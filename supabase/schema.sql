@@ -32,16 +32,16 @@ create table if not exists resources (
 create index if not exists resources_role_key_idx on resources (role_key);
 
 -- Holds the shared site password as a salted hash (never plaintext) so it
--- lives in the database instead of the git repo. Seeded below with the
--- current default password, "changeme" — change it from Settings once the
--- app is running.
+-- lives in the database instead of the git repo. Seeded below with a random
+-- one-time bootstrap password (its plaintext is not stored anywhere in this
+-- repo) — change it from Settings the first time you unlock the app.
 create table if not exists app_settings (
   key text primary key,
   value text not null
 );
 
 insert into app_settings (key, value)
-values ('site_password_hash', 'bc304f3013a91393fc46188702cb8e11:628fa9a830f1e3f4ee6b8812b43f47b857086eb48726408a584d35576883467dc453521bedd4185b7f7a9ce96b2d8e682c349cb93006afbcaaf7977fc250e17d')
+values ('site_password_hash', '02512664af010efb668561cba0080658:a4e0b8522d1a68a629627c8898c41ca4780a461fccb86bda3c4399ba59147f104983f649d8efa69cb991e90fe504a93efff778e8abd806cb09ac3045c67c352c')
 on conflict (key) do nothing;
 
 alter table progress enable row level security;
