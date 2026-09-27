@@ -4,6 +4,7 @@ import "./globals.css";
 import { AccessProvider } from "@/context/AccessContext";
 import { AppStateProvider } from "@/context/AppStateContext";
 import { ResourcesProvider } from "@/context/ResourcesContext";
+import { IdeasProvider } from "@/context/IdeasContext";
 import Gate from "@/components/Gate/Gate";
 
 export const metadata: Metadata = {
@@ -41,7 +42,9 @@ export default function RootLayout({
         <AccessProvider>
           <AppStateProvider>
             <ResourcesProvider>
-              <Gate>{children}</Gate>
+              <IdeasProvider>
+                <Gate>{children}</Gate>
+              </IdeasProvider>
             </ResourcesProvider>
           </AppStateProvider>
         </AccessProvider>

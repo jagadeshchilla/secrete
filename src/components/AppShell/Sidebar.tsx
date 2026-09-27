@@ -15,6 +15,7 @@ import {
   MoonIcon,
   RouteIcon,
   GraduationCapIcon,
+  LightbulbIcon,
 } from "@/components/icons";
 
 const NAV_ITEMS = [
@@ -22,6 +23,7 @@ const NAV_ITEMS = [
   { href: "/roles", label: "Explore Roles", icon: GridIcon },
   { href: "/roadmap", label: "Roadmap", icon: RouteIcon },
   { href: "/courses", label: "Courses", icon: GraduationCapIcon },
+  { href: "/ideas", label: "Project Ideas", icon: LightbulbIcon },
   { href: "/progress", label: "Progress", icon: CalendarIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/settings", label: "Settings", icon: SettingsIcon },

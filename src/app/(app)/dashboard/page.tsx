@@ -12,13 +12,14 @@ import {
   buildProgressEvents,
 } from "@/context/AppStateContext";
 import { useAccess } from "@/context/AccessContext";
+import { useIdeas } from "@/context/IdeasContext";
 import { PROFILES, PROFILE_LABELS, type Profile } from "@/config/access";
 import type { StatusField } from "@/types/career";
 import StatCard from "@/components/StatCard";
 import ProgressRing from "@/components/ProgressRing";
 import MonthCalendar from "@/components/MonthCalendar";
 import { ROADMAP_DATA } from "@/data/roadmapData";
-import { FlameIcon, GridIcon, RouteIcon, GraduationCapIcon, CalendarIcon } from "@/components/icons";
+import { FlameIcon, GridIcon, RouteIcon, GraduationCapIcon, CalendarIcon, LightbulbIcon } from "@/components/icons";
 
 const ROADMAP_ROLE_COUNT = Object.keys(ROADMAP_DATA).length;
 const TOOL_COUNT = new Set(
@@ -40,9 +41,14 @@ function actionVerb(field: StatusField) {
   }
 }
 
+type HouseholdEvent =
+  | { kind: "progress"; date: string; by: Profile; field: StatusField; role: string }
+  | { kind: "idea"; date: string; by: Profile; title: string };
+
 export default function Dashboard() {
   const { data, domains, progress, stats, activityByDate, streak } = useAppState();
   const { profile } = useAccess();
+  const { ideas } = useIdeas();
   const [view, setView] = useState<View>(profile || "household");
 
   const viewStats = view === "household" ? stats : statsForProfile(data, progress, view);
@@ -96,7 +102,37 @@ export default function Dashboard() {
     [domains, data, progress]
   );
 
-  const householdTimeline = useMemo(() => buildProgressEvents(data, progress, null, 15), [data, progress]);
+  const householdTimeline = useMemo<HouseholdEvent[]>(() => {
+    const progressEvents: HouseholdEvent[] = buildProgressEvents(data, progress, null, 15).map((e) => ({
+      kind: "progress",
+      date: e.date,
+      by: e.by,
+      field: e.field,
+      role: e.role,
+    }));
+    const ideaEvents: HouseholdEvent[] = ideas.map((idea) => ({
+      kind: "idea",
+      date: idea.createdAt,
+      by: idea.createdBy,
+      title: idea.title,
+    }));
+    return [...progressEvents, ...ideaEvents].sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 15);
+  }, [data, progress, ideas]);
+
+  const personalTimeline = useMemo<HouseholdEvent[]>(() => {
+    if (view === "household") return [];
+    const progressEvents: HouseholdEvent[] = buildProgressEvents(data, progress, view, 15).map((e) => ({
+      kind: "progress",
+      date: e.date,
+      by: e.by,
+      field: e.field,
+      role: e.role,
+    }));
+    const ideaEvents: HouseholdEvent[] = ideas
+      .filter((idea) => idea.createdBy === view)
+      .map((idea) => ({ kind: "idea", date: idea.createdAt, by: idea.createdBy, title: idea.title }));
+    return [...progressEvents, ...ideaEvents].sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 15);
+  }, [data, progress, ideas, view]);
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-8 md:px-8">
@@ -226,10 +262,21 @@ export default function Dashboard() {
             ) : (
               <ul className="mt-3 divide-y divide-[var(--border)]">
                 {householdTimeline.map((e, i) => (
-                  <li key={`${e.date}-${e.role}-${e.field}-${i}`} className="flex items-center justify-between py-2.5 text-sm">
-                    <span className="min-w-0 truncate">
-                      <strong className="font-medium">{e.by ? PROFILE_LABELS[e.by] : "Someone"}</strong>{" "}
-                      {actionVerb(e.field)} <strong className="font-medium">{e.role}</strong>
+                  <li key={`${e.kind}-${e.date}-${i}`} className="flex items-center justify-between py-2.5 text-sm">
+                    <span className="flex min-w-0 items-center gap-1.5 truncate">
+                      {e.kind === "idea" && <LightbulbIcon className="h-3.5 w-3.5 shrink-0 text-[var(--accent)]" />}
+                      <span className="min-w-0 truncate">
+                        <strong className="font-medium">{PROFILE_LABELS[e.by]}</strong>{" "}
+                        {e.kind === "idea" ? (
+                          <>
+                            added the idea <strong className="font-medium">{e.title}</strong>
+                          </>
+                        ) : (
+                          <>
+                            {actionVerb(e.field)} <strong className="font-medium">{e.role}</strong>
+                          </>
+                        )}
+                      </span>
                     </span>
                     <span className="shrink-0 pl-2 text-xs text-[var(--muted)]">
                       {new Date(e.date).toLocaleDateString()}
@@ -340,6 +387,40 @@ export default function Dashboard() {
                     <div className="text-[11px] text-[var(--muted)]">Longest streak</div>
                   </div>
                 </div>
+              </div>
+
+              <div className="mt-4 border-t border-[var(--border)] pt-3">
+                {personalTimeline.length === 0 ? (
+                  <p className="text-sm text-[var(--muted)]">
+                    Mark roles as researched, interested or completed to start building activity here.
+                  </p>
+                ) : (
+                  <ul className="divide-y divide-[var(--border)]">
+                    {personalTimeline.map((e, i) => (
+                      <li key={`${e.kind}-${e.date}-${i}`} className="flex items-center justify-between py-2 text-sm">
+                        <span className="flex min-w-0 items-center gap-1.5 truncate">
+                          {e.kind === "idea" && (
+                            <LightbulbIcon className="h-3.5 w-3.5 shrink-0 text-[var(--accent)]" />
+                          )}
+                          <span className="min-w-0 truncate">
+                            {e.kind === "idea" ? (
+                              <>
+                                Added the idea <strong className="font-medium">{e.title}</strong>
+                              </>
+                            ) : (
+                              <>
+                                {actionVerb(e.field)} <strong className="font-medium">{e.role}</strong>
+                              </>
+                            )}
+                          </span>
+                        </span>
+                        <span className="shrink-0 pl-2 text-xs text-[var(--muted)]">
+                          {new Date(e.date).toLocaleDateString()}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>

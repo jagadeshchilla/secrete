@@ -31,6 +31,17 @@ create table if not exists resources (
 
 create index if not exists resources_role_key_idx on resources (role_key);
 
+create table if not exists project_ideas (
+  id text primary key,
+  title text not null,
+  description text not null,
+  domains text[] not null default '{}',
+  role_keys text[] not null default '{}',
+  created_by text not null check (created_by in ('jagadesh', 'harshita')),
+  created_at timestamptz not null default now()
+);
+alter table project_ideas add column if not exists domains text[] not null default '{}';
+
 -- Holds the shared site password as a salted hash (never plaintext) so it
 -- lives in the database instead of the git repo. Seeded below with a random
 -- one-time bootstrap password (its plaintext is not stored anywhere in this
@@ -46,6 +57,7 @@ on conflict (key) do nothing;
 
 alter table progress enable row level security;
 alter table resources enable row level security;
+alter table project_ideas enable row level security;
 alter table app_settings enable row level security;
 
 -- No policies are defined, so the public Data API (anon/authenticated keys)

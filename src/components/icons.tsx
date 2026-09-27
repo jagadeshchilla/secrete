@@ -341,3 +341,12 @@ export function FlameIcon({ className }: IconProps) {
     </Base>
   );
 }
+
+export function LightbulbIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <path d="M9 18h6M10 21h4" />
+      <path d="M12 3a6 6 0 0 0-3.5 10.9c.6.45 1 1.15 1 1.9V17h5v-1.2c0-.75.4-1.45 1-1.9A6 6 0 0 0 12 3Z" />
+    </Base>
+  );
+}
