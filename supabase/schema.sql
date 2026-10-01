@@ -42,6 +42,31 @@ create table if not exists project_ideas (
 );
 alter table project_ideas add column if not exists domains text[] not null default '{}';
 
+create table if not exists research_papers (
+  id text primary key,
+  title text not null,
+  abstract text not null,
+  status text not null default 'idea' check (status in ('idea', 'drafting', 'submitted', 'published')),
+  link text,
+  domains text[] not null default '{}',
+  role_keys text[] not null default '{}',
+  created_by text not null check (created_by in ('jagadesh', 'harshita')),
+  created_at timestamptz not null default now()
+);
+
+create table if not exists freelance_gigs (
+  id text primary key,
+  title text not null,
+  description text not null,
+  status text not null default 'open' check (status in ('open', 'applied', 'in-progress', 'completed')),
+  link text,
+  budget text,
+  domains text[] not null default '{}',
+  role_keys text[] not null default '{}',
+  created_by text not null check (created_by in ('jagadesh', 'harshita')),
+  created_at timestamptz not null default now()
+);
+
 -- Holds the shared site password as a salted hash (never plaintext) so it
 -- lives in the database instead of the git repo. Seeded below with a random
 -- one-time bootstrap password (its plaintext is not stored anywhere in this
@@ -58,6 +83,8 @@ on conflict (key) do nothing;
 alter table progress enable row level security;
 alter table resources enable row level security;
 alter table project_ideas enable row level security;
+alter table research_papers enable row level security;
+alter table freelance_gigs enable row level security;
 alter table app_settings enable row level security;
 
 -- No policies are defined, so the public Data API (anon/authenticated keys)

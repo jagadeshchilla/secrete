@@ -16,6 +16,8 @@ import {
   RouteIcon,
   GraduationCapIcon,
   LightbulbIcon,
+  FlaskIcon,
+  BriefcaseIcon,
 } from "@/components/icons";
 
 const NAV_ITEMS = [
@@ -24,6 +26,8 @@ const NAV_ITEMS = [
   { href: "/roadmap", label: "Roadmap", icon: RouteIcon },
   { href: "/courses", label: "Courses", icon: GraduationCapIcon },
   { href: "/ideas", label: "Project Ideas", icon: LightbulbIcon },
+  { href: "/research", label: "Research Papers", icon: FlaskIcon },
+  { href: "/freelancing", label: "Freelancing", icon: BriefcaseIcon },
   { href: "/progress", label: "Progress", icon: CalendarIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/settings", label: "Settings", icon: SettingsIcon },

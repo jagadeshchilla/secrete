@@ -5,6 +5,8 @@ import { AccessProvider } from "@/context/AccessContext";
 import { AppStateProvider } from "@/context/AppStateContext";
 import { ResourcesProvider } from "@/context/ResourcesContext";
 import { IdeasProvider } from "@/context/IdeasContext";
+import { ResearchProvider } from "@/context/ResearchContext";
+import { FreelanceProvider } from "@/context/FreelanceContext";
 import Gate from "@/components/Gate/Gate";
 
 export const metadata: Metadata = {
@@ -43,7 +45,11 @@ export default function RootLayout({
           <AppStateProvider>
             <ResourcesProvider>
               <IdeasProvider>
-                <Gate>{children}</Gate>
+                <ResearchProvider>
+                  <FreelanceProvider>
+                    <Gate>{children}</Gate>
+                  </FreelanceProvider>
+                </ResearchProvider>
               </IdeasProvider>
             </ResourcesProvider>
           </AppStateProvider>
