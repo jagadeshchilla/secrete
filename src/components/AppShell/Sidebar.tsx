@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useAppState } from "@/context/AppStateContext";
 import ProfileSwitcher from "./ProfileSwitcher";
+import NotificationBell from "./NotificationBell";
 import {
   HomeIcon,
   GridIcon,
@@ -41,7 +42,8 @@ export default function Sidebar() {
     <aside className="hidden md:flex md:w-64 md:flex-col md:shrink-0 border-r border-[var(--border)] bg-[var(--surface)] h-screen sticky top-0">
       <div className="flex items-center gap-2 px-5 h-16 border-b border-[var(--border)]">
         <Image src="/logo.png" alt="" width={40} height={40} className="h-10 w-10 shrink-0" priority />
-        <span className="font-semibold tracking-tight">Career Hub</span>
+        <span className="flex-1 font-semibold tracking-tight">Career Hub</span>
+        <NotificationBell />
       </div>
 
       <ProfileSwitcher />

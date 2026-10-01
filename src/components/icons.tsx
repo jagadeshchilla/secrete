@@ -256,6 +256,14 @@ export function ChevronDownIcon({ className }: IconProps) {
   );
 }
 
+export function ChevronRightIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <path d="m9 6 6 6-6 6" />
+    </Base>
+  );
+}
+
 export function LockIcon({ className }: IconProps) {
   return (
     <Base className={className}>
@@ -342,11 +350,29 @@ export function FlameIcon({ className }: IconProps) {
   );
 }
 
+export function BellIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+    </Base>
+  );
+}
+
 export function LightbulbIcon({ className }: IconProps) {
   return (
     <Base className={className}>
       <path d="M9 18h6M10 21h4" />
       <path d="M12 3a6 6 0 0 0-3.5 10.9c.6.45 1 1.15 1 1.9V17h5v-1.2c0-.75.4-1.45 1-1.9A6 6 0 0 0 12 3Z" />
+    </Base>
+  );
+}
+
+export function BookIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13Z" />
+      <path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13Z" />
     </Base>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   useAppState,
   stripEmoji,
@@ -15,6 +15,7 @@ import { useAccess } from "@/context/AccessContext";
 import { useIdeas } from "@/context/IdeasContext";
 import { PROFILES, PROFILE_LABELS, type Profile } from "@/config/access";
 import type { StatusField } from "@/types/career";
+import type { Course } from "@/types/course";
 import StatCard from "@/components/StatCard";
 import ProgressRing from "@/components/ProgressRing";
 import MonthCalendar from "@/components/MonthCalendar";
@@ -43,13 +44,26 @@ function actionVerb(field: StatusField) {
 
 type HouseholdEvent =
   | { kind: "progress"; date: string; by: Profile; field: StatusField; role: string }
-  | { kind: "idea"; date: string; by: Profile; title: string };
+  | { kind: "idea"; date: string; by: Profile; title: string }
+  | { kind: "course"; date: string; slug: string; title: string };
 
 export default function Dashboard() {
   const { data, domains, progress, stats, activityByDate, streak } = useAppState();
   const { profile } = useAccess();
   const { ideas } = useIdeas();
   const [view, setView] = useState<View>(profile || "household");
+  const [courses, setCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    fetch("/api/admin-courses")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => {
+        if (json?.courses) setCourses(json.courses);
+      })
+      .catch(() => {
+        // offline or DB not configured yet
+      });
+  }, []);
 
   const viewStats = view === "household" ? stats : statsForProfile(data, progress, view);
   const viewActivity = view === "household" ? activityByDate : activityForProfile(progress, view);
@@ -102,6 +116,14 @@ export default function Dashboard() {
     [domains, data, progress]
   );
 
+  const courseEvents = useMemo<HouseholdEvent[]>(
+    () =>
+      courses
+        .filter((c) => c.createdAt)
+        .map((c) => ({ kind: "course", date: c.createdAt!, slug: c.slug, title: c.title })),
+    [courses]
+  );
+
   const householdTimeline = useMemo<HouseholdEvent[]>(() => {
     const progressEvents: HouseholdEvent[] = buildProgressEvents(data, progress, null, 15).map((e) => ({
       kind: "progress",
@@ -116,8 +138,10 @@ export default function Dashboard() {
       by: idea.createdBy,
       title: idea.title,
     }));
-    return [...progressEvents, ...ideaEvents].sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 15);
-  }, [data, progress, ideas]);
+    return [...progressEvents, ...ideaEvents, ...courseEvents]
+      .sort((a, b) => (a.date < b.date ? 1 : -1))
+      .slice(0, 15);
+  }, [data, progress, ideas, courseEvents]);
 
   const personalTimeline = useMemo<HouseholdEvent[]>(() => {
     if (view === "household") return [];
@@ -131,8 +155,11 @@ export default function Dashboard() {
     const ideaEvents: HouseholdEvent[] = ideas
       .filter((idea) => idea.createdBy === view)
       .map((idea) => ({ kind: "idea", date: idea.createdAt, by: idea.createdBy, title: idea.title }));
-    return [...progressEvents, ...ideaEvents].sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 15);
-  }, [data, progress, ideas, view]);
+    // Course announcements are shared, not tied to a profile — show them on every tab.
+    return [...progressEvents, ...ideaEvents, ...courseEvents]
+      .sort((a, b) => (a.date < b.date ? 1 : -1))
+      .slice(0, 15);
+  }, [data, progress, ideas, view, courseEvents]);
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-8 md:px-8">
@@ -265,15 +292,24 @@ export default function Dashboard() {
                   <li key={`${e.kind}-${e.date}-${i}`} className="flex items-center justify-between py-2.5 text-sm">
                     <span className="flex min-w-0 items-center gap-1.5 truncate">
                       {e.kind === "idea" && <LightbulbIcon className="h-3.5 w-3.5 shrink-0 text-[var(--accent)]" />}
+                      {e.kind === "course" && <GraduationCapIcon className="h-3.5 w-3.5 shrink-0 text-[var(--accent)]" />}
                       <span className="min-w-0 truncate">
-                        <strong className="font-medium">{PROFILE_LABELS[e.by]}</strong>{" "}
-                        {e.kind === "idea" ? (
+                        {e.kind === "course" ? (
                           <>
-                            added the idea <strong className="font-medium">{e.title}</strong>
+                            Admin added the course <strong className="font-medium">{e.title}</strong>
                           </>
                         ) : (
                           <>
-                            {actionVerb(e.field)} <strong className="font-medium">{e.role}</strong>
+                            <strong className="font-medium">{PROFILE_LABELS[e.by]}</strong>{" "}
+                            {e.kind === "idea" ? (
+                              <>
+                                added the idea <strong className="font-medium">{e.title}</strong>
+                              </>
+                            ) : (
+                              <>
+                                {actionVerb(e.field)} <strong className="font-medium">{e.role}</strong>
+                              </>
+                            )}
                           </>
                         )}
                       </span>
@@ -402,10 +438,17 @@ export default function Dashboard() {
                           {e.kind === "idea" && (
                             <LightbulbIcon className="h-3.5 w-3.5 shrink-0 text-[var(--accent)]" />
                           )}
+                          {e.kind === "course" && (
+                            <GraduationCapIcon className="h-3.5 w-3.5 shrink-0 text-[var(--accent)]" />
+                          )}
                           <span className="min-w-0 truncate">
                             {e.kind === "idea" ? (
                               <>
                                 Added the idea <strong className="font-medium">{e.title}</strong>
+                              </>
+                            ) : e.kind === "course" ? (
+                              <>
+                                Admin added the course <strong className="font-medium">{e.title}</strong>
                               </>
                             ) : (
                               <>
