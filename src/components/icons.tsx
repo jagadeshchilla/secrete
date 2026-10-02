@@ -297,6 +297,14 @@ export function PlayIcon({ className }: IconProps) {
   );
 }
 
+export function PauseIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <path d="M7 5.5h3v13H7zM14 5.5h3v13h-3z" fill="currentColor" stroke="none" />
+    </Base>
+  );
+}
+
 export function TrashIcon({ className }: IconProps) {
   return (
     <Base className={className}>

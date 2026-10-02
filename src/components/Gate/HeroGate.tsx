@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import dynamic from "next/dynamic";
 import { useAccess } from "@/context/AccessContext";
 import TypingText from "@/components/TypingText";
 
-const MAX_OFFSET = 55; // px the orb can drift from its resting position
-const PULL_STRENGTH = 0.25; // fraction of cursor-from-center distance it reaches for
-const EASE = 0.08; // lerp factor per frame — lower = smoother/laggier follow
+// lottie-react touches the DOM at import time, so it can't render during SSR.
+const Lottie = dynamic(() => import("lottie-react").then((m) => m.Lottie), { ssr: false });
 
 const PARTICLES = [
   { left: "18%", top: "28%", delay: "0s", duration: "7s" },
@@ -23,36 +23,6 @@ export default function HeroGate({ onUnlocked }: { onUnlocked: () => void }) {
   const [password, setPassword] = useState("");
   const [shake, setShake] = useState(false);
   const [headingDone, setHeadingDone] = useState(false);
-  const orbRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const target = { x: 0, y: 0 };
-    const current = { x: 0, y: 0 };
-    let raf = 0;
-
-    function onMouseMove(e: MouseEvent) {
-      const dx = e.clientX - window.innerWidth / 2;
-      const dy = e.clientY - window.innerHeight / 2;
-      target.x = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, dx * PULL_STRENGTH));
-      target.y = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, dy * PULL_STRENGTH));
-    }
-
-    function tick() {
-      current.x += (target.x - current.x) * EASE;
-      current.y += (target.y - current.y) * EASE;
-      if (orbRef.current) {
-        orbRef.current.style.transform = `translate(${current.x}px, ${current.y}px)`;
-      }
-      raf = requestAnimationFrame(tick);
-    }
-
-    window.addEventListener("mousemove", onMouseMove);
-    raf = requestAnimationFrame(tick);
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -66,7 +36,7 @@ export default function HeroGate({ onUnlocked }: { onUnlocked: () => void }) {
   }
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#0b0f0d] px-6 text-center">
+    <div className="relative flex h-screen flex-col items-center overflow-hidden bg-[#0b0f0d] px-6 pt-4 text-center md:pt-6">
       {/* Vignette — keeps the corners dark so the orb reads as a defined light source */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -87,81 +57,21 @@ export default function HeroGate({ onUnlocked }: { onUnlocked: () => void }) {
 
       {/* Content flows top-to-bottom: orb first, then text below it — never overlapping */}
       <div className="relative z-10 flex flex-col items-center">
-        <div ref={orbRef} className="relative h-[300px] w-[300px] shrink-0">
-          {/* Soft outer bloom */}
+        <div className="relative h-[clamp(360px,62vh,640px)] w-[clamp(360px,62vh,640px)] shrink-0">
+          {/* Soft static backdrop glow — no pulsing */}
           <div
             className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
             style={{
-              width: "420px",
-              height: "420px",
-              background: "radial-gradient(circle, rgba(52,211,153,0.16) 0%, transparent 62%)",
-              filter: "blur(30px)",
-              animation: "aura-pulse 7s ease-in-out infinite",
-            }}
-          />
-
-          {/* Steady halo corona hugging the disc's edge */}
-          <div
-            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-            style={{
-              width: "300px",
-              height: "300px",
+              width: "90%",
+              height: "90%",
               background:
-                "radial-gradient(circle, transparent 58%, rgba(52,211,153,0.32) 68%, rgba(242,195,104,0.18) 78%, transparent 88%)",
-              filter: "blur(6px)",
-              animation: "aura-pulse 5s ease-in-out infinite",
+                "radial-gradient(circle, transparent 58%, rgba(52,211,153,0.28) 68%, rgba(242,195,104,0.16) 78%, transparent 88%)",
+              filter: "blur(10px)",
             }}
           />
 
-          {/* Aura rings — expand outward from the disc and fade */}
-          {[0, 1.3, 2.6].map((delay) => (
-            <div
-              key={delay}
-              className="pointer-events-none absolute left-1/2 top-1/2 rounded-full"
-              style={{
-                width: "230px",
-                height: "230px",
-                border: "1px solid rgba(52,211,153,0.55)",
-                animation: `aura-ring-pulse 4s ease-out ${delay}s infinite`,
-              }}
-            />
-          ))}
-
-          {/* Defined circular disc with a crisp edge, containing morphing flame-like blobs */}
-          <div
-            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden rounded-full"
-            style={{
-              width: "230px",
-              height: "230px",
-              border: "1px solid rgba(52,211,153,0.45)",
-              background: "#0d1512",
-              boxShadow: "0 0 70px rgba(52,211,153,0.35), inset 0 0 40px rgba(0,0,0,0.5)",
-            }}
-          >
-            <div
-              className="absolute left-1/2 top-1/2"
-              style={{
-                width: "85%",
-                height: "85%",
-                background:
-                  "radial-gradient(circle, rgba(129,236,197,0.9) 0%, rgba(52,211,153,0.7) 45%, transparent 75%)",
-                filter: "blur(6px)",
-                mixBlendMode: "screen",
-                animation: "blob-morph-a 9s ease-in-out infinite",
-              }}
-            />
-            <div
-              className="absolute left-1/2 top-1/2"
-              style={{
-                width: "70%",
-                height: "70%",
-                background:
-                  "radial-gradient(circle, rgba(255,200,120,0.7) 0%, rgba(242,195,104,0.45) 40%, transparent 75%)",
-                filter: "blur(8px)",
-                mixBlendMode: "screen",
-                animation: "blob-morph-b 11s ease-in-out infinite, flicker 2.4s ease-in-out infinite",
-              }}
-            />
+          <div className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2">
+            <Lottie src="/lottie/study-discussion.json" autoplay loop className="pointer-events-none h-full w-full" />
           </div>
         </div>
 
