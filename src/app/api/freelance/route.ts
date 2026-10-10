@@ -38,11 +38,8 @@ export async function POST(req: Request) {
     createdBy: Profile;
   };
   const { title, description, status, link, budget, domains, roleKeys, createdBy } = body;
-  if (!title?.trim() || !description?.trim() || !roleKeys?.length || !createdBy) {
-    return NextResponse.json(
-      { error: "title, description, roleKeys and createdBy are required" },
-      { status: 400 }
-    );
+  if (!title?.trim() || !description?.trim() || !createdBy) {
+    return NextResponse.json({ error: "title, description and createdBy are required" }, { status: 400 });
   }
 
   const gig: FreelanceGig = {
@@ -53,7 +50,7 @@ export async function POST(req: Request) {
     link: link?.trim() || undefined,
     budget: budget?.trim() || undefined,
     domains: domains || [],
-    roleKeys,
+    roleKeys: roleKeys || [],
     createdBy,
     createdAt: new Date().toISOString(),
   };

@@ -85,7 +85,7 @@ export default function FreelancingPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!profile || !title.trim() || !description.trim() || selectedKeys.length === 0) return;
+    if (!profile || !title.trim() || !description.trim()) return;
     addGig({
       title: title.trim(),
       description: description.trim(),
@@ -345,7 +345,7 @@ export default function FreelancingPage() {
 
               <div className="mt-3">
                 <label className="mb-1.5 block text-xs font-medium text-[var(--muted)]">
-                  Related roles <span className="text-[var(--muted)]">(select one or more)</span>
+                  Related roles <span className="text-[var(--muted)]">(optional, select one or more)</span>
                 </label>
 
                 {selectedKeys.length > 0 && (
@@ -401,7 +401,7 @@ export default function FreelancingPage() {
 
               <button
                 type="submit"
-                disabled={!title.trim() || !description.trim() || selectedKeys.length === 0}
+                disabled={!title.trim() || !description.trim()}
                 className="btn-shimmer mt-4 inline-flex w-full items-center justify-center gap-2 border border-[var(--accent)] bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
               >
                 <PlusIcon className="h-4 w-4" />
