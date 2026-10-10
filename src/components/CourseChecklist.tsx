@@ -13,6 +13,7 @@ import {
   customItemDoneCount,
 } from "@/lib/courseProgress";
 import ProgressRing from "@/components/ProgressRing";
+import Favicon from "@/components/Favicon";
 import {
   ChevronDownIcon,
   PlayIcon,
@@ -191,9 +192,9 @@ function CustomChecklistItem({
                           target="_blank"
                           rel="noreferrer"
                           title={CUSTOM_RESOURCE_LABELS[s.resourceType]}
-                          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                          className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
                         >
-                          <Icon className="h-3.5 w-3.5" />
+                          <Favicon url={s.resourceUrl} className="h-3.5 w-3.5" />
                         </a>
                       ) : (
                         <HoverTip label="Not added yet">

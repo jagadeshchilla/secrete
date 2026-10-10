@@ -6,6 +6,7 @@ import { useAccess } from "@/context/AccessContext";
 import type { Course, CourseItem, CourseSection, CourseSubstep, CourseTrack, ResourceType } from "@/types/course";
 import { PlusIcon, TrashIcon, CloseIcon, SearchIcon, ChevronDownIcon, ChevronRightIcon } from "@/components/icons";
 import { TOOL_CATALOG } from "@/lib/toolCatalog";
+import Favicon from "@/components/Favicon";
 
 const TRACKS: { value: CourseTrack; label: string }[] = [
   { value: "core", label: "Foundations" },
@@ -723,7 +724,7 @@ function ItemEditor({
                 rows={2}
                 className={smallInputCls}
               />
-              <div className="flex gap-2">
+              <div className="flex items-center gap-2">
                 <select
                   value={s.resourceType}
                   onChange={(e) => onUpdateSubstep(s.id, { resourceType: e.target.value as ResourceType })}
@@ -735,6 +736,11 @@ function ItemEditor({
                     </option>
                   ))}
                 </select>
+                {s.resourceUrl && (
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#2a2418] bg-[#12100a]">
+                    <Favicon url={s.resourceUrl} className="h-3.5 w-3.5" />
+                  </div>
+                )}
                 <input
                   value={s.resourceUrl}
                   onChange={(e) => onUpdateSubstep(s.id, { resourceUrl: e.target.value })}

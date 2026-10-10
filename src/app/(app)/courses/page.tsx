@@ -356,6 +356,24 @@ function CoursesPageInner() {
         </div>
       ) : (
         <>
+          <Link
+            href="/courses/platforms"
+            className="card-hover animate-fade-in-up mt-6 flex items-center justify-between gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 hover:border-[var(--accent)]"
+          >
+            <div className="flex min-w-0 items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]">
+                <LinkIcon className="h-5 w-5" />
+              </div>
+              <div className="min-w-0">
+                <h2 className="text-sm font-semibold">Important courses &amp; platforms</h2>
+                <p className="mt-0.5 truncate text-xs text-[var(--muted)]">
+                  Curated websites worth knowing about — free/paid, what you&apos;ll learn, why it matters.
+                </p>
+              </div>
+            </div>
+            <ChevronRightIcon className="h-4 w-4 shrink-0 text-[var(--muted)]" />
+          </Link>
+
           {startedCourses.length > 0 && (
             <div className="animate-fade-in-up mt-6">
               <h2 className="text-sm font-semibold text-[var(--muted)]">Continue learning</h2>

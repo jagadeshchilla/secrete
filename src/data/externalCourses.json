@@ -1,0 +1,12 @@
+[
+  {
+    "id": "risingbrain",
+    "title": "RisingBrain",
+    "url": "https://risingbrain.org/",
+    "pricing": "freemium",
+    "category": "DSA & Interview Prep",
+    "description": "A founder-led, pattern-first placement prep platform for software engineering and product-company interviews. Organizes DSA by problem pattern instead of by topic, so you learn to recognize the type of problem rather than memorize individual solutions.",
+    "whatYouLearn": "A curated DSA sheet of ~496 problems across 85 patterns, core CS practice (SQL, DBMS, OS), timed aptitude/logical-reasoning drills, 84 brainteasers, and real round-by-round interview breakdowns from other candidates.",
+    "whyImportant": "Most DSA prep is just a long list of random problems. RisingBrain's pattern-first structure is what actually transfers to new problems in a real interview, and the free tier alone (the sheet + aptitude drills) covers most of what's needed."
+  }
+]
