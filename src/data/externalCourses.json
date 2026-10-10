@@ -8,5 +8,75 @@
     "description": "A founder-led, pattern-first placement prep platform for software engineering and product-company interviews. Organizes DSA by problem pattern instead of by topic, so you learn to recognize the type of problem rather than memorize individual solutions.",
     "whatYouLearn": "A curated DSA sheet of ~496 problems across 85 patterns, core CS practice (SQL, DBMS, OS), timed aptitude/logical-reasoning drills, 84 brainteasers, and real round-by-round interview breakdowns from other candidates.",
     "whyImportant": "Most DSA prep is just a long list of random problems. RisingBrain's pattern-first structure is what actually transfers to new problems in a real interview, and the free tier alone (the sheet + aptitude drills) covers most of what's needed."
+  },
+  {
+    "id": "madewithml",
+    "title": "Made With ML",
+    "url": "https://madewithml.com/",
+    "pricing": "freemium",
+    "category": "MLOps & ML Engineering",
+    "description": "A production-focused ML engineering course by Anyscale, built around a free, open-source lesson repo. It isn't about training a model in a notebook — it walks through taking one from design all the way to production.",
+    "whatYouLearn": "The full lifecycle: problem design, data preparation, modeling, experiment tracking and tuning, serving, testing, CI/CD, reproducibility, and monitoring — applied with real software-engineering practices across model types, data types, and cloud platforms. A paid live cohort adds live lessons, Q&A, GPU compute, and a community/alumni track on top of the free self-paced material.",
+    "whyImportant": "Most ML courses stop at a trained model; this is specifically about everything after that — the part that actually matters for an AI/ML or MLOps engineering role. The free lesson repo alone covers the core engineering practices most courses skip entirely."
+  },
+  {
+    "id": "bytebytego",
+    "title": "ByteByteGo Newsletter",
+    "url": "https://blog.bytebytego.com/?utm_source=site",
+    "pricing": "freemium",
+    "category": "System Design",
+    "description": "A widely-read Substack newsletter by Alex Xu (author of the System Design Interview book series), read by over a million people. Explains complex distributed systems in simple, visual terms.",
+    "whatYouLearn": "Deep dives into how real systems work — things like Docker internals, network protocols, and how companies like Netflix build their tech stack — plus general system design concepts applied to real-world case studies.",
+    "whyImportant": "System design is one of the hardest things to self-study because most material is either too abstract or too shallow. ByteByteGo's visual, case-study-driven explanations are a reliable way to build real intuition, and most posts are free to read."
+  },
+  {
+    "id": "ai-agents-for-beginners",
+    "title": "AI Agents for Beginners (Microsoft)",
+    "url": "https://github.com/microsoft/ai-agents-for-beginners",
+    "pricing": "free",
+    "category": "AI Agents",
+    "description": "Microsoft's open-source, 18-lesson course on building AI agents, each lesson pairing a written README with a short video. Uses the Microsoft Agent Framework and Foundry Agent Service.",
+    "whatYouLearn": "Agent fundamentals and frameworks, design patterns (tool use, planning, multi-agent, metacognition), agentic RAG, trustworthy/secure agents, agentic protocols (MCP, A2A), context engineering and memory, computer-use agents, and deploying agents to production.",
+    "whyImportant": "Agentic AI is the fastest-moving part of the field right now, and this is a free, structured, Microsoft-maintained path through it — from a single tool-using agent up to multi-agent systems — rather than scattered blog posts."
+  },
+  {
+    "id": "hands-on-llms",
+    "title": "Hands-On Large Language Models (code repo)",
+    "url": "https://github.com/HandsOnLLM/Hands-On-Large-Language-Models",
+    "pricing": "free",
+    "category": "AI / LLMs",
+    "description": "The official, free code repository for the O'Reilly book Hands-On Large Language Models by Jay Alammar and Maarten Grootendorst — 12 runnable Colab notebooks, one per chapter.",
+    "whatYouLearn": "Tokens and embeddings, transformer internals, text classification and clustering, prompt engineering, semantic search and RAG, multimodal models, embedding models, and fine-tuning — all hands-on in Colab.",
+    "whyImportant": "The code alone (free, Apache-2.0) is enough to actually build and run every concept rather than just read about it. The paid book adds the illustrated explanations behind each notebook if you want the deeper intuition."
+  },
+  {
+    "id": "prompt-engineering-guide",
+    "title": "Prompt Engineering Guide (DAIR.AI)",
+    "url": "https://github.com/dair-ai/Prompt-Engineering-Guide",
+    "pricing": "freemium",
+    "category": "Prompt Engineering & RAG",
+    "description": "A ~79k-star open-source guide covering prompt engineering, context engineering, RAG, and AI agents, with papers, lessons, notebooks, and a one-hour lecture included.",
+    "whatYouLearn": "Prompting basics and LLM settings, techniques like few-shot, chain-of-thought, self-consistency, prompt chaining, ReAct, and Tree of Thoughts, applications like function calling and code generation, model-specific guides, and risks like adversarial prompting and bias.",
+    "whyImportant": "Prompting well is a skill most people pick up haphazardly. This guide organizes the actual techniques with the reasoning behind each one, free and MIT-licensed, with DAIR.AI's own paid courses available if you want a guided track on top."
+  },
+  {
+    "id": "rag-anything",
+    "title": "RAG-Anything",
+    "url": "https://github.com/HKUDS/RAG-Anything",
+    "pricing": "free",
+    "category": "RAG / Multimodal AI",
+    "description": "An open-source, all-in-one multimodal RAG framework built on LightRAG, for retrieval over documents that mix text with images, tables, and equations.",
+    "whatYouLearn": "A full multimodal RAG pipeline: parsing PDFs/Office files/images (via MinerU, Docling, or PaddleOCR), building a knowledge graph from the parsed content, and running hybrid text + multimodal queries against it.",
+    "whyImportant": "Most RAG tutorials only handle plain text. Real documents have tables, figures, and equations that carry real information — this is a practical, MIT-licensed base for seeing how a production-grade multimodal RAG system is actually built."
+  },
+  {
+    "id": "ml-system-design-case-studies",
+    "title": "ML System Design Case Studies",
+    "url": "https://github.com/Engineer1999/A-Curated-List-of-ML-System-Design-Case-Studies",
+    "pricing": "free",
+    "category": "ML System Design",
+    "description": "A curated, free list of ~300 real machine-learning system design write-ups from 80+ companies (Netflix, Airbnb, Uber, Spotify, Stripe, and more), spanning 2017–2023.",
+    "whatYouLearn": "How real companies design production ML systems for fraud detection, recommendations, demand forecasting, search ranking, computer vision, NLP, and LLM applications — target users, model design, evaluation criteria, and deployment architecture for each.",
+    "whyImportant": "ML system design interviews and real engineering decisions both come down to pattern recognition across many examples. Reading across dozens of these case studies builds that intuition far faster than any single course."
   }
 ]
