@@ -264,6 +264,14 @@ export function ChevronRightIcon({ className }: IconProps) {
   );
 }
 
+export function ChevronLeftIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <path d="m15 6-6 6 6 6" />
+    </Base>
+  );
+}
+
 export function LockIcon({ className }: IconProps) {
   return (
     <Base className={className}>
