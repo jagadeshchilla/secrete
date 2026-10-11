@@ -272,6 +272,15 @@ export function ChevronLeftIcon({ className }: IconProps) {
   );
 }
 
+export function AwardIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <circle cx="12" cy="8" r="6" />
+      <path d="m9 13.5-1.5 7L12 18l4.5 2.5-1.5-7" />
+    </Base>
+  );
+}
+
 export function LockIcon({ className }: IconProps) {
   return (
     <Base className={className}>

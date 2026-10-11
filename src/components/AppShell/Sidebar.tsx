@@ -19,6 +19,7 @@ import {
   LightbulbIcon,
   FlaskIcon,
   BriefcaseIcon,
+  AwardIcon,
 } from "@/components/icons";
 
 const NAV_ITEMS = [
@@ -29,6 +30,7 @@ const NAV_ITEMS = [
   { href: "/ideas", label: "Project Ideas", icon: LightbulbIcon },
   { href: "/research", label: "Research Papers", icon: FlaskIcon },
   { href: "/freelancing", label: "Freelancing", icon: BriefcaseIcon },
+  { href: "/certifications", label: "Certifications", icon: AwardIcon },
   { href: "/progress", label: "Progress", icon: CalendarIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/settings", label: "Settings", icon: SettingsIcon },
