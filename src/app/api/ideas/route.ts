@@ -12,7 +12,7 @@ function rowToIdea(row: Record<string, unknown>): ProjectIdea {
     roleKeys: (row.role_keys as string[]) || [],
     createdBy: row.created_by as Profile,
     createdAt: row.created_at as string,
-    feasible: row.feasible as boolean,
+    feasible: (row.feasible as boolean | null) ?? null,
     infeasibleReason: (row.infeasible_reason as string) ?? undefined,
     researchTopics: (row.research_topics as string[]) || [],
     dataSources: (row.data_sources as ProjectIdea["dataSources"]) || [],
@@ -45,23 +45,14 @@ export async function POST(req: Request) {
     domains: string[];
     roleKeys: string[];
     createdBy: Profile;
-    feasible: boolean;
-    infeasibleReason?: string;
-    researchTopics?: string[];
-    dataSources?: ProjectIdea["dataSources"];
-    methods?: string[];
-    techStack?: string[];
-    tasks?: ProjectIdea["tasks"];
-    targetDate?: string;
   };
-  const { title, description, domains, roleKeys, createdBy, feasible, infeasibleReason } = body;
+  const { title, description, domains, roleKeys, createdBy } = body;
   if (!title?.trim() || !description?.trim() || !createdBy) {
     return NextResponse.json({ error: "title, description and createdBy are required" }, { status: 400 });
   }
-  if (feasible === false && !infeasibleReason?.trim()) {
-    return NextResponse.json({ error: "infeasibleReason is required when feasible is false" }, { status: 400 });
-  }
 
+  // Feasibility and the rest of the workflow are decided later, while
+  // viewing the idea — not at creation time.
   const idea: ProjectIdea = {
     id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     title: title.trim(),
@@ -70,14 +61,12 @@ export async function POST(req: Request) {
     roleKeys: roleKeys || [],
     createdBy,
     createdAt: new Date().toISOString(),
-    feasible: feasible !== false,
-    infeasibleReason: feasible === false ? infeasibleReason?.trim() : undefined,
-    researchTopics: body.researchTopics || [],
-    dataSources: body.dataSources || [],
-    methods: body.methods || [],
-    techStack: body.techStack || [],
-    tasks: body.tasks || [],
-    targetDate: body.targetDate?.trim() || undefined,
+    feasible: null,
+    researchTopics: [],
+    dataSources: [],
+    methods: [],
+    techStack: [],
+    tasks: [],
     done: false,
   };
 
@@ -91,13 +80,6 @@ export async function POST(req: Request) {
     created_by: idea.createdBy,
     created_at: idea.createdAt,
     feasible: idea.feasible,
-    infeasible_reason: idea.infeasibleReason ?? null,
-    research_topics: idea.researchTopics,
-    data_sources: idea.dataSources,
-    methods: idea.methods,
-    tech_stack: idea.techStack,
-    tasks: idea.tasks,
-    target_date: idea.targetDate ?? null,
     done: idea.done,
   });
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
@@ -126,6 +108,9 @@ export async function PUT(req: Request) {
   const body = (await req.json()) as { id: string; patch: Record<string, unknown> };
   const { id, patch } = body;
   if (!id || !patch) return NextResponse.json({ error: "id and patch are required" }, { status: 400 });
+  if (patch.feasible === false && !(patch.infeasibleReason as string | undefined)?.trim()) {
+    return NextResponse.json({ error: "infeasibleReason is required when feasible is false" }, { status: 400 });
+  }
 
   const update: Record<string, unknown> = {};
   for (const [key, column] of Object.entries(PATCHABLE_FIELDS)) {

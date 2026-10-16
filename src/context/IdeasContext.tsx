@@ -33,14 +33,6 @@ interface IdeasState {
     domains: string[];
     roleKeys: string[];
     createdBy: Profile;
-    feasible: boolean;
-    infeasibleReason?: string;
-    researchTopics?: string[];
-    dataSources?: ProjectIdea["dataSources"];
-    methods?: string[];
-    techStack?: string[];
-    tasks?: ProjectIdea["tasks"];
-    targetDate?: string;
   }) => void;
   updateIdea: (id: string, patch: IdeaPatch) => void;
   removeIdea: (id: string) => void;
@@ -91,14 +83,12 @@ export function IdeasProvider({ children }: { children: React.ReactNode }) {
       roleKeys: input.roleKeys,
       createdBy: input.createdBy,
       createdAt: new Date().toISOString(),
-      feasible: input.feasible,
-      infeasibleReason: input.infeasibleReason,
-      researchTopics: input.researchTopics || [],
-      dataSources: input.dataSources || [],
-      methods: input.methods || [],
-      techStack: input.techStack || [],
-      tasks: input.tasks || [],
-      targetDate: input.targetDate,
+      feasible: null,
+      researchTopics: [],
+      dataSources: [],
+      methods: [],
+      techStack: [],
+      tasks: [],
       done: false,
     };
     setIdeas((prev) => [idea, ...prev]);

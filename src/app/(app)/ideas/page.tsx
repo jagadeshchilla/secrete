@@ -265,6 +265,61 @@ function TaskListField({
   );
 }
 
+// ---- First decision shown on a newly-added idea: can we actually do this? ----
+function FeasibilityGate({ onDecide }: { onDecide: (feasible: boolean, reason?: string) => void }) {
+  const [choice, setChoice] = useState<boolean | null>(null);
+  const [reason, setReason] = useState("");
+
+  return (
+    <div className="mt-4 border-t border-[var(--border)] pt-4">
+      <p className="mb-1.5 text-xs font-medium text-[var(--muted)]">Can we actually do this?</p>
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={() => setChoice(true)}
+          className={`flex-1 border px-3 py-2 text-xs font-medium ${
+            choice === true
+              ? "border-[var(--good)] bg-[var(--good-soft)] text-[var(--good)]"
+              : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]"
+          }`}
+        >
+          Yes — let&apos;s do it
+        </button>
+        <button
+          type="button"
+          onClick={() => setChoice(false)}
+          className={`flex-1 border px-3 py-2 text-xs font-medium ${
+            choice === false
+              ? "border-[var(--bad)] bg-[rgba(224,122,95,0.12)] text-[var(--bad)]"
+              : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]"
+          }`}
+        >
+          No, not right now
+        </button>
+      </div>
+
+      {choice === false && (
+        <textarea
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+          rows={2}
+          placeholder="Why not? (required)"
+          className="mt-2 w-full border border-[var(--border)] bg-[var(--surface-2)] p-2.5 text-xs outline-none focus:border-[var(--accent)]"
+        />
+      )}
+
+      <button
+        type="button"
+        disabled={choice === null || (choice === false && !reason.trim())}
+        onClick={() => onDecide(choice as boolean, choice === false ? reason.trim() : undefined)}
+        className="btn-shimmer mt-3 w-full border border-[var(--accent)] bg-[var(--accent)] px-3 py-2 text-xs font-medium text-white disabled:opacity-50"
+      >
+        Confirm
+      </button>
+    </div>
+  );
+}
+
 // ---- Full workflow shown inside an expanded, feasible idea ----
 function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInfeasible: (reason: string) => void }) {
   const { updateIdea } = useIdeas();
@@ -448,14 +503,6 @@ export default function IdeasPage() {
   const [selectedDomains, setSelectedDomains] = useState<string[]>([]);
   const [roleSearch, setRoleSearch] = useState("");
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-  const [feasible, setFeasible] = useState<boolean | null>(null);
-  const [infeasibleReason, setInfeasibleReason] = useState("");
-  const [draftTopics, setDraftTopics] = useState<string[]>([]);
-  const [draftSources, setDraftSources] = useState<IdeaDataSource[]>([]);
-  const [draftMethods, setDraftMethods] = useState<string[]>([]);
-  const [draftStack, setDraftStack] = useState<string[]>([]);
-  const [draftTasks, setDraftTasks] = useState<IdeaTask[]>([]);
-  const [draftTargetDate, setDraftTargetDate] = useState("");
 
   const visibleIdeas = useMemo(
     () => (view === "mine" ? ideas.filter((i) => i.createdBy === profile) : ideas),
@@ -501,41 +548,23 @@ export default function IdeasPage() {
     setSelectedDomains([]);
     setSelectedKeys([]);
     setRoleSearch("");
-    setFeasible(null);
-    setInfeasibleReason("");
-    setDraftTopics([]);
-    setDraftSources([]);
-    setDraftMethods([]);
-    setDraftStack([]);
-    setDraftTasks([]);
-    setDraftTargetDate("");
   }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!profile || !title.trim() || !description.trim() || feasible === null) return;
-    if (feasible === false && !infeasibleReason.trim()) return;
+    if (!profile || !title.trim() || !description.trim()) return;
     addIdea({
       title: title.trim(),
       description: description.trim(),
       domains: selectedDomains,
       roleKeys: selectedKeys,
       createdBy: profile,
-      feasible,
-      infeasibleReason: feasible === false ? infeasibleReason.trim() : undefined,
-      researchTopics: feasible ? draftTopics : undefined,
-      dataSources: feasible ? draftSources : undefined,
-      methods: feasible ? draftMethods : undefined,
-      techStack: feasible ? draftStack : undefined,
-      tasks: feasible ? draftTasks : undefined,
-      targetDate: feasible ? draftTargetDate.trim() || undefined : undefined,
     });
     resetForm();
     setModalOpen(false);
   }
 
-  const canSubmit =
-    !!title.trim() && !!description.trim() && feasible !== null && (feasible === true || !!infeasibleReason.trim());
+  const canSubmit = !!title.trim() && !!description.trim();
 
   return (
     <div className="mx-auto max-w-4xl px-5 py-8 md:px-8">
@@ -601,7 +630,12 @@ export default function IdeasPage() {
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-2">
                       <span className="min-w-0 truncate text-sm font-medium">{idea.title}</span>
-                      {!idea.feasible && (
+                      {idea.feasible === null && (
+                        <span className="shrink-0 border border-[var(--accent)] bg-[var(--accent-soft)] px-1.5 py-0.5 text-[10px] text-[var(--accent)]">
+                          Decide feasibility
+                        </span>
+                      )}
+                      {idea.feasible === false && (
                         <span className="shrink-0 border border-[var(--border)] px-1.5 py-0.5 text-[10px] text-[var(--muted)]">
                           Not pursuing
                         </span>
@@ -666,7 +700,11 @@ export default function IdeasPage() {
                         Added by <strong className="text-[var(--text)]">{PROFILE_LABELS[idea.createdBy]}</strong>
                       </div>
 
-                      {!idea.feasible ? (
+                      {idea.feasible === null ? (
+                        <FeasibilityGate
+                          onDecide={(feasible, reason) => updateIdea(idea.id, { feasible, infeasibleReason: reason })}
+                        />
+                      ) : idea.feasible === false ? (
                         <div className="mt-4 border border-[var(--border)] bg-[var(--surface)] p-3">
                           <div className="flex items-start justify-between gap-3">
                             <div>
@@ -814,100 +852,10 @@ export default function IdeasPage() {
                 )}
               </div>
 
-              <div className="mt-4 border-t border-[var(--border)] pt-4">
-                <label className="mb-1.5 block text-xs font-medium text-[var(--muted)]">Can we actually do this?</label>
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setFeasible(true)}
-                    className={`flex-1 border px-3 py-2 text-xs font-medium ${
-                      feasible === true
-                        ? "border-[var(--good)] bg-[var(--good-soft)] text-[var(--good)]"
-                        : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]"
-                    }`}
-                  >
-                    Yes — let&apos;s do it
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setFeasible(false)}
-                    className={`flex-1 border px-3 py-2 text-xs font-medium ${
-                      feasible === false
-                        ? "border-[var(--bad)] bg-[rgba(224,122,95,0.12)] text-[var(--bad)]"
-                        : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]"
-                    }`}
-                  >
-                    No, not right now
-                  </button>
-                </div>
-
-                {feasible === false && (
-                  <textarea
-                    value={infeasibleReason}
-                    onChange={(e) => setInfeasibleReason(e.target.value)}
-                    rows={2}
-                    placeholder="Why not? (required)"
-                    className="mt-2 w-full border border-[var(--border)] bg-[var(--surface-2)] p-2.5 text-xs outline-none focus:border-[var(--accent)]"
-                  />
-                )}
-
-                {feasible === true && (
-                  <div className="mt-3 space-y-4">
-                    <p className="text-[11px] text-[var(--muted)]">
-                      Optional — fill in now, or add any of this later from the idea itself.
-                    </p>
-                    <TagListField
-                      icon={FlaskIcon}
-                      label="What to research"
-                      items={draftTopics}
-                      placeholder="A question or topic to look into"
-                      onAdd={(v) => setDraftTopics((prev) => [...prev, v])}
-                      onRemove={(i) => setDraftTopics((prev) => prev.filter((_, idx) => idx !== i))}
-                    />
-                    <DataSourceField
-                      dataSources={draftSources}
-                      onAdd={(d) => setDraftSources((prev) => [...prev, d])}
-                      onRemove={(id) => setDraftSources((prev) => prev.filter((d) => d.id !== id))}
-                    />
-                    <TagListField
-                      icon={ChipIcon}
-                      label="Methods & concepts"
-                      items={draftMethods}
-                      placeholder="e.g. Random forest, A/B testing"
-                      onAdd={(v) => setDraftMethods((prev) => [...prev, v])}
-                      onRemove={(i) => setDraftMethods((prev) => prev.filter((_, idx) => idx !== i))}
-                    />
-                    <TagListField
-                      icon={StackIcon}
-                      label="Tech stack"
-                      items={draftStack}
-                      placeholder="e.g. Python, PostgreSQL"
-                      onAdd={(v) => setDraftStack((prev) => [...prev, v])}
-                      onRemove={(i) => setDraftStack((prev) => prev.filter((_, idx) => idx !== i))}
-                    />
-                    <TaskListField
-                      tasks={draftTasks}
-                      onAdd={(t) => setDraftTasks((prev) => [...prev, t])}
-                      onToggle={(id) =>
-                        setDraftTasks((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)))
-                      }
-                      onRemove={(id) => setDraftTasks((prev) => prev.filter((t) => t.id !== id))}
-                    />
-                    <div>
-                      <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">
-                        <CalendarIcon className="h-3.5 w-3.5" />
-                        Target date / estimate
-                      </p>
-                      <input
-                        value={draftTargetDate}
-                        onChange={(e) => setDraftTargetDate(e.target.value)}
-                        placeholder="e.g. 2 weeks, or a date"
-                        className={`${inputCls} mt-1.5`}
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
+              <p className="mt-3 text-[11px] text-[var(--muted)]">
+                Once added, open the idea to decide if it&apos;s feasible and build out the rest — research,
+                data, methods, tasks, and status.
+              </p>
 
               <button
                 type="submit"

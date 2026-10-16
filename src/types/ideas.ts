@@ -32,9 +32,10 @@ export interface ProjectIdea {
   createdBy: Profile;
   createdAt: string;
 
-  // Feasibility gate — when false, none of the workflow fields below are
-  // shown in the UI (the idea stops at the reason).
-  feasible: boolean;
+  // Feasibility gate — decided while viewing the idea, not at creation.
+  // null = not decided yet; false stops at the reason, with none of the
+  // workflow fields below shown in the UI.
+  feasible: boolean | null;
   infeasibleReason?: string;
 
   // Only meaningful once feasible is true.

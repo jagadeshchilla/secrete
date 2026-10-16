@@ -39,9 +39,10 @@ create table if not exists project_ideas (
   role_keys text[] not null default '{}',
   created_by text not null check (created_by in ('jagadesh', 'harshita')),
   created_at timestamptz not null default now(),
-  -- Feasibility gate: if infeasible, the workflow fields below never show in
-  -- the UI, so they stay at their defaults for that idea.
-  feasible boolean not null default true,
+  -- Feasibility gate, decided while viewing the idea (not at creation):
+  -- null = not decided yet, false stops at infeasible_reason with none of
+  -- the workflow columns below shown in the UI.
+  feasible boolean,
   infeasible_reason text,
   research_topics text[] not null default '{}',
   data_sources jsonb not null default '[]', -- [{id, label, url}]
@@ -55,7 +56,9 @@ create table if not exists project_ideas (
   done boolean not null default false
 );
 alter table project_ideas add column if not exists domains text[] not null default '{}';
-alter table project_ideas add column if not exists feasible boolean not null default true;
+alter table project_ideas add column if not exists feasible boolean;
+alter table project_ideas alter column feasible drop not null;
+alter table project_ideas alter column feasible drop default;
 alter table project_ideas add column if not exists infeasible_reason text;
 alter table project_ideas add column if not exists research_topics text[] not null default '{}';
 alter table project_ideas add column if not exists data_sources jsonb not null default '[]';
