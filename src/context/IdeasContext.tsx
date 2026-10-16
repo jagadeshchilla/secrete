@@ -6,6 +6,24 @@ import type { Profile } from "@/config/access";
 
 const STORAGE_KEY = "careerProjectIdeas";
 
+type IdeaPatch = Partial<
+  Pick<
+    ProjectIdea,
+    | "researchTopics"
+    | "dataSources"
+    | "methods"
+    | "techStack"
+    | "tasks"
+    | "targetDate"
+    | "blockers"
+    | "outcomeNotes"
+    | "researchPaperLink"
+    | "done"
+    | "feasible"
+    | "infeasibleReason"
+  >
+>;
+
 interface IdeasState {
   ideas: ProjectIdea[];
   hydrated: boolean;
@@ -15,7 +33,16 @@ interface IdeasState {
     domains: string[];
     roleKeys: string[];
     createdBy: Profile;
+    feasible: boolean;
+    infeasibleReason?: string;
+    researchTopics?: string[];
+    dataSources?: ProjectIdea["dataSources"];
+    methods?: string[];
+    techStack?: string[];
+    tasks?: ProjectIdea["tasks"];
+    targetDate?: string;
   }) => void;
+  updateIdea: (id: string, patch: IdeaPatch) => void;
   removeIdea: (id: string) => void;
 }
 
@@ -54,35 +81,58 @@ export function IdeasProvider({ children }: { children: React.ReactNode }) {
     }
   }, [ideas, hydrated]);
 
-  const addIdea = useCallback(
-    (input: {
-      title: string;
-      description: string;
-      domains: string[];
-      roleKeys: string[];
-      createdBy: Profile;
-    }) => {
-      const idea: ProjectIdea = {
-        id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-        title: input.title,
-        description: input.description,
-        domains: input.domains,
-        roleKeys: input.roleKeys,
-        createdBy: input.createdBy,
-        createdAt: new Date().toISOString(),
-      };
-      setIdeas((prev) => [idea, ...prev]);
-      fetch("/api/ideas", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(input),
-        keepalive: true,
-      }).catch(() => {
+  const addIdea = useCallback((input: Parameters<IdeasState["addIdea"]>[0]) => {
+    const tempId = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    const idea: ProjectIdea = {
+      id: tempId,
+      title: input.title,
+      description: input.description,
+      domains: input.domains,
+      roleKeys: input.roleKeys,
+      createdBy: input.createdBy,
+      createdAt: new Date().toISOString(),
+      feasible: input.feasible,
+      infeasibleReason: input.infeasibleReason,
+      researchTopics: input.researchTopics || [],
+      dataSources: input.dataSources || [],
+      methods: input.methods || [],
+      techStack: input.techStack || [],
+      tasks: input.tasks || [],
+      targetDate: input.targetDate,
+      done: false,
+    };
+    setIdeas((prev) => [idea, ...prev]);
+    fetch("/api/ideas", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+      keepalive: true,
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => {
+        // The server mints its own id on insert — swap the optimistic temp id
+        // for the real one, otherwise any edit/delete made before the next
+        // page load would target an id that doesn't exist in the database.
+        if (json?.idea) {
+          setIdeas((prev) => prev.map((i) => (i.id === tempId ? json.idea : i)));
+        }
+      })
+      .catch(() => {
         // offline or DB not configured yet — local cache still has it
       });
-    },
-    []
-  );
+  }, []);
+
+  const updateIdea = useCallback((id: string, patch: IdeaPatch) => {
+    setIdeas((prev) => prev.map((i) => (i.id === id ? { ...i, ...patch } : i)));
+    fetch("/api/ideas", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, patch }),
+      keepalive: true,
+    }).catch(() => {
+      // offline or DB not configured yet — local cache still has it
+    });
+  }, []);
 
   const removeIdea = useCallback((id: string) => {
     setIdeas((prev) => prev.filter((i) => i.id !== id));
@@ -92,7 +142,9 @@ export function IdeasProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <IdeasCtx.Provider value={{ ideas, hydrated, addIdea, removeIdea }}>{children}</IdeasCtx.Provider>
+    <IdeasCtx.Provider value={{ ideas, hydrated, addIdea, updateIdea, removeIdea }}>
+      {children}
+    </IdeasCtx.Provider>
   );
 }
 

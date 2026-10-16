@@ -38,9 +38,35 @@ create table if not exists project_ideas (
   domains text[] not null default '{}',
   role_keys text[] not null default '{}',
   created_by text not null check (created_by in ('jagadesh', 'harshita')),
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  -- Feasibility gate: if infeasible, the workflow fields below never show in
+  -- the UI, so they stay at their defaults for that idea.
+  feasible boolean not null default true,
+  infeasible_reason text,
+  research_topics text[] not null default '{}',
+  data_sources jsonb not null default '[]', -- [{id, label, url}]
+  methods text[] not null default '{}',
+  tech_stack text[] not null default '{}',
+  tasks jsonb not null default '[]', -- [{id, title, type, assignedTo, done}]
+  target_date text,
+  blockers text,
+  outcome_notes text,
+  research_paper_link text,
+  done boolean not null default false
 );
 alter table project_ideas add column if not exists domains text[] not null default '{}';
+alter table project_ideas add column if not exists feasible boolean not null default true;
+alter table project_ideas add column if not exists infeasible_reason text;
+alter table project_ideas add column if not exists research_topics text[] not null default '{}';
+alter table project_ideas add column if not exists data_sources jsonb not null default '[]';
+alter table project_ideas add column if not exists methods text[] not null default '{}';
+alter table project_ideas add column if not exists tech_stack text[] not null default '{}';
+alter table project_ideas add column if not exists tasks jsonb not null default '[]';
+alter table project_ideas add column if not exists target_date text;
+alter table project_ideas add column if not exists blockers text;
+alter table project_ideas add column if not exists outcome_notes text;
+alter table project_ideas add column if not exists research_paper_link text;
+alter table project_ideas add column if not exists done boolean not null default false;
 
 create table if not exists research_papers (
   id text primary key,
