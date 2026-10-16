@@ -30,12 +30,23 @@ function newId() {
 const inputCls =
   "w-full border border-[var(--border)] bg-[var(--surface-2)] px-2.5 py-1.5 text-xs outline-none focus:border-[var(--accent)]";
 
+// ---- Shared label row (view-only — editing is controlled by one button for the whole workflow) ----
+function SectionHeader({ icon: Icon, label }: { icon: typeof LightbulbIcon; label: string }) {
+  return (
+    <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">
+      <Icon className="h-3.5 w-3.5" />
+      {label}
+    </p>
+  );
+}
+
 // ---- Generic add/remove chip list, used for research topics / methods / tech stack ----
 function TagListField({
-  icon: Icon,
+  icon,
   label,
   items,
   placeholder,
+  editing,
   onAdd,
   onRemove,
 }: {
@@ -43,6 +54,7 @@ function TagListField({
   label: string;
   items: string[];
   placeholder: string;
+  editing: boolean;
   onAdd: (value: string) => void;
   onRemove: (index: number) => void;
 }) {
@@ -56,11 +68,8 @@ function TagListField({
 
   return (
     <div>
-      <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">
-        <Icon className="h-3.5 w-3.5" />
-        {label}
-      </p>
-      {items.length > 0 && (
+      <SectionHeader icon={icon} label={label} />
+      {items.length > 0 ? (
         <div className="mt-1.5 flex flex-wrap gap-1.5">
           {items.map((item, idx) => (
             <span
@@ -68,34 +77,41 @@ function TagListField({
               className="flex items-center gap-1 border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[11px]"
             >
               {item}
-              <button type="button" onClick={() => onRemove(idx)} className="text-[var(--muted)] hover:text-[var(--bad)]">
-                <CloseIcon className="h-3 w-3" />
-              </button>
+              {editing && (
+                <button type="button" onClick={() => onRemove(idx)} className="text-[var(--muted)] hover:text-[var(--bad)]">
+                  <CloseIcon className="h-3 w-3" />
+                </button>
+              )}
             </span>
           ))}
         </div>
+      ) : (
+        <p className="mt-1 text-[11px] text-[var(--muted)]">Nothing added yet.</p>
       )}
-      <div className="mt-1.5 flex gap-1.5">
-        <input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              submit();
-            }
-          }}
-          placeholder={placeholder}
-          className={inputCls}
-        />
-        <button
-          type="button"
-          onClick={submit}
-          className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
-        >
-          <PlusIcon className="h-3.5 w-3.5" />
-        </button>
-      </div>
+      {editing && (
+        <div className="mt-1.5 flex gap-1.5">
+          <input
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                submit();
+              }
+            }}
+            placeholder={placeholder}
+            autoFocus
+            className={inputCls}
+          />
+          <button
+            type="button"
+            onClick={submit}
+            className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            <PlusIcon className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -103,10 +119,12 @@ function TagListField({
 // ---- Data sources: {label, url} pairs ----
 function DataSourceField({
   dataSources,
+  editing,
   onAdd,
   onRemove,
 }: {
   dataSources: IdeaDataSource[];
+  editing: boolean;
   onAdd: (source: IdeaDataSource) => void;
   onRemove: (id: string) => void;
 }) {
@@ -122,11 +140,8 @@ function DataSourceField({
 
   return (
     <div>
-      <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">
-        <DatabaseIcon className="h-3.5 w-3.5" />
-        Data needed
-      </p>
-      {dataSources.length > 0 && (
+      <SectionHeader icon={DatabaseIcon} label="Data needed" />
+      {dataSources.length > 0 ? (
         <div className="mt-1.5 space-y-1">
           {dataSources.map((d) => (
             <div key={d.id} className="flex items-center justify-between gap-2 border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5">
@@ -139,24 +154,30 @@ function DataSourceField({
                 <ExternalLinkIcon className="h-3 w-3 shrink-0" />
                 <span className="truncate">{d.label}</span>
               </a>
-              <button type="button" onClick={() => onRemove(d.id)} className="shrink-0 text-[var(--muted)] hover:text-[var(--bad)]">
-                <CloseIcon className="h-3.5 w-3.5" />
-              </button>
+              {editing && (
+                <button type="button" onClick={() => onRemove(d.id)} className="shrink-0 text-[var(--muted)] hover:text-[var(--bad)]">
+                  <CloseIcon className="h-3.5 w-3.5" />
+                </button>
+              )}
             </div>
           ))}
         </div>
+      ) : (
+        <p className="mt-1 text-[11px] text-[var(--muted)]">Nothing added yet.</p>
       )}
-      <div className="mt-1.5 grid grid-cols-[1fr_1fr_auto] gap-1.5">
-        <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="What data" className={inputCls} />
-        <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Link to it" className={inputCls} />
-        <button
-          type="button"
-          onClick={submit}
-          className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
-        >
-          <PlusIcon className="h-3.5 w-3.5" />
-        </button>
-      </div>
+      {editing && (
+        <div className="mt-1.5 grid grid-cols-[1fr_1fr_auto] gap-1.5">
+          <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="What data" autoFocus className={inputCls} />
+          <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Link to it" className={inputCls} />
+          <button
+            type="button"
+            onClick={submit}
+            className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            <PlusIcon className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -164,11 +185,13 @@ function DataSourceField({
 // ---- Tasks: title + type + assignee + done ----
 function TaskListField({
   tasks,
+  editing,
   onAdd,
   onToggle,
   onRemove,
 }: {
   tasks: IdeaTask[];
+  editing: boolean;
   onAdd: (task: IdeaTask) => void;
   onToggle: (id: string) => void;
   onRemove: (id: string) => void;
@@ -188,10 +211,7 @@ function TaskListField({
   return (
     <div>
       <div className="flex items-center justify-between">
-        <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">
-          <StackIcon className="h-3.5 w-3.5" />
-          Tasks
-        </p>
+        <SectionHeader icon={StackIcon} label="Tasks" />
         {tasks.length > 0 && (
           <span className="text-[11px] text-[var(--muted)]">
             {doneCount}/{tasks.length} done
@@ -199,7 +219,7 @@ function TaskListField({
         )}
       </div>
 
-      {tasks.length > 0 && (
+      {tasks.length > 0 ? (
         <div className="mt-1.5 space-y-1.5">
           {tasks.map((t) => (
             <div key={t.id} className="flex items-center gap-2 border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5">
@@ -223,44 +243,51 @@ function TaskListField({
                   {PROFILE_LABELS[t.assignedTo]}
                 </span>
               )}
-              <button type="button" onClick={() => onRemove(t.id)} className="shrink-0 text-[var(--muted)] hover:text-[var(--bad)]">
-                <CloseIcon className="h-3.5 w-3.5" />
-              </button>
+              {editing && (
+                <button type="button" onClick={() => onRemove(t.id)} className="shrink-0 text-[var(--muted)] hover:text-[var(--bad)]">
+                  <CloseIcon className="h-3.5 w-3.5" />
+                </button>
+              )}
             </div>
           ))}
         </div>
+      ) : (
+        <p className="mt-1 text-[11px] text-[var(--muted)]">No tasks added yet.</p>
       )}
 
-      <div className="mt-1.5 grid grid-cols-[1fr_auto_auto_auto] gap-1.5">
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Task — e.g. Research X"
-          className={inputCls}
-        />
-        <select value={type} onChange={(e) => setType(e.target.value as IdeaTask["type"])} className={inputCls}>
-          {IDEA_TASK_TYPES.map((t) => (
-            <option key={t.value} value={t.value}>
-              {t.label}
-            </option>
-          ))}
-        </select>
-        <select value={assignedTo} onChange={(e) => setAssignedTo(e.target.value as Profile | "")} className={inputCls}>
-          <option value="">Unassigned</option>
-          {PROFILES.map((p) => (
-            <option key={p} value={p}>
-              {PROFILE_LABELS[p]}
-            </option>
-          ))}
-        </select>
-        <button
-          type="button"
-          onClick={submit}
-          className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
-        >
-          <PlusIcon className="h-3.5 w-3.5" />
-        </button>
-      </div>
+      {editing && (
+        <div className="mt-1.5 grid grid-cols-[1fr_auto_auto_auto] gap-1.5">
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Task — e.g. Research X"
+            autoFocus
+            className={inputCls}
+          />
+          <select value={type} onChange={(e) => setType(e.target.value as IdeaTask["type"])} className={inputCls}>
+            {IDEA_TASK_TYPES.map((t) => (
+              <option key={t.value} value={t.value}>
+                {t.label}
+              </option>
+            ))}
+          </select>
+          <select value={assignedTo} onChange={(e) => setAssignedTo(e.target.value as Profile | "")} className={inputCls}>
+            <option value="">Unassigned</option>
+            {PROFILES.map((p) => (
+              <option key={p} value={p}>
+                {PROFILE_LABELS[p]}
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            onClick={submit}
+            className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            <PlusIcon className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -323,6 +350,7 @@ function FeasibilityGate({ onDecide }: { onDecide: (feasible: boolean, reason?: 
 // ---- Full workflow shown inside an expanded, feasible idea ----
 function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInfeasible: (reason: string) => void }) {
   const { updateIdea } = useIdeas();
+  const [editing, setEditing] = useState(false);
   const [targetDate, setTargetDate] = useState(idea.targetDate || "");
   const [blockers, setBlockers] = useState(idea.blockers || "");
   const [outcomeNotes, setOutcomeNotes] = useState(idea.outcomeNotes || "");
@@ -332,17 +360,34 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
 
   return (
     <div className="mt-4 space-y-4 border-t border-[var(--border)] pt-4">
+      <div className="flex items-center justify-between">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">Workflow</p>
+        <button
+          type="button"
+          onClick={() => setEditing((v) => !v)}
+          className={`border px-2.5 py-1 text-[11px] font-medium ${
+            editing
+              ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
+              : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          }`}
+        >
+          {editing ? "Done editing" : "Edit"}
+        </button>
+      </div>
+
       <TagListField
         icon={FlaskIcon}
         label="What to research"
         items={idea.researchTopics}
         placeholder="A question or topic to look into"
+        editing={editing}
         onAdd={(v) => updateIdea(idea.id, { researchTopics: [...idea.researchTopics, v] })}
         onRemove={(i) => updateIdea(idea.id, { researchTopics: idea.researchTopics.filter((_, idx) => idx !== i) })}
       />
 
       <DataSourceField
         dataSources={idea.dataSources}
+        editing={editing}
         onAdd={(d) => updateIdea(idea.id, { dataSources: [...idea.dataSources, d] })}
         onRemove={(id) => updateIdea(idea.id, { dataSources: idea.dataSources.filter((d) => d.id !== id) })}
       />
@@ -352,6 +397,7 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
         label="Methods & concepts"
         items={idea.methods}
         placeholder="e.g. Random forest, A/B testing"
+        editing={editing}
         onAdd={(v) => updateIdea(idea.id, { methods: [...idea.methods, v] })}
         onRemove={(i) => updateIdea(idea.id, { methods: idea.methods.filter((_, idx) => idx !== i) })}
       />
@@ -361,12 +407,14 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
         label="Tech stack"
         items={idea.techStack}
         placeholder="e.g. Python, PostgreSQL"
+        editing={editing}
         onAdd={(v) => updateIdea(idea.id, { techStack: [...idea.techStack, v] })}
         onRemove={(i) => updateIdea(idea.id, { techStack: idea.techStack.filter((_, idx) => idx !== i) })}
       />
 
       <TaskListField
         tasks={idea.tasks}
+        editing={editing}
         onAdd={(t) => updateIdea(idea.id, { tasks: [...idea.tasks, t] })}
         onToggle={(id) =>
           updateIdea(idea.id, { tasks: idea.tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t)) })
@@ -380,26 +428,44 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
             <CalendarIcon className="h-3.5 w-3.5" />
             Target date / estimate
           </p>
-          <input
-            value={targetDate}
-            onChange={(e) => setTargetDate(e.target.value)}
-            onBlur={() => updateIdea(idea.id, { targetDate: targetDate.trim() || undefined })}
-            placeholder="e.g. 2 weeks, or a date"
-            className={`${inputCls} mt-1.5`}
-          />
+          {editing ? (
+            <input
+              value={targetDate}
+              onChange={(e) => setTargetDate(e.target.value)}
+              onBlur={() => updateIdea(idea.id, { targetDate: targetDate.trim() || undefined })}
+              placeholder="e.g. 2 weeks, or a date"
+              className={`${inputCls} mt-1.5`}
+            />
+          ) : (
+            <p className="mt-1 text-xs text-[var(--muted)]">{idea.targetDate || "Not set."}</p>
+          )}
         </div>
         <div>
           <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">
             <ExternalLinkIcon className="h-3.5 w-3.5" />
             Research paper link
           </p>
-          <input
-            value={researchPaperLink}
-            onChange={(e) => setResearchPaperLink(e.target.value)}
-            onBlur={() => updateIdea(idea.id, { researchPaperLink: researchPaperLink.trim() || undefined })}
-            placeholder="If this became a paper..."
-            className={`${inputCls} mt-1.5`}
-          />
+          {editing ? (
+            <input
+              value={researchPaperLink}
+              onChange={(e) => setResearchPaperLink(e.target.value)}
+              onBlur={() => updateIdea(idea.id, { researchPaperLink: researchPaperLink.trim() || undefined })}
+              placeholder="If this became a paper..."
+              className={`${inputCls} mt-1.5`}
+            />
+          ) : idea.researchPaperLink ? (
+            <a
+              href={idea.researchPaperLink}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-[var(--accent)] hover:underline"
+            >
+              <ExternalLinkIcon className="h-3 w-3" />
+              {idea.researchPaperLink}
+            </a>
+          ) : (
+            <p className="mt-1 text-xs text-[var(--muted)]">Not set.</p>
+          )}
         </div>
       </div>
 
@@ -408,14 +474,18 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
           <ShieldIcon className="h-3.5 w-3.5" />
           Blockers / risks
         </p>
-        <textarea
-          value={blockers}
-          onChange={(e) => setBlockers(e.target.value)}
-          onBlur={() => updateIdea(idea.id, { blockers: blockers.trim() || undefined })}
-          rows={2}
-          placeholder="Anything this depends on, or you're unsure is possible"
-          className={`${inputCls} mt-1.5`}
-        />
+        {editing ? (
+          <textarea
+            value={blockers}
+            onChange={(e) => setBlockers(e.target.value)}
+            onBlur={() => updateIdea(idea.id, { blockers: blockers.trim() || undefined })}
+            rows={2}
+            placeholder="Anything this depends on, or you're unsure is possible"
+            className={`${inputCls} mt-1.5`}
+          />
+        ) : (
+          <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">{idea.blockers || "None noted."}</p>
+        )}
       </div>
 
       <div className="border-t border-[var(--border)] pt-3">
@@ -435,14 +505,20 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
           </button>
         </div>
         {idea.done && (
-          <textarea
-            value={outcomeNotes}
-            onChange={(e) => setOutcomeNotes(e.target.value)}
-            onBlur={() => updateIdea(idea.id, { outcomeNotes: outcomeNotes.trim() || undefined })}
-            rows={2}
-            placeholder="What did you actually build or learn?"
-            className={`${inputCls} mt-2`}
-          />
+          editing ? (
+            <textarea
+              value={outcomeNotes}
+              onChange={(e) => setOutcomeNotes(e.target.value)}
+              onBlur={() => updateIdea(idea.id, { outcomeNotes: outcomeNotes.trim() || undefined })}
+              rows={2}
+              placeholder="What did you actually build or learn?"
+              className={`${inputCls} mt-2`}
+            />
+          ) : (
+            <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
+              {idea.outcomeNotes || "No notes yet."}
+            </p>
+          )
         )}
 
         {!idea.done && (
