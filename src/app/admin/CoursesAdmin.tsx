@@ -135,6 +135,8 @@ export default function CoursesAdmin() {
   const [saving, setSaving] = useState(false);
   const [creating, setCreating] = useState(false);
   const [roleSearch, setRoleSearch] = useState("");
+  const [closedSections, setClosedSections] = useState<Set<string>>(new Set());
+  const [closedItems, setClosedItems] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     fetch("/api/admin-courses")
@@ -164,13 +166,46 @@ export default function CoursesAdmin() {
   function openCreateModal() {
     setDraft(emptyCourse());
     setStatus("");
+    setClosedSections(new Set());
+    setClosedItems(new Set());
     setModalOpen(true);
   }
 
   function openEditModal(c: Course) {
     setDraft(JSON.parse(JSON.stringify(c)));
     setStatus("");
+    setClosedSections(new Set());
+    setClosedItems(new Set());
     setModalOpen(true);
+  }
+
+  function toggleSectionOpen(id: string) {
+    setClosedSections((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  function toggleItemOpen(id: string) {
+    setClosedItems((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  function expandAll() {
+    setClosedSections(new Set());
+    setClosedItems(new Set());
+  }
+
+  function collapseAll() {
+    if (!draft) return;
+    setClosedSections(new Set(draft.sections.map((s) => s.id)));
+    setClosedItems(new Set(draft.sections.flatMap((s) => (s.customItems || []).map((i) => i.id))));
   }
 
   function closeModal() {
@@ -435,7 +470,7 @@ export default function CoursesAdmin() {
                     value={draft.title}
                     onChange={(v) => updateDraft((c) => ({ ...c, title: v }))}
                     placeholder="Search a tool/tech (e.g. AWS) or type a course title"
-                    autoFocus
+                    autoFocus={isNew}
                     className={inputCls}
                   />
                 </div>
@@ -510,13 +545,37 @@ export default function CoursesAdmin() {
               ) : (
                 <>
                   <div className="mt-6 space-y-3">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-[#8a8270]">
-                      Modules
-                    </p>
+                    <div className="flex items-center justify-between">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-[#8a8270]">
+                        Modules
+                      </p>
+                      {draft.sections.length > 0 && (
+                        <div className="flex gap-1.5">
+                          <button
+                            type="button"
+                            onClick={expandAll}
+                            className="border border-[#2a2418] px-2.5 py-1 text-[11px] font-medium text-[#9a927e] transition-colors hover:border-[#f2c368] hover:text-[#f2c368]"
+                          >
+                            Expand all
+                          </button>
+                          <button
+                            type="button"
+                            onClick={collapseAll}
+                            className="border border-[#2a2418] px-2.5 py-1 text-[11px] font-medium text-[#9a927e] transition-colors hover:border-[#f2c368] hover:text-[#f2c368]"
+                          >
+                            Collapse all
+                          </button>
+                        </div>
+                      )}
+                    </div>
                     {draft.sections.map((sec) => (
                       <SectionEditor
                         key={sec.id}
                         section={sec}
+                        open={!closedSections.has(sec.id)}
+                        onToggleOpen={() => toggleSectionOpen(sec.id)}
+                        closedItems={closedItems}
+                        onToggleItemOpen={toggleItemOpen}
                         onUpdate={(patch) => updateSection(sec.id, patch)}
                         onRemove={() => removeSection(sec.id)}
                         onAddItem={() => addItem(sec.id)}
@@ -564,6 +623,10 @@ export default function CoursesAdmin() {
 
 function SectionEditor({
   section,
+  open,
+  onToggleOpen,
+  closedItems,
+  onToggleItemOpen,
   onUpdate,
   onRemove,
   onAddItem,
@@ -574,6 +637,10 @@ function SectionEditor({
   onRemoveSubstep,
 }: {
   section: CourseSection;
+  open: boolean;
+  onToggleOpen: () => void;
+  closedItems: Set<string>;
+  onToggleItemOpen: (itemId: string) => void;
   onUpdate: (patch: Partial<CourseSection>) => void;
   onRemove: () => void;
   onAddItem: () => void;
@@ -583,11 +650,10 @@ function SectionEditor({
   onUpdateSubstep: (itemId: string, substepId: string, patch: Partial<CourseSubstep>) => void;
   onRemoveSubstep: (itemId: string, substepId: string) => void;
 }) {
-  const [open, setOpen] = useState(true);
   return (
     <div className="border border-[#2a2418] bg-[#1a1710]">
       <div className="flex items-center gap-2 p-3">
-        <button onClick={() => setOpen((v) => !v)} className="shrink-0 text-[#9a927e]">
+        <button onClick={onToggleOpen} className="shrink-0 text-[#9a927e]">
           <ChevronDownIcon className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />
         </button>
         <input
@@ -636,6 +702,8 @@ function SectionEditor({
             <ItemEditor
               key={item.id}
               item={item}
+              open={!closedItems.has(item.id)}
+              onToggleOpen={() => onToggleItemOpen(item.id)}
               onUpdate={(patch) => onUpdateItem(item.id, patch)}
               onRemove={() => onRemoveItem(item.id)}
               onAddSubstep={() => onAddSubstep(item.id)}
@@ -658,6 +726,8 @@ function SectionEditor({
 
 function ItemEditor({
   item,
+  open,
+  onToggleOpen,
   onUpdate,
   onRemove,
   onAddSubstep,
@@ -665,17 +735,18 @@ function ItemEditor({
   onRemoveSubstep,
 }: {
   item: CourseItem;
+  open: boolean;
+  onToggleOpen: () => void;
   onUpdate: (patch: Partial<CourseItem>) => void;
   onRemove: () => void;
   onAddSubstep: () => void;
   onUpdateSubstep: (substepId: string, patch: Partial<CourseSubstep>) => void;
   onRemoveSubstep: (substepId: string) => void;
 }) {
-  const [open, setOpen] = useState(true);
   return (
     <div className="border border-[#2a2418] bg-[#12100a]">
       <div className="flex items-center gap-2 p-2.5">
-        <button onClick={() => setOpen((v) => !v)} className="shrink-0 text-[#9a927e]">
+        <button onClick={onToggleOpen} className="shrink-0 text-[#9a927e]">
           <ChevronDownIcon className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
         </button>
         <input
