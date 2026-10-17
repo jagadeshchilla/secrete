@@ -1,9 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppState, stripEmoji, keyFor } from "@/context/AppStateContext";
 import { useAccess } from "@/context/AccessContext";
 import { useIdeas } from "@/context/IdeasContext";
+import { useNewBadge } from "@/hooks/useNewBadge";
+import NewBadge from "@/components/NewBadge";
 import { PROFILES, PROFILE_LABELS, type Profile } from "@/config/access";
 import { IDEA_TASK_TYPES, type IdeaTask, type IdeaDataSource, type ProjectIdea } from "@/types/ideas";
 import {
@@ -585,6 +587,16 @@ export default function IdeasPage() {
     [ideas, view, profile]
   );
 
+  const { isNew: isNewIdea, markSeen: markIdeasSeen } = useNewBadge(
+    "ideas",
+    ideas.map((i) => i.createdAt)
+  );
+
+  useEffect(() => {
+    markIdeasSeen();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ideas]);
+
   const roleFilterResults = useMemo(() => {
     const q = roleSearch.toLowerCase().trim();
     if (!q) return [];
@@ -706,6 +718,7 @@ export default function IdeasPage() {
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-2">
                       <span className="min-w-0 truncate text-sm font-medium">{idea.title}</span>
+                      {isNewIdea(idea.createdAt) && <NewBadge />}
                       {idea.feasible === null && (
                         <span className="shrink-0 border border-[var(--accent)] bg-[var(--accent-soft)] px-1.5 py-0.5 text-[10px] text-[var(--accent)]">
                           Decide feasibility

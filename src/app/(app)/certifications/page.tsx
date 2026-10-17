@@ -1,10 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppState, stripEmoji, keyFor } from "@/context/AppStateContext";
 import { AwardIcon, SearchIcon, CloseIcon, ExternalLinkIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 import Favicon from "@/components/Favicon";
 import { CERTIFICATIONS, CERTIFICATION_DOMAINS, LEVEL_TIER_LABELS, type Certification, type LevelTier } from "@/lib/certifications";
+import { useNewBadge } from "@/hooks/useNewBadge";
+import NewBadge from "@/components/NewBadge";
+
+const CERTIFICATION_TIMESTAMPS = CERTIFICATIONS.map((c) => c.researchedAt);
 
 const PER_PAGE = 18;
 
@@ -18,7 +22,7 @@ const LEVEL_TIER_COLORS: Record<LevelTier, string> = {
 
 const LEVEL_TIERS: LevelTier[] = ["beginner", "associate", "professional", "expert"];
 
-function CertificationCard({ cert }: { cert: Certification }) {
+function CertificationCard({ cert, isNew }: { cert: Certification; isNew?: boolean }) {
   const color = LEVEL_TIER_COLORS[cert.levelTier];
   return (
     <a
@@ -34,7 +38,10 @@ function CertificationCard({ cert }: { cert: Certification }) {
               <Favicon url={cert.link} className="h-4 w-4" />
             </div>
             <div className="min-w-0">
-              <h3 className="truncate text-sm font-semibold leading-snug">{cert.name}</h3>
+              <h3 className="flex items-center gap-1.5 truncate text-sm font-semibold leading-snug">
+                <span className="truncate">{cert.name}</span>
+                {isNew && <NewBadge />}
+              </h3>
               <p className="truncate text-[10px] text-[var(--muted)]">{cert.issuer}</p>
             </div>
           </div>
@@ -93,6 +100,16 @@ export default function CertificationsPage() {
   const [priceFilter, setPriceFilter] = useState<"all" | "free" | "paid">("all");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [page, setPage] = useState(1);
+
+  const { isNew: isNewCert, markSeen: markCertificationsSeen } = useNewBadge(
+    "certifications",
+    CERTIFICATION_TIMESTAMPS
+  );
+
+  useEffect(() => {
+    markCertificationsSeen();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const roleFilterResults = useMemo(() => {
     const q = roleSearch.toLowerCase().trim();
@@ -312,7 +329,7 @@ export default function CertificationsPage() {
         <>
           <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {visible.map((c) => (
-              <CertificationCard key={c.id} cert={c} />
+              <CertificationCard key={c.id} cert={c} isNew={isNewCert(c.researchedAt)} />
             ))}
           </div>
 

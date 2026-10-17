@@ -29,6 +29,7 @@ export interface Certification {
   link: string;
   usefulRoles: string[];
   domain: string;
+  researchedAt: string; // when this domain's certs were added — used for the "New" badge
 }
 
 // The 7 source files use ~35 different free-text level labels between them
@@ -76,7 +77,16 @@ function formatPrice(raw: Record<string, unknown>): { text: string; isFree: bool
   return { text, isFree: /\bfree\b/i.test(text) };
 }
 
-function normalize(file: { domain: string; credentials: unknown[] }): Certification[] {
+// Fallback for the one source file that never recorded a research date.
+const DEFAULT_RESEARCHED_AT = "2026-10-17";
+
+function normalize(file: {
+  domain: string;
+  credentials: unknown[];
+  last_researched_date?: string;
+  research_date?: string;
+}): Certification[] {
+  const researchedAt = file.last_researched_date || file.research_date || DEFAULT_RESEARCHED_AT;
   return (file.credentials as Record<string, unknown>[]).map((raw, i) => {
     const { text: price, isFree } = formatPrice(raw);
     const level = pick(raw, ["level"]);
@@ -93,6 +103,7 @@ function normalize(file: { domain: string; credentials: unknown[] }): Certificat
       link: pick(raw, ["link", "official_url", "official_link"]),
       usefulRoles: pickRoles(raw, ["useful_roles", "matching_roles", "matched_roles", "mapped_roles"]),
       domain: file.domain,
+      researchedAt,
     };
   });
 }

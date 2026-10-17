@@ -1,9 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppState, stripEmoji, keyFor } from "@/context/AppStateContext";
 import { useAccess } from "@/context/AccessContext";
 import { useResearch } from "@/context/ResearchContext";
+import { useNewBadge } from "@/hooks/useNewBadge";
+import NewBadge from "@/components/NewBadge";
 import { PROFILE_LABELS } from "@/config/access";
 import { RESEARCH_STATUSES, type ResearchStatus } from "@/types/research";
 import {
@@ -37,6 +39,16 @@ export default function ResearchPage() {
   const [selectedDomains, setSelectedDomains] = useState<string[]>([]);
   const [roleSearch, setRoleSearch] = useState("");
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+
+  const { isNew: isNewPaper, markSeen: markResearchSeen } = useNewBadge(
+    "research",
+    papers.map((p) => p.createdAt)
+  );
+
+  useEffect(() => {
+    markResearchSeen();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [papers]);
 
   const roleFilterResults = useMemo(() => {
     const q = roleSearch.toLowerCase().trim();
@@ -140,6 +152,7 @@ export default function ResearchPage() {
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-2">
                       <span className="min-w-0 truncate text-sm font-medium">{paper.title}</span>
+                      {isNewPaper(paper.createdAt) && <NewBadge />}
                       <span
                         className={`shrink-0 border px-1.5 py-0.5 text-[10px] font-medium ${STATUS_STYLES[paper.status]}`}
                       >

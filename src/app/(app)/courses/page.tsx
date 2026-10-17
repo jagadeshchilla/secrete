@@ -10,6 +10,8 @@ import { COURSES } from "@/data/courses";
 import { loadCourseProgress, saveCourseProgressLocal, fetchCourseProgress, courseTotals } from "@/lib/courseProgress";
 import { useAccess } from "@/context/AccessContext";
 import { SUBSTEPS, wholeTopicPrompt, type ResourceLink } from "@/lib/topicSubsteps";
+import { useNewBadge } from "@/hooks/useNewBadge";
+import NewBadge from "@/components/NewBadge";
 import {
   GraduationCapIcon,
   SearchIcon,
@@ -30,7 +32,7 @@ const RESOURCE_ICONS: Record<ResourceLink["type"], typeof PlayIcon> = {
 
 const CATALOG = TOOL_CATALOG;
 
-function CourseCard({ course, pct }: { course: Course; pct?: number }) {
+function CourseCard({ course, pct, isNew }: { course: Course; pct?: number; isNew?: boolean }) {
   const { total } = courseTotals(course, {});
   const topicCount = course.sections.reduce((sum, sec) => sum + (sec.customItems?.length || 0), 0);
   const roleCount = course.roleKeys?.length ?? 0;
@@ -40,8 +42,11 @@ function CourseCard({ course, pct }: { course: Course; pct?: number }) {
       className="card-hover group flex flex-col overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--accent)]"
     >
       <div className="p-5">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--accent)] to-[var(--good)] text-white shadow-sm">
-          <GraduationCapIcon className="h-6 w-6" />
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--accent)] to-[var(--good)] text-white shadow-sm">
+            <GraduationCapIcon className="h-6 w-6" />
+          </div>
+          {isNew && <NewBadge />}
         </div>
         <h3 className="mt-3 text-base font-semibold leading-snug">{course.title}</h3>
         <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-[var(--muted)]">{course.subtitle}</p>
@@ -242,6 +247,16 @@ function CoursesPageInner() {
     return [...map.values()];
   }, [adminCourses]);
 
+  const { isNew: isNewCourse, markSeen: markCoursesSeen } = useNewBadge(
+    "courses",
+    allCourses.filter((c) => c.createdAt).map((c) => c.createdAt!)
+  );
+
+  useEffect(() => {
+    markCoursesSeen();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allCourses]);
+
   useEffect(() => {
     fetch("/api/admin-courses")
       .then((res) => (res.ok ? res.json() : null))
@@ -381,7 +396,14 @@ function CoursesPageInner() {
                 {startedCourses.map((course) => {
                   const p = courseProgress[course.slug];
                   const pct = p && p.total ? Math.round((p.done / p.total) * 100) : 0;
-                  return <CourseCard key={course.slug} course={course} pct={pct} />;
+                  return (
+                    <CourseCard
+                      key={course.slug}
+                      course={course}
+                      pct={pct}
+                      isNew={!!course.createdAt && isNewCourse(course.createdAt)}
+                    />
+                  );
                 })}
               </div>
             </div>
@@ -391,7 +413,11 @@ function CoursesPageInner() {
             <h2 className="text-sm font-semibold text-[var(--muted)]">Available courses</h2>
             <div className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {allCourses.map((course) => (
-                <CourseCard key={course.slug} course={course} />
+                <CourseCard
+                  key={course.slug}
+                  course={course}
+                  isNew={!!course.createdAt && isNewCourse(course.createdAt)}
+                />
               ))}
             </div>
           </div>

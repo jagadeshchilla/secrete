@@ -1,9 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppState, stripEmoji, keyFor } from "@/context/AppStateContext";
 import { useAccess } from "@/context/AccessContext";
 import { useFreelance } from "@/context/FreelanceContext";
+import { useNewBadge } from "@/hooks/useNewBadge";
+import NewBadge from "@/components/NewBadge";
 import { PROFILE_LABELS } from "@/config/access";
 import { FREELANCE_STATUSES, type FreelanceStatus } from "@/types/freelance";
 import {
@@ -38,6 +40,16 @@ export default function FreelancingPage() {
   const [selectedDomains, setSelectedDomains] = useState<string[]>([]);
   const [roleSearch, setRoleSearch] = useState("");
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+
+  const { isNew: isNewGig, markSeen: markFreelancingSeen } = useNewBadge(
+    "freelancing",
+    gigs.map((g) => g.createdAt)
+  );
+
+  useEffect(() => {
+    markFreelancingSeen();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gigs]);
 
   const roleFilterResults = useMemo(() => {
     const q = roleSearch.toLowerCase().trim();
@@ -143,6 +155,7 @@ export default function FreelancingPage() {
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-2">
                       <span className="min-w-0 truncate text-sm font-medium">{gig.title}</span>
+                      {isNewGig(gig.createdAt) && <NewBadge />}
                       <span
                         className={`shrink-0 border px-1.5 py-0.5 text-[10px] font-medium ${STATUS_STYLES[gig.status]}`}
                       >
