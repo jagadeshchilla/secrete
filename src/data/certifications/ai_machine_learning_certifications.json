@@ -1,0 +1,703 @@
+{
+  "schema_version": "1.0",
+  "last_researched_date": "2026-10-17",
+  "domain": "AI / Machine Learning",
+  "role_count": 36,
+  "roles_from_careerData_json": [
+    "AI Engineer",
+    "Generative AI Engineer",
+    "LLM Engineer",
+    "GenAI Application Engineer",
+    "AI Application Engineer",
+    "AI Solutions Engineer",
+    "Agentic AI Engineer",
+    "AI Agent Engineer",
+    "AI Automation Engineer",
+    "AI Integration Engineer",
+    "Machine Learning Engineer",
+    "ML Engineer",
+    "Deep Learning Engineer",
+    "Applied ML Engineer",
+    "Applied Scientist",
+    "ML Research Engineer",
+    "NLP Engineer",
+    "Computer Vision Engineer",
+    "Speech AI Engineer",
+    "Multimodal AI Engineer",
+    "Recommendation Systems Engineer",
+    "Reinforcement Learning Engineer",
+    "Generative AI Research Engineer",
+    "Retrieval Engineer",
+    "RAG Engineer",
+    "Knowledge Graph Engineer",
+    "AI Evaluation Engineer",
+    "LLM Evaluation Engineer",
+    "AI Quality Engineer",
+    "Model Evaluation Engineer",
+    "AI Safety Engineer",
+    "AI Red Team Engineer",
+    "AI Architect",
+    "ML Architect",
+    "Generative AI Architect",
+    "AI Solutions Architect"
+  ],
+  "credential_count": 20,
+  "credentials": [
+    {
+      "name": "AWS Certified AI Practitioner",
+      "issuer": "Amazon Web Services (AWS)",
+      "type": "Professional certification",
+      "about": "Validates foundational knowledge of AI, machine learning, generative AI concepts, and AWS AI service use cases.",
+      "price": {
+        "amount": 100,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "AWS lists USD 100; INR voucher pricing may be available through its authorized voucher store."
+      },
+      "level": "Foundational / beginner",
+      "usefulness": "A good entry credential for AI concepts on AWS, but not proof of advanced model-building skills.",
+      "useful_roles": [
+        "AI Engineer",
+        "AI Application Engineer",
+        "AI Solutions Engineer",
+        "AI Integration Engineer",
+        "Generative AI Engineer",
+        "AI Architect",
+        "AI Solutions Architect"
+      ],
+      "link": "https://aws.amazon.com/certification/certified-ai-practitioner/",
+      "prerequisites": "No formal prerequisite; basic familiarity with AI/ML concepts is helpful.",
+      "exam_details": "65 questions; 90 minutes; multiple choice/multiple response.",
+      "validity": "3 years.",
+      "research_notes": "Official AWS page lists exam fee, format, and intended candidate profile."
+    },
+    {
+      "name": "AWS Certified Machine Learning Engineer – Associate (MLA-C02 beta)",
+      "issuer": "Amazon Web Services (AWS)",
+      "type": "Professional certification — beta exam",
+      "about": "Validates implementation, deployment, and maintenance of AI/ML workloads on AWS, with the updated blueprint expanding into foundation models, LLMs, agentic workflows, and responsible AI.",
+      "price": {
+        "amount": 75,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "USD 75 beta price for MLA-C02; the standard updated exam is expected in early 2027. Verify availability before booking."
+      },
+      "level": "Associate / intermediate",
+      "usefulness": "Strong role match for production ML and cloud AI engineering. As of October 2026, the updated exam is in beta, so check the exam status before planning.",
+      "useful_roles": [
+        "Machine Learning Engineer",
+        "ML Engineer",
+        "Applied ML Engineer",
+        "AI Engineer",
+        "Generative AI Engineer",
+        "LLM Engineer",
+        "AI Integration Engineer",
+        "AI Evaluation Engineer"
+      ],
+      "link": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/",
+      "prerequisites": "No formal prerequisite; AWS recommends hands-on experience with SageMaker AI, Bedrock, and ML engineering services.",
+      "exam_details": "MLA-C02 beta: 85 questions; 170 minutes; English; Pearson VUE test centre or online proctoring.",
+      "validity": "Check official page for validity details for the current exam version.",
+      "research_notes": "Official AWS announcement dated July 14, 2026 says English beta registration opened September 1 and beta delivery began September 29, 2026."
+    },
+    {
+      "name": "AWS Certified Generative AI Developer – Professional",
+      "issuer": "Amazon Web Services (AWS)",
+      "type": "Professional certification",
+      "about": "Validates advanced skills for integrating foundation models into applications and workflows, building production-grade GenAI, using RAG/vector stores, testing, safety, security, optimization, and operations.",
+      "price": {
+        "amount": 300,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "AWS lists USD 300; regional pricing may apply."
+      },
+      "level": "Professional / advanced",
+      "usefulness": "High relevance for production GenAI, RAG, and AI application engineering on AWS; better after substantial hands-on experience.",
+      "useful_roles": [
+        "Generative AI Engineer",
+        "LLM Engineer",
+        "GenAI Application Engineer",
+        "AI Application Engineer",
+        "Agentic AI Engineer",
+        "AI Agent Engineer",
+        "AI Integration Engineer",
+        "RAG Engineer",
+        "Retrieval Engineer",
+        "AI Evaluation Engineer",
+        "AI Safety Engineer",
+        "Generative AI Architect",
+        "AI Architect",
+        "AI Solutions Architect"
+      ],
+      "link": "https://aws.amazon.com/certification/certified-generative-ai-developer-professional/",
+      "prerequisites": "Target candidate: 2+ years building production applications and 1+ year implementing generative AI solutions; AWS compute, storage, networking, security, and deployment knowledge recommended.",
+      "exam_details": "75 questions; 180 minutes; multiple choice/multiple response.",
+      "validity": "3 years.",
+      "research_notes": "Official AWS certification page and exam guide."
+    },
+    {
+      "name": "Google Cloud Professional Machine Learning Engineer",
+      "issuer": "Google Cloud",
+      "type": "Professional certification",
+      "about": "Validates building, evaluating, productionizing, deploying, monitoring, and optimizing ML models and AI solutions on Google Cloud, including newer GenAI capabilities.",
+      "price": {
+        "amount": 200,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "USD 200 plus applicable tax."
+      },
+      "level": "Professional",
+      "usefulness": "A strong cloud ML credential for production ML, MLOps-aware ML engineering, and AI architecture. Recommended for people with practical GCP experience.",
+      "useful_roles": [
+        "Machine Learning Engineer",
+        "ML Engineer",
+        "Applied ML Engineer",
+        "Deep Learning Engineer",
+        "Applied Scientist",
+        "ML Research Engineer",
+        "AI Engineer",
+        "Generative AI Engineer",
+        "AI Evaluation Engineer",
+        "ML Architect",
+        "AI Architect",
+        "Generative AI Architect",
+        "AI Solutions Architect"
+      ],
+      "link": "https://cloud.google.com/learn/certification/machine-learning-engineer",
+      "prerequisites": "No formal prerequisite; Google recommends 3+ years industry experience, including 1+ year designing/managing solutions on Google Cloud.",
+      "exam_details": "Professional exam; check the current official exam guide for format and updated GenAI scope.",
+      "validity": "2 years for Professional certifications.",
+      "research_notes": "Official Google Cloud exam guide says the updated exam covering GenAI and Vertex AI Agent Builder launches October 1, 2026."
+    },
+    {
+      "name": "Google Cloud Generative AI Leader",
+      "issuer": "Google Cloud",
+      "type": "Professional certification — business/strategy focused",
+      "about": "Assesses GenAI fundamentals, Google Cloud GenAI offerings, output-improvement techniques, and business strategies for successful GenAI solutions.",
+      "price": {
+        "amount": 99,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "USD 99 plus applicable tax."
+      },
+      "level": "Foundational / leadership",
+      "usefulness": "Useful for AI strategy and architecture conversations, but less technical than ML Engineer or GenAI Developer credentials.",
+      "useful_roles": [
+        "AI Architect",
+        "Generative AI Architect",
+        "AI Solutions Architect",
+        "AI Solutions Engineer",
+        "AI Engineer"
+      ],
+      "link": "https://cloud.google.com/learn/certification/generative-ai-leader",
+      "prerequisites": "No prerequisites; intended for people in technical or nontechnical roles.",
+      "exam_details": "50–60 multiple-choice questions; 90 minutes; online or onsite proctored.",
+      "validity": "3 years.",
+      "research_notes": "Official Google Cloud page lists exam cost, format, and validity."
+    },
+    {
+      "name": "Microsoft Certified: Azure AI Apps and Agents Developer Associate (AI-103)",
+      "issuer": "Microsoft",
+      "type": "Professional certification",
+      "about": "Validates development of AI applications and agents using Azure AI services; relevant to building and integrating AI-powered apps and agent workflows.",
+      "price": {
+        "amount": 165,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Typical Microsoft role-based exam price in the US; country/region price is shown during booking."
+      },
+      "level": "Associate / intermediate",
+      "usefulness": "Useful for Azure-based AI application and agent development. Confirm the live exam page and current study guide before purchasing.",
+      "useful_roles": [
+        "AI Engineer",
+        "Generative AI Engineer",
+        "LLM Engineer",
+        "GenAI Application Engineer",
+        "AI Application Engineer",
+        "AI Solutions Engineer",
+        "Agentic AI Engineer",
+        "AI Agent Engineer",
+        "AI Automation Engineer",
+        "AI Integration Engineer",
+        "RAG Engineer",
+        "Retrieval Engineer",
+        "AI Solutions Architect"
+      ],
+      "link": "https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-apps-and-agents-developer-associate/",
+      "prerequisites": "Practical programming and familiarity with Azure AI services, APIs, and agent/application development are recommended.",
+      "exam_details": "Exam AI-103; consult the current official study guide for skills measured and exam format.",
+      "validity": "Microsoft role-based certifications generally require annual renewal; online renewal assessment is free.",
+      "research_notes": "Microsoft lists AI-103 as the Azure AI Apps and Agents Developer Associate credential; the older AI-102 credential retired June 30, 2026."
+    },
+    {
+      "name": "Microsoft Certified: Machine Learning Operations Engineer Associate (AI-300)",
+      "issuer": "Microsoft",
+      "type": "Professional certification",
+      "about": "Validates operationalizing machine learning and generative AI solutions, including AI/ML operations, fine-tuning data, model lifecycle, deployment, monitoring, and production management on Azure.",
+      "price": {
+        "amount": 165,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Typical Microsoft role-based exam price in the US; verify regional price during booking."
+      },
+      "level": "Associate / intermediate",
+      "usefulness": "A good fit for operationalizing models and production AI; more MLOps-oriented than research-oriented.",
+      "useful_roles": [
+        "Machine Learning Engineer",
+        "ML Engineer",
+        "Applied ML Engineer",
+        "AI Engineer",
+        "Generative AI Engineer",
+        "LLM Engineer",
+        "AI Evaluation Engineer",
+        "AI Quality Engineer",
+        "AI Architect",
+        "ML Architect",
+        "Generative AI Architect"
+      ],
+      "link": "https://learn.microsoft.com/en-us/credentials/certifications/operationalizing-machine-learning-and-generative-ai-solutions/",
+      "prerequisites": "Hands-on Azure ML/AI service experience and software/data lifecycle knowledge recommended.",
+      "exam_details": "Exam AI-300; official study guide covers operationalizing ML and GenAI solutions. Check current exam booking page.",
+      "validity": "Microsoft role-based certifications generally require annual renewal; online renewal assessment is free.",
+      "research_notes": "Official Microsoft Learn study guide is active in 2026; do not confuse it with retired AI-102 or DP-100."
+    },
+    {
+      "name": "Databricks Certified Generative AI Engineer Associate",
+      "issuer": "Databricks",
+      "type": "Professional certification",
+      "about": "Validates designing and deploying RAG applications and LLM chains using Databricks tooling, including Vector Search, Model Serving, MLflow, and Unity Catalog.",
+      "price": {
+        "amount": 200,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Price may vary by country, taxes, or checkout."
+      },
+      "level": "Associate / intermediate",
+      "usefulness": "Strong targeted credential for RAG and enterprise GenAI application engineering in the Databricks ecosystem.",
+      "useful_roles": [
+        "Generative AI Engineer",
+        "LLM Engineer",
+        "GenAI Application Engineer",
+        "AI Application Engineer",
+        "Agentic AI Engineer",
+        "AI Agent Engineer",
+        "AI Integration Engineer",
+        "Retrieval Engineer",
+        "RAG Engineer",
+        "Knowledge Graph Engineer",
+        "AI Evaluation Engineer"
+      ],
+      "link": "https://www.databricks.com/learn/certification/generative-ai-engineer-associate",
+      "prerequisites": "No formal prerequisite; Databricks recommends training and around six months hands-on experience.",
+      "exam_details": "45 questions; 90 minutes; online proctored.",
+      "validity": "2 years; recertification required.",
+      "research_notes": "Official Databricks exam guide lists fee, format, and validity."
+    },
+    {
+      "name": "NVIDIA Certified Associate: AI Model and Application Development (NCA-AMAD)",
+      "issuer": "NVIDIA",
+      "type": "Professional certification",
+      "about": "Validates foundational AI model and application development, including model selection, prompt engineering/fine-tuning concepts, inference, deployment, and application integration.",
+      "price": {
+        "amount": 125,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Price may vary by country, taxes, or checkout."
+      },
+      "level": "Associate / beginner-to-intermediate",
+      "usefulness": "Useful entry-level vendor credential for AI developers building and deploying model-powered applications.",
+      "useful_roles": [
+        "AI Engineer",
+        "Generative AI Engineer",
+        "LLM Engineer",
+        "GenAI Application Engineer",
+        "AI Application Engineer",
+        "AI Integration Engineer",
+        "Multimodal AI Engineer",
+        "AI Solutions Engineer"
+      ],
+      "link": "https://www.nvidia.com/en-us/learn/certification/ai-model-application-development-associate/",
+      "prerequisites": "Foundational AI development knowledge and preparation through NVIDIA's recommended learning path.",
+      "exam_details": "50–60 multiple-choice questions plus hands-on lab; 1 hour.",
+      "validity": "2 years; retake exam to recertify.",
+      "research_notes": "Official NVIDIA certification page lists price, format, and validity."
+    },
+    {
+      "name": "IBM AI Engineering Professional Certificate",
+      "issuer": "IBM / Coursera",
+      "type": "Course-based professional certificate — not a proctored vendor certification",
+      "about": "Multi-course program covering machine learning, deep learning, neural networks, PyTorch, TensorFlow, Keras, and practical AI projects.",
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "status": "Paid subscription generally",
+        "notes": "Coursera subscription price varies by country and offer; financial aid may be available. Audit access may not include the certificate."
+      },
+      "level": "Beginner / intermediate",
+      "usefulness": "Structured foundation for ML and AI engineering; stronger when the capstone and projects are published in a portfolio.",
+      "useful_roles": [
+        "AI Engineer",
+        "Machine Learning Engineer",
+        "ML Engineer",
+        "Deep Learning Engineer",
+        "Applied ML Engineer",
+        "Applied Scientist",
+        "ML Research Engineer",
+        "Computer Vision Engineer",
+        "Recommendation Systems Engineer"
+      ],
+      "link": "https://www.coursera.org/professional-certificates/ibm-ai-engineer",
+      "prerequisites": "Working knowledge of Python and Jupyter notebooks is helpful; beginner-oriented.",
+      "exam_details": "Course quizzes, hands-on assignments, and capstone; no single proctored certification exam.",
+      "validity": "No standard expiry stated.",
+      "research_notes": "IBM's official training page describes the course series and project-based learning."
+    },
+    {
+      "name": "IBM Generative AI Engineering Professional Certificate",
+      "issuer": "IBM / Coursera",
+      "type": "Course-based professional certificate — not a proctored vendor certification",
+      "about": "Course series on generative AI, transformer concepts, prompt engineering, LLM applications, deployment, and hands-on GenAI projects.",
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "status": "Paid subscription generally",
+        "notes": "Coursera pricing varies by country and promotion; verify whether certificate access is included."
+      },
+      "level": "Beginner / intermediate",
+      "usefulness": "Relevant for learners building GenAI skills; projects and working demos matter more than the certificate alone.",
+      "useful_roles": [
+        "Generative AI Engineer",
+        "LLM Engineer",
+        "GenAI Application Engineer",
+        "AI Application Engineer",
+        "AI Engineer",
+        "AI Integration Engineer",
+        "RAG Engineer"
+      ],
+      "link": "https://www.coursera.org/professional-certificates/ibm-generative-ai-engineering",
+      "prerequisites": "Beginner-friendly; Python and Jupyter knowledge helps.",
+      "exam_details": "Course assessments and hands-on projects; not a single proctored certification exam.",
+      "validity": "No standard expiry stated.",
+      "research_notes": "IBM official training information identifies this as a Coursera professional certificate."
+    },
+    {
+      "name": "IBM RAG and Agentic AI Professional Certificate",
+      "issuer": "IBM / Coursera",
+      "type": "Course-based professional certificate — not a proctored vendor certification",
+      "about": "Hands-on learning in RAG, vector databases, multimodal GenAI, tool calling, and agent frameworks such as LangChain, LangGraph, CrewAI, AutoGen, and BeeAI.",
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "status": "Paid subscription generally",
+        "notes": "Coursera pricing varies by country and promotion."
+      },
+      "level": "Intermediate",
+      "usefulness": "Very relevant to RAG and agentic AI portfolio projects; course completion should be backed by a deployed demo.",
+      "useful_roles": [
+        "Generative AI Engineer",
+        "LLM Engineer",
+        "GenAI Application Engineer",
+        "Agentic AI Engineer",
+        "AI Agent Engineer",
+        "AI Automation Engineer",
+        "AI Integration Engineer",
+        "Retrieval Engineer",
+        "RAG Engineer",
+        "Knowledge Graph Engineer",
+        "AI Evaluation Engineer"
+      ],
+      "link": "https://www.coursera.org/professional-certificates/ibm-rag-and-agentic-ai",
+      "prerequisites": "Basic Python and API familiarity are useful; review the current course prerequisites.",
+      "exam_details": "Multiple course assessments and projects; not a proctored vendor certification exam.",
+      "validity": "No standard expiry stated.",
+      "research_notes": "Official IBM badge description outlines RAG, vector stores, multimodal apps, and agent frameworks."
+    },
+    {
+      "name": "IBM AI Developer Professional Certificate",
+      "issuer": "IBM / Coursera",
+      "type": "Course-based professional certificate — not a proctored vendor certification",
+      "about": "Entry-level series on AI concepts, Python-based AI applications, chatbots, APIs, and building AI-powered software.",
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "status": "Paid subscription generally",
+        "notes": "Coursera price varies by country and offer."
+      },
+      "level": "Beginner",
+      "usefulness": "Accessible starting point for AI application engineering; use the projects as portfolio evidence.",
+      "useful_roles": [
+        "AI Engineer",
+        "AI Application Engineer",
+        "AI Solutions Engineer",
+        "AI Automation Engineer",
+        "AI Integration Engineer",
+        "GenAI Application Engineer"
+      ],
+      "link": "https://www.coursera.org/professional-certificates/ibm-ai-developer",
+      "prerequisites": "No prior experience is required according to IBM's program description.",
+      "exam_details": "Course quizzes, labs, and projects; not a single proctored certification exam.",
+      "validity": "No standard expiry stated.",
+      "research_notes": "IBM official program description says it includes hands-on projects and an AI app development path."
+    },
+    {
+      "name": "OpenAI Academy course badges and pathway certificates",
+      "issuer": "OpenAI",
+      "type": "Free course-completion badge/certificate — explicitly not a professional certification",
+      "about": "Free self-paced courses include AI Foundations, Applied AI Foundations, Agents and Workflows, and developer pathways covering evaluation, agentic systems, RAG, and performance optimization.",
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "status": "Free",
+        "notes": "OpenAI Academy says courses are free for people with a ChatGPT account."
+      },
+      "level": "Beginner to intermediate depending on pathway",
+      "usefulness": "Good direct learning from OpenAI, especially for GenAI app, agents, RAG, and evaluation topics; it is a completion credential, not a vendor certification.",
+      "useful_roles": [
+        "AI Engineer",
+        "Generative AI Engineer",
+        "LLM Engineer",
+        "GenAI Application Engineer",
+        "Agentic AI Engineer",
+        "AI Agent Engineer",
+        "AI Automation Engineer",
+        "AI Integration Engineer",
+        "Retrieval Engineer",
+        "RAG Engineer",
+        "AI Evaluation Engineer",
+        "LLM Evaluation Engineer"
+      ],
+      "link": "https://openai.com/academy/",
+      "prerequisites": "ChatGPT account; no workspace membership required.",
+      "exam_details": "Complete each course and pass its assessment; eligible pathway certificates require completing all courses and assessments with at least 80%.",
+      "validity": "No professional certification validity period stated.",
+      "research_notes": "OpenAI Help Center explicitly says Academy badges and completion certificates are not certifications and do not guarantee eligibility for a future certification."
+    },
+    {
+      "name": "Hugging Face LLM Course certificate",
+      "issuer": "Hugging Face",
+      "type": "Free course-completion certificate — not a professional certification",
+      "about": "Self-paced learning on Transformers, pretrained models, fine-tuning, and sharing models; chapter quizzes provide course completion evidence.",
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "status": "Free",
+        "notes": "Price may vary by country, taxes, or checkout."
+      },
+      "level": "Beginner / intermediate",
+      "usefulness": "Useful for learning the open-source model ecosystem and demonstrating completion; best paired with a Hugging Face model or fine-tuning project.",
+      "useful_roles": [
+        "LLM Engineer",
+        "Generative AI Engineer",
+        "ML Engineer",
+        "Deep Learning Engineer",
+        "NLP Engineer",
+        "Generative AI Research Engineer",
+        "Applied Scientist"
+      ],
+      "link": "https://huggingface.co/learn/llm-course",
+      "prerequisites": "Basic Python and machine-learning concepts are helpful.",
+      "exam_details": "Course chapter quiz; requirements vary by course section.",
+      "validity": "No standard expiry stated.",
+      "research_notes": "Official Hugging Face course documentation includes an end-of-chapter certificate flow."
+    },
+    {
+      "name": "Hugging Face Agents Course certificate",
+      "issuer": "Hugging Face",
+      "type": "Free course-completion certificate — not a professional certification",
+      "about": "Learning path for building AI agents, with course units and a final quiz; covers agent concepts and practical agent-building tools.",
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "status": "Free",
+        "notes": "Price may vary by country, taxes, or checkout."
+      },
+      "level": "Beginner / intermediate",
+      "usefulness": "A useful no-cost learning credential for agentic AI; build and publish an agent project to improve CV value.",
+      "useful_roles": [
+        "Agentic AI Engineer",
+        "AI Agent Engineer",
+        "AI Automation Engineer",
+        "Generative AI Engineer",
+        "LLM Engineer",
+        "AI Application Engineer"
+      ],
+      "link": "https://huggingface.co/learn/agents-course",
+      "prerequisites": "Basic Python and LLM/API familiarity are useful.",
+      "exam_details": "Complete Unit 1 and pass its final quiz at 80% or higher for the course certificate; check course page for current full-program requirements.",
+      "validity": "No standard expiry stated.",
+      "research_notes": "Official Hugging Face course instructions describe certificate criteria."
+    },
+    {
+      "name": "Hugging Face Audio Course certificate",
+      "issuer": "Hugging Face",
+      "type": "Free course-completion certificate — not a professional certification",
+      "about": "Practical audio AI course with hands-on assignments and a completion/excellence certificate.",
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "status": "Free",
+        "notes": "Price may vary by country, taxes, or checkout."
+      },
+      "level": "Intermediate",
+      "usefulness": "Relevant for speech and audio AI learners; hands-on model/demo submissions make the credential more meaningful.",
+      "useful_roles": [
+        "Speech AI Engineer",
+        "Multimodal AI Engineer",
+        "Machine Learning Engineer",
+        "Deep Learning Engineer",
+        "Applied Scientist"
+      ],
+      "link": "https://huggingface.co/learn/audio-course",
+      "prerequisites": "Python and basic ML/audio knowledge recommended.",
+      "exam_details": "Pass at least 3 of 4 hands-on assignments for completion; 4 of 4 for certificate of excellence.",
+      "validity": "No standard expiry stated.",
+      "research_notes": "Official Hugging Face page explicitly says the certification process is free and lists assignment criteria."
+    },
+    {
+      "name": "AWS Generative AI for Developers Professional Certificate",
+      "issuer": "AWS / Coursera / edX",
+      "type": "Course-based professional certificate — not AWS Certification exam credential",
+      "about": "Learning program for generative AI development using concepts and AWS services such as Amazon Bedrock and Amazon Q Developer, with hands-on labs.",
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "status": "Course-platform pricing varies",
+        "notes": "Coursera/edX pricing, promotions, and certificate access vary; this is separate from AWS Certified Generative AI Developer – Professional."
+      },
+      "level": "Beginner / intermediate",
+      "usefulness": "Structured preparation for AWS GenAI development; do not confuse this course certificate with the paid AWS professional certification exam.",
+      "useful_roles": [
+        "Generative AI Engineer",
+        "LLM Engineer",
+        "GenAI Application Engineer",
+        "AI Application Engineer",
+        "AI Integration Engineer",
+        "AI Solutions Engineer"
+      ],
+      "link": "https://aws.amazon.com/blogs/training-and-certification/aws-generative-ai-for-developers-professional-certificate/",
+      "prerequisites": "Designed for students and early-to-mid-career software developers; programming fundamentals are helpful.",
+      "exam_details": "Course modules and labs; no single AWS Certification proctored exam.",
+      "validity": "No standard expiry stated.",
+      "research_notes": "Official AWS Training blog distinguishes the course-based Professional Certificate from AWS Certification exams."
+    },
+    {
+      "name": "NVIDIA Deep Learning Institute course certificates",
+      "issuer": "NVIDIA",
+      "type": "Course completion certificate / certificate of competency, depending on course",
+      "about": "Hands-on courses in deep learning, generative AI, accelerated computing, computer vision, and model deployment; certificate availability and pricing depend on course.",
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "status": "Varies by course",
+        "notes": "Some self-paced courses are free; instructor-led workshops may be paid. Verify the individual course."
+      },
+      "level": "Beginner to advanced depending on course",
+      "usefulness": "Good targeted evidence of practical skills when a relevant lab-based course is completed; not one universal NVIDIA certification.",
+      "useful_roles": [
+        "AI Engineer",
+        "Machine Learning Engineer",
+        "Deep Learning Engineer",
+        "Computer Vision Engineer",
+        "Speech AI Engineer",
+        "Multimodal AI Engineer",
+        "Generative AI Research Engineer",
+        "Applied Scientist"
+      ],
+      "link": "https://www.nvidia.com/en-us/training/",
+      "prerequisites": "Depends on course; some require basic Python/ML knowledge.",
+      "exam_details": "Course-specific quizzes, labs, or instructor-led assessment.",
+      "validity": "Depends on the specific course credential.",
+      "research_notes": "Official NVIDIA training catalog; course credentials should not be mislabelled as NCA-AMAD certification."
+    },
+    {
+      "name": "Anthropic Claude training / public certification status",
+      "issuer": "Anthropic",
+      "type": "No public, generally available proctored professional certification verified in this research",
+      "about": "Anthropic publishes Claude documentation and learning resources, but this batch did not identify an official public exam-based Claude certification comparable to AWS or Google certifications.",
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "status": "No verified public certification price",
+        "notes": "Price may vary by country, taxes, or checkout."
+      },
+      "level": "Learning resources vary",
+      "usefulness": "Avoid paying third parties for a credential presented as an official Anthropic certification unless Anthropic itself confirms it. Learn through official docs and show working Claude API projects instead.",
+      "useful_roles": [
+        "LLM Engineer",
+        "Generative AI Engineer",
+        "AI Application Engineer",
+        "AI Agent Engineer",
+        "RAG Engineer",
+        "AI Evaluation Engineer"
+      ],
+      "link": "https://docs.anthropic.com/",
+      "prerequisites": "Depends on the selected documentation/tutorial.",
+      "exam_details": "No official public proctored certification exam confirmed in this research.",
+      "validity": "Not applicable.",
+      "research_notes": "Status note is limited to the official public resources reviewed; it is not a claim that no private/partner training exists."
+    }
+  ],
+  "research_notes": [
+    "Credential types are explicitly separated: proctored vendor certifications, course-based professional certificates, and free completion badges/certificates are not interchangeable.",
+    "Microsoft AI-102 and AI-900 are excluded as active recommendations because official Microsoft pages list them as retired in 2026; AI-103 and AI-300 are listed as the newer role-aligned credentials.",
+    "AWS Certified Machine Learning Engineer Associate is in a 2026 MLA-C02 beta period; the listed $75 is beta pricing, not a confirmed standard exam fee.",
+    "Prices may vary by country, tax, promotions, or checkout. Where a current price could not be verified, the field says so.",
+    "Anthropic is included as a status note because an official public exam-based Claude certification was not verified in the reviewed sources; this avoids inventing a credential.",
+    "Role mappings are relevance suggestions based on credential scope, not a guarantee of qualification or employment.",
+    "This is a curated research batch rather than an exhaustive list of every possible AI/ML credential."
+  ],
+  "source_links": [
+    {
+      "claim": "AWS ML Engineer Associate exam update and beta price",
+      "url": "https://aws.amazon.com/blogs/training-and-certification/updates-to-aws-certified-machine-learning-engineer-associate-mla-c02/"
+    },
+    {
+      "claim": "AWS AI Practitioner exam price and format",
+      "url": "https://aws.amazon.com/certification/certified-ai-practitioner/"
+    },
+    {
+      "claim": "AWS Generative AI Developer Professional exam price and target profile",
+      "url": "https://aws.amazon.com/certification/certified-generative-ai-developer-professional/"
+    },
+    {
+      "claim": "Google Professional ML Engineer exam guide",
+      "url": "https://cloud.google.com/learn/certification/guides/machine-learning-engineer"
+    },
+    {
+      "claim": "Google Generative AI Leader exam details",
+      "url": "https://cloud.google.com/learn/certification/generative-ai-leader"
+    },
+    {
+      "claim": "Microsoft AI-300 study guide",
+      "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ai-300"
+    },
+    {
+      "claim": "Microsoft retired certification exams",
+      "url": "https://learn.microsoft.com/en-us/credentials/support/retired-certification-exams"
+    },
+    {
+      "claim": "Databricks Generative AI Engineer Associate exam guide",
+      "url": "https://www.databricks.com/sites/default/files/2024-05/Databricks-Exam-Guide-Generative-AI-Engineer-Associate-Exam-Guide.pdf"
+    },
+    {
+      "claim": "NVIDIA NCA-AMAD exam details",
+      "url": "https://www.nvidia.com/en-us/learn/certification/ai-model-application-development-associate/"
+    },
+    {
+      "claim": "OpenAI Academy badge/certificate status",
+      "url": "https://help.openai.com/en/articles/20001270-openai-academy-courses"
+    },
+    {
+      "claim": "Hugging Face LLM course certificate",
+      "url": "https://huggingface.co/learn/llm-course"
+    },
+    {
+      "claim": "Hugging Face Agents course certificate",
+      "url": "https://huggingface.co/learn/agents-course/unit1/get-your-certificate"
+    },
+    {
+      "claim": "Hugging Face Audio course certificate",
+      "url": "https://huggingface.co/learn/audio-course/en/chapter8/certification"
+    }
+  ]
+}

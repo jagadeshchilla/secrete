@@ -1,0 +1,996 @@
+{
+  "domain": "📊 Business / Analysis",
+  "source_file": "careerData.json",
+  "source_role_count": 33,
+  "role_count_verification": "Exact role names and descriptions extracted from careerData.json.",
+  "research_date": "2026-10-17",
+  "purpose": "Curated free/paid certifications and course certificates relevant to Business / Analysis roles. Professional exam-based certifications are distinguished from course-completion certificates.",
+  "important_guidance": [
+    "A course-completion certificate is not the same as a professional certification; keep credential_type visible when using this file.",
+    "Prices are in the issuer currency and may change; international tax, exchange rates, local pricing and promotions may apply.",
+    "Credentials are mapped to relevant roles as a shortlist, not a guarantee that employers require or prefer the credential.",
+    "For CV value, combine credentials with portfolio evidence such as a requirements document, process map, SQL analysis, dashboard, business case or product metrics case study.",
+    "Choose credentials based on target job descriptions rather than completing every option."
+  ],
+  "role_catalog": [
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Business Analyst",
+      "description": "Translates business problems into requirements, processes and solutions.",
+      "coding": "Low-Medium",
+      "ai": "High AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Technical Business Analyst",
+      "description": "Connects business requirements with technical implementation teams.",
+      "coding": "Medium",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "IT Business Analyst",
+      "description": "Analyzes IT processes and requirements and coordinates technology solutions.",
+      "coding": "Low-Medium",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Business Systems Analyst",
+      "description": "Analyzes business systems and defines improvements or new capabilities.",
+      "coding": "Medium",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Systems Analyst",
+      "description": "Studies systems, requirements and processes to improve technology solutions.",
+      "coding": "Medium",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Process Analyst",
+      "description": "Analyzes and improves business processes and workflows.",
+      "coding": "Low",
+      "ai": "AI automation of routine analysis",
+      "outlook": "Moderate/strong",
+      "type": "Non-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Business Process Analyst",
+      "description": "Maps processes and identifies technology-enabled improvements.",
+      "coding": "Low",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Non-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Business Intelligence Analyst",
+      "description": "Uses data and BI tools to answer business questions.",
+      "coding": "Low-Medium",
+      "ai": "High AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Data Analyst",
+      "description": "Analyzes datasets and creates insights, reports and visualizations.",
+      "coding": "Low-Medium",
+      "ai": "High AI augmentation",
+      "outlook": "Moderate/strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Business Data Analyst",
+      "description": "Uses business data to identify trends, performance and opportunities.",
+      "coding": "Low-Medium",
+      "ai": "High AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Product Data Analyst",
+      "description": "Analyzes product usage, funnels and user behavior.",
+      "coding": "Medium",
+      "ai": "High AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Marketing Data Analyst",
+      "description": "Analyzes campaigns, customers and marketing performance.",
+      "coding": "Low-Medium",
+      "ai": "High AI augmentation",
+      "outlook": "Moderate/strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Operations Data Analyst",
+      "description": "Uses data to improve operational performance and decisions.",
+      "coding": "Low-Medium",
+      "ai": "High AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "BI Analyst",
+      "description": "Builds dashboards and analysis using business intelligence tools.",
+      "coding": "Low-Medium",
+      "ai": "High AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Reporting Analyst",
+      "description": "Produces recurring business reports and performance analysis.",
+      "coding": "Low",
+      "ai": "High automation pressure",
+      "outlook": "Moderate",
+      "type": "Non-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Analytics Consultant",
+      "description": "Helps organizations solve business problems through analytics.",
+      "coding": "Medium",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Decision Scientist",
+      "description": "Combines analytics, experimentation and decision science to guide decisions.",
+      "coding": "Medium-High",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Analytical"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Data Strategy Consultant",
+      "description": "Defines data strategies, operating models and transformation roadmaps.",
+      "coding": "Medium",
+      "ai": "AI increases data demand",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Business Intelligence Developer",
+      "description": "Builds data models, dashboards and BI applications.",
+      "coding": "Medium-High",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Coding/technical"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "BI Consultant",
+      "description": "Implements BI solutions and translates business requirements into analytics systems.",
+      "coding": "Medium",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Quantitative Analyst",
+      "description": "Uses mathematics, statistics and programming to support quantitative decisions.",
+      "coding": "High",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Coding-heavy"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Operations Research Analyst",
+      "description": "Uses optimization and quantitative methods to improve complex decisions.",
+      "coding": "Medium-High",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Analytical"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Product Analyst",
+      "description": "Uses product data to understand behavior, performance and opportunities.",
+      "coding": "Medium",
+      "ai": "High AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Product Operations Analyst",
+      "description": "Improves product operations through processes, metrics and analysis.",
+      "coding": "Low-Medium",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Technology Business Analyst",
+      "description": "Bridges technology capabilities and business needs.",
+      "coding": "Medium",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Data Product Analyst",
+      "description": "Works with data products, users, metrics and product requirements.",
+      "coding": "Medium",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "AI Business Analyst",
+      "description": "Defines requirements and workflows for AI-enabled solutions.",
+      "coding": "Medium",
+      "ai": "AI increases demand",
+      "outlook": "Emerging/strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "AI Product Analyst",
+      "description": "Analyzes AI product usage, quality, cost and business outcomes.",
+      "coding": "Medium",
+      "ai": "AI increases demand",
+      "outlook": "Emerging/strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "AI Consultant",
+      "description": "Advises organizations on practical AI adoption and implementation.",
+      "coding": "Medium",
+      "ai": "AI increases demand",
+      "outlook": "Very strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "AI Business Consultant",
+      "description": "Connects AI opportunities to business processes and outcomes.",
+      "coding": "Low-Medium",
+      "ai": "AI increases demand",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "AI Strategy Consultant",
+      "description": "Develops AI strategy, roadmaps and operating models.",
+      "coding": "Low-Medium",
+      "ai": "AI increases demand",
+      "outlook": "Very strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "AI Transformation Consultant",
+      "description": "Guides organizations through enterprise AI adoption and transformation.",
+      "coding": "Medium",
+      "ai": "AI increases demand",
+      "outlook": "Very strong",
+      "type": "Low-coding"
+    },
+    {
+      "domain": "📊 Business / Analysis",
+      "role": "Technology Strategy Consultant",
+      "description": "Develops technology strategies and transformation plans.",
+      "coding": "Low-Medium",
+      "ai": "AI augmentation",
+      "outlook": "Strong",
+      "type": "Low-coding"
+    }
+  ],
+  "credentials": [
+    {
+      "credential_name": "Entry Certificate in Business Analysis (ECBA)",
+      "issuer": "International Institute of Business Analysis (IIBA)",
+      "credential_type": "Professional certification — exam-based",
+      "focus_and_skills": "Foundational business analysis, requirements, stakeholders, solution evaluation, business analysis practices.",
+      "price_and_cost_notes": "Official page lists USD $395 or less including membership, exam, practice exam and learning journey; student/regional pricing may differ.",
+      "level": "Entry",
+      "cv_relevance": "High for aspiring business analysts; directly relevant and recognized by a specialist BA body.",
+      "official_url": "https://www.iiba.org/ecba/",
+      "prerequisites": "Designed for aspiring BAs; check current IIBA handbook for current eligibility and exam rules.",
+      "assessment_or_completion_method": "Online-proctored exam; current package includes practice exam and learning journey.",
+      "validity_or_renewal": "Check current IIBA renewal policy and handbook.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Technical Business Analyst",
+        "IT Business Analyst",
+        "Business Systems Analyst",
+        "Systems Analyst",
+        "Process Analyst",
+        "Business Process Analyst",
+        "Technology Business Analyst",
+        "AI Business Analyst"
+      ],
+      "notes": "Price checked against IIBA official page; prices can change."
+    },
+    {
+      "credential_name": "Certification of Capability in Business Analysis (CCBA)",
+      "issuer": "IIBA",
+      "credential_type": "Professional certification — application, experience and exam",
+      "focus_and_skills": "Intermediate BA practice, stakeholder engagement, requirements life cycle, strategy analysis and solution evaluation.",
+      "price_and_cost_notes": "Official fee page lists USD $145 application plus exam fee (member/non-member rates vary; page currently shows $405 members / $250 non-members in exam column, confirm at checkout).",
+      "level": "Intermediate",
+      "cv_relevance": "High for candidates with substantive BA experience; not an entry-level shortcut.",
+      "official_url": "https://www.iiba.org/business-analysis-certifications/certification-fees/",
+      "prerequisites": "Requires documented BA work experience and professional development; confirm current handbook.",
+      "assessment_or_completion_method": "Application review plus exam.",
+      "validity_or_renewal": "Renewal/recertification requirements and fees apply.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Technical Business Analyst",
+        "IT Business Analyst",
+        "Business Systems Analyst",
+        "Systems Analyst",
+        "Process Analyst",
+        "Business Process Analyst",
+        "Technology Business Analyst",
+        "AI Business Analyst"
+      ],
+      "notes": "Do not pursue before meeting experience requirements."
+    },
+    {
+      "credential_name": "Certified Business Analysis Professional (CBAP)",
+      "issuer": "IIBA",
+      "credential_type": "Professional certification — application, experience and exam",
+      "focus_and_skills": "Advanced business analysis, strategy, requirements and solution evaluation.",
+      "price_and_cost_notes": "Official fee page lists USD $145 application plus exam fee (member/non-member rates vary; confirm current pricing).",
+      "level": "Advanced",
+      "cv_relevance": "High for experienced BAs and consultants; low priority for students/new graduates.",
+      "official_url": "https://www.iiba.org/business-analysis-certifications/certification-fees/",
+      "prerequisites": "Substantial documented BA experience and professional development; check current CBAP handbook.",
+      "assessment_or_completion_method": "Application approval plus exam.",
+      "validity_or_renewal": "Renewal/recertification requirements and fees apply.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Technical Business Analyst",
+        "IT Business Analyst",
+        "Business Systems Analyst",
+        "Systems Analyst",
+        "Analytics Consultant",
+        "Technology Business Analyst"
+      ],
+      "notes": "Experience-based senior credential."
+    },
+    {
+      "credential_name": "Foundation Certificate in Business Analysis",
+      "issuer": "BCS, The Chartered Institute for IT",
+      "credential_type": "Professional certificate — exam-based",
+      "focus_and_skills": "BA fundamentals, investigation techniques, stakeholder analysis, business case, feasibility and requirements management.",
+      "price_and_cost_notes": "BCS page lists UK exam-only price £200 including remote proctoring; VAT and international pricing may vary.",
+      "level": "Entry",
+      "cv_relevance": "High for entry-level BA roles; clear assessment rather than attendance-only certificate.",
+      "official_url": "https://www.bcs.org/qualifications-and-certifications/certifications-for-professionals/business-analysis/foundation-certificate-in-business-analysis/",
+      "prerequisites": "No formal entry requirements.",
+      "assessment_or_completion_method": "One-hour closed-book exam with 40 multiple-choice questions; page lists 65% pass mark.",
+      "validity_or_renewal": "Check BCS current policy; confirm on official page.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Technical Business Analyst",
+        "IT Business Analyst",
+        "Business Systems Analyst",
+        "Systems Analyst",
+        "Process Analyst",
+        "Business Process Analyst",
+        "Technology Business Analyst",
+        "AI Business Analyst"
+      ],
+      "notes": "Training-provider bundle costs vary; exam-only route is available."
+    },
+    {
+      "credential_name": "Professional in Business Analysis (PMI-PBA)",
+      "issuer": "Project Management Institute (PMI)",
+      "credential_type": "Professional certification — experience and exam",
+      "focus_and_skills": "Business analysis in projects, requirements, stakeholder needs and business outcomes.",
+      "price_and_cost_notes": "Official page lists USD $405 member / $555 non-member exam fees.",
+      "level": "Intermediate/advanced",
+      "cv_relevance": "High for BA roles embedded in project delivery; best after experience.",
+      "official_url": "https://www.pmi.org/certifications/certification-resources/process/~/link.aspx?_id=DEC65B231B794B429BEF682DAACDBF3F&_z=z",
+      "prerequisites": "Requires qualifying business analysis/project experience and education; consult current handbook.",
+      "assessment_or_completion_method": "Online-proctored exam availability may vary.",
+      "validity_or_renewal": "Maintenance/renewal requirements apply; verify current PMI rules.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Technical Business Analyst",
+        "IT Business Analyst",
+        "Business Systems Analyst",
+        "Systems Analyst",
+        "Business Process Analyst",
+        "Analytics Consultant",
+        "Technology Business Analyst"
+      ],
+      "notes": "Not ideal as a first credential without relevant experience."
+    },
+    {
+      "credential_name": "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
+      "issuer": "Microsoft",
+      "credential_type": "Professional certification — exam-based",
+      "focus_and_skills": "Prepare, model, visualize and analyze data; Power Query, DAX, dashboards and reports in Power BI.",
+      "price_and_cost_notes": "Official exam page lists USD $165; exam price depends on country/region.",
+      "level": "Entry/intermediate",
+      "cv_relevance": "Very high for BI, reporting and data analyst roles using Power BI.",
+      "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/",
+      "prerequisites": "No formal prerequisite; practical Power BI and data-modeling knowledge recommended.",
+      "assessment_or_completion_method": "Proctored PL-300 exam.",
+      "validity_or_renewal": "Role-based certification expires; free online renewal assessment is available.",
+      "mapped_roles": [
+        "Business Intelligence Analyst",
+        "Data Analyst",
+        "Business Data Analyst",
+        "Product Data Analyst",
+        "Marketing Data Analyst",
+        "Operations Data Analyst",
+        "BI Analyst",
+        "Reporting Analyst",
+        "Business Intelligence Developer",
+        "BI Consultant",
+        "Data Product Analyst",
+        "Product Analyst",
+        "AI Product Analyst"
+      ],
+      "notes": "Strong portfolio project alongside certification is recommended."
+    },
+    {
+      "credential_name": "Tableau Certified Data Analyst",
+      "issuer": "Salesforce / Tableau",
+      "credential_type": "Professional certification — exam-based",
+      "focus_and_skills": "Data exploration, transformation, analysis, visualization and publishing with Tableau products.",
+      "price_and_cost_notes": "Official exam voucher currently listed at USD $250.",
+      "level": "Intermediate",
+      "cv_relevance": "High where Tableau is used in analytics, BI and consulting jobs.",
+      "official_url": "https://tableau-store.pearsonvue.com/tableau-certified-data-analyst-exam-voucher/p/tableau-TDAC01-gen-vch",
+      "prerequisites": "No formal prerequisite stated on voucher page; hands-on Tableau experience recommended.",
+      "assessment_or_completion_method": "Certification exam through Pearson VUE; online proctoring or test centre options depend on region.",
+      "validity_or_renewal": "Voucher expires 12 months after purchase; check certification maintenance policy.",
+      "mapped_roles": [
+        "Business Intelligence Analyst",
+        "Data Analyst",
+        "Business Data Analyst",
+        "Product Data Analyst",
+        "Marketing Data Analyst",
+        "Operations Data Analyst",
+        "BI Analyst",
+        "Reporting Analyst",
+        "Analytics Consultant",
+        "Business Intelligence Developer",
+        "BI Consultant",
+        "Product Analyst"
+      ],
+      "notes": "Choose Tableau or PL-300 based on target job descriptions, not both automatically."
+    },
+    {
+      "credential_name": "Google Data Analytics Professional Certificate",
+      "issuer": "Google via Coursera",
+      "credential_type": "Course-completion / professional learning certificate — not a proctored industry certification",
+      "focus_and_skills": "Foundational analytics, spreadsheets, SQL, data cleaning, analysis, visualization and communicating findings.",
+      "price_and_cost_notes": "Coursera subscription; Google India page gives country-specific prices for some Google certificates, but exact current price varies by offer/region.",
+      "level": "Entry",
+      "cv_relevance": "Good structured learning proof for beginners; weaker signal than an exam-based certification alone.",
+      "official_url": "https://www.coursera.org/professional-certificates/google-data-analytics",
+      "prerequisites": "No degree or prior experience required.",
+      "assessment_or_completion_method": "Complete course modules and graded activities/projects.",
+      "validity_or_renewal": "Course credential; no professional recertification stated.",
+      "mapped_roles": [
+        "Data Analyst",
+        "Business Data Analyst",
+        "Marketing Data Analyst",
+        "Operations Data Analyst",
+        "Reporting Analyst",
+        "Product Analyst"
+      ],
+      "notes": "Clearly classify as a course certificate on CV, not an exam certification."
+    },
+    {
+      "credential_name": "Google Business Intelligence Professional Certificate",
+      "issuer": "Google via Coursera",
+      "credential_type": "Course-completion / professional learning certificate — not a proctored industry certification",
+      "focus_and_skills": "Data modeling, ETL concepts, data visualization, dashboards and BI reporting.",
+      "price_and_cost_notes": "Coursera subscription; current price depends on region/subscription and promotions.",
+      "level": "Intermediate",
+      "cv_relevance": "High skills alignment for BI and dashboard roles, but it is a course credential.",
+      "official_url": "https://www.coursera.org/professional-certificates/google-business-intelligence",
+      "prerequisites": "Recommended BI/data analytics experience; see current Coursera listing.",
+      "assessment_or_completion_method": "Complete 4-course series and graded work.",
+      "validity_or_renewal": "Course credential; no professional recertification stated.",
+      "mapped_roles": [
+        "Business Intelligence Analyst",
+        "BI Analyst",
+        "Reporting Analyst",
+        "Business Intelligence Developer",
+        "BI Consultant",
+        "Business Data Analyst"
+      ],
+      "notes": "Useful after SQL, data modeling and dashboard fundamentals."
+    },
+    {
+      "credential_name": "IBM Business Analyst Professional Certificate",
+      "issuer": "IBM via Coursera",
+      "credential_type": "Course-completion / professional learning certificate — not a proctored industry certification",
+      "focus_and_skills": "Business analysis tools, requirements, stakeholder work and practical BA activities aligned with BA concepts.",
+      "price_and_cost_notes": "Coursera subscription; price varies by country, plan and promotion.",
+      "level": "Entry",
+      "cv_relevance": "Useful structured training for aspiring BAs; do not present as equivalent to IIBA/BCS exam credentials.",
+      "official_url": "https://www.coursera.org/professional-certificates/ibm-business-analyst-professional-certificate",
+      "prerequisites": "Beginner level; no formal experience prerequisite listed.",
+      "assessment_or_completion_method": "Complete eight-course series and graded work.",
+      "validity_or_renewal": "Course credential; no professional recertification stated.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Technical Business Analyst",
+        "IT Business Analyst",
+        "Business Systems Analyst",
+        "Systems Analyst",
+        "Process Analyst",
+        "Business Process Analyst",
+        "Technology Business Analyst",
+        "AI Business Analyst"
+      ],
+      "notes": "Can help prepare for entry-level BA work and IIBA ECBA study."
+    },
+    {
+      "credential_name": "Professional Scrum Master I (PSM I)",
+      "issuer": "Scrum.org",
+      "credential_type": "Professional certification — assessment-based",
+      "focus_and_skills": "Scrum framework, Scrum Master accountabilities and Scrum application.",
+      "price_and_cost_notes": "USD $200 per attempt, plus any applicable taxes.",
+      "level": "Entry/intermediate",
+      "cv_relevance": "Useful for product/technology teams and agile delivery; complementary rather than a BA-specific credential.",
+      "official_url": "https://www.scrum.org/assessments/professional-scrum-master-i-certification",
+      "prerequisites": "No class prerequisite; Scrum Guide study recommended.",
+      "assessment_or_completion_method": "80 questions, 60 minutes, 85% passing score.",
+      "validity_or_renewal": "Lifetime certification; no annual renewal fee.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Technical Business Analyst",
+        "IT Business Analyst",
+        "Business Systems Analyst",
+        "Product Analyst",
+        "Product Operations Analyst",
+        "Technology Business Analyst",
+        "AI Business Analyst",
+        "AI Product Analyst"
+      ],
+      "notes": "Scrum.org says certification requires passing the test, not just attending training."
+    },
+    {
+      "credential_name": "Professional Scrum Product Owner I (PSPO I)",
+      "issuer": "Scrum.org",
+      "credential_type": "Professional certification — assessment-based",
+      "focus_and_skills": "Product ownership, value delivery, product backlog and stakeholder/product decisions.",
+      "price_and_cost_notes": "USD $200 per attempt, plus applicable taxes; confirm official assessment page.",
+      "level": "Entry/intermediate",
+      "cv_relevance": "Useful for product analyst, data product and AI product roles.",
+      "official_url": "https://www.scrum.org/assessments/professional-scrum-product-owner-i-certification",
+      "prerequisites": "No course prerequisite; practical product/Scrum study recommended.",
+      "assessment_or_completion_method": "Assessment-based exam.",
+      "validity_or_renewal": "Lifetime certification; no annual renewal fee, subject to current Scrum.org policy.",
+      "mapped_roles": [
+        "Product Analyst",
+        "Product Data Analyst",
+        "Data Product Analyst",
+        "Product Operations Analyst",
+        "AI Product Analyst",
+        "AI Business Analyst"
+      ],
+      "notes": "Complements analytics and product case-study portfolio."
+    },
+    {
+      "credential_name": "Certified Associate in Project Management (CAPM)",
+      "issuer": "Project Management Institute (PMI)",
+      "credential_type": "Professional certification — exam-based",
+      "focus_and_skills": "Foundational project management, agile principles and business analysis frameworks.",
+      "price_and_cost_notes": "Official page lists USD $225 member / $300 non-member exam fee.",
+      "level": "Entry",
+      "cv_relevance": "Useful for analyst and transformation roles involving project coordination; not a substitute for BA-specific certification.",
+      "official_url": "https://www.pmi.org/certifications/certified-associate-capm",
+      "prerequisites": "Secondary degree and 23 hours of project management education; see official eligibility page.",
+      "assessment_or_completion_method": "PMI certification exam.",
+      "validity_or_renewal": "Maintenance/renewal requirements apply; verify current PMI rules.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Technical Business Analyst",
+        "IT Business Analyst",
+        "Business Process Analyst",
+        "Analytics Consultant",
+        "AI Business Analyst",
+        "AI Business Consultant",
+        "AI Transformation Consultant"
+      ],
+      "notes": "A practical early-career project credential."
+    },
+    {
+      "credential_name": "Project Management Professional (PMP)",
+      "issuer": "Project Management Institute (PMI)",
+      "credential_type": "Professional certification — experience and exam",
+      "focus_and_skills": "Project leadership, people, processes, business environment and delivery across methodologies.",
+      "price_and_cost_notes": "Official page lists USD $405 member / $655 non-member exam fee.",
+      "level": "Advanced",
+      "cv_relevance": "Strong for experienced consultants and transformation leaders; not suitable as a first credential without eligibility.",
+      "official_url": "https://www.pmi.org/certifications/project-management-pmp",
+      "prerequisites": "Requires qualifying project leadership experience and 35 hours of project education or CAPM; exact path depends on education.",
+      "assessment_or_completion_method": "Application approval plus exam.",
+      "validity_or_renewal": "Continuing certification requirements apply.",
+      "mapped_roles": [
+        "Analytics Consultant",
+        "Data Strategy Consultant",
+        "AI Consultant",
+        "AI Business Consultant",
+        "AI Strategy Consultant",
+        "AI Transformation Consultant",
+        "Technology Strategy Consultant"
+      ],
+      "notes": "High cost and experience prerequisites mean it should be a later-stage option."
+    },
+    {
+      "credential_name": "IIBA Certification in Business Data Analytics (CBDA)",
+      "issuer": "IIBA",
+      "credential_type": "Specialized professional certification — exam-based",
+      "focus_and_skills": "Business data analytics, research questions, data acquisition, analysis, interpretation and communicating findings.",
+      "price_and_cost_notes": "IIBA fee page lists exam pricing by membership/region; check current official fee table before purchase.",
+      "level": "Intermediate",
+      "cv_relevance": "Very high overlap with analytics consulting, decision science and business data roles.",
+      "official_url": "https://www.iiba.org/business-analysis-certifications/certification-fees/",
+      "prerequisites": "Review current IIBA CBDA handbook and eligibility requirements.",
+      "assessment_or_completion_method": "IIBA assessment/exam.",
+      "validity_or_renewal": "Recertification requirements and fees may apply; verify current policy.",
+      "mapped_roles": [
+        "Business Intelligence Analyst",
+        "Data Analyst",
+        "Business Data Analyst",
+        "Analytics Consultant",
+        "Decision Scientist",
+        "Data Strategy Consultant",
+        "BI Analyst",
+        "AI Business Analyst",
+        "AI Product Analyst"
+      ],
+      "notes": "Specialized option if you want to bridge business analysis and data analytics."
+    },
+    {
+      "credential_name": "IIBA Agile Analysis Certification (AAC)",
+      "issuer": "IIBA",
+      "credential_type": "Specialized professional certification — exam-based",
+      "focus_and_skills": "Agile analysis, adaptive planning, collaboration, requirements and value delivery.",
+      "price_and_cost_notes": "IIBA fee page lists USD $405 member / $250 non-member exam fee; verify current displayed pricing before purchase.",
+      "level": "Intermediate",
+      "cv_relevance": "Good for business analysts working in agile product/technology teams.",
+      "official_url": "https://www.iiba.org/business-analysis-certifications/certification-fees/",
+      "prerequisites": "Experience and preparation recommended; check current AAC handbook.",
+      "assessment_or_completion_method": "IIBA assessment/exam.",
+      "validity_or_renewal": "Recertification requirements and fees may apply.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Technical Business Analyst",
+        "IT Business Analyst",
+        "Business Systems Analyst",
+        "Product Analyst",
+        "Product Operations Analyst",
+        "Technology Business Analyst",
+        "AI Business Analyst"
+      ],
+      "notes": "More targeted than a generic agile course certificate."
+    },
+    {
+      "credential_name": "BCS Foundation Certificate in Digital Business Change",
+      "issuer": "BCS, The Chartered Institute for IT",
+      "credential_type": "Professional certificate — exam-based",
+      "focus_and_skills": "Digital transformation, business change, stakeholders and organizational change concepts.",
+      "price_and_cost_notes": "BCS page lists UK exam-only price £200 including remote proctoring; VAT and international pricing may vary.",
+      "level": "Entry",
+      "cv_relevance": "Useful for business change and technology transformation pathways.",
+      "official_url": "https://www.bcs.org/qualifications-and-certifications/certifications-for-professionals/business-analysis/foundation-certificate-in-digital-business-change",
+      "prerequisites": "No formal prerequisites stated on official page.",
+      "assessment_or_completion_method": "Exam-based; exact exam format on official page.",
+      "validity_or_renewal": "Check BCS current policy.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Business Process Analyst",
+        "Data Strategy Consultant",
+        "AI Consultant",
+        "AI Business Consultant",
+        "AI Strategy Consultant",
+        "AI Transformation Consultant",
+        "Technology Strategy Consultant"
+      ],
+      "notes": "Choose when transformation/change work is a target rather than pure analytics."
+    },
+    {
+      "credential_name": "ASQ Certified Six Sigma Green Belt (CSSGB)",
+      "issuer": "ASQ India",
+      "credential_type": "Professional certification — exam-based and experience-required",
+      "focus_and_skills": "Process improvement, root-cause analysis, quality improvement and Six Sigma methods.",
+      "price_and_cost_notes": "ASQ India currently lists INR ₹43,000 non-member / ₹34,100 member.",
+      "level": "Intermediate",
+      "cv_relevance": "Relevant to process analysts and operations improvement; less relevant to product/data analytics unless process quality is central.",
+      "official_url": "https://asq.org.in/certification/six-sigma-green-belt-cssgb/",
+      "prerequisites": "ASQ India lists at least 3 years of full-time paid work experience in relevant areas.",
+      "assessment_or_completion_method": "Certification exam.",
+      "validity_or_renewal": "Check current ASQ renewal/recertification policy.",
+      "mapped_roles": [
+        "Process Analyst",
+        "Business Process Analyst",
+        "Operations Data Analyst",
+        "Operations Research Analyst"
+      ],
+      "notes": "Experience prerequisite makes this unsuitable for most freshers."
+    },
+    {
+      "credential_name": "ASQ Six Sigma Yellow Belt (CSSYB)",
+      "issuer": "ASQ India",
+      "credential_type": "Professional certification — exam-based",
+      "focus_and_skills": "Introductory process improvement, quality concepts and Six Sigma terminology.",
+      "price_and_cost_notes": "ASQ India catalog lists current member/non-member pricing; check live catalog for current amount.",
+      "level": "Entry",
+      "cv_relevance": "Moderate for process/operations roles; more introductory than Green Belt.",
+      "official_url": "https://asq.org.in/certification-catalog/",
+      "prerequisites": "Check current ASQ exam requirements; generally positioned as foundational.",
+      "assessment_or_completion_method": "Certification exam.",
+      "validity_or_renewal": "Check current ASQ renewal policy.",
+      "mapped_roles": [
+        "Process Analyst",
+        "Business Process Analyst",
+        "Operations Data Analyst"
+      ],
+      "notes": "Choose this only if process improvement is relevant to target jobs."
+    },
+    {
+      "credential_name": "Salesforce Certified Platform Administrator",
+      "issuer": "Salesforce",
+      "credential_type": "Professional certification — exam-based",
+      "focus_and_skills": "CRM configuration, user management, data, automation and reporting in Salesforce.",
+      "price_and_cost_notes": "Salesforce official pricing page lists administrator exam USD $200 excluding tax; retake USD $100.",
+      "level": "Entry/intermediate",
+      "cv_relevance": "Relevant for CRM/business systems analyst and business operations roles where Salesforce is used.",
+      "official_url": "https://help.salesforce.com/s/articleView?id=005298916&language=en_US&type=1",
+      "prerequisites": "No formal prerequisite; Trailhead learning and hands-on practice recommended.",
+      "assessment_or_completion_method": "Salesforce certification exam.",
+      "validity_or_renewal": "Salesforce credentials may be subject to maintenance modules; check current credential policy.",
+      "mapped_roles": [
+        "Business Systems Analyst",
+        "Systems Analyst",
+        "Business Intelligence Analyst",
+        "Reporting Analyst",
+        "Analytics Consultant",
+        "Technology Business Analyst"
+      ],
+      "notes": "Only prioritize if job descriptions mention Salesforce."
+    },
+    {
+      "credential_name": "Google Project Management Professional Certificate",
+      "issuer": "Google via Coursera",
+      "credential_type": "Course-completion / professional learning certificate — not a proctored industry certification",
+      "focus_and_skills": "Project planning, risk, stakeholder communication, Agile and project documentation.",
+      "price_and_cost_notes": "Google India page lists subscription at USD $20/month after a 7-day trial; Coursera price can vary by region/offer.",
+      "level": "Entry",
+      "cv_relevance": "Useful for project coordination and transformation support; not equivalent to PMI CAPM/PMP.",
+      "official_url": "https://grow.google/intl/en_in/project-management-course/",
+      "prerequisites": "No prior experience required.",
+      "assessment_or_completion_method": "Complete course series and graded assignments.",
+      "validity_or_renewal": "Course credential; no professional recertification stated.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Technical Business Analyst",
+        "IT Business Analyst",
+        "Analytics Consultant",
+        "Data Strategy Consultant",
+        "AI Business Consultant",
+        "AI Strategy Consultant",
+        "AI Transformation Consultant",
+        "Technology Strategy Consultant"
+      ],
+      "notes": "Google says completion can count toward 100+ hours of project management education relevant to PMI credential requirements."
+    },
+    {
+      "credential_name": "Microsoft Office Specialist: Excel Associate",
+      "issuer": "Microsoft",
+      "credential_type": "Professional certification — exam-based",
+      "focus_and_skills": "Spreadsheet management, formulas, tables, charts and workbook operations.",
+      "price_and_cost_notes": "Exam pricing varies by country and testing provider; verify locally through Microsoft certification pages.",
+      "level": "Entry",
+      "cv_relevance": "Useful supporting credential for reporting/data analyst roles, but lower priority than demonstrable Excel projects and PL-300.",
+      "official_url": "https://learn.microsoft.com/en-us/credentials/certifications/microsoft-office-specialist-excel-associate-m365-apps/",
+      "prerequisites": "No formal prerequisite; practical Excel proficiency recommended.",
+      "assessment_or_completion_method": "MOS exam through authorized testing provider.",
+      "validity_or_renewal": "Check current Microsoft certification page for version and validity details.",
+      "mapped_roles": [
+        "Data Analyst",
+        "Business Data Analyst",
+        "Marketing Data Analyst",
+        "Operations Data Analyst",
+        "Reporting Analyst",
+        "Business Intelligence Analyst"
+      ],
+      "notes": "Good foundational option if Excel is a skill gap; avoid collecting it if already proficient."
+    },
+    {
+      "credential_name": "IIBA Certificate in Product Ownership Analysis (CPOA)",
+      "issuer": "IIBA",
+      "credential_type": "Specialized credential — learning/exam package or exam-based option",
+      "focus_and_skills": "Product ownership analysis, product value, backlog, stakeholder collaboration and business analysis for product work.",
+      "price_and_cost_notes": "IIBA fee page lists exam-only and learning-plus-exam options; current pricing varies by membership and package, so verify before purchase.",
+      "level": "Entry/intermediate",
+      "cv_relevance": "Relevant for product analytics and AI product roles; useful specialization rather than a universal requirement.",
+      "official_url": "https://www.iiba.org/business-analysis-certifications/certification-fees/",
+      "prerequisites": "Check current CPOA handbook and package prerequisites.",
+      "assessment_or_completion_method": "IIBA exam; optional learning package.",
+      "validity_or_renewal": "Check current maintenance policy.",
+      "mapped_roles": [
+        "Product Analyst",
+        "Product Data Analyst",
+        "Data Product Analyst",
+        "Product Operations Analyst",
+        "AI Product Analyst",
+        "AI Business Analyst"
+      ],
+      "notes": "A targeted credential for product-focused business analysis."
+    },
+    {
+      "credential_name": "BCS Practitioner Certificate in Business Analysis Practice",
+      "issuer": "BCS, The Chartered Institute for IT",
+      "credential_type": "Professional certificate — exam-based",
+      "focus_and_skills": "Practical BA techniques, stakeholder engagement, investigation, business analysis delivery and recommendations.",
+      "price_and_cost_notes": "BCS price list lists exam fee £195 plus optional remote proctoring/Pearson VUE fees; VAT/international pricing may vary.",
+      "level": "Intermediate",
+      "cv_relevance": "High for people progressing beyond foundation BA knowledge.",
+      "official_url": "https://www.bcs.org/qualifications-and-certifications/certifications-for-professionals/business-analysis/",
+      "prerequisites": "Foundation-level knowledge recommended; review BCS syllabus and current entry requirements.",
+      "assessment_or_completion_method": "Practitioner-level assessment/exam.",
+      "validity_or_renewal": "Check current BCS policy.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Technical Business Analyst",
+        "IT Business Analyst",
+        "Business Systems Analyst",
+        "Systems Analyst",
+        "Process Analyst",
+        "Business Process Analyst",
+        "Technology Business Analyst",
+        "AI Business Analyst"
+      ],
+      "notes": "A more advanced follow-on after the BCS Foundation Certificate."
+    },
+    {
+      "credential_name": "Free Scrum Open assessment",
+      "issuer": "Scrum.org",
+      "credential_type": "Free practice assessment — not a certification",
+      "focus_and_skills": "Free self-check of Scrum framework knowledge before attempting PSM I or PSPO I.",
+      "price_and_cost_notes": "Free.",
+      "level": "Entry",
+      "cv_relevance": "Low direct CV value; useful preparation for paid assessment-based certification.",
+      "official_url": "https://www.scrum.org/open-assessments",
+      "prerequisites": "None.",
+      "assessment_or_completion_method": "Online practice assessment.",
+      "validity_or_renewal": "No credential/expiry; it is not a certification.",
+      "mapped_roles": [
+        "Business Analyst",
+        "Product Analyst",
+        "Product Operations Analyst",
+        "AI Product Analyst"
+      ],
+      "notes": "Included to distinguish free preparation from a credential you can list on a CV."
+    }
+  ],
+  "recommended_priority_for_early_career": [
+    {
+      "priority": 1,
+      "credential": "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
+      "reason": "Strong skills-based signal for BI/data analyst roles when Power BI is relevant."
+    },
+    {
+      "priority": 2,
+      "credential": "Entry Certificate in Business Analysis (ECBA)",
+      "reason": "Specialist BA credential for aspiring business analysts."
+    },
+    {
+      "priority": 3,
+      "credential": "Foundation Certificate in Business Analysis (BCS)",
+      "reason": "Exam-based BA foundation credential with no formal entry requirements."
+    },
+    {
+      "priority": 4,
+      "credential": "Google Data Analytics Professional Certificate",
+      "reason": "Structured beginner training; clearly label it as a course certificate."
+    },
+    {
+      "priority": 5,
+      "credential": "Professional Scrum Master I (PSM I) or Professional Scrum Product Owner I (PSPO I)",
+      "reason": "Choose based on whether target roles lean toward agile delivery or product ownership."
+    },
+    {
+      "priority": 6,
+      "credential": "Google Business Intelligence Professional Certificate",
+      "reason": "Practical BI learning path for data modeling, dashboards and reporting."
+    }
+  ],
+  "source_references": [
+    {
+      "name": "IIBA certification fees",
+      "url": "https://www.iiba.org/business-analysis-certifications/certification-fees/"
+    },
+    {
+      "name": "IIBA ECBA",
+      "url": "https://www.iiba.org/ecba/"
+    },
+    {
+      "name": "BCS Foundation Certificate in Business Analysis",
+      "url": "https://www.bcs.org/qualifications-and-certifications/certifications-for-professionals/business-analysis/foundation-certificate-in-business-analysis/"
+    },
+    {
+      "name": "PMI-PBA",
+      "url": "https://www.pmi.org/certifications/certification-resources/process/~/link.aspx?_id=DEC65B231B794B429BEF682DAACDBF3F&_z=z"
+    },
+    {
+      "name": "Microsoft PL-300",
+      "url": "https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/"
+    },
+    {
+      "name": "Tableau Certified Data Analyst exam voucher",
+      "url": "https://tableau-store.pearsonvue.com/tableau-certified-data-analyst-exam-voucher/p/tableau-TDAC01-gen-vch"
+    },
+    {
+      "name": "Google Business Intelligence Professional Certificate",
+      "url": "https://www.coursera.org/professional-certificates/google-business-intelligence"
+    },
+    {
+      "name": "IBM Business Analyst Professional Certificate",
+      "url": "https://www.coursera.org/professional-certificates/ibm-business-analyst-professional-certificate/"
+    },
+    {
+      "name": "Scrum.org PSM I",
+      "url": "https://www.scrum.org/assessments/professional-scrum-master-i-certification"
+    },
+    {
+      "name": "PMI CAPM",
+      "url": "https://www.pmi.org/certifications/certified-associate-capm"
+    },
+    {
+      "name": "PMI PMP",
+      "url": "https://www.pmi.org/certifications/project-management-pmp"
+    },
+    {
+      "name": "ASQ India Six Sigma Green Belt",
+      "url": "https://asq.org.in/certification/six-sigma-green-belt-cssgb/"
+    },
+    {
+      "name": "Salesforce certification exam pricing",
+      "url": "https://help.salesforce.com/s/articleView?id=005298916&language=en_US&type=1"
+    },
+    {
+      "name": "Google Project Management certificate (India)",
+      "url": "https://grow.google/intl/en_in/project-management-course/"
+    }
+  ]
+}

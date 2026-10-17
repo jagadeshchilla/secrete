@@ -1,0 +1,629 @@
+{
+  "schema_version": "1.0",
+  "last_researched_date": "2026-10-17",
+  "domain": "Data Engineering & Data",
+  "role_count": 38,
+  "roles_from_careerData_json": [
+    "Data Engineer",
+    "Big Data Engineer",
+    "Data Platform Engineer",
+    "Data Infrastructure Engineer",
+    "Data Pipeline Engineer",
+    "ETL Engineer",
+    "ELT Engineer",
+    "Data Integration Engineer",
+    "Data Warehouse Engineer",
+    "Data Lake Engineer",
+    "Data Lakehouse Engineer",
+    "Streaming Data Engineer",
+    "Real-Time Data Engineer",
+    "DataOps Engineer",
+    "Data Reliability Engineer",
+    "Data Architect",
+    "Cloud Data Architect",
+    "Enterprise Data Architect",
+    "Data Platform Architect",
+    "Data Warehouse Architect",
+    "Data Lakehouse Architect",
+    "Database Engineer",
+    "Database Architect",
+    "Database Administrator",
+    "Cloud Database Engineer",
+    "Distributed Database Engineer",
+    "NoSQL Engineer",
+    "Data Scientist",
+    "Applied Data Scientist",
+    "Decision Scientist",
+    "Analytics Engineer",
+    "Machine Learning Data Engineer",
+    "Data Quality Engineer",
+    "Data Governance Engineer",
+    "Data Steward",
+    "Metadata Engineer",
+    "Master Data Management Specialist",
+    "Quantitative Analyst"
+  ],
+  "credential_count": 20,
+  "credentials": [
+    {
+      "name": "AWS Certified Data Engineer – Associate",
+      "issuer": "Amazon Web Services",
+      "type": "Professional certification",
+      "about": "Validates AWS data ingestion and transformation, pipeline orchestration, data modeling, data lifecycle management, and data quality.",
+      "price": {
+        "amount": 150,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Taxes or regional pricing may apply"
+      },
+      "level": "Associate / intermediate",
+      "usefulness": "Strong for AWS-focused data engineering; pair with a working AWS pipeline project.",
+      "useful_roles": [
+        "Data Engineer",
+        "Big Data Engineer",
+        "Data Pipeline Engineer",
+        "ETL Engineer",
+        "ELT Engineer",
+        "Data Integration Engineer",
+        "Data Platform Engineer",
+        "Data Lake Engineer",
+        "Data Warehouse Engineer",
+        "Cloud Data Architect",
+        "Data Architect",
+        "Data Quality Engineer",
+        "Machine Learning Data Engineer"
+      ],
+      "link": "https://aws.amazon.com/certification/certified-data-engineer-associate/",
+      "prerequisites": "No formal prerequisite; AWS recommends 2–3 years data engineering/architecture and 1–2 years hands-on AWS.",
+      "exam_details": "65 questions; 130 minutes; multiple choice/multiple response.",
+      "validity": "3 years.",
+      "source_notes": "Official AWS certification page."
+    },
+    {
+      "name": "Microsoft Certified: Fabric Data Engineer Associate (DP-700)",
+      "issuer": "Microsoft",
+      "type": "Professional certification",
+      "about": "Validates Fabric data ingestion/transformation, lakehouse and warehouse implementation, real-time intelligence, monitoring, and optimization.",
+      "price": {
+        "amount": 165,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Exam price depends on country/region."
+      },
+      "level": "Intermediate",
+      "usefulness": "Useful for Microsoft Fabric analytics and engineering teams.",
+      "useful_roles": [
+        "Data Engineer",
+        "Data Pipeline Engineer",
+        "ETL Engineer",
+        "ELT Engineer",
+        "Data Warehouse Engineer",
+        "Data Lakehouse Engineer",
+        "Streaming Data Engineer",
+        "Real-Time Data Engineer",
+        "Analytics Engineer",
+        "Data Platform Engineer",
+        "Data Quality Engineer",
+        "Data Architect",
+        "Cloud Data Architect"
+      ],
+      "link": "https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/",
+      "prerequisites": "No formal prerequisite; SQL, PySpark, and KQL skills are expected.",
+      "exam_details": "Exam DP-700; consult the current official study guide.",
+      "validity": "Microsoft role-based credentials require periodic renewal; online renewal assessment is free.",
+      "source_notes": "Official Microsoft Learn page; exam price is regional."
+    },
+    {
+      "name": "Google Cloud Professional Data Engineer",
+      "issuer": "Google Cloud",
+      "type": "Professional certification",
+      "about": "Assesses design of data processing systems, ingestion, storage, analytics preparation, and automated/maintained data workloads.",
+      "price": {
+        "amount": 200,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Plus applicable tax."
+      },
+      "level": "Professional",
+      "usefulness": "Strong cloud data engineering/architecture signal; most useful with GCP project experience.",
+      "useful_roles": [
+        "Data Engineer",
+        "Big Data Engineer",
+        "Data Infrastructure Engineer",
+        "Streaming Data Engineer",
+        "Real-Time Data Engineer",
+        "Data Architect",
+        "Cloud Data Architect",
+        "Data Platform Architect",
+        "Data Warehouse Architect",
+        "Data Lakehouse Architect",
+        "Data Platform Engineer"
+      ],
+      "link": "https://cloud.google.com/learn/certification/data-engineer",
+      "prerequisites": "No formal prerequisite; recommended 3+ years industry experience including 1+ year with GCP.",
+      "exam_details": "40–50 multiple-choice/multiple-select questions; 2 hours.",
+      "validity": "2 years.",
+      "source_notes": "Official Google Cloud certification page."
+    },
+    {
+      "name": "Databricks Certified Data Engineer Associate",
+      "issuer": "Databricks",
+      "type": "Professional certification",
+      "about": "Validates introductory Databricks engineering, Spark SQL/PySpark ETL, data handling, and workflow/job orchestration.",
+      "price": {
+        "amount": 200,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Taxes or regional pricing may apply"
+      },
+      "level": "Associate / beginner-to-intermediate",
+      "usefulness": "Good for Spark and lakehouse roles; demonstrate skills with a Databricks pipeline.",
+      "useful_roles": [
+        "Data Engineer",
+        "Big Data Engineer",
+        "Data Pipeline Engineer",
+        "Data Lake Engineer",
+        "Data Lakehouse Engineer",
+        "Streaming Data Engineer",
+        "Data Platform Engineer",
+        "Analytics Engineer",
+        "Machine Learning Data Engineer"
+      ],
+      "link": "https://www.databricks.com/learn/certification/data-engineer-associate",
+      "prerequisites": "No formal prerequisite; hands-on practice recommended.",
+      "exam_details": "45 multiple-choice questions; 90 minutes.",
+      "validity": "2 years.",
+      "source_notes": "Official Databricks certification page/exam guide."
+    },
+    {
+      "name": "SnowPro Core Certification",
+      "issuer": "Snowflake",
+      "type": "Professional certification",
+      "about": "Validates foundational Snowflake architecture, loading/transformation, performance, security, and platform knowledge.",
+      "price": {
+        "amount": null,
+        "currency": "USD/local currency",
+        "status": "Paid",
+        "notes": "Price varies by region; verify the current local checkout price."
+      },
+      "level": "Foundational / intermediate",
+      "usefulness": "Relevant to Snowflake warehouse, ELT, and analytics engineering jobs.",
+      "useful_roles": [
+        "Data Warehouse Engineer",
+        "Data Warehouse Architect",
+        "Data Engineer",
+        "ELT Engineer",
+        "Analytics Engineer",
+        "Data Platform Engineer",
+        "Cloud Data Architect",
+        "Database Engineer",
+        "Data Architect"
+      ],
+      "link": "https://learn.snowflake.com/en/certifications/snowpro-core/",
+      "prerequisites": "No strict prerequisite; practical Snowflake experience recommended.",
+      "exam_details": "Use official page for current exam format.",
+      "validity": "Verify current policy on the official page.",
+      "source_notes": "Official Snowflake certification portal; price can vary by region."
+    },
+    {
+      "name": "Microsoft Certified: Azure Database Administrator Associate (DP-300)",
+      "issuer": "Microsoft",
+      "type": "Professional certification",
+      "about": "Validates administration, security, availability, performance, and operations for Azure SQL/SQL Server database environments.",
+      "price": {
+        "amount": 165,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Price depends on exam country/region."
+      },
+      "level": "Intermediate",
+      "usefulness": "Targeted for database administration and Azure database operations.",
+      "useful_roles": [
+        "Database Administrator",
+        "Database Engineer",
+        "Cloud Database Engineer",
+        "Database Architect",
+        "Data Infrastructure Engineer",
+        "Data Reliability Engineer"
+      ],
+      "link": "https://learn.microsoft.com/en-us/credentials/certifications/azure-database-administrator-associate/",
+      "prerequisites": "SQL database administration experience recommended.",
+      "exam_details": "Exam DP-300; check current study guide.",
+      "validity": "Check current Microsoft renewal status on credential page.",
+      "source_notes": "Official Microsoft Learn page."
+    },
+    {
+      "name": "Google Cloud Professional Cloud Database Engineer",
+      "issuer": "Google Cloud",
+      "type": "Professional certification",
+      "about": "Validates design, migration, deployment, management, monitoring, and troubleshooting of Google Cloud databases.",
+      "price": {
+        "amount": 200,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Plus applicable tax."
+      },
+      "level": "Professional",
+      "usefulness": "Specialist credential for cloud database engineering; best after real GCP database work.",
+      "useful_roles": [
+        "Database Engineer",
+        "Database Architect",
+        "Database Administrator",
+        "Cloud Database Engineer",
+        "Distributed Database Engineer",
+        "Data Infrastructure Engineer",
+        "Data Reliability Engineer"
+      ],
+      "link": "https://cloud.google.com/learn/certification/cloud-database-engineer",
+      "prerequisites": "No formal prerequisite; Google recommends substantial database/IT and GCP database experience.",
+      "exam_details": "Check current official exam guide.",
+      "validity": "2 years, subject to current policy.",
+      "source_notes": "Official Google Cloud certification page."
+    },
+    {
+      "name": "MongoDB Associate Data Modeler",
+      "issuer": "MongoDB",
+      "type": "Professional certification",
+      "about": "Validates foundational MongoDB document data modeling and schema design.",
+      "price": {
+        "amount": 150,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Confirm current exam price during registration."
+      },
+      "level": "Associate / beginner-to-intermediate",
+      "usefulness": "Focused credential for document databases; add a schema-design project.",
+      "useful_roles": [
+        "NoSQL Engineer",
+        "Database Engineer",
+        "Database Architect",
+        "Distributed Database Engineer",
+        "Data Architect",
+        "Data Integration Engineer"
+      ],
+      "link": "https://learn.mongodb.com/courses/mongodb-associate-data-modeler-exam",
+      "prerequisites": "No formal prerequisite stated on the learning page.",
+      "exam_details": "See official exam/course page for current details.",
+      "validity": "Verify current MongoDB policy.",
+      "source_notes": "Official MongoDB University exam-preparation page."
+    },
+    {
+      "name": "dbt Analytics Engineering Certification",
+      "issuer": "dbt Labs",
+      "type": "Professional certification",
+      "about": "Tests ability to build, test, maintain, govern, and troubleshoot dbt models and analytics pipelines.",
+      "price": {
+        "amount": 200,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Taxes or regional pricing may apply"
+      },
+      "level": "Intermediate",
+      "usefulness": "Highly role-specific for modern SQL transformation and analytics engineering.",
+      "useful_roles": [
+        "Analytics Engineer",
+        "ELT Engineer",
+        "Data Engineer",
+        "Data Quality Engineer",
+        "Data Pipeline Engineer",
+        "Data Warehouse Engineer",
+        "Data Governance Engineer"
+      ],
+      "link": "https://www.getdbt.com/certifications/analytics-engineer-certification-exam",
+      "prerequisites": "Recommended SQL proficiency and at least six months working with dbt/dbt Core.",
+      "exam_details": "65 questions; 2 hours; 65% passing score listed on official page.",
+      "validity": "Check current dbt Labs policy.",
+      "source_notes": "Official dbt Labs exam page."
+    },
+    {
+      "name": "Certified Data Management Professional (CDMP) – Associate",
+      "issuer": "DAMA International",
+      "type": "Professional certification",
+      "about": "Tests data-management knowledge based on DAMA-DMBOK, including governance, quality, metadata, integration, architecture, and master data.",
+      "price": {
+        "amount": 311,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Official page lists USD 311 per exam; higher levels require additional exams."
+      },
+      "level": "Associate / foundational",
+      "usefulness": "Vendor-neutral credential for data governance, stewardship, metadata, and data quality.",
+      "useful_roles": [
+        "Data Governance Engineer",
+        "Data Steward",
+        "Metadata Engineer",
+        "Master Data Management Specialist",
+        "Data Quality Engineer",
+        "Data Architect",
+        "Enterprise Data Architect",
+        "Data Integration Engineer",
+        "Data Warehouse Architect"
+      ],
+      "link": "https://dama.org/certification/exam-information-and-pricing/",
+      "prerequisites": "Associate level has no experience requirement; Practitioner/Master require experience and specialist exams.",
+      "exam_details": "Core exam: 100 multiple-choice questions, 90 minutes; Associate pass mark 60%.",
+      "validity": "Check current DAMA renewal policy.",
+      "source_notes": "Official DAMA exam information and pricing."
+    },
+    {
+      "name": "Confluent Certified Developer for Apache Kafka (CCDAK)",
+      "issuer": "Confluent",
+      "type": "Professional certification",
+      "about": "Validates skills for developing, deploying, and maintaining real-time streaming applications using Kafka APIs and platform capabilities.",
+      "price": {
+        "amount": 150,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Confluent training catalog lists USD 150; confirm at checkout."
+      },
+      "level": "Intermediate",
+      "usefulness": "Useful for Kafka event-streaming roles and real-time pipelines.",
+      "useful_roles": [
+        "Streaming Data Engineer",
+        "Real-Time Data Engineer",
+        "Data Pipeline Engineer",
+        "Data Engineer",
+        "Big Data Engineer",
+        "Data Platform Engineer",
+        "Data Integration Engineer"
+      ],
+      "link": "https://www.confluent.io/certification/",
+      "prerequisites": "No mandatory course; Kafka development knowledge recommended.",
+      "exam_details": "90-minute proctored exam.",
+      "validity": "2 years; recertification required.",
+      "source_notes": "Official Confluent certification page/catalog."
+    },
+    {
+      "name": "Confluent Cloud Certified Operator",
+      "issuer": "Confluent",
+      "type": "Professional certification",
+      "about": "Validates management of Confluent Cloud and multi-cloud/global Kafka architectures, connectors, governance, and operations.",
+      "price": {
+        "amount": 150,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Confluent training catalog lists USD 150; confirm at checkout."
+      },
+      "level": "Intermediate / professional",
+      "usefulness": "Targeted for streaming platform operations and reliability.",
+      "useful_roles": [
+        "Streaming Data Engineer",
+        "Real-Time Data Engineer",
+        "Data Platform Engineer",
+        "Data Infrastructure Engineer",
+        "Data Reliability Engineer",
+        "DataOps Engineer"
+      ],
+      "link": "https://www.confluent.io/certification/",
+      "prerequisites": "Cloud streaming and Kafka operations experience recommended.",
+      "exam_details": "90-minute proctored exam.",
+      "validity": "2 years; recertification required.",
+      "source_notes": "Official Confluent certification page/catalog."
+    },
+    {
+      "name": "Confluent Fundamentals Accreditation",
+      "issuer": "Confluent",
+      "type": "Free assessment / digital badge, not the proctored professional certification",
+      "about": "Introductory assessment of Kafka and Confluent fundamentals.",
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "status": "Free",
+        "notes": "Verify current access and credential conditions on the official page."
+      },
+      "level": "Beginner",
+      "usefulness": "A low-cost starting badge; less CV weight than a proctored certification or project.",
+      "useful_roles": [
+        "Streaming Data Engineer",
+        "Real-Time Data Engineer",
+        "Data Engineer",
+        "Data Integration Engineer",
+        "Data Platform Engineer"
+      ],
+      "link": "https://www.confluent.io/certification/",
+      "prerequisites": "No formal prerequisite.",
+      "exam_details": "Fundamentals assessment; check current format.",
+      "validity": "Check badge terms.",
+      "source_notes": "Official Confluent page describes free Fundamentals accreditation exams."
+    },
+    {
+      "name": "Get Started with Data Engineering on Databricks",
+      "issuer": "Databricks",
+      "type": "Free course-completion certificate/learning credential, not paid proctored certification",
+      "about": "Introductory data engineering concepts and Databricks lakehouse workflow.",
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "status": "Free",
+        "notes": "Verify current access and credential conditions on the official page."
+      },
+      "level": "Beginner",
+      "usefulness": "Useful preparation for a project or paid exam; modest standalone CV value.",
+      "useful_roles": [
+        "Data Engineer",
+        "Big Data Engineer",
+        "Data Pipeline Engineer",
+        "Data Lakehouse Engineer",
+        "Data Platform Engineer",
+        "Analytics Engineer"
+      ],
+      "link": "https://www.databricks.com/resources/ebook/get-started-data-engineering-databricks",
+      "prerequisites": "Introductory; no prerequisite expected.",
+      "exam_details": "Course/quiz-based; not a proctored certification exam.",
+      "validity": "No professional certification validity period stated.",
+      "source_notes": "Official Databricks learning resource; verify current certificate availability."
+    },
+    {
+      "name": "Snowflake Hands-On Essentials",
+      "issuer": "Snowflake University",
+      "type": "Free learning path/badge, not SnowPro Core certification",
+      "about": "Hands-on introductory learning paths for Snowflake platform workflows.",
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "status": "Free",
+        "notes": "Verify current access and credential conditions on the official page."
+      },
+      "level": "Beginner",
+      "usefulness": "Good preparation for Snowflake; pair with a warehouse/ELT project.",
+      "useful_roles": [
+        "Data Engineer",
+        "Data Warehouse Engineer",
+        "ELT Engineer",
+        "Analytics Engineer",
+        "Database Engineer",
+        "Data Platform Engineer"
+      ],
+      "link": "https://learn.snowflake.com/",
+      "prerequisites": "Usually no prerequisite for introductory paths.",
+      "exam_details": "Activities/badges vary by path; not equivalent to proctored SnowPro exam.",
+      "validity": "Not a professional certification.",
+      "source_notes": "Official Snowflake University portal."
+    },
+    {
+      "name": "IBM Data Engineering Professional Certificate",
+      "issuer": "IBM / Coursera",
+      "type": "Course-based professional certificate, not proctored vendor certification",
+      "about": "Course series covering Python, SQL, relational/NoSQL databases, ETL, warehousing, Spark, and Kafka.",
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "status": "Paid subscription generally",
+        "notes": "Price varies by country/subscription; financial aid or promotions may be available. Auditing may not include certificate."
+      },
+      "level": "Beginner",
+      "usefulness": "Structured entry-level learning; strongest with completed labs and a public pipeline project.",
+      "useful_roles": [
+        "Data Engineer",
+        "ETL Engineer",
+        "Big Data Engineer",
+        "Data Pipeline Engineer",
+        "Database Engineer",
+        "Data Warehouse Engineer",
+        "Data Integration Engineer",
+        "Streaming Data Engineer"
+      ],
+      "link": "https://www.coursera.org/professional-certificates/ibm-data-engineer",
+      "prerequisites": "Beginner-oriented; basic analytical/computer skills help.",
+      "exam_details": "Course quizzes and hands-on assignments; no single proctored certification exam.",
+      "validity": "No standard expiry stated.",
+      "source_notes": "Official Coursera program page."
+    },
+    {
+      "name": "Google Cloud data learning certificates / skill badges",
+      "issuer": "Google Cloud",
+      "type": "Course-based certificate or skill badge, depending on selected path; not Professional Data Engineer certification",
+      "about": "Google Cloud learning paths for analytics and data skills; scope varies by exact path.",
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "status": "Varies",
+        "notes": "Some learning content/badges may be free; subscriptions and certificate access vary. Verify the exact path."
+      },
+      "level": "Beginner / intermediate",
+      "usefulness": "Good for targeted foundational skills; use exact credential title on CV.",
+      "useful_roles": [
+        "Decision Scientist",
+        "Analytics Engineer",
+        "Data Scientist",
+        "Applied Data Scientist",
+        "Quantitative Analyst",
+        "Data Engineer"
+      ],
+      "link": "https://cloud.google.com/learn/certificates",
+      "prerequisites": "Depends on the chosen path.",
+      "exam_details": "Course or skill-badge requirements vary.",
+      "validity": "Depends on the specific credential.",
+      "source_notes": "Official Google Cloud learning portal."
+    },
+    {
+      "name": "Collibra Data Steward / Data Quality Steward certifications",
+      "issuer": "Collibra",
+      "type": "Vendor certification (role/product-based)",
+      "about": "Role-based credentials for stewardship, governance workflows, data asset documentation, and data quality processes in Collibra.",
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "status": "Price not publicly confirmed",
+        "notes": "Access/pricing may depend on customer, partner, or employee status; ask Collibra."
+      },
+      "level": "Intermediate / professional",
+      "usefulness": "Useful when targeting organizations that use Collibra; vendor-specific.",
+      "useful_roles": [
+        "Data Steward",
+        "Data Governance Engineer",
+        "Data Quality Engineer",
+        "Metadata Engineer",
+        "Enterprise Data Architect"
+      ],
+      "link": "https://www.collibra.com/customer-success/education-and-certifications",
+      "prerequisites": "Product familiarity or access to Collibra University may be needed.",
+      "exam_details": "Requirements vary by role credential.",
+      "validity": "Check current program terms.",
+      "source_notes": "Official Collibra page lists free self-paced courses and role-based certifications."
+    },
+    {
+      "name": "Oracle Database / MySQL certifications",
+      "issuer": "Oracle University",
+      "type": "Professional certification; exact title depends on active exam",
+      "about": "Oracle offers database and MySQL certification tracks; select an active exam matching SQL, administration, or database development.",
+      "price": {
+        "amount": null,
+        "currency": "INR/USD varies",
+        "status": "Paid; exact current price unconfirmed",
+        "notes": "Oracle India lists exam subscriptions and individual technology exam options; confirm exact exam and price."
+      },
+      "level": "Foundational to professional",
+      "usefulness": "Potentially useful for Oracle-heavy enterprise database roles; list only the exact active credential earned.",
+      "useful_roles": [
+        "Database Administrator",
+        "Database Engineer",
+        "Database Architect",
+        "Cloud Database Engineer",
+        "Data Infrastructure Engineer",
+        "Data Architect"
+      ],
+      "link": "https://www.oracle.com/in/education/training/buy/",
+      "prerequisites": "Depends on selected credential.",
+      "exam_details": "Exam and subscription options vary; use current Oracle catalog.",
+      "validity": "Depends on exact credential.",
+      "source_notes": "Official Oracle India certification purchase portal."
+    },
+    {
+      "name": "Microsoft Certified: Azure Databricks Data Engineer Associate",
+      "issuer": "Microsoft",
+      "type": "Professional certification",
+      "about": "Validates data integration/modeling, pipeline deployment, workload troubleshooting, and data quality/governance in Azure Databricks.",
+      "price": {
+        "amount": 165,
+        "currency": "USD",
+        "status": "Paid",
+        "notes": "Price depends on country/region."
+      },
+      "level": "Intermediate",
+      "usefulness": "Useful for Microsoft/Azure Databricks data engineering; avoid duplicate spending unless both ecosystems matter.",
+      "useful_roles": [
+        "Data Engineer",
+        "Data Pipeline Engineer",
+        "Data Integration Engineer",
+        "Data Lakehouse Engineer",
+        "Data Quality Engineer",
+        "Data Governance Engineer",
+        "Data Platform Engineer",
+        "Machine Learning Data Engineer"
+      ],
+      "link": "https://learn.microsoft.com/en-us/credentials/certifications/implementing-data-engineering-solutions-using-azure-databricks/",
+      "prerequisites": "SQL, Python, Git/SDLC, Azure data services, and Databricks experience recommended.",
+      "exam_details": "Check current DP-750 study guide and exam code before booking.",
+      "validity": "Check current Microsoft renewal policy.",
+      "source_notes": "Official Microsoft Learn page; exam blueprint is changing in October 2026."
+    }
+  ],
+  "research_notes": [
+    "Professional certifications are separated from course-completion certificates, free learning badges, and assessments.",
+    "Prices may vary by country, tax, promotions, and checkout. Where not confirmed, the file says so rather than guessing.",
+    "Role mappings are relevance suggestions, not guarantees of job qualification.",
+    "This is a curated first batch for the domain, not an exhaustive list of every possible credential.",
+    "Credentials and pricing should be rechecked on official pages before purchase."
+  ]
+}
