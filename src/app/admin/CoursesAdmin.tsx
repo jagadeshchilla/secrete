@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAppState, stripEmoji, keyFor } from "@/context/AppStateContext";
 import { useAccess } from "@/context/AccessContext";
-import type { Course, CourseItem, CourseSection, CourseSubstep, CourseTrack, ResourceType } from "@/types/course";
+import type { Course, CourseItem, CourseResource, CourseSection, CourseSubstep, CourseTrack, ResourceType } from "@/types/course";
 import { PlusIcon, TrashIcon, CloseIcon, SearchIcon, ChevronDownIcon, ChevronRightIcon } from "@/components/icons";
 import { TOOL_CATALOG } from "@/lib/toolCatalog";
 import Favicon from "@/components/Favicon";
@@ -35,7 +35,7 @@ function newId() {
 }
 
 function emptySubstep(): CourseSubstep {
-  return { id: newId(), label: "", whatYouLearn: "", resourceType: "article", resourceUrl: "", prompt: "" };
+  return { id: newId(), label: "", whatYouLearn: "", resources: [], prompt: "" };
 }
 
 function emptyItem(): CourseItem {
@@ -795,29 +795,62 @@ function ItemEditor({
                 rows={2}
                 className={smallInputCls}
               />
-              <div className="flex items-center gap-2">
-                <select
-                  value={s.resourceType}
-                  onChange={(e) => onUpdateSubstep(s.id, { resourceType: e.target.value as ResourceType })}
-                  className="shrink-0 border border-[#2a2418] bg-[#12100a] px-2 py-1.5 text-xs text-[#f3ede1]"
-                >
-                  {RESOURCE_TYPES.map((t) => (
-                    <option key={t.value} value={t.value}>
-                      {t.label}
-                    </option>
-                  ))}
-                </select>
-                {s.resourceUrl && (
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#2a2418] bg-[#12100a]">
-                    <Favicon url={s.resourceUrl} className="h-3.5 w-3.5" />
+              <div className="space-y-1.5">
+                {s.resources.map((r) => (
+                  <div key={r.id} className="flex items-center gap-2">
+                    <select
+                      value={r.type}
+                      onChange={(e) =>
+                        onUpdateSubstep(s.id, {
+                          resources: s.resources.map((x) =>
+                            x.id === r.id ? { ...x, type: e.target.value as ResourceType } : x
+                          ),
+                        })
+                      }
+                      className="shrink-0 border border-[#2a2418] bg-[#12100a] px-2 py-1.5 text-xs text-[#f3ede1]"
+                    >
+                      {RESOURCE_TYPES.map((t) => (
+                        <option key={t.value} value={t.value}>
+                          {t.label}
+                        </option>
+                      ))}
+                    </select>
+                    {r.url && (
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#2a2418] bg-[#12100a]">
+                        <Favicon url={r.url} className="h-3.5 w-3.5" />
+                      </div>
+                    )}
+                    <input
+                      value={r.url}
+                      onChange={(e) =>
+                        onUpdateSubstep(s.id, {
+                          resources: s.resources.map((x) => (x.id === r.id ? { ...x, url: e.target.value } : x)),
+                        })
+                      }
+                      placeholder="https://..."
+                      className={smallInputCls}
+                    />
+                    <button
+                      onClick={() =>
+                        onUpdateSubstep(s.id, { resources: s.resources.filter((x) => x.id !== r.id) })
+                      }
+                      className="shrink-0 p-1 text-[#9a927e] hover:text-[#e07a5f]"
+                    >
+                      <CloseIcon className="h-3.5 w-3.5" />
+                    </button>
                   </div>
-                )}
-                <input
-                  value={s.resourceUrl}
-                  onChange={(e) => onUpdateSubstep(s.id, { resourceUrl: e.target.value })}
-                  placeholder="https://..."
-                  className={smallInputCls}
-                />
+                ))}
+                <button
+                  onClick={() =>
+                    onUpdateSubstep(s.id, {
+                      resources: [...s.resources, { id: newId(), type: "article", url: "" }],
+                    })
+                  }
+                  className="flex w-full items-center justify-center gap-1.5 border border-dashed border-[#2a2418] py-1 text-[11px] font-medium text-[#9a927e] hover:border-[#f2c368] hover:text-[#f2c368]"
+                >
+                  <PlusIcon className="h-3 w-3" />
+                  Add link
+                </button>
               </div>
               <textarea
                 value={s.prompt}

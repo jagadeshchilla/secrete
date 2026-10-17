@@ -25,14 +25,6 @@ import {
   FlameIcon,
 } from "@/components/icons";
 
-const CUSTOM_RESOURCE_ICONS: Record<ResourceType, typeof PlayIcon> = {
-  youtube: PlayIcon,
-  article: LinkIcon,
-  docs: BookIcon,
-  course: GraduationCapIcon,
-  other: LinkIcon,
-};
-
 const CUSTOM_RESOURCE_LABELS: Record<ResourceType, string> = {
   youtube: "YouTube",
   article: "Article",
@@ -161,7 +153,6 @@ function CustomChecklistItem({
             <div className="space-y-2">
               {item.substeps.map((s, i) => {
                 const checked = !!subState[s.id];
-                const Icon = CUSTOM_RESOURCE_ICONS[s.resourceType];
                 return (
                   <div key={s.id} className="rounded-xl border border-[var(--border)] bg-[var(--surface-2)] px-3 py-2.5">
                     <div className="flex items-start gap-3">
@@ -185,24 +176,27 @@ function CustomChecklistItem({
                         )}
                       </div>
                     </div>
-                    <div className="mt-2 flex items-center gap-1.5 pl-9">
-                      {s.resourceUrl ? (
-                        <a
-                          href={s.resourceUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          title={CUSTOM_RESOURCE_LABELS[s.resourceType]}
-                          className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                        >
-                          <Favicon url={s.resourceUrl} className="h-3.5 w-3.5" />
-                        </a>
+                    <div className="mt-2 flex flex-wrap items-center gap-1.5 pl-9">
+                      {s.resources.length > 0 ? (
+                        s.resources.map((r) => (
+                          <a
+                            key={r.id}
+                            href={r.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            title={CUSTOM_RESOURCE_LABELS[r.type]}
+                            className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                          >
+                            <Favicon url={r.url} className="h-3.5 w-3.5" />
+                          </a>
+                        ))
                       ) : (
                         <HoverTip label="Not added yet">
                           <button
                             disabled
                             className="flex h-7 w-7 shrink-0 cursor-not-allowed items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] opacity-50"
                           >
-                            <Icon className="h-3.5 w-3.5" />
+                            <LinkIcon className="h-3.5 w-3.5" />
                           </button>
                         </HoverTip>
                       )}

@@ -134,11 +134,15 @@ create table if not exists admin_course_substeps (
   item_id text not null references admin_course_items(id) on delete cascade,
   label text not null,
   what_you_learn text not null default '',
+  -- Legacy single-resource columns, kept (unused going forward) so nothing
+  -- that still reads them breaks. New saves write the real list to `resources`.
   resource_type text not null default 'article' check (resource_type in ('youtube', 'article', 'docs', 'course', 'other')),
   resource_url text not null default '',
+  resources jsonb not null default '[]', -- [{id, type, url}] — a sub-topic can have more than one link
   prompt text not null default '',
   sort_order int not null default 0
 );
+alter table admin_course_substeps add column if not exists resources jsonb not null default '[]';
 
 create index if not exists admin_course_sections_course_id_idx on admin_course_sections (course_id);
 create index if not exists admin_course_items_section_id_idx on admin_course_items (section_id);
@@ -176,14 +180,15 @@ begin
   from jsonb_array_elements(p_sections) with ordinality as t(sec, sec_ord),
        lateral jsonb_array_elements(coalesce(sec->'customItems', '[]'::jsonb)) with ordinality as ti(item, item_ord);
 
-  insert into admin_course_substeps (id, item_id, label, what_you_learn, resource_type, resource_url, prompt, sort_order)
+  insert into admin_course_substeps (id, item_id, label, what_you_learn, resource_type, resource_url, resources, prompt, sort_order)
   select
     sub->>'id',
     item->>'id',
     sub->>'label',
     coalesce(sub->>'whatYouLearn', ''),
-    coalesce(sub->>'resourceType', 'article'),
-    coalesce(sub->>'resourceUrl', ''),
+    coalesce(sub->'resources'->0->>'type', 'article'),
+    coalesce(sub->'resources'->0->>'url', ''),
+    coalesce(sub->'resources', '[]'::jsonb),
     coalesce(sub->>'prompt', ''),
     (sub_ord - 1)::int
   from jsonb_array_elements(p_sections) with ordinality as t(sec, sec_ord),

@@ -41,12 +41,20 @@ export async function assembleCourses(courseIds?: string[]): Promise<Course[]> {
   const substepsByItem = new Map<string, CourseSubstep[]>();
   substepRows.forEach((row) => {
     const list = substepsByItem.get(row.item_id) || [];
+    // Rows saved before multi-resource support only have the legacy
+    // resource_type/resource_url columns — wrap that single link into the
+    // new array shape so nothing already in the database gets dropped.
+    const resources =
+      Array.isArray(row.resources) && row.resources.length > 0
+        ? row.resources
+        : row.resource_url
+          ? [{ id: `${row.id}-legacy`, type: row.resource_type, url: row.resource_url }]
+          : [];
     list.push({
       id: row.id,
       label: row.label,
       whatYouLearn: row.what_you_learn,
-      resourceType: row.resource_type,
-      resourceUrl: row.resource_url,
+      resources,
       prompt: row.prompt,
     });
     substepsByItem.set(row.item_id, list);

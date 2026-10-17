@@ -2,14 +2,19 @@ export type CourseTrack = "core" | "backend" | "data" | "ai" | "infra";
 
 export type ResourceType = "youtube" | "article" | "docs" | "course" | "other";
 
+export interface CourseResource {
+  id: string;
+  type: ResourceType;
+  url: string;
+}
+
 // Admin-authored sub-topic learning point — replaces the generic templated
 // substep for custom courses created through the Admin panel.
 export interface CourseSubstep {
   id: string;
   label: string;
   whatYouLearn: string;
-  resourceType: ResourceType;
-  resourceUrl: string;
+  resources: CourseResource[]; // zero or more links — a sub-topic can have a video and an article, etc.
   prompt: string;
 }
 
