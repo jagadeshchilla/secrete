@@ -33,6 +33,28 @@ const STEPS: ResumeStep[] = [
     prompt:
       "Below is the LaTeX source code of my resume template, followed by my details (or my old CV). Rewrite the LaTeX code with my information filled in, keeping the exact same structure, formatting, and commands as the template — don't change the layout or packages. Rephrase my experience and project bullet points to be concise, achievement-focused, and ATS-friendly, using strong action verbs and quantifying results wherever possible. If anything important seems missing (dates, metrics, tech stack, etc.), ask me before filling it in with placeholders. Output only the final, complete, compilable LaTeX code — no explanations before or after.",
   },
+  {
+    title: "Open as Template and paste the code",
+    description:
+      "Go back to the template page, but this time click Open as Template. This opens the Overleaf editor — a code panel on the left and a live PDF preview on the right. Select everything in the code panel and paste in the code ChatGPT gave you.",
+    image: { src: "/resume-creation/paste-code-editor.png", alt: "The Overleaf editor with the code panel and PDF preview" },
+  },
+  {
+    title: "Compile it",
+    description: "Click Recompile at the top. Your resume renders in the preview on the right.",
+    image: { src: "/resume-creation/recompile-button.png", alt: "The Recompile button in the Overleaf editor" },
+  },
+  {
+    title: "Fix issues and repeat until it's right",
+    description:
+      "Check the preview. If something's off — spacing, overflow, wording, anything — tell ChatGPT exactly what's wrong and ask for the corrected code. Paste the new code back into the editor and recompile. Keep repeating this loop until the resume looks exactly right, then download it as a PDF.",
+  },
+  {
+    title: "Score it on Resume Worded",
+    description:
+      "Upload the PDF to Resume Worded to see how it scores. If the score is low, ask ChatGPT to fix whatever it flagged as lacking, update the code, paste it back into Overleaf, recompile, download again, and re-check the score. Keep looping until you're happy with the score.",
+    link: { label: "Resume Worded", url: "https://resumeworded.com/" },
+  },
 ];
 
 export default function ResumeCreationPage() {
@@ -83,6 +105,13 @@ export default function ResumeCreationPage() {
             )}
           </section>
         ))}
+
+        <div className="flex items-start gap-2.5 rounded-xl border border-[var(--accent)]/30 bg-[var(--accent-soft)] p-4">
+          <span className="text-xl leading-none">😊</span>
+          <p className="text-sm font-medium text-[var(--text)]">
+            Your resume is done! I hope it&apos;s helpful to you.
+          </p>
+        </div>
       </article>
     </div>
   );
