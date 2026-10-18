@@ -132,12 +132,14 @@ function DataSourceField({
 }) {
   const [label, setLabel] = useState("");
   const [url, setUrl] = useState("");
+  const [extract, setExtract] = useState("");
 
   function submit() {
     if (!label.trim() || !url.trim()) return;
-    onAdd({ id: newId(), label: label.trim(), url: url.trim() });
+    onAdd({ id: newId(), label: label.trim(), url: url.trim(), extract: extract.trim() || undefined });
     setLabel("");
     setUrl("");
+    setExtract("");
   }
 
   return (
@@ -146,16 +148,19 @@ function DataSourceField({
       {dataSources.length > 0 ? (
         <div className="mt-1.5 space-y-1">
           {dataSources.map((d) => (
-            <div key={d.id} className="flex items-center justify-between gap-2 border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5">
-              <a
-                href={d.url}
-                target="_blank"
-                rel="noreferrer"
-                className="flex min-w-0 items-center gap-1.5 text-xs font-medium text-[var(--accent)] hover:underline"
-              >
-                <ExternalLinkIcon className="h-3 w-3 shrink-0" />
-                <span className="truncate">{d.label}</span>
-              </a>
+            <div key={d.id} className="flex items-start justify-between gap-2 border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5">
+              <div className="min-w-0 flex-1">
+                <a
+                  href={d.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex min-w-0 items-center gap-1.5 text-xs font-medium text-[var(--accent)] hover:underline"
+                >
+                  <ExternalLinkIcon className="h-3 w-3 shrink-0" />
+                  <span className="truncate">{d.label}</span>
+                </a>
+                {d.extract && <p className="mt-0.5 truncate text-[11px] text-[var(--muted)]">Extract: {d.extract}</p>}
+              </div>
               {editing && (
                 <button type="button" onClick={() => onRemove(d.id)} className="shrink-0 text-[var(--muted)] hover:text-[var(--bad)]">
                   <CloseIcon className="h-3.5 w-3.5" />
@@ -168,9 +173,10 @@ function DataSourceField({
         <p className="mt-1 text-[11px] text-[var(--muted)]">Nothing added yet.</p>
       )}
       {editing && (
-        <div className="mt-1.5 grid grid-cols-[1fr_1fr_auto] gap-1.5">
+        <div className="mt-1.5 grid grid-cols-[1fr_1fr_1fr_auto] gap-1.5">
           <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="What data" autoFocus className={inputCls} />
           <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Link to it" className={inputCls} />
+          <input value={extract} onChange={(e) => setExtract(e.target.value)} placeholder="What we can extract from there" className={inputCls} />
           <button
             type="button"
             onClick={submit}

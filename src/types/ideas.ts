@@ -21,6 +21,7 @@ export interface IdeaDataSource {
   id: string;
   label: string;
   url: string;
+  extract?: string; // what can be extracted from this source
 }
 
 export interface ProjectIdea {
