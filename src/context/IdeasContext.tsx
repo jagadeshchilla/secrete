@@ -9,6 +9,8 @@ const STORAGE_KEY = "careerProjectIdeas";
 type IdeaPatch = Partial<
   Pick<
     ProjectIdea,
+    | "title"
+    | "description"
     | "researchTopics"
     | "dataSources"
     | "methods"

@@ -33,6 +33,81 @@ function newId() {
 const inputCls =
   "w-full border border-[var(--border)] bg-[var(--surface-2)] px-2.5 py-1.5 text-xs outline-none focus:border-[var(--accent)]";
 
+// ---- Idea title + description, editable in place ----
+function IdeaMetaField({
+  title,
+  description,
+  onSave,
+}: {
+  title: string;
+  description: string;
+  onSave: (next: { title: string; description: string }) => void;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [draftTitle, setDraftTitle] = useState(title);
+  const [draftDescription, setDraftDescription] = useState(description);
+
+  function startEdit() {
+    setDraftTitle(title);
+    setDraftDescription(description);
+    setEditing(true);
+  }
+
+  function save() {
+    if (!draftTitle.trim() || !draftDescription.trim()) return;
+    onSave({ title: draftTitle.trim(), description: draftDescription.trim() });
+    setEditing(false);
+  }
+
+  if (editing) {
+    return (
+      <div className="flex-1">
+        <input
+          value={draftTitle}
+          onChange={(e) => setDraftTitle(e.target.value)}
+          autoFocus
+          className="w-full border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5 text-sm font-medium outline-none focus:border-[var(--accent)]"
+        />
+        <textarea
+          value={draftDescription}
+          onChange={(e) => setDraftDescription(e.target.value)}
+          rows={3}
+          className="mt-2 w-full border border-[var(--border)] bg-[var(--surface)] p-2.5 text-sm leading-relaxed outline-none focus:border-[var(--accent)]"
+        />
+        <div className="mt-2 flex gap-2">
+          <button
+            type="button"
+            onClick={save}
+            disabled={!draftTitle.trim() || !draftDescription.trim()}
+            className="border border-[var(--accent)] bg-[var(--accent)] px-3 py-1 text-xs font-medium text-white disabled:opacity-50"
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            onClick={() => setEditing(false)}
+            className="border border-[var(--border)] px-3 py-1 text-xs font-medium text-[var(--muted)] hover:text-[var(--text)]"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-w-0 flex-1">
+      <div className="flex items-start gap-2">
+        <h3 className="min-w-0 text-sm font-semibold">{title}</h3>
+        <button type="button" onClick={startEdit} className="shrink-0 text-[var(--muted)] hover:text-[var(--accent)]" title="Edit title & description">
+          <PencilIcon className="h-3.5 w-3.5" />
+        </button>
+      </div>
+      <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">{description}</p>
+    </div>
+  );
+}
+
 // ---- Shared label row (view-only — editing is controlled by one button for the whole workflow) ----
 function SectionHeader({ icon: Icon, label }: { icon: typeof LightbulbIcon; label: string }) {
   return (
@@ -809,7 +884,11 @@ export default function IdeasPage() {
                   {isOpen && (
                     <div className="animate-fade-in-up bg-[var(--surface-2)] p-4">
                       <div className="flex items-start justify-between gap-3">
-                        <p className="text-sm leading-relaxed text-[var(--muted)]">{idea.description}</p>
+                        <IdeaMetaField
+                          title={idea.title}
+                          description={idea.description}
+                          onSave={(next) => updateIdea(idea.id, next)}
+                        />
                         <button
                           onClick={() => removeIdea(idea.id)}
                           className="shrink-0 p-1 text-[var(--muted)] hover:text-[var(--bad)]"

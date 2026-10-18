@@ -90,6 +90,8 @@ export async function POST(req: Request) {
 // client can send e.g. just { tasks } to toggle one checkbox without
 // resending the whole idea.
 const PATCHABLE_FIELDS: Record<string, string> = {
+  title: "title",
+  description: "description",
   researchTopics: "research_topics",
   dataSources: "data_sources",
   methods: "methods",
@@ -110,6 +112,12 @@ export async function PUT(req: Request) {
   if (!id || !patch) return NextResponse.json({ error: "id and patch are required" }, { status: 400 });
   if (patch.feasible === false && !(patch.infeasibleReason as string | undefined)?.trim()) {
     return NextResponse.json({ error: "infeasibleReason is required when feasible is false" }, { status: 400 });
+  }
+  if ("title" in patch && !(patch.title as string)?.trim()) {
+    return NextResponse.json({ error: "title cannot be empty" }, { status: 400 });
+  }
+  if ("description" in patch && !(patch.description as string)?.trim()) {
+    return NextResponse.json({ error: "description cannot be empty" }, { status: 400 });
   }
 
   const update: Record<string, unknown> = {};
