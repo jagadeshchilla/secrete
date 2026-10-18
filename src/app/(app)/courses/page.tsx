@@ -389,6 +389,24 @@ function CoursesPageInner() {
             <ChevronRightIcon className="h-4 w-4 shrink-0 text-[var(--muted)]" />
           </Link>
 
+          <Link
+            href="/courses/special"
+            className="card-hover animate-fade-in-up mt-3 flex items-center justify-between gap-3 rounded-xl border border-[#f2c368]/40 bg-[#f2c368]/10 p-4 hover:border-[#f2c368]"
+          >
+            <div className="flex min-w-0 items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#f2c368]/20 text-lg">
+                😊
+              </div>
+              <div className="min-w-0">
+                <h2 className="text-sm font-semibold text-[#c9972e]">Special courses</h2>
+                <p className="mt-0.5 truncate text-xs text-[var(--muted)]">
+                  Paid courses with shared access — use them freely, no need to buy your own.
+                </p>
+              </div>
+            </div>
+            <ChevronRightIcon className="h-4 w-4 shrink-0 text-[#c9972e]" />
+          </Link>
+
           {startedCourses.length > 0 && (
             <div className="animate-fade-in-up mt-6">
               <h2 className="text-sm font-semibold text-[var(--muted)]">Continue learning</h2>
