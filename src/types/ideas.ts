@@ -17,11 +17,23 @@ export interface IdeaTask {
   done: boolean;
 }
 
+export type IdeaDataCategory = "dataset" | "api" | "scraping" | "survey" | "internal" | "other";
+
+export const IDEA_DATA_CATEGORIES: { value: IdeaDataCategory; label: string }[] = [
+  { value: "dataset", label: "Dataset" },
+  { value: "api", label: "API" },
+  { value: "scraping", label: "Scraping" },
+  { value: "survey", label: "Survey" },
+  { value: "internal", label: "Internal" },
+  { value: "other", label: "Other" },
+];
+
 export interface IdeaDataSource {
   id: string;
   label: string;
   url: string;
   extract?: string; // what can be extracted from this source
+  category?: IdeaDataCategory;
 }
 
 export interface ProjectIdea {

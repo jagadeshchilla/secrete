@@ -45,7 +45,7 @@ create table if not exists project_ideas (
   feasible boolean,
   infeasible_reason text,
   research_topics text[] not null default '{}',
-  data_sources jsonb not null default '[]', -- [{id, label, url, extract?}]
+  data_sources jsonb not null default '[]', -- [{id, label, url, extract?, category?}]
   methods text[] not null default '{}',
   tech_stack text[] not null default '{}',
   tasks jsonb not null default '[]', -- [{id, title, type, assignedTo, done}]

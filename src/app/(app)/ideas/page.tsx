@@ -7,7 +7,14 @@ import { useIdeas } from "@/context/IdeasContext";
 import { useNewBadge } from "@/hooks/useNewBadge";
 import NewBadge from "@/components/NewBadge";
 import { PROFILES, PROFILE_LABELS, type Profile } from "@/config/access";
-import { IDEA_TASK_TYPES, type IdeaTask, type IdeaDataSource, type ProjectIdea } from "@/types/ideas";
+import {
+  IDEA_TASK_TYPES,
+  IDEA_DATA_CATEGORIES,
+  type IdeaTask,
+  type IdeaDataSource,
+  type IdeaDataCategory,
+  type ProjectIdea,
+} from "@/types/ideas";
 import {
   LightbulbIcon,
   SearchIcon,
@@ -133,13 +140,21 @@ function DataSourceField({
   const [label, setLabel] = useState("");
   const [url, setUrl] = useState("");
   const [extract, setExtract] = useState("");
+  const [category, setCategory] = useState<IdeaDataCategory | "">("");
 
   function submit() {
     if (!label.trim() || !url.trim()) return;
-    onAdd({ id: newId(), label: label.trim(), url: url.trim(), extract: extract.trim() || undefined });
+    onAdd({
+      id: newId(),
+      label: label.trim(),
+      url: url.trim(),
+      extract: extract.trim() || undefined,
+      category: category || undefined,
+    });
     setLabel("");
     setUrl("");
     setExtract("");
+    setCategory("");
   }
 
   return (
@@ -150,15 +165,22 @@ function DataSourceField({
           {dataSources.map((d) => (
             <div key={d.id} className="flex items-start justify-between gap-2 border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5">
               <div className="min-w-0 flex-1">
-                <a
-                  href={d.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex min-w-0 items-center gap-1.5 text-xs font-medium text-[var(--accent)] hover:underline"
-                >
-                  <ExternalLinkIcon className="h-3 w-3 shrink-0" />
-                  <span className="truncate">{d.label}</span>
-                </a>
+                <div className="flex min-w-0 items-center gap-1.5">
+                  <a
+                    href={d.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex min-w-0 items-center gap-1.5 text-xs font-medium text-[var(--accent)] hover:underline"
+                  >
+                    <ExternalLinkIcon className="h-3 w-3 shrink-0" />
+                    <span className="truncate">{d.label}</span>
+                  </a>
+                  {d.category && (
+                    <span className="shrink-0 border border-[var(--border)] px-1.5 py-0.5 text-[10px] text-[var(--muted)]">
+                      {IDEA_DATA_CATEGORIES.find((c) => c.value === d.category)?.label}
+                    </span>
+                  )}
+                </div>
                 {d.extract && <p className="mt-0.5 truncate text-[11px] text-[var(--muted)]">Extract: {d.extract}</p>}
               </div>
               {editing && (
@@ -173,17 +195,29 @@ function DataSourceField({
         <p className="mt-1 text-[11px] text-[var(--muted)]">Nothing added yet.</p>
       )}
       {editing && (
-        <div className="mt-1.5 grid grid-cols-[1fr_1fr_1fr_auto] gap-1.5">
-          <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="What data" autoFocus className={inputCls} />
-          <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Link to it" className={inputCls} />
-          <input value={extract} onChange={(e) => setExtract(e.target.value)} placeholder="What we can extract from there" className={inputCls} />
-          <button
-            type="button"
-            onClick={submit}
-            className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
-          >
-            <PlusIcon className="h-3.5 w-3.5" />
-          </button>
+        <div className="mt-1.5 space-y-1.5">
+          <div className="grid grid-cols-[1fr_1fr_auto] gap-1.5">
+            <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="What data" autoFocus className={inputCls} />
+            <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Link to it" className={inputCls} />
+            <select value={category} onChange={(e) => setCategory(e.target.value as IdeaDataCategory | "")} className={inputCls}>
+              <option value="">Category</option>
+              {IDEA_DATA_CATEGORIES.map((c) => (
+                <option key={c.value} value={c.value}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="grid grid-cols-[1fr_auto] gap-1.5">
+            <input value={extract} onChange={(e) => setExtract(e.target.value)} placeholder="What we can extract from there" className={inputCls} />
+            <button
+              type="button"
+              onClick={submit}
+              className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              <PlusIcon className="h-3.5 w-3.5" />
+            </button>
+          </div>
         </div>
       )}
     </div>
