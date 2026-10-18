@@ -32,7 +32,7 @@ import {
 
 type NavSection = "courses" | "ideas" | "research" | "freelancing" | "certifications";
 
-const NAV_ITEMS: { href: string; label: string; icon: typeof HomeIcon; section?: NavSection }[] = [
+const NAV_ITEMS: { href: string; label: string; icon: typeof HomeIcon; section?: NavSection; badge?: string }[] = [
   { href: "/dashboard", label: "Dashboard", icon: HomeIcon },
   { href: "/roles", label: "Explore Roles", icon: GridIcon },
   { href: "/roadmap", label: "Roadmap", icon: RouteIcon },
@@ -41,7 +41,7 @@ const NAV_ITEMS: { href: string; label: string; icon: typeof HomeIcon; section?:
   { href: "/research", label: "Research Papers", icon: FlaskIcon, section: "research" },
   { href: "/freelancing", label: "Freelancing", icon: BriefcaseIcon, section: "freelancing" },
   { href: "/certifications", label: "Certifications", icon: AwardIcon, section: "certifications" },
-  { href: "/resume-creation", label: "Resume Creation", icon: FileTextIcon },
+  { href: "/resume-creation", label: "Resume Creation", icon: FileTextIcon, badge: "Helpful" },
   { href: "/progress", label: "Progress", icon: CalendarIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/settings", label: "Settings", icon: SettingsIcon },
@@ -96,7 +96,7 @@ export default function Sidebar() {
       <ProfileSwitcher />
 
       <nav className="flex-1 px-3 py-4 space-y-1">
-        {NAV_ITEMS.map(({ href, label, icon: Icon, section }) => {
+        {NAV_ITEMS.map(({ href, label, icon: Icon, section, badge }) => {
           const active = pathname.startsWith(href);
           const count = section ? newCounts[section] : 0;
           return (
@@ -114,6 +114,11 @@ export default function Sidebar() {
               {count > 0 && (
                 <span className="flex h-4 min-w-4 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] px-1 text-[9px] font-bold text-white">
                   {count}
+                </span>
+              )}
+              {badge && (
+                <span className="shrink-0 rounded-full border border-[var(--good)] bg-[var(--good-soft)] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[var(--good)]">
+                  {badge}
                 </span>
               )}
             </Link>
