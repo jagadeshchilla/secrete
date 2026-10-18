@@ -31,7 +31,7 @@ const STEPS: ResumeStep[] = [
     description:
       "Paste the LaTeX code into ChatGPT along with your own details — qualifications, experience, skills — or just paste your old CV and let it pull the details from there. Use a prompt like this:",
     prompt:
-      "This is my resume's LaTeX template code. Using my details below, generate an updated, optimized version of this LaTeX code with my information filled in.",
+      "Below is the LaTeX source code of my resume template, followed by my details (or my old CV). Rewrite the LaTeX code with my information filled in, keeping the exact same structure, formatting, and commands as the template — don't change the layout or packages. Rephrase my experience and project bullet points to be concise, achievement-focused, and ATS-friendly, using strong action verbs and quantifying results wherever possible. If anything important seems missing (dates, metrics, tech stack, etc.), ask me before filling it in with placeholders. Output only the final, complete, compilable LaTeX code — no explanations before or after.",
   },
 ];
 
