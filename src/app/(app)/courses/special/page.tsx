@@ -23,7 +23,8 @@ export default function SpecialCoursesPage() {
         <h1 className="text-2xl font-semibold tracking-tight">Special courses</h1>
       </div>
       <p className="mt-1 text-sm text-[var(--muted)]">
-        Paid courses where one of us already has access — go ahead and use them, no need to buy your own.
+        😊 These are paid courses I already have — I&apos;m giving them to you, and I&apos;d be so happy if they turn
+        out to be useful.
       </p>
 
       {courses.length === 0 ? (

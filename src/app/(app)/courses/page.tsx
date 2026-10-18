@@ -400,7 +400,7 @@ function CoursesPageInner() {
               <div className="min-w-0">
                 <h2 className="text-sm font-semibold text-[#c9972e]">Special courses</h2>
                 <p className="mt-0.5 truncate text-xs text-[var(--muted)]">
-                  Paid courses with shared access — use them freely, no need to buy your own.
+                  Paid courses I already have — sharing them with you, happy if they&apos;re useful!
                 </p>
               </div>
             </div>
