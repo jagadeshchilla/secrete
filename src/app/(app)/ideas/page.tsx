@@ -7,14 +7,7 @@ import { useIdeas } from "@/context/IdeasContext";
 import { useNewBadge } from "@/hooks/useNewBadge";
 import NewBadge from "@/components/NewBadge";
 import { PROFILES, PROFILE_LABELS, type Profile } from "@/config/access";
-import {
-  IDEA_TASK_TYPES,
-  IDEA_DATA_CATEGORIES,
-  type IdeaTask,
-  type IdeaDataSource,
-  type IdeaDataCategory,
-  type ProjectIdea,
-} from "@/types/ideas";
+import { IDEA_TASK_TYPES, type IdeaTask, type IdeaDataSource, type ProjectIdea } from "@/types/ideas";
 import {
   LightbulbIcon,
   SearchIcon,
@@ -30,6 +23,7 @@ import {
   CalendarIcon,
   ShieldIcon,
   ExternalLinkIcon,
+  PencilIcon,
 } from "@/components/icons";
 
 function newId() {
@@ -130,31 +124,49 @@ function DataSourceField({
   dataSources,
   editing,
   onAdd,
+  onUpdate,
   onRemove,
 }: {
   dataSources: IdeaDataSource[];
   editing: boolean;
   onAdd: (source: IdeaDataSource) => void;
+  onUpdate: (source: IdeaDataSource) => void;
   onRemove: (id: string) => void;
 }) {
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [label, setLabel] = useState("");
   const [url, setUrl] = useState("");
   const [extract, setExtract] = useState("");
-  const [category, setCategory] = useState<IdeaDataCategory | "">("");
+  const [category, setCategory] = useState("");
 
-  function submit() {
-    if (!label.trim() || !url.trim()) return;
-    onAdd({
-      id: newId(),
-      label: label.trim(),
-      url: url.trim(),
-      extract: extract.trim() || undefined,
-      category: category || undefined,
-    });
+  function startEdit(d: IdeaDataSource) {
+    setEditingId(d.id);
+    setLabel(d.label);
+    setUrl(d.url);
+    setExtract(d.extract || "");
+    setCategory(d.category || "");
+  }
+
+  function resetForm() {
+    setEditingId(null);
     setLabel("");
     setUrl("");
     setExtract("");
     setCategory("");
+  }
+
+  function submit() {
+    if (!label.trim() || !url.trim()) return;
+    const source: IdeaDataSource = {
+      id: editingId || newId(),
+      label: label.trim(),
+      url: url.trim(),
+      extract: extract.trim() || undefined,
+      category: category.trim() || undefined,
+    };
+    if (editingId) onUpdate(source);
+    else onAdd(source);
+    resetForm();
   }
 
   return (
@@ -177,16 +189,21 @@ function DataSourceField({
                   </a>
                   {d.category && (
                     <span className="shrink-0 border border-[var(--border)] px-1.5 py-0.5 text-[10px] text-[var(--muted)]">
-                      {IDEA_DATA_CATEGORIES.find((c) => c.value === d.category)?.label}
+                      {d.category}
                     </span>
                   )}
                 </div>
                 {d.extract && <p className="mt-0.5 truncate text-[11px] text-[var(--muted)]">Extract: {d.extract}</p>}
               </div>
               {editing && (
-                <button type="button" onClick={() => onRemove(d.id)} className="shrink-0 text-[var(--muted)] hover:text-[var(--bad)]">
-                  <CloseIcon className="h-3.5 w-3.5" />
-                </button>
+                <div className="flex shrink-0 items-center gap-2">
+                  <button type="button" onClick={() => startEdit(d)} className="text-[var(--muted)] hover:text-[var(--accent)]">
+                    <PencilIcon className="h-3.5 w-3.5" />
+                  </button>
+                  <button type="button" onClick={() => onRemove(d.id)} className="text-[var(--muted)] hover:text-[var(--bad)]">
+                    <CloseIcon className="h-3.5 w-3.5" />
+                  </button>
+                </div>
               )}
             </div>
           ))}
@@ -196,17 +213,18 @@ function DataSourceField({
       )}
       {editing && (
         <div className="mt-1.5 space-y-1.5">
+          {editingId && (
+            <div className="flex items-center justify-between">
+              <p className="text-[10px] font-medium text-[var(--accent)]">Editing entry</p>
+              <button type="button" onClick={resetForm} className="text-[10px] text-[var(--muted)] hover:text-[var(--text)]">
+                Cancel
+              </button>
+            </div>
+          )}
           <div className="grid grid-cols-[1fr_1fr_auto] gap-1.5">
             <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="What data" autoFocus className={inputCls} />
             <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Link to it" className={inputCls} />
-            <select value={category} onChange={(e) => setCategory(e.target.value as IdeaDataCategory | "")} className={inputCls}>
-              <option value="">Category</option>
-              {IDEA_DATA_CATEGORIES.map((c) => (
-                <option key={c.value} value={c.value}>
-                  {c.label}
-                </option>
-              ))}
-            </select>
+            <input value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Category" className={inputCls} />
           </div>
           <div className="grid grid-cols-[1fr_auto] gap-1.5">
             <input value={extract} onChange={(e) => setExtract(e.target.value)} placeholder="What we can extract from there" className={inputCls} />
@@ -215,7 +233,7 @@ function DataSourceField({
               onClick={submit}
               className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
-              <PlusIcon className="h-3.5 w-3.5" />
+              {editingId ? <CheckIcon className="h-3.5 w-3.5" /> : <PlusIcon className="h-3.5 w-3.5" />}
             </button>
           </div>
         </div>
@@ -431,6 +449,7 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
         dataSources={idea.dataSources}
         editing={editing}
         onAdd={(d) => updateIdea(idea.id, { dataSources: [...idea.dataSources, d] })}
+        onUpdate={(d) => updateIdea(idea.id, { dataSources: idea.dataSources.map((s) => (s.id === d.id ? d : s)) })}
         onRemove={(id) => updateIdea(idea.id, { dataSources: idea.dataSources.filter((d) => d.id !== id) })}
       />
 
