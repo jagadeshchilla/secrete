@@ -14,6 +14,7 @@ import {
   FlaskIcon,
   BriefcaseIcon,
   AwardIcon,
+  FileTextIcon,
 } from "@/components/icons";
 
 const NAV_ITEMS = [
@@ -25,6 +26,7 @@ const NAV_ITEMS = [
   { href: "/research", label: "Research", icon: FlaskIcon },
   { href: "/freelancing", label: "Freelance", icon: BriefcaseIcon },
   { href: "/certifications", label: "Certs", icon: AwardIcon },
+  { href: "/resume-creation", label: "Resume", icon: FileTextIcon },
   { href: "/progress", label: "Progress", icon: CalendarIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/settings", label: "Settings", icon: SettingsIcon },
