@@ -6,6 +6,15 @@
     "category": "Full Stack / Data Science Program",
     "description": "A 14-course program covering programming foundations, data structures & algorithms, Python, SQL, statistics, machine learning, deep learning, NLP, and big data.",
     "whatYouLearn": "Course 1: Foundation of Programming in Java · Course 2: Design and Analysis of Algorithms · Course 3: Python for Machine Learning · Course 4: Python Project · Course 5: Data Structures · Course 6: SQL & Visualization · Course 7: Statistics & EDA · Course 8: Machine Learning 1 · Course 9: Competitive Programming · Course 10: Natural Language Processing · Course 11 (Elective): Coding Question_Placement · Course 12: Deep Learning · Course 13: Machine Learning 2 · Course 14: Big Data Analytics",
-    "accessNote": "😊 Shared upGrad account — login with jagadesh.12110846@lpu.in, message me for the OTP. After entering the OTP you'll land on Programs — click \"Programming to Java\" and all 14 courses will show up there."
+    "accessNote": "Shared account. Login: jagadesh.12110846@lpu.in — message Jagadesh for the OTP. After verifying, go to Programs and open \"Programming to Java\" to see all 14 courses."
+  },
+  {
+    "id": "udemy-courses",
+    "title": "Udemy — My Courses (23 courses)",
+    "url": "https://www.udemy.com/home/my-courses/",
+    "category": "AI / Data / Web Dev Bootcamps",
+    "description": "23 Udemy courses spanning Generative AI/LLM engineering, MLOps, data analytics, system design, cloud certifications, and full-stack web development.",
+    "whatYouLearn": "Learn Big Data Basics · Dynamic Programming Algorithms Master Course · GCP PCA - Google Professional Cloud Architect · Learn Machine Learning & AI [Beginner to Advanced] · AI Engineer Core Track: LLM Engineering, RAG, QLoRA, Agents · Ultimate RAG Bootcamp Using Langchain, LangGraph & Langsmith · Complete Generative AI Course With Langchain and Huggingface · Complete Data Analyst Bootcamp From Basics To Advanced · Low Level System Design, Design Patterns & SOLID Principles · LLMOps And AIOps Bootcamp With 8 End To End Projects · Beginner to Advanced MLOps on GCP - CI/CD, Kubernetes, Jenkins · The Complete Full-Stack Web Development Bootcamp · Complete Agentic AI Bootcamp With LangGraph and Langchain · Complete MLOps Bootcamp With 10+ End To End ML Projects · Building Gen AI App 12+ Hands-on Projects with Gemini Pro · AWS Cloud Practitioner Certification - Practice Exams · +6 more courses (23 total)",
+    "accessNote": "Shared account. Login: chillajagadesh68@gmail.com — message Jagadesh for the OTP."
   }
 ]

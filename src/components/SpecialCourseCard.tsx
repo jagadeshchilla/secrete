@@ -1,4 +1,4 @@
-import { ExternalLinkIcon } from "@/components/icons";
+import { ExternalLinkIcon, LockIcon } from "@/components/icons";
 import Favicon from "@/components/Favicon";
 
 export interface SpecialCourse {
@@ -8,19 +8,22 @@ export interface SpecialCourse {
   category: string;
   description: string;
   whatYouLearn: string;
-  accessNote: string; // e.g. "Shared Udemy account — message me for the OTP/password"
+  accessNote: string; // e.g. "Shared Udemy account, login: x@y.com — message me for the OTP/password"
 }
 
 export default function SpecialCourseCard({ course }: { course: SpecialCourse }) {
+  const topics = course.whatYouLearn
+    .split("·")
+    .map((t) => t.trim())
+    .filter(Boolean);
+
   return (
     <a
       href={course.url}
       target="_blank"
       rel="noreferrer"
-      className="card-hover group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-sm hover:border-[var(--accent)]"
+      className="card-hover group flex flex-col overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-sm hover:border-[var(--accent)]"
     >
-      <div className="h-1 w-full bg-gradient-to-r from-[#f2c368] to-transparent" />
-
       <div className="flex flex-1 flex-col p-3.5">
         <div className="flex items-start justify-between gap-2">
           <div className="flex min-w-0 items-center gap-2">
@@ -32,8 +35,8 @@ export default function SpecialCourseCard({ course }: { course: SpecialCourse })
               <p className="truncate text-[10px] text-[var(--muted)]">{course.category}</p>
             </div>
           </div>
-          <span className="shrink-0 rounded-full border border-[#f2c368]/40 bg-[#f2c368]/10 px-1.5 py-0.5 text-[9px] font-semibold text-[#c9972e]">
-            😊 Paid — shared
+          <span className="shrink-0 rounded-full border border-[var(--accent)] bg-[var(--accent-soft)] px-1.5 py-0.5 text-[9px] font-semibold text-[var(--accent)]">
+            Paid
           </span>
         </div>
 
@@ -41,21 +44,30 @@ export default function SpecialCourseCard({ course }: { course: SpecialCourse })
           <p className="mt-2 line-clamp-2 text-[11px] leading-relaxed text-[var(--muted)]">{course.description}</p>
         )}
 
-        {course.whatYouLearn && (
-          <div className="mt-2 rounded-lg bg-[var(--surface-2)] p-2.5">
-            <p className="text-[9px] font-semibold uppercase tracking-wider text-[var(--muted)]">What you&apos;ll learn</p>
-            <p className="mt-0.5 text-[11px] leading-relaxed">{course.whatYouLearn}</p>
+        {topics.length > 0 && (
+          <div className="mt-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-2.5">
+            <p className="text-[9px] font-semibold uppercase tracking-wider text-[var(--muted)]">
+              What&apos;s included ({topics.length})
+            </p>
+            <ul className="mt-1.5 max-h-28 space-y-1 overflow-y-auto pr-1">
+              {topics.map((t, i) => (
+                <li key={i} className="flex gap-1.5 text-[11px] leading-snug text-[var(--text)]">
+                  <span className="mt-[5px] h-1 w-1 shrink-0 rounded-full bg-[var(--muted)]" />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
 
         {course.accessNote && (
-          <div className="mt-2 flex items-start gap-1.5 rounded-lg border border-[#f2c368]/30 bg-[#f2c368]/10 p-2.5">
-            <span className="text-sm leading-none">😊</span>
-            <p className="text-[11px] leading-relaxed text-[#c9972e]">{course.accessNote}</p>
+          <div className="mt-2.5 flex items-start gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-2.5">
+            <LockIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--muted)]" />
+            <p className="text-[11px] leading-relaxed text-[var(--muted)]">{course.accessNote}</p>
           </div>
         )}
 
-        <div className="mt-2 flex items-center gap-1 text-[11px] font-semibold text-[var(--accent)]">
+        <div className="mt-3 flex items-center gap-1 text-[11px] font-semibold text-[var(--accent)]">
           Visit site
           <ExternalLinkIcon className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
         </div>
