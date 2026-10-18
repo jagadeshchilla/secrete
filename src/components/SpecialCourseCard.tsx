@@ -44,14 +44,14 @@ export default function SpecialCourseCard({ course }: { course: SpecialCourse })
         {course.whatYouLearn && (
           <div className="mt-2 rounded-lg bg-[var(--surface-2)] p-2.5">
             <p className="text-[9px] font-semibold uppercase tracking-wider text-[var(--muted)]">What you&apos;ll learn</p>
-            <p className="mt-0.5 line-clamp-2 text-[11px] leading-relaxed">{course.whatYouLearn}</p>
+            <p className="mt-0.5 text-[11px] leading-relaxed">{course.whatYouLearn}</p>
           </div>
         )}
 
         {course.accessNote && (
           <div className="mt-2 flex items-start gap-1.5 rounded-lg border border-[#f2c368]/30 bg-[#f2c368]/10 p-2.5">
             <span className="text-sm leading-none">😊</span>
-            <p className="line-clamp-2 text-[11px] leading-relaxed text-[#c9972e]">{course.accessNote}</p>
+            <p className="text-[11px] leading-relaxed text-[#c9972e]">{course.accessNote}</p>
           </div>
         )}
 

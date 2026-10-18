@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "upgrad-pg-program",
+    "title": "upGrad — PG Program (14 courses)",
+    "url": "https://learn.upgrad.com/login",
+    "category": "Full Stack / Data Science Program",
+    "description": "A 14-course program covering programming foundations, data structures & algorithms, Python, SQL, statistics, machine learning, deep learning, NLP, and big data.",
+    "whatYouLearn": "Course 1: Foundation of Programming in Java · Course 2: Design and Analysis of Algorithms · Course 3: Python for Machine Learning · Course 4: Python Project · Course 5: Data Structures · Course 6: SQL & Visualization · Course 7: Statistics & EDA · Course 8: Machine Learning 1 · Course 9: Competitive Programming · Course 10: Natural Language Processing · Course 11 (Elective): Coding Question_Placement · Course 12: Deep Learning · Course 13: Machine Learning 2 · Course 14: Big Data Analytics",
+    "accessNote": "😊 Shared upGrad account — login with jagadesh.12110846@lpu.in, message me for the OTP. After entering the OTP you'll land on Programs — click \"Programming to Java\" and all 14 courses will show up there."
+  }
+]
