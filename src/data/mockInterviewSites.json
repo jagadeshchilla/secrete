@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "id": "huru",
+    "title": "Huru",
+    "url": "https://huru.ai/",
+    "category": "Free — voice/video mock interviews",
+    "description": "All job-seeker features are free: unlimited mock interviews, voice/video practice, and answer scoring with feedback. 20,000+ questions across 300+ professions. iOS, Android, and a Chrome extension that turns job listings into practice questions."
+  },
+  {
+    "id": "yoodli",
+    "title": "Yoodli",
+    "url": "https://yoodli.ai/",
+    "category": "Free with limits — AI roleplays",
+    "description": "Up to 5 total roleplays on the free Starter plan, including AI interview roleplays with feedback. Build a scenario from a job description, then practice with an AI interviewer or focus on specific questions."
+  },
+  {
+    "id": "aced-exponent",
+    "title": "Aced (formerly Exponent)",
+    "url": "https://www.tryexponent.com/",
+    "category": "Partially free — peer + paid AI feedback",
+    "description": "Free peer-to-peer mock interviews; AI interview feedback and transcripts require a paid membership. Exponent is in the process of rebranding to \"Aced\" as an all-in-one interview prep platform."
+  },
+  {
+    "id": "interviewing-io",
+    "title": "interviewing.io",
+    "url": "https://interviewing.io/",
+    "category": "Limited free access — technical interviews",
+    "description": "Anonymous, live technical mock interviews with real engineers (including from FAANG companies) in a shared coding environment with voice, text chat, and a whiteboard. Check current pricing — reports of both free practice and paid sessions."
+  }
+]
