@@ -62,7 +62,15 @@ export default function FrontendUIBlogPage() {
       </div>
 
       <div className="mx-auto max-w-3xl px-5 py-8 md:px-8">
-        <div className="animate-fade-in-up flex items-center gap-2">
+        <div className="animate-fade-in-up border-l-4 border-[var(--accent)] bg-[var(--accent-soft)] p-4">
+          <p className="text-sm font-medium italic leading-relaxed text-[var(--text)]">
+            &ldquo;You know my secret to UI design? This is it — I search components and frameworks to see how
+            others have built things, check whether it fits here, and figure out how to use it to make our website
+            look premium, better, and more user-friendly.&rdquo;
+          </p>
+        </div>
+
+        <div className="animate-fade-in-up mt-5 flex items-center gap-2">
           <LayersIcon className="h-5 w-5 text-[var(--accent)]" />
           <h1 className="text-2xl font-semibold tracking-tight">
             How to Build a Premium Frontend UI: A Practical Guide to AI Tools, Templates, Components, and Creative Design
