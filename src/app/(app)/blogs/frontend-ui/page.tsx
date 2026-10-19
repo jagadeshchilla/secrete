@@ -1,32 +1,80 @@
 import Link from "next/link";
-import { ArrowLeftIcon, LayersIcon, ExternalLinkIcon } from "@/components/icons";
+import { ArrowLeftIcon, LayersIcon, ExternalLinkIcon, CheckIcon } from "@/components/icons";
+import Favicon from "@/components/Favicon";
 
-const h2Cls = "text-lg font-semibold";
-const h3Cls = "mt-4 text-sm font-semibold uppercase tracking-wide text-[var(--muted)]";
+const h3Cls = "mt-5 text-sm font-semibold uppercase tracking-wide text-[var(--accent)]";
 const pCls = "mt-2 text-sm leading-relaxed text-[var(--muted)]";
 const strongCls = "text-[var(--text)]";
 const ulCls = "mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--muted)]";
 const olCls = "mt-2 list-decimal space-y-1 pl-5 text-sm leading-relaxed text-[var(--muted)]";
-const hrCls = "my-8 border-[var(--border)]";
-const linkCls = "inline-flex items-center gap-1 font-medium text-[var(--accent)] hover:underline";
+
+function SectionHeading({ n, title }: { n?: number; title: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      {n !== undefined ? (
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--good)] text-sm font-bold text-white">
+          {n}
+        </span>
+      ) : (
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
+          <LayersIcon className="h-4 w-4" />
+        </span>
+      )}
+      <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
+    </div>
+  );
+}
+
+function Quote({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mt-3 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] p-4">
+      <p className="text-sm italic leading-relaxed text-[var(--text)]">
+        <span className="mr-1 font-serif text-lg text-[var(--accent)]">&ldquo;</span>
+        {children}
+        <span className="font-serif text-lg text-[var(--accent)]">&rdquo;</span>
+      </p>
+    </div>
+  );
+}
+
+function MistakeCard({ n, problem, better }: { n: number; problem: string; better: string }) {
+  return (
+    <div className="mt-3 rounded-xl border border-[rgba(224,122,95,0.35)] bg-[rgba(224,122,95,0.06)] p-4">
+      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--bad)]">Mistake {n}</p>
+      <p className="mt-1 text-sm leading-relaxed text-[var(--text)]">{problem}</p>
+      <div className="mt-2.5 flex items-start gap-1.5 border-t border-[rgba(224,122,95,0.25)] pt-2.5">
+        <CheckIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--good)]" />
+        <p className="text-sm leading-relaxed text-[var(--muted)]">
+          <strong className={strongCls}>Better approach:</strong> {better}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 function ExtLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <a href={href} target="_blank" rel="noreferrer" className={linkCls}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-xs font-medium text-[var(--accent)] transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent-soft)]"
+    >
+      <Favicon url={href} className="h-3.5 w-3.5 shrink-0 rounded-sm" />
       {children}
-      <ExternalLinkIcon className="h-3 w-3" />
+      <ExternalLinkIcon className="h-3 w-3 shrink-0" />
     </a>
   );
 }
 
 function Table({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
   return (
-    <div className="mt-3 overflow-x-auto border border-[var(--border)]">
+    <div className="mt-3 overflow-x-auto rounded-xl border border-[var(--border)]">
       <table className="w-full min-w-[480px] border-collapse text-sm">
         <thead>
-          <tr className="border-b border-[var(--border)] bg-[var(--surface-2)]">
+          <tr className="bg-[var(--accent-soft)]">
             {head.map((h) => (
-              <th key={h} className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
+              <th key={h} className="px-3.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
                 {h}
               </th>
             ))}
@@ -34,9 +82,9 @@ function Table({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr key={i} className="border-b border-[var(--border)] last:border-0">
+            <tr key={i} className="border-t border-[var(--border)] transition-colors hover:bg-[var(--surface-2)]">
               {row.map((cell, j) => (
-                <td key={j} className="px-3 py-2 align-top leading-relaxed text-[var(--muted)]">
+                <td key={j} className="px-3.5 py-2.5 align-top leading-relaxed text-[var(--muted)]">
                   {cell}
                 </td>
               ))}
@@ -62,7 +110,23 @@ export default function FrontendUIBlogPage() {
       </div>
 
       <div className="mx-auto max-w-3xl px-5 py-8 md:px-8">
-        <div className="animate-fade-in-up border-l-4 border-[var(--accent)] bg-[var(--accent-soft)] p-4">
+        <div className="animate-fade-in-up flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
+          <LayersIcon className="h-3.5 w-3.5" />
+          Guide
+        </div>
+        <h1 className="animate-fade-in-up mt-2 text-3xl font-bold leading-tight tracking-tight">
+          How to Build a Premium Frontend UI
+        </h1>
+        <p className="animate-fade-in-up mt-2 text-base leading-relaxed text-[var(--muted)]">
+          A practical guide to AI tools, templates, components, and creative design.
+        </p>
+        <div className="animate-fade-in-up mt-3 flex items-center gap-2.5 text-xs text-[var(--muted)]">
+          <span>15 sections</span>
+          <span className="h-1 w-1 rounded-full bg-[var(--border)]" />
+          <span>Frontend &amp; UI</span>
+        </div>
+
+        <div className="animate-fade-in-up mt-6 border-l-4 border-[var(--accent)] bg-[var(--accent-soft)] p-4">
           <p className="text-sm font-medium italic leading-relaxed text-[var(--text)]">
             &ldquo;You know my secret to UI design? This is it — I search components and frameworks to see how
             others have built things, check whether it fits here, and figure out how to use it to make our website
@@ -70,16 +134,9 @@ export default function FrontendUIBlogPage() {
           </p>
         </div>
 
-        <div className="animate-fade-in-up mt-5 flex items-center gap-2">
-          <LayersIcon className="h-5 w-5 text-[var(--accent)]" />
-          <h1 className="text-2xl font-semibold tracking-tight">
-            How to Build a Premium Frontend UI: A Practical Guide to AI Tools, Templates, Components, and Creative Design
-          </h1>
-        </div>
-
-        <article className="animate-fade-in-up mt-8">
+        <article className="animate-fade-in-up mt-10 space-y-10">
           <section>
-            <h2 className={h2Cls}>Introduction</h2>
+            <SectionHeading title="Introduction" />
             <p className={pCls}>
               Building a frontend is not just about writing HTML, CSS, JavaScript, or React code. A great frontend
               should look professional, feel intuitive, work smoothly, and help users accomplish their goals without
@@ -108,10 +165,8 @@ export default function FrontendUIBlogPage() {
             <p className={pCls}>This guide explains the complete process, from planning your first screen to refining the final interface.</p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>1. Before Writing Code: Understand What You Are Building</h2>
+            <SectionHeading n={1} title="Before Writing Code: Understand What You Are Building" />
             <p className={pCls}>
               The first step is not opening an AI tool or copying a component. It is understanding the product and
               the users who will interact with it.
@@ -148,8 +203,8 @@ export default function FrontendUIBlogPage() {
             </p>
           </section>
 
-          <section className="mt-8">
-            <h2 className={h2Cls}>2. Decide How You Want to Build the Frontend</h2>
+          <section>
+            <SectionHeading n={2} title="Decide How You Want to Build the Frontend" />
             <p className={pCls}>
               There is no single correct way to build a frontend. Choose the approach that matches your experience,
               project requirements, and available time.
@@ -183,11 +238,11 @@ export default function FrontendUIBlogPage() {
             </p>
             <p className={pCls}>You can describe the page, explain the features, specify a visual style, and ask the AI to generate a first version.</p>
             <p className={pCls}>For example:</p>
-            <blockquote className="mt-2.5 border-l-2 border-[var(--accent)] bg-[var(--surface-2)] py-2 pl-3 text-sm italic leading-relaxed text-[var(--text)]">
-              &ldquo;Create a premium SaaS dashboard for an AI market research platform. Use a clean layout, a
-              collapsible sidebar, a compact top navigation bar, clear metric cards, trend charts, recent reports,
-              and a modern typography system. Make it responsive and use reusable React components.&rdquo;
-            </blockquote>
+            <Quote>
+              Create a premium SaaS dashboard for an AI market research platform. Use a clean layout, a collapsible
+              sidebar, a compact top navigation bar, clear metric cards, trend charts, recent reports, and a modern
+              typography system. Make it responsive and use reusable React components.
+            </Quote>
             <p className={pCls}>
               The generated result is a starting point, not necessarily the final design. You should review the
               structure, improve the layout, check the code, and adapt it to your actual application.
@@ -206,10 +261,8 @@ export default function FrontendUIBlogPage() {
             </p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>3. Learn from Existing Websites Before Designing Everything Yourself</h2>
+            <SectionHeading n={3} title="Learn from Existing Websites Before Designing Everything Yourself" />
             <p className={pCls}>
               One of the most useful habits in frontend development is learning from existing UI libraries, component
               collections, and website templates.
@@ -235,8 +288,8 @@ export default function FrontendUIBlogPage() {
             <p className={pCls}>The following resources can help you at different stages of frontend development.</p>
           </section>
 
-          <section className="mt-8">
-            <h2 className={h2Cls}>4. UI Component Libraries and Collections</h2>
+          <section>
+            <SectionHeading n={4} title="UI Component Libraries and Collections" />
             <p className={pCls}>
               These websites are useful when you already have a page but need better components, visual effects, or
               reusable interface elements.
@@ -296,10 +349,8 @@ export default function FrontendUIBlogPage() {
             <p className={pCls}>Choose the resource that solves your current design problem.</p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>5. How to Reuse Components in Your Own Project</h2>
+            <SectionHeading n={5} title="How to Reuse Components in Your Own Project" />
             <p className={pCls}>
               Imagine you have already created a dashboard. The layout works, but the cards look basic and the
               buttons do not match the visual style you want.
@@ -338,11 +389,11 @@ export default function FrontendUIBlogPage() {
 
             <h3 className={h3Cls}>Step 4: Customize the component</h3>
             <p className={pCls}>You can either modify the code manually or provide it to an AI coding assistant. For example, you might ask:</p>
-            <blockquote className="mt-2.5 border-l-2 border-[var(--accent)] bg-[var(--surface-2)] py-2 pl-3 text-sm italic leading-relaxed text-[var(--text)]">
-              &ldquo;Use this component as a reference. Adapt it to my existing Next.js application. Keep my current
-              page structure and business logic, use our existing color palette, improve responsiveness, and avoid
-              adding unnecessary dependencies. Integrate it into the existing component architecture.&rdquo;
-            </blockquote>
+            <Quote>
+              Use this component as a reference. Adapt it to my existing Next.js application. Keep my current page
+              structure and business logic, use our existing color palette, improve responsiveness, and avoid
+              adding unnecessary dependencies. Integrate it into the existing component architecture.
+            </Quote>
             <p className={pCls}>
               Give the AI the relevant source code and explain the intended changes. Do not simply ask it to replace
               the entire page.
@@ -361,10 +412,8 @@ export default function FrontendUIBlogPage() {
             </p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>6. Build with Your Own Creativity</h2>
+            <SectionHeading n={6} title="Build with Your Own Creativity" />
             <p className={pCls}>UI libraries are references, not restrictions.</p>
             <p className={pCls}>
               If you have a creative idea, you can combine components from different sources and arrange them in a
@@ -405,10 +454,8 @@ export default function FrontendUIBlogPage() {
             </p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>7. AI Tools for Generating UI Designs and Frontend Code</h2>
+            <SectionHeading n={7} title="AI Tools for Generating UI Designs and Frontend Code" />
             <p className={pCls}>AI UI generation tools are especially useful when you want to explore a design before implementing it.</p>
             <p className={pCls}>Some tools focus on visual mockups. Others generate React code or build working web applications. Choose according to the stage of development.</p>
 
@@ -463,10 +510,8 @@ export default function FrontendUIBlogPage() {
             <p className={pCls}>You do not need to use every tool. Choose one that fits the task and learn how to guide it effectively.</p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>8. A Practical Workflow for Using AI to Build a Frontend</h2>
+            <SectionHeading n={8} title="A Practical Workflow for Using AI to Build a Frontend" />
             <p className={pCls}>
               The quality of an AI-generated interface depends heavily on how clearly you describe the product and
               its requirements.
@@ -475,18 +520,18 @@ export default function FrontendUIBlogPage() {
 
             <h3 className={h3Cls}>Step 1: Describe the product</h3>
             <p className={pCls}>Explain the application, target users, main purpose, and pages. Example:</p>
-            <blockquote className="mt-2.5 border-l-2 border-[var(--accent)] bg-[var(--surface-2)] py-2 pl-3 text-sm italic leading-relaxed text-[var(--text)]">
-              &ldquo;I&apos;m building an AI-powered food market research platform for food businesses. Users should
-              be able to explore market trends, understand consumer sentiment, discover product opportunities, and
-              generate research reports.&rdquo;
-            </blockquote>
+            <Quote>
+              I&apos;m building an AI-powered food market research platform for food businesses. Users should be able
+              to explore market trends, understand consumer sentiment, discover product opportunities, and generate
+              research reports.
+            </Quote>
 
             <h3 className={h3Cls}>Step 2: Define the page and its purpose</h3>
             <p className={pCls}>Instead of asking for an entire application immediately, begin with one page. Example:</p>
-            <blockquote className="mt-2.5 border-l-2 border-[var(--accent)] bg-[var(--surface-2)] py-2 pl-3 text-sm italic leading-relaxed text-[var(--text)]">
-              &ldquo;Create the market research dashboard. It should help users quickly understand important trends,
-              recent signals, opportunity scores, and the status of their research reports.&rdquo;
-            </blockquote>
+            <Quote>
+              Create the market research dashboard. It should help users quickly understand important trends,
+              recent signals, opportunity scores, and the status of their research reports.
+            </Quote>
 
             <h3 className={h3Cls}>Step 3: Specify the visual direction</h3>
             <p className={pCls}>Describe the style rather than using only words such as &ldquo;modern&rdquo; or &ldquo;premium.&rdquo; For example:</p>
@@ -538,10 +583,8 @@ export default function FrontendUIBlogPage() {
             <p className={pCls}>Ask the AI to fix specific issues rather than repeatedly regenerating the entire application.</p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>9. Use AI to Create Demos Before Building a Feature</h2>
+            <SectionHeading n={9} title="Use AI to Create Demos Before Building a Feature" />
             <p className={pCls}>
               Another valuable use of AI is creating a demonstration of a feature before committing to the complete
               implementation.
@@ -597,10 +640,8 @@ export default function FrontendUIBlogPage() {
             </p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>10. How to Improve an Existing Frontend Instead of Rebuilding It</h2>
+            <SectionHeading n={10} title="How to Improve an Existing Frontend Instead of Rebuilding It" />
             <p className={pCls}>Many applications already have working pages but need visual improvements.</p>
             <p className={pCls}>In this situation, rebuilding everything may introduce unnecessary work and risk.</p>
             <p className={pCls}>A better approach is to audit the existing interface and identify the highest-impact improvements.</p>
@@ -634,18 +675,16 @@ export default function FrontendUIBlogPage() {
             </ol>
             <p className={pCls}>You can use AI to inspect a relevant code section and suggest changes, but verify those changes in the application.</p>
             <p className={pCls}>A good instruction might be:</p>
-            <blockquote className="mt-2.5 border-l-2 border-[var(--accent)] bg-[var(--surface-2)] py-2 pl-3 text-sm italic leading-relaxed text-[var(--text)]">
-              &ldquo;Review this page for visual hierarchy, spacing, responsiveness, and component consistency.
-              Identify the five most important improvements. Preserve existing functionality and explain the
-              proposed changes before rewriting the component.&rdquo;
-            </blockquote>
+            <Quote>
+              Review this page for visual hierarchy, spacing, responsiveness, and component consistency. Identify
+              the five most important improvements. Preserve existing functionality and explain the proposed
+              changes before rewriting the component.
+            </Quote>
             <p className={pCls}>This helps prevent unnecessary code changes and keeps the focus on improving the actual user experience.</p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>11. How to Choose the Right Components and Templates</h2>
+            <SectionHeading n={11} title="How to Choose the Right Components and Templates" />
             <p className={pCls}>A component may look impressive in isolation but still be a poor fit for your application.</p>
             <p className={pCls}>Before selecting one, consider the following:</p>
             <ul className={ulCls}>
@@ -661,10 +700,8 @@ export default function FrontendUIBlogPage() {
             <p className={pCls}>Do not select a component simply because it is popular or visually impressive. Select it because it serves a purpose.</p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>12. A Recommended Frontend Development Stack</h2>
+            <SectionHeading n={12} title="A Recommended Frontend Development Stack" />
             <p className={pCls}>For developers building modern web applications, a practical stack could include:</p>
             <Table
               head={["Purpose", "Example technology or resource"]}
@@ -688,44 +725,47 @@ export default function FrontendUIBlogPage() {
             </p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>13. Common Mistakes to Avoid</h2>
-
-            <h3 className={h3Cls}>Mistake 1: Starting to code without planning</h3>
-            <p className={pCls}>This often leads to inconsistent layouts, unnecessary components, and repeated redesigns.</p>
-            <p className={pCls}><strong className={strongCls}>Better approach:</strong> Define the page structure and user workflow first.</p>
-
-            <h3 className={h3Cls}>Mistake 2: Asking AI to build everything in one prompt</h3>
-            <p className={pCls}>A single large prompt can produce inconsistent styling, duplicated code, or incomplete interactions.</p>
-            <p className={pCls}><strong className={strongCls}>Better approach:</strong> Work page by page and component by component.</p>
-
-            <h3 className={h3Cls}>Mistake 3: Copying components without checking dependencies</h3>
-            <p className={pCls}>Copied components may depend on additional libraries, CSS variables, icon packages, or specific framework versions.</p>
-            <p className={pCls}><strong className={strongCls}>Better approach:</strong> Understand the implementation and adapt it to your project.</p>
-
-            <h3 className={h3Cls}>Mistake 4: Mixing too many design styles</h3>
-            <p className={pCls}>Using components with unrelated colors, spacing, typography, and animations makes the application feel inconsistent.</p>
-            <p className={pCls}><strong className={strongCls}>Better approach:</strong> Establish a design system and customize every reused component to match it.</p>
-
-            <h3 className={h3Cls}>Mistake 5: Focusing only on appearance</h3>
-            <p className={pCls}>A beautiful page is not useful if buttons do nothing, forms fail, or the interface is difficult to navigate.</p>
-            <p className={pCls}><strong className={strongCls}>Better approach:</strong> Design for both visual quality and functionality.</p>
-
-            <h3 className={h3Cls}>Mistake 6: Trusting generated code without testing it</h3>
-            <p className={pCls}>AI-generated code can contain errors, inefficient patterns, or security problems.</p>
-            <p className={pCls}><strong className={strongCls}>Better approach:</strong> Review the code, run the application, test interactions, and verify the implementation.</p>
-
-            <h3 className={h3Cls}>Mistake 7: Treating a demo as a finished product</h3>
-            <p className={pCls}>A prototype may use sample data and simulated behavior.</p>
-            <p className={pCls}><strong className={strongCls}>Better approach:</strong> Clearly identify what is mocked and complete the production integration separately.</p>
+            <SectionHeading n={13} title="Common Mistakes to Avoid" />
+            <MistakeCard
+              n={1}
+              problem="Starting to code without planning. This often leads to inconsistent layouts, unnecessary components, and repeated redesigns."
+              better="Define the page structure and user workflow first."
+            />
+            <MistakeCard
+              n={2}
+              problem="Asking AI to build everything in one prompt. A single large prompt can produce inconsistent styling, duplicated code, or incomplete interactions."
+              better="Work page by page and component by component."
+            />
+            <MistakeCard
+              n={3}
+              problem="Copying components without checking dependencies. Copied components may depend on additional libraries, CSS variables, icon packages, or specific framework versions."
+              better="Understand the implementation and adapt it to your project."
+            />
+            <MistakeCard
+              n={4}
+              problem="Mixing too many design styles. Using components with unrelated colors, spacing, typography, and animations makes the application feel inconsistent."
+              better="Establish a design system and customize every reused component to match it."
+            />
+            <MistakeCard
+              n={5}
+              problem="Focusing only on appearance. A beautiful page is not useful if buttons do nothing, forms fail, or the interface is difficult to navigate."
+              better="Design for both visual quality and functionality."
+            />
+            <MistakeCard
+              n={6}
+              problem="Trusting generated code without testing it. AI-generated code can contain errors, inefficient patterns, or security problems."
+              better="Review the code, run the application, test interactions, and verify the implementation."
+            />
+            <MistakeCard
+              n={7}
+              problem="Treating a demo as a finished product. A prototype may use sample data and simulated behavior."
+              better="Clearly identify what is mocked and complete the production integration separately."
+            />
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>14. A Practical Learning Plan</h2>
+            <SectionHeading n={14} title="A Practical Learning Plan" />
             <p className={pCls}>If you are starting to improve your frontend development skills, follow this sequence.</p>
 
             <h3 className={h3Cls}>Phase 1: Learn the fundamentals</h3>
@@ -775,10 +815,8 @@ export default function FrontendUIBlogPage() {
             </p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>15. The Complete Workflow: From Idea to Production UI</h2>
+            <SectionHeading n={15} title="The Complete Workflow: From Idea to Production UI" />
             <p className={pCls}>The process can be summarized as follows:</p>
             <p className={pCls}>
               <strong className={strongCls}>
@@ -799,10 +837,8 @@ export default function FrontendUIBlogPage() {
             <p className={pCls}>You do not need to follow the process rigidly. You can move back and forth between stages as you discover new requirements.</p>
           </section>
 
-          <hr className={hrCls} />
-
           <section>
-            <h2 className={h2Cls}>Conclusion</h2>
+            <SectionHeading title="Conclusion" />
             <p className={pCls}>Building a great frontend is a combination of design understanding, technical knowledge, creativity, and iteration.</p>
             <p className={pCls}>
               You do not need to create every component from scratch, and you do not need to depend entirely on AI.
@@ -823,7 +859,7 @@ export default function FrontendUIBlogPage() {
             </p>
           </section>
 
-          <div className="mt-8 flex items-start gap-2.5 rounded-xl border border-[var(--accent)]/30 bg-[var(--accent-soft)] p-4">
+          <div className="flex items-start gap-2.5 rounded-xl border border-[var(--accent)]/30 bg-[var(--accent-soft)] p-4">
             <span className="text-xl leading-none">😊</span>
             <p className="text-sm font-medium text-[var(--text)]">
               This is added so you can improve your skills in frontend and do better in frontend/UI design. I hope
