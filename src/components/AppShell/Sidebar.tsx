@@ -97,7 +97,7 @@ export default function Sidebar() {
 
       <ProfileSwitcher />
 
-      <nav className="flex-1 px-3 py-4 space-y-1">
+      <nav className="scrollbar-hide flex-1 overflow-y-auto px-3 py-4 space-y-1">
         {NAV_ITEMS.map(({ href, label, icon: Icon, section, badge }) => {
           const active = pathname.startsWith(href);
           const count = section ? newCounts[section] : 0;

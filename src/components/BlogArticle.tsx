@@ -4,6 +4,7 @@ export interface BlogSection {
   title: string;
   description: string;
   link?: { label: string; url: string };
+  links?: { label: string; url: string }[];
   prompt?: string;
 }
 
@@ -48,6 +49,22 @@ export default function BlogArticle({
                   <ExternalLinkIcon className="h-3.5 w-3.5" />
                   {section.link.label}
                 </a>
+              )}
+              {section.links && section.links.length > 0 && (
+                <div className="mt-2.5 flex flex-wrap gap-2">
+                  {section.links.map((l) => (
+                    <a
+                      key={l.url}
+                      href={l.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface-2)] px-2.5 py-1 text-xs font-medium text-[var(--accent)] hover:border-[var(--accent)] hover:underline"
+                    >
+                      <ExternalLinkIcon className="h-3 w-3" />
+                      {l.label}
+                    </a>
+                  ))}
+                </div>
               )}
               {section.prompt && (
                 <blockquote className="mt-2.5 border-l-2 border-[var(--accent)] bg-[var(--surface-2)] py-2 pl-3 text-sm italic leading-relaxed text-[var(--text)]">

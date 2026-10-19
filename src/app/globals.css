@@ -274,3 +274,12 @@ button {
   animation: marching-border 3s linear infinite;
   pointer-events: none;
 }
+
+/* Scrollable but no visible scrollbar — used for the sidebar nav list */
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/WebKit */
+}
