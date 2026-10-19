@@ -418,3 +418,12 @@ export function FileTextIcon({ className }: IconProps) {
     </Base>
   );
 }
+
+export function LayersIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <path d="m12 3 9 5-9 5-9-5 9-5Z" />
+      <path d="m3 12 9 5 9-5M3 16l9 5 9-5" />
+    </Base>
+  );
+}
