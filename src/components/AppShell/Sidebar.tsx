@@ -43,7 +43,7 @@ const NAV_ITEMS: { href: string; label: string; icon: typeof HomeIcon; section?:
   { href: "/freelancing", label: "Freelancing", icon: BriefcaseIcon, section: "freelancing" },
   { href: "/certifications", label: "Certifications", icon: AwardIcon, section: "certifications" },
   { href: "/resume-creation", label: "Resume Creation", icon: FileTextIcon, badge: "Helpful" },
-  { href: "/blogs", label: "Blogs", icon: BookIcon, badge: "New" },
+  { href: "/blogs", label: "Blogs", icon: BookIcon, badge: "For You" },
   { href: "/progress", label: "Progress", icon: CalendarIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/settings", label: "Settings", icon: SettingsIcon },
