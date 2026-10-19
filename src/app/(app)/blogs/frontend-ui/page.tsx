@@ -822,6 +822,14 @@ export default function FrontendUIBlogPage() {
               wasted effort and more intentional design.
             </p>
           </section>
+
+          <div className="mt-8 flex items-start gap-2.5 rounded-xl border border-[var(--accent)]/30 bg-[var(--accent-soft)] p-4">
+            <span className="text-xl leading-none">😊</span>
+            <p className="text-sm font-medium text-[var(--text)]">
+              This is added so you can improve your skills in frontend and do better in frontend/UI design. I hope
+              this is helpful to you.
+            </p>
+          </div>
         </article>
       </div>
     </div>
