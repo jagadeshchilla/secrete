@@ -16,6 +16,7 @@ import {
   AwardIcon,
   FileTextIcon,
   BookIcon,
+  MessageIcon,
 } from "@/components/icons";
 
 const NAV_ITEMS = [
@@ -29,6 +30,7 @@ const NAV_ITEMS = [
   { href: "/certifications", label: "Certs", icon: AwardIcon },
   { href: "/resume-creation", label: "Resume", icon: FileTextIcon },
   { href: "/blogs", label: "Blogs", icon: BookIcon },
+  { href: "/mock-interview", label: "Mock", icon: MessageIcon },
   { href: "/progress", label: "Progress", icon: CalendarIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/settings", label: "Settings", icon: SettingsIcon },

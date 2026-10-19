@@ -29,6 +29,7 @@ import {
   AwardIcon,
   FileTextIcon,
   BookIcon,
+  MessageIcon,
 } from "@/components/icons";
 
 type NavSection = "courses" | "ideas" | "research" | "freelancing" | "certifications";
@@ -44,6 +45,7 @@ const NAV_ITEMS: { href: string; label: string; icon: typeof HomeIcon; section?:
   { href: "/certifications", label: "Certifications", icon: AwardIcon, section: "certifications" },
   { href: "/resume-creation", label: "Resume Creation", icon: FileTextIcon, badge: "Helpful" },
   { href: "/blogs", label: "Blogs", icon: BookIcon, badge: "For You" },
+  { href: "/mock-interview", label: "Mock Interview", icon: MessageIcon },
   { href: "/progress", label: "Progress", icon: CalendarIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/settings", label: "Settings", icon: SettingsIcon },
