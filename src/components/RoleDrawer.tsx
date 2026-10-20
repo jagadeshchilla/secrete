@@ -50,7 +50,7 @@ export default function RoleDrawer({
                 <button
                   onClick={() => onStatusChange("saved", !record.saved)}
                   title={record.saved ? "Remove from Saved" : "Save this role"}
-                  className={`border p-1.5 transition-colors ${
+                  className={`rounded-lg border p-1.5 transition-colors ${
                     record.saved
                       ? "border-[var(--accent)] text-[var(--accent)]"
                       : "border-[var(--border)] text-[var(--muted)] hover:text-[var(--accent)]"
@@ -60,7 +60,7 @@ export default function RoleDrawer({
                 </button>
                 <button
                   onClick={onClose}
-                  className="border border-[var(--border)] p-1.5 text-[var(--muted)] hover:text-[var(--text)]"
+                  className="rounded-lg border border-[var(--border)] p-1.5 text-[var(--muted)] transition-colors hover:text-[var(--text)]"
                 >
                   <CloseIcon className="h-4 w-4" />
                 </button>
@@ -71,15 +71,15 @@ export default function RoleDrawer({
               <p className="text-sm leading-relaxed text-[var(--muted)]">{role.description}</p>
 
               <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="border border-[var(--border)] p-2.5">
+                <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-2.5">
                   <div className="text-[11px] text-[var(--muted)]">Coding</div>
                   <div className="mt-0.5 text-sm font-medium">{role.coding}</div>
                 </div>
-                <div className="border border-[var(--border)] p-2.5">
+                <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-2.5">
                   <div className="text-[11px] text-[var(--muted)]">AI impact</div>
                   <div className="mt-0.5 text-sm font-medium">{role.ai}</div>
                 </div>
-                <div className="border border-[var(--border)] p-2.5">
+                <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-2.5">
                   <div className="text-[11px] text-[var(--muted)]">Outlook</div>
                   <div className="mt-0.5 text-sm font-medium">{role.outlook}</div>
                 </div>
@@ -100,7 +100,7 @@ export default function RoleDrawer({
                         href={r.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-between gap-2 border border-[var(--border)] p-2.5 text-sm hover:border-[var(--accent)]"
+                        className="flex items-center justify-between gap-2 rounded-lg border border-[var(--border)] p-2.5 text-sm transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent-soft)]"
                       >
                         <span className="flex min-w-0 items-center gap-2">
                           <PlayIcon className="h-4 w-4 shrink-0 text-[var(--accent)]" />
@@ -121,7 +121,7 @@ export default function RoleDrawer({
                   onBlur={(e) => onNoteChange(e.target.value)}
                   rows={6}
                   placeholder="What did you learn about this role?"
-                  className="w-full border border-[var(--border)] bg-[var(--surface-2)] p-3 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]"
+                  className="w-full rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-3 text-sm text-[var(--text)] outline-none transition-colors focus:border-[var(--accent)]"
                 />
               </div>
             </div>

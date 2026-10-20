@@ -170,11 +170,11 @@ export default function Dashboard() {
             Your career research at a glance. Pick up where you left off.
           </p>
         </div>
-        <div className="flex border border-[var(--border)]">
+        <div className="flex overflow-hidden rounded-lg border border-[var(--border)]">
           <button
             onClick={() => setView("household")}
-            className={`px-3 py-1.5 text-xs font-medium ${
-              view === "household" ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)]"
+            className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+              view === "household" ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
             }`}
           >
             Household
@@ -183,8 +183,8 @@ export default function Dashboard() {
             <button
               key={p}
               onClick={() => setView(p)}
-              className={`border-l border-[var(--border)] px-3 py-1.5 text-xs font-medium ${
-                view === p ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)]"
+              className={`border-l border-[var(--border)] px-3 py-1.5 text-xs font-medium transition-colors ${
+                view === p ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
               }`}
             >
               {PROFILE_LABELS[p]}
@@ -220,9 +220,9 @@ export default function Dashboard() {
                   <StatCard label="Completed" value={pStats.completed} />
                 </div>
 
-                <div className="mt-4 h-1.5 w-full bg-[var(--border)]">
+                <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-[var(--border)]">
                   <div
-                    className="h-full bg-[var(--accent)] transition-all duration-500"
+                    className="h-full rounded-full bg-gradient-to-r from-[var(--accent)] to-[var(--good)] transition-all duration-700 ease-out"
                     style={{ width: `${pStats.pct}%` }}
                   />
                 </div>
@@ -251,9 +251,9 @@ export default function Dashboard() {
                           <span className="w-14 shrink-0 truncate text-[11px] text-[var(--muted)] sm:w-16">
                             {PROFILE_LABELS[p]}
                           </span>
-                          <div className="h-1.5 flex-1 bg-[var(--border)]">
+                          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-[var(--border)]">
                             <div
-                              className="h-full bg-[var(--accent)] transition-all duration-500"
+                              className="h-full rounded-full bg-gradient-to-r from-[var(--accent)] to-[var(--good)] transition-all duration-700 ease-out"
                               style={{ width: `${pct}%` }}
                             />
                           </div>
@@ -337,10 +337,10 @@ export default function Dashboard() {
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
             <Link
               href="/roadmap"
-              className="card-hover animate-fade-in-up flex items-center gap-3 border border-[var(--border)] bg-[var(--surface)] p-4"
+              className="card-hover group animate-fade-in-up flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4"
               style={{ animationDelay: "40ms" }}
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)] transition-transform group-hover:scale-105">
                 <RouteIcon className="h-5 w-5" />
               </div>
               <div>
@@ -350,10 +350,10 @@ export default function Dashboard() {
             </Link>
             <Link
               href="/courses"
-              className="card-hover animate-fade-in-up flex items-center gap-3 border border-[var(--border)] bg-[var(--surface)] p-4"
+              className="card-hover group animate-fade-in-up flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4"
               style={{ animationDelay: "80ms" }}
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)] transition-transform group-hover:scale-105">
                 <GraduationCapIcon className="h-5 w-5" />
               </div>
               <div>
@@ -363,10 +363,10 @@ export default function Dashboard() {
             </Link>
             <Link
               href="/progress"
-              className="card-hover animate-fade-in-up flex items-center gap-3 border border-[var(--border)] bg-[var(--surface)] p-4"
+              className="card-hover group animate-fade-in-up flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4"
               style={{ animationDelay: "120ms" }}
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)] transition-transform group-hover:scale-105">
                 <CalendarIcon className="h-5 w-5" />
               </div>
               <div>
@@ -379,7 +379,7 @@ export default function Dashboard() {
           </div>
 
           <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-3">
-            <div className="card-hover animate-fade-in-up flex flex-col items-center justify-center gap-3 border border-[var(--border)] bg-[var(--surface)] p-6">
+            <div className="card-hover animate-fade-in-up flex flex-col items-center justify-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6">
               <ProgressRing pct={viewStats.pct} label="complete" />
               <Link
                 href="/roles"
@@ -391,7 +391,7 @@ export default function Dashboard() {
             </div>
 
             <div
-              className="card-hover animate-fade-in-up lg:col-span-2 border border-[var(--border)] bg-[var(--surface)] p-5"
+              className="card-hover animate-fade-in-up lg:col-span-2 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5"
               style={{ animationDelay: "80ms" }}
             >
               <div className="flex items-center justify-between">
@@ -475,9 +475,9 @@ export default function Dashboard() {
                         {completed}/{total}
                       </span>
                     </div>
-                    <div className="mt-1 h-1.5 w-full bg-[var(--border)]">
+                    <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-[var(--border)]">
                       <div
-                        className="h-full bg-[var(--accent)] transition-all duration-500"
+                        className="h-full rounded-full bg-gradient-to-r from-[var(--accent)] to-[var(--good)] transition-all duration-700 ease-out"
                         style={{ width: `${pct}%` }}
                       />
                     </div>

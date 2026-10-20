@@ -201,6 +201,14 @@ button {
 .btn-shimmer {
   position: relative;
   overflow: hidden;
+  border-radius: var(--radius-sm);
+  transition: transform 0.15s var(--ease-premium), box-shadow 0.15s var(--ease-premium);
+}
+.btn-shimmer:hover {
+  box-shadow: var(--shadow-sm);
+}
+.btn-shimmer:active {
+  transform: scale(0.97);
 }
 .btn-shimmer::after {
   content: "";

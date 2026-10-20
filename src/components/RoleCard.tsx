@@ -24,7 +24,7 @@ export default function RoleCard({
     <article
       onClick={onOpen}
       style={style}
-      className={`card-hover animate-fade-in-up relative flex cursor-pointer flex-col gap-3 border bg-[var(--surface)] p-4 ${
+      className={`card-hover animate-fade-in-up relative flex cursor-pointer flex-col gap-3 rounded-xl border bg-[var(--surface)] p-4 ${
         record.completed ? "border-[var(--good)]" : "border-[var(--border)]"
       }`}
     >
@@ -45,16 +45,16 @@ export default function RoleCard({
 
       <div className="flex items-start justify-between gap-2 pr-7">
         <h3 className="text-sm font-semibold leading-snug">{role.role}</h3>
-        <span className="shrink-0 border border-[var(--border)] px-1.5 py-0.5 text-[10px] text-[var(--muted)]">
+        <span className="shrink-0 rounded-full border border-[var(--border)] px-1.5 py-0.5 text-[10px] text-[var(--muted)]">
           {role.type}
         </span>
       </div>
       <p className="line-clamp-3 text-xs leading-relaxed text-[var(--muted)]">{role.description}</p>
       <div className="flex flex-wrap gap-1.5">
-        <span className="border border-[var(--border)] px-2 py-0.5 text-[11px] text-[var(--muted)]">
+        <span className="rounded-full border border-[var(--border)] px-2 py-0.5 text-[11px] text-[var(--muted)]">
           Coding: {role.coding}
         </span>
-        <span className="border border-[var(--border)] px-2 py-0.5 text-[11px] text-[var(--muted)]">
+        <span className="rounded-full border border-[var(--border)] px-2 py-0.5 text-[11px] text-[var(--muted)]">
           AI: {role.ai}
         </span>
       </div>
@@ -65,7 +65,7 @@ export default function RoleCard({
             href={`/roadmap?domain=${encodeURIComponent(role.domain)}&role=${encodeURIComponent(role.role)}`}
             onClick={(e) => e.stopPropagation()}
             title="View roadmap for this role"
-            className="flex shrink-0 items-center gap-1 border border-[var(--border)] px-2 py-1 text-[11px] font-medium text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            className="flex shrink-0 items-center gap-1 rounded-full border border-[var(--border)] px-2 py-1 text-[11px] font-medium text-[var(--muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
             <RouteIcon className="h-3 w-3" />
             Roadmap

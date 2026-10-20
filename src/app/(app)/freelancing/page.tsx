@@ -140,29 +140,33 @@ export default function FreelancingPage() {
         </h2>
 
         {gigs.length === 0 ? (
-          <div className="mt-3 border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
+          <div className="mt-3 rounded-xl border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
             No gigs yet. Click &ldquo;Add gig&rdquo; to add the first one.
           </div>
         ) : (
-          <div className="mt-3 divide-y divide-[var(--border)] border border-[var(--border)]">
+          <div className="mt-3 space-y-2">
             {gigs.map((gig, i) => {
               const isOpen = expanded.has(gig.id);
               return (
-                <div key={gig.id} className="animate-fade-in-up" style={{ animationDelay: `${Math.min(i, 10) * 30}ms` }}>
+                <div
+                  key={gig.id}
+                  className="surface-card animate-fade-in-up overflow-hidden"
+                  style={{ animationDelay: `${Math.min(i, 10) * 30}ms` }}
+                >
                   <button
                     onClick={() => toggleExpanded(gig.id)}
-                    className="flex w-full items-center justify-between gap-3 bg-[var(--surface)] px-4 py-3 text-left hover:bg-[var(--surface-2)]"
+                    className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:bg-[var(--surface-2)]"
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-2">
                       <span className="min-w-0 truncate text-sm font-medium">{gig.title}</span>
                       {isNewGig(gig.createdAt) && <NewBadge />}
                       <span
-                        className={`shrink-0 border px-1.5 py-0.5 text-[10px] font-medium ${STATUS_STYLES[gig.status]}`}
+                        className={`shrink-0 rounded-full border px-1.5 py-0.5 text-[10px] font-medium ${STATUS_STYLES[gig.status]}`}
                       >
                         {FREELANCE_STATUSES.find((s) => s.value === gig.status)?.label}
                       </span>
                       {gig.budget && (
-                        <span className="shrink-0 border border-[var(--border)] px-1.5 py-0.5 text-[10px] text-[var(--muted)]">
+                        <span className="shrink-0 rounded-full border border-[var(--border)] px-1.5 py-0.5 text-[10px] text-[var(--muted)]">
                           {gig.budget}
                         </span>
                       )}
@@ -204,7 +208,7 @@ export default function FreelancingPage() {
                           {gig.domains.map((d) => (
                             <span
                               key={d}
-                              className="border border-[var(--accent)] bg-[var(--accent-soft)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
+                              className="rounded-full border border-[var(--accent)] bg-[var(--accent-soft)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
                             >
                               {stripEmoji(d)}
                             </span>
@@ -218,7 +222,7 @@ export default function FreelancingPage() {
                           return (
                             <span
                               key={key}
-                              className="border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[11px] text-[var(--muted)]"
+                              className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[11px] text-[var(--muted)]"
                             >
                               {r.role}
                             </span>
@@ -234,7 +238,7 @@ export default function FreelancingPage() {
                         <select
                           value={gig.status}
                           onChange={(e) => setStatus(gig.id, e.target.value as FreelanceStatus)}
-                          className="border border-[var(--border)] bg-[var(--surface)] px-2 py-1 text-xs"
+                          className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-2 py-1 text-xs"
                         >
                           {FREELANCE_STATUSES.map((s) => (
                             <option key={s.value} value={s.value}>
@@ -254,7 +258,7 @@ export default function FreelancingPage() {
 
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/40 px-4 py-8 sm:items-center">
-          <div className="animate-scale-in w-full max-w-lg border border-[var(--border)] bg-[var(--surface)] shadow-2xl">
+          <div className="animate-scale-in w-full max-w-lg overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl">
             <div className="flex items-center justify-between border-b border-[var(--border)] p-4">
               <h2 className="text-sm font-semibold">Add a freelance gig</h2>
               <button

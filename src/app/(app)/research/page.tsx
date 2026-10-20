@@ -137,24 +137,28 @@ export default function ResearchPage() {
         </h2>
 
         {papers.length === 0 ? (
-          <div className="mt-3 border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
+          <div className="mt-3 rounded-xl border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
             No research papers yet. Click &ldquo;Add paper&rdquo; to add the first one.
           </div>
         ) : (
-          <div className="mt-3 divide-y divide-[var(--border)] border border-[var(--border)]">
+          <div className="mt-3 space-y-2">
             {papers.map((paper, i) => {
               const isOpen = expanded.has(paper.id);
               return (
-                <div key={paper.id} className="animate-fade-in-up" style={{ animationDelay: `${Math.min(i, 10) * 30}ms` }}>
+                <div
+                  key={paper.id}
+                  className="surface-card animate-fade-in-up overflow-hidden"
+                  style={{ animationDelay: `${Math.min(i, 10) * 30}ms` }}
+                >
                   <button
                     onClick={() => toggleExpanded(paper.id)}
-                    className="flex w-full items-center justify-between gap-3 bg-[var(--surface)] px-4 py-3 text-left hover:bg-[var(--surface-2)]"
+                    className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:bg-[var(--surface-2)]"
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-2">
                       <span className="min-w-0 truncate text-sm font-medium">{paper.title}</span>
                       {isNewPaper(paper.createdAt) && <NewBadge />}
                       <span
-                        className={`shrink-0 border px-1.5 py-0.5 text-[10px] font-medium ${STATUS_STYLES[paper.status]}`}
+                        className={`shrink-0 rounded-full border px-1.5 py-0.5 text-[10px] font-medium ${STATUS_STYLES[paper.status]}`}
                       >
                         {RESEARCH_STATUSES.find((s) => s.value === paper.status)?.label}
                       </span>
@@ -196,7 +200,7 @@ export default function ResearchPage() {
                           {paper.domains.map((d) => (
                             <span
                               key={d}
-                              className="border border-[var(--accent)] bg-[var(--accent-soft)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
+                              className="rounded-full border border-[var(--accent)] bg-[var(--accent-soft)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
                             >
                               {stripEmoji(d)}
                             </span>
@@ -210,7 +214,7 @@ export default function ResearchPage() {
                           return (
                             <span
                               key={key}
-                              className="border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[11px] text-[var(--muted)]"
+                              className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[11px] text-[var(--muted)]"
                             >
                               {r.role}
                             </span>
@@ -226,7 +230,7 @@ export default function ResearchPage() {
                         <select
                           value={paper.status}
                           onChange={(e) => setStatus(paper.id, e.target.value as ResearchStatus)}
-                          className="border border-[var(--border)] bg-[var(--surface)] px-2 py-1 text-xs"
+                          className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-2 py-1 text-xs"
                         >
                           {RESEARCH_STATUSES.map((s) => (
                             <option key={s.value} value={s.value}>
@@ -246,7 +250,7 @@ export default function ResearchPage() {
 
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/40 px-4 py-8 sm:items-center">
-          <div className="animate-scale-in w-full max-w-lg border border-[var(--border)] bg-[var(--surface)] shadow-2xl">
+          <div className="animate-scale-in w-full max-w-lg overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl">
             <div className="flex items-center justify-between border-b border-[var(--border)] p-4">
               <h2 className="text-sm font-semibold">Add a research paper</h2>
               <button

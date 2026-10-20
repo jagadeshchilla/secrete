@@ -161,11 +161,11 @@ export default function ProgressPage() {
             Your activity across roles, courses, ideas, research, and freelancing.
           </p>
         </div>
-        <div className="flex border border-[var(--border)]">
+        <div className="flex overflow-hidden rounded-lg border border-[var(--border)]">
           <button
             onClick={() => setView("household")}
-            className={`px-3 py-1.5 text-xs font-medium ${
-              view === "household" ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)]"
+            className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+              view === "household" ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
             }`}
           >
             Household
@@ -174,8 +174,8 @@ export default function ProgressPage() {
             <button
               key={p}
               onClick={() => setView(p)}
-              className={`border-l border-[var(--border)] px-3 py-1.5 text-xs font-medium ${
-                view === p ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)]"
+              className={`border-l border-[var(--border)] px-3 py-1.5 text-xs font-medium transition-colors ${
+                view === p ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
               }`}
             >
               {PROFILE_LABELS[p]}
@@ -190,7 +190,7 @@ export default function ProgressPage() {
           <button
             key={value}
             onClick={() => setSection(value)}
-            className={`flex items-center gap-1.5 border px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
               section === value
                 ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
                 : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]"

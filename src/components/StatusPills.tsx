@@ -24,7 +24,7 @@ export default function StatusPills({
           <button
             key={field}
             onClick={() => onChange(field, !active)}
-            className={`inline-flex items-center gap-1 border px-2.5 py-1 text-xs font-medium transition-all active:scale-95 ${
+            className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-medium transition-all duration-150 active:scale-95 ${
               active
                 ? "border-[var(--good)] bg-[var(--good-soft)] text-[var(--good)]"
                 : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
