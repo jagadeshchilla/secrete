@@ -204,11 +204,11 @@ export default function ProgressPage() {
 
       {section === "roles" &&
         (view === "household" ? (
-          <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
             {perProfile.map(({ profile: p, stats: pStats, activity: pActivity, streak: pStreak, timeline: pTimeline }, i) => (
               <div
                 key={p}
-                className="animate-fade-in-up border border-[var(--border)] bg-[var(--surface)] p-5"
+                className="surface-card animate-fade-in-up p-5"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 <button
@@ -289,10 +289,7 @@ export default function ProgressPage() {
               </div>
             </div>
 
-            <div
-              className="animate-fade-in-up mt-4 border border-[var(--border)] bg-[var(--surface)] p-5"
-              style={{ animationDelay: "80ms" }}
-            >
+            <div className="surface-card mt-4 animate-fade-in-up p-5" style={{ animationDelay: "80ms" }}>
               <h2 className="text-sm font-semibold">Recent updates</h2>
               {timeline.length === 0 ? (
                 <p className="mt-3 text-sm text-[var(--muted)]">
@@ -319,13 +316,13 @@ export default function ProgressPage() {
 
       {section === "courses" &&
         (view === "household" ? (
-          <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
             {PROFILES.map((p, i) => {
               const s = courseStatsForProfile(courses, courseProgressByProfile[p]);
               return (
                 <div
                   key={p}
-                  className="animate-fade-in-up border border-[var(--border)] bg-[var(--surface)] p-5"
+                  className="surface-card animate-fade-in-up p-5"
                   style={{ animationDelay: `${i * 60}ms` }}
                 >
                   <h2 className="text-base font-semibold">
@@ -363,13 +360,13 @@ export default function ProgressPage() {
 
       {section === "ideas" &&
         (view === "household" ? (
-          <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
             {PROFILES.map((p, i) => {
               const s = ideaStatsForProfile(p);
               return (
                 <div
                   key={p}
-                  className="animate-fade-in-up border border-[var(--border)] bg-[var(--surface)] p-5"
+                  className="surface-card animate-fade-in-up p-5"
                   style={{ animationDelay: `${i * 60}ms` }}
                 >
                   <h2 className="text-base font-semibold">
@@ -407,13 +404,13 @@ export default function ProgressPage() {
 
       {section === "research" &&
         (view === "household" ? (
-          <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
             {PROFILES.map((p, i) => {
               const s = researchStatsForProfile(p);
               return (
                 <div
                   key={p}
-                  className="animate-fade-in-up border border-[var(--border)] bg-[var(--surface)] p-5"
+                  className="surface-card animate-fade-in-up p-5"
                   style={{ animationDelay: `${i * 60}ms` }}
                 >
                   <h2 className="text-base font-semibold">
@@ -421,7 +418,7 @@ export default function ProgressPage() {
                     {p === profile ? " (me)" : ""}
                   </h2>
                   <p className="mt-1 text-xs text-[var(--muted)]">{s.total} papers added</p>
-                  <div className="mt-4 grid grid-cols-4 gap-2">
+                  <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
                     {s.byStatus.map((st) => (
                       <StatCard key={st.value} label={st.label} value={st.count} />
                     ))}
@@ -440,13 +437,13 @@ export default function ProgressPage() {
 
       {section === "freelancing" &&
         (view === "household" ? (
-          <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
             {PROFILES.map((p, i) => {
               const s = freelanceStatsForProfile(p);
               return (
                 <div
                   key={p}
-                  className="animate-fade-in-up border border-[var(--border)] bg-[var(--surface)] p-5"
+                  className="surface-card animate-fade-in-up p-5"
                   style={{ animationDelay: `${i * 60}ms` }}
                 >
                   <h2 className="text-base font-semibold">
@@ -454,7 +451,7 @@ export default function ProgressPage() {
                     {p === profile ? " (me)" : ""}
                   </h2>
                   <p className="mt-1 text-xs text-[var(--muted)]">{s.total} gigs added</p>
-                  <div className="mt-4 grid grid-cols-4 gap-2">
+                  <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
                     {s.byStatus.map((st) => (
                       <StatCard key={st.value} label={st.label} value={st.count} />
                     ))}

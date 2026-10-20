@@ -196,11 +196,11 @@ export default function Dashboard() {
 
       {view === "household" ? (
         <>
-          <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
             {perProfile.map(({ profile: p, stats: pStats, activity: pActivity, streak: pStreak }, i) => (
               <div
                 key={p}
-                className="animate-fade-in-up border border-[var(--border)] bg-[var(--surface)] p-5"
+                className="surface-card animate-fade-in-up p-5"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 <button onClick={() => setView(p)} className="flex w-full items-center justify-between text-left">
@@ -237,10 +237,7 @@ export default function Dashboard() {
             ))}
           </div>
 
-          <div
-            className="mt-4 animate-fade-in-up border border-[var(--border)] bg-[var(--surface)] p-5"
-            style={{ animationDelay: "120ms" }}
-          >
+          <div className="surface-card mt-4 animate-fade-in-up p-5" style={{ animationDelay: "120ms" }}>
             <h2 className="text-sm font-semibold">Domain progress comparison</h2>
             <div className="mt-4 space-y-4">
               {domainComparison.map(({ domain, total, perProfileCompleted }) => (
@@ -251,7 +248,7 @@ export default function Dashboard() {
                       const pct = total ? Math.round((completed / total) * 100) : 0;
                       return (
                         <div key={p} className="flex items-center gap-2">
-                          <span className="w-16 shrink-0 text-[11px] text-[var(--muted)]">
+                          <span className="w-14 shrink-0 truncate text-[11px] text-[var(--muted)] sm:w-16">
                             {PROFILE_LABELS[p]}
                           </span>
                           <div className="h-1.5 flex-1 bg-[var(--border)]">
@@ -272,10 +269,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div
-            className="mt-4 animate-fade-in-up border border-[var(--border)] bg-[var(--surface)] p-5"
-            style={{ animationDelay: "160ms" }}
-          >
+          <div className="surface-card mt-4 animate-fade-in-up p-5" style={{ animationDelay: "160ms" }}>
             <div className="flex items-center justify-between">
               <h2 className="text-sm font-semibold">Recent activity</h2>
               <Link href="/progress" className="text-xs font-medium text-[var(--accent)] hover:underline">
@@ -468,7 +462,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="mt-4 animate-fade-in-up border border-[var(--border)] bg-[var(--surface)] p-5" style={{ animationDelay: "120ms" }}>
+          <div className="surface-card mt-4 animate-fade-in-up p-5" style={{ animationDelay: "120ms" }}>
             <h2 className="text-sm font-semibold">Domain progress</h2>
             <div className="mt-4 space-y-3">
               {domainBreakdown.map(({ domain, total, completed }) => {

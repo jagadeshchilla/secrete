@@ -211,7 +211,7 @@ export default function CertificationsPage() {
       </div>
 
       {filtersOpen && (
-        <div className="animate-fade-in-up mt-2.5 flex flex-wrap items-center gap-4 border border-[var(--border)] bg-[var(--surface)] p-3">
+        <div className="surface-card animate-fade-in-up mt-2.5 flex flex-wrap items-center gap-4 p-3">
           <div>
             <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--muted)]">Level</p>
             <div className="flex flex-wrap gap-1.5">

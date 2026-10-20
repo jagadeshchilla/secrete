@@ -294,7 +294,7 @@ function DataSourceField({
               </button>
             </div>
           )}
-          <div className="grid grid-cols-[1fr_1fr_auto] gap-1.5">
+          <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-[1fr_1fr_auto]">
             <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="What data" autoFocus className={inputCls} />
             <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Link to it" className={inputCls} />
             <input value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Category" className={inputCls} />
@@ -389,7 +389,7 @@ function TaskListField({
       )}
 
       {editing && (
-        <div className="mt-1.5 grid grid-cols-[1fr_auto_auto_auto] gap-1.5">
+        <div className="mt-1.5 grid grid-cols-1 gap-1.5 sm:grid-cols-[1fr_auto_auto_auto]">
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -737,7 +737,7 @@ export default function IdeaDetailPage() {
           </div>
         ) : null
       ) : (
-        <div className="animate-fade-in-up mt-4 border border-[var(--border)] bg-[var(--surface-2)] p-4">
+        <div className="animate-fade-in-up mt-4 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] p-4">
           <div className="flex items-start justify-between gap-3">
             <IdeaMetaField
               title={idea.title}
@@ -788,7 +788,7 @@ export default function IdeaDetailPage() {
               onDecide={(feasible, reason) => updateIdea(idea.id, { feasible, infeasibleReason: reason })}
             />
           ) : idea.feasible === false ? (
-            <div className="mt-4 border border-[var(--border)] bg-[var(--surface)] p-3">
+            <div className="surface-card mt-4 p-3">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-xs font-semibold text-[var(--muted)]">Not pursuing this idea</p>

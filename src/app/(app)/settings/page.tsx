@@ -81,7 +81,7 @@ export default function SettingsPage() {
         <p className="mt-1 text-sm text-[var(--muted)]">Theme, backups, and sharing your progress.</p>
       </div>
 
-      <section className="animate-fade-in-up mt-6 border border-[var(--border)] bg-[var(--surface)] p-5">
+      <section className="surface-card animate-fade-in-up mt-6 p-5">
         <h2 className="text-sm font-semibold">Profile</h2>
         <p className="mt-1 text-xs text-[var(--muted)]">
           You&apos;re currently marking progress as <strong>{profile ? PROFILE_LABELS[profile] : "—"}</strong>.
@@ -110,7 +110,7 @@ export default function SettingsPage() {
       </section>
 
       <section
-        className="animate-fade-in-up mt-4 border border-[var(--border)] bg-[var(--surface)] p-5"
+        className="surface-card animate-fade-in-up mt-4 p-5"
         style={{ animationDelay: "20ms" }}
       >
         <h2 className="text-sm font-semibold">Site password</h2>
@@ -151,7 +151,7 @@ export default function SettingsPage() {
       </section>
 
       <section
-        className="animate-fade-in-up mt-4 border border-[var(--border)] bg-[var(--surface)] p-5"
+        className="surface-card animate-fade-in-up mt-4 p-5"
         style={{ animationDelay: "40ms" }}
       >
         <h2 className="text-sm font-semibold">Appearance</h2>
@@ -166,7 +166,7 @@ export default function SettingsPage() {
       </section>
 
       <section
-        className="animate-fade-in-up mt-4 border border-[var(--border)] bg-[var(--surface)] p-5"
+        className="surface-card animate-fade-in-up mt-4 p-5"
         style={{ animationDelay: "60ms" }}
       >
         <h2 className="text-sm font-semibold">Backup your progress</h2>
@@ -193,7 +193,7 @@ export default function SettingsPage() {
       </section>
 
       <section
-        className="animate-fade-in-up mt-4 border border-[var(--border)] bg-[var(--surface)] p-5"
+        className="surface-card animate-fade-in-up mt-4 p-5"
         style={{ animationDelay: "120ms" }}
       >
         <div className="flex items-center gap-2">

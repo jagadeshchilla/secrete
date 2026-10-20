@@ -361,7 +361,7 @@ export default function CourseChecklist({ course }: { course: Course }) {
               return (
                 <div
                   key={sec.id}
-                  className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]"
+                  className="surface-card overflow-hidden rounded-2xl"
                 >
                   <div className="flex flex-col gap-2 p-4">
                     <div className="flex items-center justify-between gap-2">
@@ -431,7 +431,7 @@ export default function CourseChecklist({ course }: { course: Course }) {
         </div>
 
         <aside className="animate-fade-in-up space-y-4 lg:sticky lg:top-3 lg:h-fit">
-          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+          <div className="surface-card rounded-2xl p-4">
             <div className="flex items-start gap-3">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]">
                 <FlameIcon className="h-5 w-5" />
@@ -443,7 +443,7 @@ export default function CourseChecklist({ course }: { course: Course }) {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
+          <div className="surface-card rounded-2xl p-5">
             <div className="flex items-center gap-4">
               <ProgressRing pct={pct} size={88} stroke={9} />
               <div>

@@ -147,7 +147,7 @@ function RoadmapPageInner() {
                 />
               </div>
 
-              <div className="mt-4 border border-[var(--border)] bg-[var(--surface)] p-4">
+              <div className="surface-card mt-4 p-4">
                 <div className="text-xs font-medium text-[var(--muted)]">Sources</div>
                 <ul className="mt-2 space-y-1">
                   {entry.sources.map((s) => (
