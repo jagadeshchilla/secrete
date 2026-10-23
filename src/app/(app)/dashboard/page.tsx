@@ -317,23 +317,23 @@ export default function Dashboard() {
           />
         </div>
 
-        <div className="surface-card flex h-full animate-fade-in-up flex-col justify-center p-5" style={{ animationDelay: "160ms" }}>
+        <div className="surface-card flex h-full animate-fade-in-up flex-col p-6" style={{ animationDelay: "160ms" }}>
           <div className="flex items-center gap-2">
-            <FlameIcon className="h-4 w-4 text-[var(--accent)]" />
-            <h2 className="text-sm font-semibold">Activity streak</h2>
+            <FlameIcon className="h-5 w-5 text-[var(--accent)]" />
+            <h2 className="text-base font-semibold">Activity streak</h2>
           </div>
-          <div className="mt-3 flex gap-5">
+          <div className="mt-4 flex gap-8">
             <div>
-              <div className="text-2xl font-semibold tabular-nums">{activityStreak.current}</div>
-              <div className="text-[11px] text-[var(--muted)]">Day streak</div>
+              <div className="text-4xl font-semibold tabular-nums">{activityStreak.current}</div>
+              <div className="mt-1 text-sm text-[var(--muted)]">Day streak</div>
             </div>
             <div>
-              <div className="text-2xl font-semibold tabular-nums">{activityStreak.longest}</div>
-              <div className="text-[11px] text-[var(--muted)]">Longest</div>
+              <div className="text-4xl font-semibold tabular-nums">{activityStreak.longest}</div>
+              <div className="mt-1 text-sm text-[var(--muted)]">Longest</div>
             </div>
           </div>
-          <div className="mt-4 overflow-x-auto">
-            <HeatmapCalendar activityByDate={activityMap} mode="rolling" weeks={10} />
+          <div className="mt-6 flex flex-1 items-center overflow-x-auto">
+            <HeatmapCalendar activityByDate={activityMap} mode="rolling" weeks={16} cellSize={16} />
           </div>
         </div>
       </div>

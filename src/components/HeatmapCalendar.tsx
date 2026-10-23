@@ -22,13 +22,17 @@ export default function HeatmapCalendar({
   weeks = 18,
   mode = "rolling",
   compact = false,
+  cellSize = 10,
 }: {
   activityByDate: Map<string, number>;
   weeks?: number;
   mode?: "rolling" | "year";
   compact?: boolean;
+  cellSize?: number;
 }) {
   const [hovered, setHovered] = useState<{ date: string; count: number } | null>(null);
+  const gap = cellSize >= 14 ? 4 : 3;
+  const step = cellSize + gap;
 
   const { columns, monthMarkers } = useMemo(() => {
     const today = new Date();
@@ -78,14 +82,15 @@ export default function HeatmapCalendar({
     return { columns: cols, monthMarkers: markers };
   }, [activityByDate, weeks, mode]);
 
+  const legendCellCls = cellSize >= 14 ? "text-xs" : "text-[10px]";
   const legend = (
-    <div className={`flex shrink-0 items-center gap-1 text-[10px] text-[var(--muted)] ${compact ? "mt-2" : "mt-5"}`}>
+    <div className={`flex shrink-0 items-center gap-1.5 ${legendCellCls} text-[var(--muted)] ${compact ? "mt-2" : "mt-5"}`}>
       <span>Less</span>
       {HEAT_VARS.map((v, level) => (
         <span
           key={v}
-          className="h-[10px] w-[10px] rounded-[2px] border border-[var(--border)]"
-          style={{ background: level === 0 ? "transparent" : `var(${v})` }}
+          className="rounded-[2px] border border-[var(--border)]"
+          style={{ height: cellSize, width: cellSize, background: level === 0 ? "transparent" : `var(${v})` }}
         />
       ))}
       <span>More</span>
@@ -94,47 +99,49 @@ export default function HeatmapCalendar({
 
   return (
     <div>
-      <div className={compact ? "" : "flex items-start gap-6"}>
-        <div className="shrink-0">
-          <div className="flex gap-[3px] pl-6 mb-1 relative h-4">
-            {monthMarkers.map((m) => (
-              <span
-                key={`${m.index}-${m.label}`}
-                className="absolute text-[11px] text-[var(--muted)]"
-                style={{ left: m.index * 13 }}
-              >
-                {m.label}
-              </span>
-            ))}
-          </div>
-          <div className="flex gap-[3px]">
-            <div className="flex flex-col gap-[3px] pr-1 justify-between text-[10px] text-[var(--muted)] h-[91px]">
-              <span>Sun</span>
-              <span>Wed</span>
-              <span>Sat</span>
-            </div>
-            {columns.map((col, ci) => (
-              <div className="flex flex-col gap-[3px]" key={ci}>
-                {col.map((cell) => (
-                  <div
-                    key={cell.date}
-                    onMouseEnter={() => cell.inRange && setHovered(cell)}
-                    onMouseLeave={() => setHovered(null)}
-                    className="h-[10px] w-[10px] rounded-[2px] border border-[var(--border)]"
-                    style={{
-                      background: cell.inRange && cell.count > 0 ? `var(${HEAT_VARS[levelFor(cell.count)]})` : "transparent",
-                      borderColor: cell.inRange ? "var(--border)" : "transparent",
-                    }}
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
+      <div className="shrink-0">
+        <div className="mb-1 relative h-4" style={{ paddingLeft: cellSize + 16 }}>
+          {monthMarkers.map((m) => (
+            <span
+              key={`${m.index}-${m.label}`}
+              className={`absolute text-[var(--muted)] ${cellSize >= 14 ? "text-xs" : "text-[11px]"}`}
+              style={{ left: m.index * step }}
+            >
+              {m.label}
+            </span>
+          ))}
         </div>
-
-        {!compact && legend}
+        <div className="flex" style={{ gap }}>
+          <div
+            className={`flex flex-col pr-1 justify-between text-[var(--muted)] ${cellSize >= 14 ? "text-xs" : "text-[10px]"}`}
+            style={{ gap, height: cellSize * 7 + gap * 6 }}
+          >
+            <span>Sun</span>
+            <span>Wed</span>
+            <span>Sat</span>
+          </div>
+          {columns.map((col, ci) => (
+            <div className="flex flex-col" style={{ gap }} key={ci}>
+              {col.map((cell) => (
+                <div
+                  key={cell.date}
+                  onMouseEnter={() => cell.inRange && setHovered(cell)}
+                  onMouseLeave={() => setHovered(null)}
+                  className="rounded-[3px] border border-[var(--border)]"
+                  style={{
+                    height: cellSize,
+                    width: cellSize,
+                    background: cell.inRange && cell.count > 0 ? `var(${HEAT_VARS[levelFor(cell.count)]})` : "transparent",
+                    borderColor: cell.inRange ? "var(--border)" : "transparent",
+                  }}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
-      {compact && legend}
+
+      {legend}
       {!compact && (
         <div className="mt-2 h-4 text-xs text-[var(--muted)]">
           {hovered ? (
