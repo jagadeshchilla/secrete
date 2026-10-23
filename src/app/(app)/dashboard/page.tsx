@@ -282,8 +282,8 @@ export default function Dashboard() {
         </Link>
       </div>
 
-      <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-[1fr_310px]">
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-2 lg:items-stretch">
+        <div className="grid grid-cols-1 gap-3">
           <MiniStat
             icon={GraduationCapIcon}
             label="Courses"
@@ -317,7 +317,7 @@ export default function Dashboard() {
           />
         </div>
 
-        <div className="surface-card animate-fade-in-up p-4" style={{ animationDelay: "160ms" }}>
+        <div className="surface-card flex h-full animate-fade-in-up flex-col justify-center p-5" style={{ animationDelay: "160ms" }}>
           <div className="flex items-center gap-2">
             <FlameIcon className="h-4 w-4 text-[var(--accent)]" />
             <h2 className="text-sm font-semibold">Activity streak</h2>
@@ -333,7 +333,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="mt-4 overflow-x-auto">
-            <HeatmapCalendar activityByDate={activityMap} mode="rolling" weeks={8} compact />
+            <HeatmapCalendar activityByDate={activityMap} mode="rolling" weeks={10} />
           </div>
         </div>
       </div>
