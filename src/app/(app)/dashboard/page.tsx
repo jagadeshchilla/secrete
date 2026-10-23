@@ -282,57 +282,59 @@ export default function Dashboard() {
         </Link>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <MiniStat
-          icon={GraduationCapIcon}
-          label="Courses"
-          value={`${courseStats.started}/${courseStats.total}`}
-          sub={`${courseStats.pct}% complete`}
-          pct={courseStats.pct}
-        />
-        <MiniStat
-          icon={LightbulbIcon}
-          label="Ideas"
-          value={ideaStats.total}
-          sub={`${ideaStats.done} done · ${ideaStats.pending} pending`}
-          pct={ideaStats.total ? Math.round((ideaStats.done / ideaStats.total) * 100) : 0}
-          delay={40}
-        />
-        <MiniStat
-          icon={FlaskIcon}
-          label="Research"
-          value={researchStats.total}
-          sub={`${researchStats.published} published`}
-          pct={researchStats.total ? Math.round((researchStats.published / researchStats.total) * 100) : 0}
-          delay={80}
-        />
-        <MiniStat
-          icon={BriefcaseIcon}
-          label="Freelancing"
-          value={freelanceStats.total}
-          sub={`${freelanceStats.completed} completed`}
-          pct={freelanceStats.total ? Math.round((freelanceStats.completed / freelanceStats.total) * 100) : 0}
-          delay={120}
-        />
-      </div>
+      <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-[1fr_310px]">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <MiniStat
+            icon={GraduationCapIcon}
+            label="Courses"
+            value={`${courseStats.started}/${courseStats.total}`}
+            sub={`${courseStats.pct}% complete`}
+            pct={courseStats.pct}
+          />
+          <MiniStat
+            icon={LightbulbIcon}
+            label="Ideas"
+            value={ideaStats.total}
+            sub={`${ideaStats.done} done · ${ideaStats.pending} pending`}
+            pct={ideaStats.total ? Math.round((ideaStats.done / ideaStats.total) * 100) : 0}
+            delay={40}
+          />
+          <MiniStat
+            icon={FlaskIcon}
+            label="Research"
+            value={researchStats.total}
+            sub={`${researchStats.published} published`}
+            pct={researchStats.total ? Math.round((researchStats.published / researchStats.total) * 100) : 0}
+            delay={80}
+          />
+          <MiniStat
+            icon={BriefcaseIcon}
+            label="Freelancing"
+            value={freelanceStats.total}
+            sub={`${freelanceStats.completed} completed`}
+            pct={freelanceStats.total ? Math.round((freelanceStats.completed / freelanceStats.total) * 100) : 0}
+            delay={120}
+          />
+        </div>
 
-      <div className="surface-card mt-4 max-w-xl animate-fade-in-up p-5" style={{ animationDelay: "160ms" }}>
-        <div className="flex items-center gap-2">
-          <FlameIcon className="h-4 w-4 text-[var(--accent)]" />
-          <h2 className="text-sm font-semibold">Activity streak</h2>
-        </div>
-        <div className="mt-3 flex gap-5">
-          <div>
-            <div className="text-2xl font-semibold tabular-nums">{activityStreak.current}</div>
-            <div className="text-[11px] text-[var(--muted)]">Day streak</div>
+        <div className="surface-card animate-fade-in-up p-4" style={{ animationDelay: "160ms" }}>
+          <div className="flex items-center gap-2">
+            <FlameIcon className="h-4 w-4 text-[var(--accent)]" />
+            <h2 className="text-sm font-semibold">Activity streak</h2>
           </div>
-          <div>
-            <div className="text-2xl font-semibold tabular-nums">{activityStreak.longest}</div>
-            <div className="text-[11px] text-[var(--muted)]">Longest</div>
+          <div className="mt-3 flex gap-5">
+            <div>
+              <div className="text-2xl font-semibold tabular-nums">{activityStreak.current}</div>
+              <div className="text-[11px] text-[var(--muted)]">Day streak</div>
+            </div>
+            <div>
+              <div className="text-2xl font-semibold tabular-nums">{activityStreak.longest}</div>
+              <div className="text-[11px] text-[var(--muted)]">Longest</div>
+            </div>
           </div>
-        </div>
-        <div className="mt-4 overflow-x-auto">
-          <HeatmapCalendar activityByDate={activityMap} mode="rolling" weeks={10} />
+          <div className="mt-4 overflow-x-auto">
+            <HeatmapCalendar activityByDate={activityMap} mode="rolling" weeks={8} compact />
+          </div>
         </div>
       </div>
 

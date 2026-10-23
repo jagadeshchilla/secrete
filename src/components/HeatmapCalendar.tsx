@@ -21,10 +21,12 @@ export default function HeatmapCalendar({
   activityByDate,
   weeks = 18,
   mode = "rolling",
+  compact = false,
 }: {
   activityByDate: Map<string, number>;
   weeks?: number;
   mode?: "rolling" | "year";
+  compact?: boolean;
 }) {
   const [hovered, setHovered] = useState<{ date: string; count: number } | null>(null);
 
@@ -76,9 +78,23 @@ export default function HeatmapCalendar({
     return { columns: cols, monthMarkers: markers };
   }, [activityByDate, weeks, mode]);
 
+  const legend = (
+    <div className={`flex shrink-0 items-center gap-1 text-[10px] text-[var(--muted)] ${compact ? "mt-2" : "mt-5"}`}>
+      <span>Less</span>
+      {HEAT_VARS.map((v, level) => (
+        <span
+          key={v}
+          className="h-[10px] w-[10px] rounded-[2px] border border-[var(--border)]"
+          style={{ background: level === 0 ? "transparent" : `var(${v})` }}
+        />
+      ))}
+      <span>More</span>
+    </div>
+  );
+
   return (
     <div>
-      <div className="flex items-start gap-6">
+      <div className={compact ? "" : "flex items-start gap-6"}>
         <div className="shrink-0">
           <div className="flex gap-[3px] pl-6 mb-1 relative h-4">
             {monthMarkers.map((m) => (
@@ -116,28 +132,21 @@ export default function HeatmapCalendar({
           </div>
         </div>
 
-        <div className="mt-5 flex shrink-0 items-center gap-1 text-[10px] text-[var(--muted)]">
-          <span>Less</span>
-          {HEAT_VARS.map((v, level) => (
-            <span
-              key={v}
-              className="h-[10px] w-[10px] rounded-[2px] border border-[var(--border)]"
-              style={{ background: level === 0 ? "transparent" : `var(${v})` }}
-            />
-          ))}
-          <span>More</span>
+        {!compact && legend}
+      </div>
+      {compact && legend}
+      {!compact && (
+        <div className="mt-2 h-4 text-xs text-[var(--muted)]">
+          {hovered ? (
+            <span>
+              <strong className="text-[var(--text)]">{hovered.count}</strong> update
+              {hovered.count === 1 ? "" : "s"} on {hovered.date}
+            </span>
+          ) : (
+            <span>Hover a day to see activity</span>
+          )}
         </div>
-      </div>
-      <div className="mt-2 h-4 text-xs text-[var(--muted)]">
-        {hovered ? (
-          <span>
-            <strong className="text-[var(--text)]">{hovered.count}</strong> update
-            {hovered.count === 1 ? "" : "s"} on {hovered.date}
-          </span>
-        ) : (
-          <span>Hover a day to see activity</span>
-        )}
-      </div>
+      )}
     </div>
   );
 }
