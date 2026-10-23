@@ -282,7 +282,7 @@ export default function Dashboard() {
         </Link>
       </div>
 
-      <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-2 lg:items-start">
+      <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-2 lg:items-stretch">
         <div className="grid grid-cols-1 gap-3">
           <MiniStat
             icon={GraduationCapIcon}
@@ -317,23 +317,23 @@ export default function Dashboard() {
           />
         </div>
 
-        <div className="surface-card animate-fade-in-up p-5" style={{ animationDelay: "160ms" }}>
+        <div className="surface-card flex h-full animate-fade-in-up flex-col p-6" style={{ animationDelay: "160ms" }}>
           <div className="flex items-center gap-2">
-            <FlameIcon className="h-4 w-4 text-[var(--accent)]" />
-            <h2 className="text-sm font-semibold">Activity streak</h2>
+            <FlameIcon className="h-5 w-5 text-[var(--accent)]" />
+            <h2 className="text-base font-semibold">Activity streak</h2>
           </div>
-          <div className="mt-3 flex gap-6">
+          <div className="mt-4 flex gap-8">
             <div>
-              <div className="text-3xl font-semibold tabular-nums">{activityStreak.current}</div>
-              <div className="mt-0.5 text-xs text-[var(--muted)]">Day streak</div>
+              <div className="text-4xl font-semibold tabular-nums">{activityStreak.current}</div>
+              <div className="mt-1 text-sm text-[var(--muted)]">Day streak</div>
             </div>
             <div>
-              <div className="text-3xl font-semibold tabular-nums">{activityStreak.longest}</div>
-              <div className="mt-0.5 text-xs text-[var(--muted)]">Longest</div>
+              <div className="text-4xl font-semibold tabular-nums">{activityStreak.longest}</div>
+              <div className="mt-1 text-sm text-[var(--muted)]">Longest</div>
             </div>
           </div>
-          <div className="mt-4 overflow-x-auto">
-            <HeatmapCalendar activityByDate={activityMap} mode="rolling" weeks={14} cellSize={13} />
+          <div className="mt-6 flex flex-1 items-start overflow-x-auto">
+            <HeatmapCalendar activityByDate={activityMap} mode="rolling" weeks={12} cellSize={26} />
           </div>
         </div>
       </div>
