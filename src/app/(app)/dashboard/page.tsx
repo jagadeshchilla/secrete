@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { useAppState, buildProgressEvents } from "@/context/AppStateContext";
+import { useAppState, buildProgressEvents, computeStreak } from "@/context/AppStateContext";
 import { useAccess } from "@/context/AccessContext";
 import { useIdeas } from "@/context/IdeasContext";
 import { useResearch } from "@/context/ResearchContext";
@@ -12,6 +12,8 @@ import type { StatusField } from "@/types/career";
 import type { Course } from "@/types/course";
 import { ROADMAP_DATA } from "@/data/roadmapData";
 import { courseTotals, loadCourseProgress, fetchCourseProgress } from "@/lib/courseProgress";
+import { buildActivityMap } from "@/lib/activityHeatmap";
+import HeatmapCalendar from "@/components/HeatmapCalendar";
 import {
   RouteIcon,
   GraduationCapIcon,
@@ -19,6 +21,7 @@ import {
   LightbulbIcon,
   FlaskIcon,
   BriefcaseIcon,
+  FlameIcon,
 } from "@/components/icons";
 
 const ROADMAP_ROLE_COUNT = Object.keys(ROADMAP_DATA).length;
@@ -170,6 +173,12 @@ export default function Dashboard() {
     return { total: mine.length, completed: mine.filter((g) => g.status === "completed").length };
   }, [gigs, view]);
 
+  const activityMap = useMemo(
+    () => buildActivityMap({ ideas, papers, gigs, courses }, view === "household" ? null : view),
+    [ideas, papers, gigs, courses, view]
+  );
+  const activityStreak = useMemo(() => computeStreak(activityMap), [activityMap]);
+
   const courseEvents = useMemo<HouseholdEvent[]>(
     () =>
       courses
@@ -307,7 +316,27 @@ export default function Dashboard() {
         />
       </div>
 
-      <div className="surface-card mt-4 animate-fade-in-up p-5" style={{ animationDelay: "160ms" }}>
+      <div className="surface-card mt-4 max-w-xl animate-fade-in-up p-5" style={{ animationDelay: "160ms" }}>
+        <div className="flex items-center gap-2">
+          <FlameIcon className="h-4 w-4 text-[var(--accent)]" />
+          <h2 className="text-sm font-semibold">Activity streak</h2>
+        </div>
+        <div className="mt-3 flex gap-5">
+          <div>
+            <div className="text-2xl font-semibold tabular-nums">{activityStreak.current}</div>
+            <div className="text-[11px] text-[var(--muted)]">Day streak</div>
+          </div>
+          <div>
+            <div className="text-2xl font-semibold tabular-nums">{activityStreak.longest}</div>
+            <div className="text-[11px] text-[var(--muted)]">Longest</div>
+          </div>
+        </div>
+        <div className="mt-4 overflow-x-auto">
+          <HeatmapCalendar activityByDate={activityMap} mode="rolling" weeks={10} />
+        </div>
+      </div>
+
+      <div className="surface-card mt-4 animate-fade-in-up p-5" style={{ animationDelay: "200ms" }}>
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-semibold">Recent activity</h2>
           <Link href="/progress" className="text-xs font-medium text-[var(--accent)] hover:underline">

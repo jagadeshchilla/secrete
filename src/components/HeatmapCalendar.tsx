@@ -77,40 +77,56 @@ export default function HeatmapCalendar({
   }, [activityByDate, weeks, mode]);
 
   return (
-    <div className="inline-block">
-      <div className="flex gap-[3px] pl-6 mb-1 relative h-4">
-        {monthMarkers.map((m) => (
-          <span
-            key={`${m.index}-${m.label}`}
-            className="absolute text-[11px] text-[var(--muted)]"
-            style={{ left: m.index * 13 }}
-          >
-            {m.label}
-          </span>
-        ))}
-      </div>
-      <div className="flex gap-[3px]">
-        <div className="flex flex-col gap-[3px] pr-1 justify-between text-[10px] text-[var(--muted)] h-[91px]">
-          <span>Sun</span>
-          <span>Wed</span>
-          <span>Sat</span>
-        </div>
-        {columns.map((col, ci) => (
-          <div className="flex flex-col gap-[3px]" key={ci}>
-            {col.map((cell) => (
-              <div
-                key={cell.date}
-                onMouseEnter={() => cell.inRange && setHovered(cell)}
-                onMouseLeave={() => setHovered(null)}
-                className="h-[10px] w-[10px] rounded-[2px] border border-[var(--border)]"
-                style={{
-                  background: cell.inRange && cell.count > 0 ? `var(${HEAT_VARS[levelFor(cell.count)]})` : "transparent",
-                  borderColor: cell.inRange ? "var(--border)" : "transparent",
-                }}
-              />
+    <div>
+      <div className="flex items-start gap-6">
+        <div className="shrink-0">
+          <div className="flex gap-[3px] pl-6 mb-1 relative h-4">
+            {monthMarkers.map((m) => (
+              <span
+                key={`${m.index}-${m.label}`}
+                className="absolute text-[11px] text-[var(--muted)]"
+                style={{ left: m.index * 13 }}
+              >
+                {m.label}
+              </span>
             ))}
           </div>
-        ))}
+          <div className="flex gap-[3px]">
+            <div className="flex flex-col gap-[3px] pr-1 justify-between text-[10px] text-[var(--muted)] h-[91px]">
+              <span>Sun</span>
+              <span>Wed</span>
+              <span>Sat</span>
+            </div>
+            {columns.map((col, ci) => (
+              <div className="flex flex-col gap-[3px]" key={ci}>
+                {col.map((cell) => (
+                  <div
+                    key={cell.date}
+                    onMouseEnter={() => cell.inRange && setHovered(cell)}
+                    onMouseLeave={() => setHovered(null)}
+                    className="h-[10px] w-[10px] rounded-[2px] border border-[var(--border)]"
+                    style={{
+                      background: cell.inRange && cell.count > 0 ? `var(${HEAT_VARS[levelFor(cell.count)]})` : "transparent",
+                      borderColor: cell.inRange ? "var(--border)" : "transparent",
+                    }}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5 flex shrink-0 items-center gap-1 text-[10px] text-[var(--muted)]">
+          <span>Less</span>
+          {HEAT_VARS.map((v, level) => (
+            <span
+              key={v}
+              className="h-[10px] w-[10px] rounded-[2px] border border-[var(--border)]"
+              style={{ background: level === 0 ? "transparent" : `var(${v})` }}
+            />
+          ))}
+          <span>More</span>
+        </div>
       </div>
       <div className="mt-2 h-4 text-xs text-[var(--muted)]">
         {hovered ? (

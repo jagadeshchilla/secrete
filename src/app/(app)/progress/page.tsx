@@ -9,9 +9,12 @@ import { PROFILES, PROFILE_LABELS, type Profile } from "@/config/access";
 import { RESEARCH_STATUSES } from "@/types/research";
 import { FREELANCE_STATUSES } from "@/types/freelance";
 import { courseTotals, loadCourseProgress, fetchCourseProgress } from "@/lib/courseProgress";
+import { buildActivityMap } from "@/lib/activityHeatmap";
+import { computeStreak } from "@/context/AppStateContext";
 import type { Course } from "@/types/course";
 import StatCard from "@/components/StatCard";
-import { GraduationCapIcon, LightbulbIcon, FlaskIcon, BriefcaseIcon } from "@/components/icons";
+import HeatmapCalendar from "@/components/HeatmapCalendar";
+import { GraduationCapIcon, LightbulbIcon, FlaskIcon, BriefcaseIcon, FlameIcon } from "@/components/icons";
 
 type View = "household" | Profile;
 type Section = "courses" | "ideas" | "research" | "freelancing";
@@ -59,7 +62,6 @@ export default function ProgressPage() {
   >({ jagadesh: {}, harshita: {} });
 
   useEffect(() => {
-    if (section !== "courses") return;
     fetch("/api/admin-courses")
       .then((res) => (res.ok ? res.json() : null))
       .then((json) => {
@@ -68,7 +70,7 @@ export default function ProgressPage() {
       .catch(() => {
         // offline or DB not configured yet
       });
-  }, [section]);
+  }, []);
 
   useEffect(() => {
     if (!courses.length) return;
@@ -121,6 +123,12 @@ export default function ProgressPage() {
     };
   };
 
+  const activityMap = useMemo(
+    () => buildActivityMap({ ideas, papers, gigs, courses }, view === "household" ? null : view),
+    [ideas, papers, gigs, courses, view]
+  );
+  const activityStreak = useMemo(() => computeStreak(activityMap), [activityMap]);
+
   return (
     <div className="mx-auto max-w-5xl px-5 py-8 md:px-8">
       <div className="animate-fade-in-up flex flex-wrap items-center justify-between gap-3">
@@ -151,6 +159,26 @@ export default function ProgressPage() {
               {p === profile ? " (me)" : ""}
             </button>
           ))}
+        </div>
+      </div>
+
+      <div className="surface-card mt-4 max-w-xl animate-fade-in-up p-5">
+        <div className="flex items-center gap-2">
+          <FlameIcon className="h-4 w-4 text-[var(--accent)]" />
+          <h2 className="text-sm font-semibold">Activity streak</h2>
+        </div>
+        <div className="mt-3 flex gap-5">
+          <div>
+            <div className="text-2xl font-semibold tabular-nums">{activityStreak.current}</div>
+            <div className="text-[11px] text-[var(--muted)]">Day streak</div>
+          </div>
+          <div>
+            <div className="text-2xl font-semibold tabular-nums">{activityStreak.longest}</div>
+            <div className="text-[11px] text-[var(--muted)]">Longest</div>
+          </div>
+        </div>
+        <div className="mt-4 overflow-x-auto">
+          <HeatmapCalendar activityByDate={activityMap} mode="rolling" weeks={10} />
         </div>
       </div>
 

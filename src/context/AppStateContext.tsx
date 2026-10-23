@@ -29,11 +29,14 @@ export function stripEmoji(domain: string) {
   return domain.replace(/^[^\p{L}\p{N}]+/u, "").trim();
 }
 
-function todayKey(d: Date = new Date()) {
+export function todayKey(d: Date = new Date()) {
   return d.toISOString().slice(0, 10);
 }
 
-function computeStreak(activityByDate: Map<string, number>) {
+// Generic current/longest streak from any date-keyed activity map — used for
+// roles as well as the combined Courses/Ideas/Research/Freelancing activity
+// shown on Dashboard and the Progress page.
+export function computeStreak(activityByDate: Map<string, number>) {
   let current = 0;
   let longest = 0;
   let running = 0;
