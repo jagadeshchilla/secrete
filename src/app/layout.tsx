@@ -7,7 +7,9 @@ import { ResourcesProvider } from "@/context/ResourcesContext";
 import { IdeasProvider } from "@/context/IdeasContext";
 import { ResearchProvider } from "@/context/ResearchContext";
 import { FreelanceProvider } from "@/context/FreelanceContext";
+import { ToastProvider } from "@/context/ToastContext";
 import Gate from "@/components/Gate/Gate";
+import StreakToastWatcher from "@/components/StreakToastWatcher";
 
 export const metadata: Metadata = {
   title: "Career Hub",
@@ -47,7 +49,12 @@ export default function RootLayout({
               <IdeasProvider>
                 <ResearchProvider>
                   <FreelanceProvider>
-                    <Gate>{children}</Gate>
+                    <ToastProvider>
+                      <Gate>
+                        <StreakToastWatcher />
+                        {children}
+                      </Gate>
+                    </ToastProvider>
                   </FreelanceProvider>
                 </ResearchProvider>
               </IdeasProvider>
