@@ -29,6 +29,7 @@ import {
   BookIcon,
   MessageIcon,
   TargetIcon,
+  ChevronRightIcon,
 } from "@/components/icons";
 
 const TOOL_COUNT = new Set(
@@ -310,14 +311,14 @@ export default function Dashboard() {
               </div>
             );
             return (
-              <div key={step.href} className="flex shrink-0 items-start">
+              <div key={step.href} className="flex shrink-0 items-center">
                 {step.disabled ? (
                   <div title="Coming soon">{content}</div>
                 ) : (
                   <Link href={step.href}>{content}</Link>
                 )}
                 {i < JOURNEY_STEPS.length - 1 && (
-                  <div className="mt-5 h-px w-6 shrink-0 bg-[var(--border)] sm:w-10" />
+                  <ChevronRightIcon className="mb-5 h-4 w-4 shrink-0 text-[var(--muted)]" />
                 )}
               </div>
             );
