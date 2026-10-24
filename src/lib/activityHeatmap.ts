@@ -3,6 +3,7 @@ import type { ProjectIdea } from "@/types/ideas";
 import type { ResearchPaper } from "@/types/research";
 import type { FreelanceGig } from "@/types/freelance";
 import type { Course } from "@/types/course";
+import { todayKey } from "@/context/AppStateContext";
 
 // Combined activity-by-date map across Courses, Ideas, Research, and
 // Freelancing — replaces the old roles-only heatmap now that progress
@@ -14,7 +15,9 @@ export function buildActivityMap(
   const map = new Map<string, number>();
   function add(dateStr: string | undefined) {
     if (!dateStr) return;
-    const day = dateStr.slice(0, 10);
+    // Key by local calendar day (matches todayKey/HeatmapCalendar) rather than
+    // slicing the raw UTC timestamp, which shifted a day early for IST.
+    const day = todayKey(new Date(dateStr));
     map.set(day, (map.get(day) || 0) + 1);
   }
   ideas.forEach((i) => {

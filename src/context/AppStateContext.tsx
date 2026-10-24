@@ -29,8 +29,14 @@ export function stripEmoji(domain: string) {
   return domain.replace(/^[^\p{L}\p{N}]+/u, "").trim();
 }
 
+// Local calendar-day key (not toISOString/UTC) — using UTC here would shift
+// the date backward for positive UTC offsets (e.g. IST) near local midnight,
+// making "today" mismatch the heatmap grid and activity timestamps.
 export function todayKey(d: Date = new Date()) {
-  return d.toISOString().slice(0, 10);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
 }
 
 // Generic current/longest streak from any date-keyed activity map — used for

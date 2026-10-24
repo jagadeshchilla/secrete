@@ -2,8 +2,13 @@
 
 import { useMemo, useState } from "react";
 
+// Local calendar-day key (not toISOString/UTC) — matches the key format
+// used by computeStreak/buildActivityMap so "today" lines up with the grid.
 function toKey(d: Date) {
-  return d.toISOString().slice(0, 10);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
 }
 
 function levelFor(count: number) {
