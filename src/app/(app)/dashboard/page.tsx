@@ -22,12 +22,36 @@ import {
   FlaskIcon,
   BriefcaseIcon,
   FlameIcon,
+  GridIcon,
+  AwardIcon,
+  FileTextIcon,
+  BadgeIcon,
+  BrowserIcon,
+  BookIcon,
+  MessageIcon,
+  TargetIcon,
 } from "@/components/icons";
 
 const ROADMAP_ROLE_COUNT = Object.keys(ROADMAP_DATA).length;
 const TOOL_COUNT = new Set(
   Object.values(ROADMAP_DATA).flatMap((entry) => entry.skills.flatMap((s) => s.items))
 ).size;
+
+const JOURNEY_STEPS: { href: string; label: string; icon: typeof RouteIcon; disabled?: boolean }[] = [
+  { href: "/roles", label: "Explore Roles", icon: GridIcon },
+  { href: "/roadmap", label: "Roadmap", icon: RouteIcon },
+  { href: "/courses", label: "Courses", icon: GraduationCapIcon },
+  { href: "/ideas", label: "Project Ideas", icon: LightbulbIcon },
+  { href: "/research", label: "Research Papers", icon: FlaskIcon },
+  { href: "/freelancing", label: "Freelancing", icon: BriefcaseIcon },
+  { href: "/certifications", label: "Certifications", icon: AwardIcon },
+  { href: "/resume-creation", label: "Resume Creation", icon: FileTextIcon },
+  { href: "/profiles", label: "Profiles", icon: BadgeIcon, disabled: true },
+  { href: "/portfolio", label: "Portfolio Website", icon: BrowserIcon, disabled: true },
+  { href: "/blogs", label: "Blogs", icon: BookIcon },
+  { href: "/mock-interview", label: "Mock Interview", icon: MessageIcon },
+  { href: "/job-applications", label: "Job Applications", icon: TargetIcon, disabled: true },
+];
 
 type View = "household" | Profile;
 
@@ -238,6 +262,51 @@ export default function Dashboard() {
               {p === profile ? " (me)" : ""}
             </button>
           ))}
+        </div>
+      </div>
+
+      <div className="surface-card mt-6 animate-fade-in-up p-4" style={{ animationDelay: "20ms" }}>
+        <h2 className="text-sm font-semibold">Your journey</h2>
+        <div className="scrollbar-hide mt-3 flex items-center overflow-x-auto pb-1">
+          {JOURNEY_STEPS.map((step, i) => {
+            const Icon = step.icon;
+            const content = (
+              <div
+                className={`flex shrink-0 flex-col items-center gap-1.5 ${
+                  step.disabled ? "cursor-not-allowed opacity-50" : "group"
+                }`}
+              >
+                <div
+                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-transform ${
+                    step.disabled
+                      ? "border-[var(--border)] bg-[var(--surface-2)] text-[var(--muted)]"
+                      : "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)] group-hover:scale-110"
+                  }`}
+                >
+                  <Icon className="h-[18px] w-[18px]" />
+                </div>
+                <span
+                  className={`max-w-[84px] text-center text-[11px] font-medium leading-tight ${
+                    step.disabled ? "text-[var(--muted)]" : "text-[var(--text)]"
+                  }`}
+                >
+                  {step.label}
+                </span>
+              </div>
+            );
+            return (
+              <div key={step.href} className="flex shrink-0 items-start">
+                {step.disabled ? (
+                  <div title="Coming soon">{content}</div>
+                ) : (
+                  <Link href={step.href}>{content}</Link>
+                )}
+                {i < JOURNEY_STEPS.length - 1 && (
+                  <div className="mt-5 h-px w-6 shrink-0 bg-[var(--border)] sm:w-10" />
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 
