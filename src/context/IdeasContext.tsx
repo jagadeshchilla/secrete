@@ -32,6 +32,8 @@ type IdeaPatch = Partial<
     | "blockers"
     | "outcomeNotes"
     | "researchPaperLink"
+    | "chatgptProjectLink"
+    | "githubUrl"
     | "done"
     | "feasible"
     | "infeasibleReason"

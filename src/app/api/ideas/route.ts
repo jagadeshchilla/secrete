@@ -24,6 +24,8 @@ function rowToIdea(row: Record<string, unknown>): ProjectIdea {
     blockers: (row.blockers as string) ?? undefined,
     outcomeNotes: (row.outcome_notes as string) ?? undefined,
     researchPaperLink: (row.research_paper_link as string) ?? undefined,
+    chatgptProjectLink: (row.chatgpt_project_link as string) ?? undefined,
+    githubUrl: (row.github_url as string) ?? undefined,
     done: row.done as boolean,
   };
 }
@@ -102,6 +104,8 @@ const PATCHABLE_FIELDS: Record<string, string> = {
   blockers: "blockers",
   outcomeNotes: "outcome_notes",
   researchPaperLink: "research_paper_link",
+  chatgptProjectLink: "chatgpt_project_link",
+  githubUrl: "github_url",
   done: "done",
   feasible: "feasible",
   infeasibleReason: "infeasible_reason",

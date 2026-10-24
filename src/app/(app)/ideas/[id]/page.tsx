@@ -23,6 +23,7 @@ import {
   ExternalLinkIcon,
   PencilIcon,
   CopyIcon,
+  MessageIcon,
 } from "@/components/icons";
 
 function newId() {
@@ -114,6 +115,52 @@ function SectionHeader({ icon: Icon, label }: { icon: typeof LightbulbIcon; labe
       <Icon className="h-3.5 w-3.5" />
       {label}
     </p>
+  );
+}
+
+// ---- A single shared URL field (ChatGPT project, GitHub repo, ...), editable in place ----
+function SharedLinkField({
+  icon,
+  label,
+  placeholder,
+  value,
+  editing,
+  onSave,
+}: {
+  icon: typeof LightbulbIcon;
+  label: string;
+  placeholder: string;
+  value: string | undefined;
+  editing: boolean;
+  onSave: (next: string | undefined) => void;
+}) {
+  const [draft, setDraft] = useState(value || "");
+
+  return (
+    <div>
+      <SectionHeader icon={icon} label={label} />
+      {editing ? (
+        <input
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onBlur={() => onSave(draft.trim() || undefined)}
+          placeholder={placeholder}
+          className={`${inputCls} mt-1.5`}
+        />
+      ) : value ? (
+        <a
+          href={value}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-1 inline-flex min-w-0 items-center gap-1 text-xs font-medium text-[var(--accent)] hover:underline"
+        >
+          <ExternalLinkIcon className="h-3 w-3 shrink-0" />
+          <span className="truncate">{value}</span>
+        </a>
+      ) : (
+        <p className="mt-1 text-xs text-[var(--muted)]">Not set.</p>
+      )}
+    </div>
   );
 }
 
@@ -694,6 +741,25 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
         >
           {editing ? "Done editing" : "Edit"}
         </button>
+      </div>
+
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <SharedLinkField
+          icon={MessageIcon}
+          label="ChatGPT project"
+          placeholder="https://chatgpt.com/g/g-p-.../project"
+          value={idea.chatgptProjectLink}
+          editing={editing}
+          onSave={(v) => updateIdea(idea.id, { chatgptProjectLink: v })}
+        />
+        <SharedLinkField
+          icon={StackIcon}
+          label="GitHub repo"
+          placeholder="https://github.com/you/repo"
+          value={idea.githubUrl}
+          editing={editing}
+          onSave={(v) => updateIdea(idea.id, { githubUrl: v })}
+        />
       </div>
 
       <PromptItemField

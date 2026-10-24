@@ -49,6 +49,8 @@ export interface ProjectIdea {
   infeasibleReason?: string;
 
   // Only meaningful once feasible is true.
+  chatgptProjectLink?: string; // shared ChatGPT Project link both profiles chat in
+  githubUrl?: string;
   researchTopics: IdeaPromptItem[];
   dataSources: IdeaDataSource[];
   methods: IdeaPromptItem[];

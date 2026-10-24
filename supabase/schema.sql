@@ -53,6 +53,8 @@ create table if not exists project_ideas (
   blockers text,
   outcome_notes text,
   research_paper_link text,
+  chatgpt_project_link text, -- shared ChatGPT Project link both profiles chat in
+  github_url text,
   done boolean not null default false
 );
 alter table project_ideas add column if not exists domains text[] not null default '{}';
@@ -75,6 +77,8 @@ alter table project_ideas alter column research_topics set default '[]'::jsonb;
 alter table project_ideas alter column methods drop default;
 alter table project_ideas alter column methods type jsonb using to_jsonb(methods);
 alter table project_ideas alter column methods set default '[]'::jsonb;
+alter table project_ideas add column if not exists chatgpt_project_link text;
+alter table project_ideas add column if not exists github_url text;
 alter table project_ideas add column if not exists tech_stack text[] not null default '{}';
 alter table project_ideas add column if not exists tasks jsonb not null default '[]';
 alter table project_ideas add column if not exists target_date text;
