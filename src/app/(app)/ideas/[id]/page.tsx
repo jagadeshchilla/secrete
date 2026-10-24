@@ -244,6 +244,7 @@ function TagListField({
 function PromptItemField({
   icon,
   label,
+  hint,
   placeholder,
   items: topics,
   editing,
@@ -255,6 +256,7 @@ function PromptItemField({
 }: {
   icon: typeof LightbulbIcon;
   label: string;
+  hint?: string;
   placeholder: string;
   items: IdeaPromptItem[];
   editing: boolean;
@@ -314,6 +316,7 @@ function PromptItemField({
           </button>
         )}
       </div>
+      {hint && <p className="mt-0.5 text-[10px] text-[var(--muted)]">{hint}</p>}
       {topics.length > 0 ? (
         <div className="mt-1.5 space-y-1.5">
           {topics.map((topic) => (
@@ -765,6 +768,7 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
       <PromptItemField
         icon={FlaskIcon}
         label="What to research"
+        hint="Do the research or discuss it together in the ChatGPT project above."
         placeholder="A question or topic to look into"
         items={idea.researchTopics}
         editing={editing}
@@ -788,6 +792,7 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
       <PromptItemField
         icon={ChipIcon}
         label="Methods & concepts"
+        hint="Discuss and decide on these together in the ChatGPT project above."
         placeholder="e.g. Random forest, A/B testing"
         items={idea.methods}
         editing={editing}
