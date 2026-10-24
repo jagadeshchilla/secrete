@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useAppState, stripEmoji, keyFor } from "@/context/AppStateContext";
 import { useIdeas } from "@/context/IdeasContext";
 import { PROFILES, PROFILE_LABELS, type Profile } from "@/config/access";
-import { IDEA_TASK_TYPES, type IdeaTask, type IdeaDataSource, type ProjectIdea } from "@/types/ideas";
+import { IDEA_TASK_TYPES, type IdeaTask, type IdeaDataSource, type IdeaPromptItem, type ProjectIdea } from "@/types/ideas";
 import {
   LightbulbIcon,
   ArrowLeftIcon,
@@ -22,6 +22,7 @@ import {
   ShieldIcon,
   ExternalLinkIcon,
   PencilIcon,
+  CopyIcon,
 } from "@/components/icons";
 
 function newId() {
@@ -116,7 +117,7 @@ function SectionHeader({ icon: Icon, label }: { icon: typeof LightbulbIcon; labe
   );
 }
 
-// ---- Generic add/remove chip list, used for research topics / methods / tech stack ----
+// ---- Generic add/remove chip list, used for methods / tech stack ----
 function TagListField({
   icon,
   label,
@@ -159,6 +160,190 @@ function TagListField({
                 </button>
               )}
             </span>
+          ))}
+        </div>
+      ) : (
+        <p className="mt-1 text-[11px] text-[var(--muted)]">Nothing added yet.</p>
+      )}
+      {editing && (
+        <div className="mt-1.5 flex gap-1.5">
+          <input
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                submit();
+              }
+            }}
+            placeholder={placeholder}
+            autoFocus
+            className={inputCls}
+          />
+          <button
+            type="button"
+            onClick={submit}
+            className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            <PlusIcon className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---- Research topics / methods: text + an editable, DB-persisted ChatGPT prompt per item ----
+function PromptItemField({
+  icon,
+  label,
+  placeholder,
+  items: topics,
+  editing,
+  defaultPrompt,
+  bundlePrompt,
+  onAdd,
+  onRemove,
+  onUpdatePrompt,
+}: {
+  icon: typeof LightbulbIcon;
+  label: string;
+  placeholder: string;
+  items: IdeaPromptItem[];
+  editing: boolean;
+  defaultPrompt: (text: string) => string;
+  bundlePrompt: (items: IdeaPromptItem[]) => string;
+  onAdd: (text: string) => void;
+  onRemove: (id: string) => void;
+  onUpdatePrompt: (id: string, prompt: string | undefined) => void;
+}) {
+  const [value, setValue] = useState("");
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [draftPrompt, setDraftPrompt] = useState("");
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [copiedAll, setCopiedAll] = useState(false);
+
+  function submit() {
+    if (!value.trim()) return;
+    onAdd(value.trim());
+    setValue("");
+  }
+
+  async function copy(text: string, mark: () => void, unmark: () => void) {
+    try {
+      await navigator.clipboard.writeText(text);
+      mark();
+      setTimeout(unmark, 1500);
+    } catch {
+      // clipboard unavailable — ignore
+    }
+  }
+
+  function openEditor(topic: IdeaPromptItem) {
+    setOpenId(topic.id);
+    setDraftPrompt(topic.prompt ?? defaultPrompt(topic.text));
+  }
+
+  function savePrompt(id: string) {
+    onUpdatePrompt(id, draftPrompt.trim() || undefined);
+    setOpenId(null);
+  }
+
+  return (
+    <div>
+      <div className="flex items-center justify-between gap-2">
+        <SectionHeader icon={icon} label={label} />
+        {topics.length > 0 && (
+          <button
+            type="button"
+            onClick={() =>
+              copy(bundlePrompt(topics), () => setCopiedAll(true), () => setCopiedAll(false))
+            }
+            className="flex shrink-0 items-center gap-1 text-[10px] font-medium text-[var(--accent)] hover:underline"
+            title="Copy one ChatGPT prompt covering every topic above"
+          >
+            {copiedAll ? <CheckIcon className="h-3 w-3" /> : <CopyIcon className="h-3 w-3" />}
+            {copiedAll ? "Copied" : "Copy prompt for all"}
+          </button>
+        )}
+      </div>
+      {topics.length > 0 ? (
+        <div className="mt-1.5 space-y-1.5">
+          {topics.map((topic) => (
+            <div key={topic.id} className="border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5 text-[11px]">
+              <div className="flex items-center gap-1.5">
+                <span className="min-w-0 flex-1">{topic.text}</span>
+                <button
+                  type="button"
+                  onClick={() =>
+                    copy(
+                      topic.prompt ?? defaultPrompt(topic.text),
+                      () => setCopiedId(topic.id),
+                      () => setCopiedId((cur) => (cur === topic.id ? null : cur))
+                    )
+                  }
+                  className="shrink-0 text-[var(--muted)] hover:text-[var(--accent)]"
+                  title="Copy a ChatGPT prompt for this topic"
+                >
+                  {copiedId === topic.id ? <CheckIcon className="h-3 w-3" /> : <CopyIcon className="h-3 w-3" />}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => (openId === topic.id ? setOpenId(null) : openEditor(topic))}
+                  className="shrink-0 text-[var(--muted)] hover:text-[var(--accent)]"
+                  title={topic.prompt ? "Edit saved prompt" : "Customize this prompt"}
+                >
+                  <PencilIcon className="h-3 w-3" />
+                </button>
+                {editing && (
+                  <button
+                    type="button"
+                    onClick={() => onRemove(topic.id)}
+                    className="shrink-0 text-[var(--muted)] hover:text-[var(--bad)]"
+                  >
+                    <CloseIcon className="h-3 w-3" />
+                  </button>
+                )}
+              </div>
+              {openId === topic.id && (
+                <div className="mt-1.5">
+                  <textarea
+                    value={draftPrompt}
+                    onChange={(e) => setDraftPrompt(e.target.value)}
+                    rows={5}
+                    className={`${inputCls} leading-relaxed`}
+                  />
+                  <div className="mt-1.5 flex flex-wrap gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => savePrompt(topic.id)}
+                      className="border border-[var(--accent)] bg-[var(--accent)] px-2.5 py-1 text-[11px] font-medium text-white"
+                    >
+                      Save prompt
+                    </button>
+                    {topic.prompt && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          onUpdatePrompt(topic.id, undefined);
+                          setOpenId(null);
+                        }}
+                        className="border border-[var(--border)] px-2.5 py-1 text-[11px] font-medium text-[var(--muted)] hover:text-[var(--text)]"
+                      >
+                        Reset to default
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => setOpenId(null)}
+                      className="border border-[var(--border)] px-2.5 py-1 text-[11px] font-medium text-[var(--muted)] hover:text-[var(--text)]"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
         </div>
       ) : (
@@ -508,24 +693,48 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
         </button>
       </div>
 
-      <TagListField
+      <PromptItemField
         icon={FlaskIcon}
         label="What to research"
-        items={idea.researchTopics}
         placeholder="A question or topic to look into"
+        items={idea.researchTopics}
         editing={editing}
-        onAdd={(v) => updateIdea(idea.id, { researchTopics: [...idea.researchTopics, v] })}
-        onRemove={(i) => updateIdea(idea.id, { researchTopics: idea.researchTopics.filter((_, idx) => idx !== i) })}
+        onAdd={(text) => updateIdea(idea.id, { researchTopics: [...idea.researchTopics, { id: newId(), text }] })}
+        onRemove={(id) => updateIdea(idea.id, { researchTopics: idea.researchTopics.filter((t) => t.id !== id) })}
+        onUpdatePrompt={(id, prompt) =>
+          updateIdea(idea.id, {
+            researchTopics: idea.researchTopics.map((t) => (t.id === id ? { ...t, prompt } : t)),
+          })
+        }
+        defaultPrompt={(text) =>
+          `I'm working on a project called "${idea.title}" (${idea.description}). Explain this in depth: "${text}".\n\nCover:\n1. The core concept in plain language.\n2. Why it matters specifically for this project.\n3. A step-by-step approach to research or apply it.\n4. 2-3 reputable resources, papers, or tools to go deeper.\n\nKeep it practical, not just theory.`
+        }
+        bundlePrompt={(items) =>
+          `I'm working on a project called "${idea.title}" (${idea.description}). I need to research the following topics:\n${items
+            .map((t, i) => `${i + 1}. ${t.text}`)
+            .join("\n")}\n\nFor each one, give me:\n1. The core concept in plain language.\n2. Why it matters for this project.\n3. A step-by-step approach to research or apply it.\n4. 2-3 reputable resources, papers, or tools to go deeper.\n\nKeep it practical and organized by topic.`
+        }
       />
 
-      <TagListField
+      <PromptItemField
         icon={ChipIcon}
         label="Methods & concepts"
-        items={idea.methods}
         placeholder="e.g. Random forest, A/B testing"
+        items={idea.methods}
         editing={editing}
-        onAdd={(v) => updateIdea(idea.id, { methods: [...idea.methods, v] })}
-        onRemove={(i) => updateIdea(idea.id, { methods: idea.methods.filter((_, idx) => idx !== i) })}
+        onAdd={(text) => updateIdea(idea.id, { methods: [...idea.methods, { id: newId(), text }] })}
+        onRemove={(id) => updateIdea(idea.id, { methods: idea.methods.filter((m) => m.id !== id) })}
+        onUpdatePrompt={(id, prompt) =>
+          updateIdea(idea.id, { methods: idea.methods.map((m) => (m.id === id ? { ...m, prompt } : m)) })
+        }
+        defaultPrompt={(text) =>
+          `I'm working on a project called "${idea.title}" (${idea.description}). Explain the method/concept "${text}" in depth.\n\nCover:\n1. What it is, in plain language.\n2. How it's typically applied, with a simple example.\n3. Why it's a good fit for this project specifically.\n4. Common pitfalls or alternatives worth knowing.\n\nKeep it practical, not just theory.`
+        }
+        bundlePrompt={(items) =>
+          `I'm working on a project called "${idea.title}" (${idea.description}). I'm using the following methods/concepts:\n${items
+            .map((m, i) => `${i + 1}. ${m.text}`)
+            .join("\n")}\n\nFor each one, give me:\n1. What it is, in plain language.\n2. How it's typically applied, with a simple example.\n3. Why it's a good fit for this project.\n4. Common pitfalls or alternatives worth knowing.\n\nKeep it practical and organized by item.`
+        }
       />
 
       <DataSourceField

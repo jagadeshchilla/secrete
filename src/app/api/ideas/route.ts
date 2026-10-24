@@ -1,7 +1,16 @@
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
-import type { ProjectIdea } from "@/types/ideas";
+import type { ProjectIdea, IdeaPromptItem } from "@/types/ideas";
 import type { Profile } from "@/config/access";
+
+// research_topics/methods used to be stored as plain strings; normalize old
+// rows into the {id, text, prompt?} shape so older ideas still render correctly.
+function normalizePromptItems(raw: unknown): IdeaPromptItem[] {
+  if (!Array.isArray(raw)) return [];
+  return raw.map((t, i) =>
+    typeof t === "string" ? { id: `legacy-${i}`, text: t } : (t as IdeaPromptItem)
+  );
+}
 
 function rowToIdea(row: Record<string, unknown>): ProjectIdea {
   return {
@@ -14,9 +23,9 @@ function rowToIdea(row: Record<string, unknown>): ProjectIdea {
     createdAt: row.created_at as string,
     feasible: (row.feasible as boolean | null) ?? null,
     infeasibleReason: (row.infeasible_reason as string) ?? undefined,
-    researchTopics: (row.research_topics as string[]) || [],
+    researchTopics: normalizePromptItems(row.research_topics),
     dataSources: (row.data_sources as ProjectIdea["dataSources"]) || [],
-    methods: (row.methods as string[]) || [],
+    methods: normalizePromptItems(row.methods),
     techStack: (row.tech_stack as string[]) || [],
     tasks: (row.tasks as ProjectIdea["tasks"]) || [],
     targetDate: (row.target_date as string) ?? undefined,

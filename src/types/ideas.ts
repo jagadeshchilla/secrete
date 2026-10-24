@@ -25,6 +25,14 @@ export interface IdeaDataSource {
   category?: string; // free-text, e.g. "Dataset", "API", "Scraping"
 }
 
+// Used for both researchTopics and methods — a short text item that can carry
+// its own saved ChatGPT prompt override (auto-generated default used when absent).
+export interface IdeaPromptItem {
+  id: string;
+  text: string;
+  prompt?: string;
+}
+
 export interface ProjectIdea {
   id: string;
   title: string;
@@ -41,9 +49,9 @@ export interface ProjectIdea {
   infeasibleReason?: string;
 
   // Only meaningful once feasible is true.
-  researchTopics: string[];
+  researchTopics: IdeaPromptItem[];
   dataSources: IdeaDataSource[];
-  methods: string[];
+  methods: IdeaPromptItem[];
   techStack: string[];
   tasks: IdeaTask[];
   targetDate?: string;
