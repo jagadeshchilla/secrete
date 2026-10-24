@@ -1,16 +1,8 @@
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
-import type { ProjectIdea, IdeaPromptItem } from "@/types/ideas";
+import type { ProjectIdea } from "@/types/ideas";
 import type { Profile } from "@/config/access";
-
-// research_topics/methods used to be stored as plain strings; normalize old
-// rows into the {id, text, prompt?} shape so older ideas still render correctly.
-function normalizePromptItems(raw: unknown): IdeaPromptItem[] {
-  if (!Array.isArray(raw)) return [];
-  return raw.map((t, i) =>
-    typeof t === "string" ? { id: `legacy-${i}`, text: t } : (t as IdeaPromptItem)
-  );
-}
+import { normalizePromptItems } from "@/lib/ideaPromptItems";
 
 function rowToIdea(row: Record<string, unknown>): ProjectIdea {
   return {

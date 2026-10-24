@@ -298,7 +298,10 @@ function PromptItemField({
                 {editing && (
                   <button
                     type="button"
-                    onClick={() => onRemove(topic.id)}
+                    onClick={() => {
+                      if (openId === topic.id) setOpenId(null);
+                      onRemove(topic.id);
+                    }}
                     className="shrink-0 text-[var(--muted)] hover:text-[var(--bad)]"
                   >
                     <CloseIcon className="h-3 w-3" />

@@ -3,8 +3,20 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import type { ProjectIdea } from "@/types/ideas";
 import type { Profile } from "@/config/access";
+import { normalizePromptItems } from "@/lib/ideaPromptItems";
 
 const STORAGE_KEY = "careerProjectIdeas";
+
+// A browser's localStorage cache can predate the researchTopics/methods
+// shape change (plain strings -> {id, text, prompt?}) — normalize on every
+// load path so the rest of the app never has to special-case the old shape.
+function normalizeIdea(idea: ProjectIdea): ProjectIdea {
+  return {
+    ...idea,
+    researchTopics: normalizePromptItems(idea.researchTopics),
+    methods: normalizePromptItems(idea.methods),
+  };
+}
 
 type IdeaPatch = Partial<
   Pick<
@@ -50,7 +62,7 @@ export function IdeasProvider({ children }: { children: React.ReactNode }) {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (stored) setIdeas(JSON.parse(stored));
+      if (stored) setIdeas((JSON.parse(stored) as ProjectIdea[]).map(normalizeIdea));
     } catch {
       // ignore corrupted storage
     }
@@ -59,7 +71,7 @@ export function IdeasProvider({ children }: { children: React.ReactNode }) {
     fetch("/api/ideas")
       .then((res) => (res.ok ? res.json() : null))
       .then((json) => {
-        if (json?.ideas) setIdeas(json.ideas);
+        if (json?.ideas) setIdeas((json.ideas as ProjectIdea[]).map(normalizeIdea));
       })
       .catch(() => {
         // offline or DB not configured yet — keep the local cache
