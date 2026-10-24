@@ -518,14 +518,6 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
         onRemove={(i) => updateIdea(idea.id, { researchTopics: idea.researchTopics.filter((_, idx) => idx !== i) })}
       />
 
-      <DataSourceField
-        dataSources={idea.dataSources}
-        editing={editing}
-        onAdd={(d) => updateIdea(idea.id, { dataSources: [...idea.dataSources, d] })}
-        onUpdate={(d) => updateIdea(idea.id, { dataSources: idea.dataSources.map((s) => (s.id === d.id ? d : s)) })}
-        onRemove={(id) => updateIdea(idea.id, { dataSources: idea.dataSources.filter((d) => d.id !== id) })}
-      />
-
       <TagListField
         icon={ChipIcon}
         label="Methods & concepts"
@@ -534,6 +526,14 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
         editing={editing}
         onAdd={(v) => updateIdea(idea.id, { methods: [...idea.methods, v] })}
         onRemove={(i) => updateIdea(idea.id, { methods: idea.methods.filter((_, idx) => idx !== i) })}
+      />
+
+      <DataSourceField
+        dataSources={idea.dataSources}
+        editing={editing}
+        onAdd={(d) => updateIdea(idea.id, { dataSources: [...idea.dataSources, d] })}
+        onUpdate={(d) => updateIdea(idea.id, { dataSources: idea.dataSources.map((s) => (s.id === d.id ? d : s)) })}
+        onRemove={(id) => updateIdea(idea.id, { dataSources: idea.dataSources.filter((d) => d.id !== id) })}
       />
 
       <TagListField
