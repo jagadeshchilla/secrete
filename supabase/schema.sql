@@ -44,9 +44,9 @@ create table if not exists project_ideas (
   -- the workflow columns below shown in the UI.
   feasible boolean,
   infeasible_reason text,
-  research_topics text[] not null default '{}',
+  research_topics jsonb not null default '[]', -- [{id, text, prompt?}]
   data_sources jsonb not null default '[]', -- [{id, label, url, extract?, category?}]
-  methods text[] not null default '{}',
+  methods jsonb not null default '[]', -- [{id, text, prompt?}]
   tech_stack text[] not null default '{}',
   tasks jsonb not null default '[]', -- [{id, title, type, assignedTo, done}]
   target_date text,
@@ -60,9 +60,21 @@ alter table project_ideas add column if not exists feasible boolean;
 alter table project_ideas alter column feasible drop not null;
 alter table project_ideas alter column feasible drop default;
 alter table project_ideas add column if not exists infeasible_reason text;
-alter table project_ideas add column if not exists research_topics text[] not null default '{}';
+alter table project_ideas add column if not exists research_topics jsonb not null default '[]';
 alter table project_ideas add column if not exists data_sources jsonb not null default '[]';
-alter table project_ideas add column if not exists methods text[] not null default '{}';
+alter table project_ideas add column if not exists methods jsonb not null default '[]';
+-- research_topics/methods were originally text[] (plain strings). Each item
+-- now needs to carry its own {id, text, prompt?}, which text[] can't hold —
+-- Postgres silently stringifies object elements into garbage text instead of
+-- rejecting them. Converting to jsonb; to_jsonb() on an existing text[]
+-- preserves each entry as a JSON string, which the app already treats as a
+-- legacy item and normalizes into {id, text} on read.
+alter table project_ideas alter column research_topics drop default;
+alter table project_ideas alter column research_topics type jsonb using to_jsonb(research_topics);
+alter table project_ideas alter column research_topics set default '[]'::jsonb;
+alter table project_ideas alter column methods drop default;
+alter table project_ideas alter column methods type jsonb using to_jsonb(methods);
+alter table project_ideas alter column methods set default '[]'::jsonb;
 alter table project_ideas add column if not exists tech_stack text[] not null default '{}';
 alter table project_ideas add column if not exists tasks jsonb not null default '[]';
 alter table project_ideas add column if not exists target_date text;
