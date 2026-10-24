@@ -137,7 +137,7 @@ function SharedLinkField({
   const [draft, setDraft] = useState(value || "");
 
   return (
-    <div>
+    <div className="min-w-0">
       <SectionHeader icon={icon} label={label} />
       {editing ? (
         <input
@@ -152,10 +152,10 @@ function SharedLinkField({
           href={value}
           target="_blank"
           rel="noreferrer"
-          className="mt-1 inline-flex min-w-0 items-center gap-1 text-xs font-medium text-[var(--accent)] hover:underline"
+          className="mt-1 flex w-full min-w-0 items-center gap-1 text-xs font-medium text-[var(--accent)] hover:underline"
         >
           <ExternalLinkIcon className="h-3 w-3 shrink-0" />
-          <span className="truncate">{value}</span>
+          <span className="min-w-0 truncate">{value}</span>
         </a>
       ) : (
         <p className="mt-1 text-xs text-[var(--muted)]">Not set.</p>
