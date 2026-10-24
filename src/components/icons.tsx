@@ -435,3 +435,21 @@ export function MessageIcon({ className }: IconProps) {
     </Base>
   );
 }
+
+export function BadgeIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <circle cx="12" cy="8" r="5" />
+      <path d="m8.5 13.5-1.5 7 5-3 5 3-1.5-7" />
+    </Base>
+  );
+}
+
+export function BrowserIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M3 9h18M7 6.5h.01M10 6.5h.01" />
+    </Base>
+  );
+}

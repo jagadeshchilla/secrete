@@ -30,11 +30,21 @@ import {
   FileTextIcon,
   BookIcon,
   MessageIcon,
+  BadgeIcon,
+  BrowserIcon,
+  TargetIcon,
 } from "@/components/icons";
 
 type NavSection = "courses" | "ideas" | "research" | "freelancing" | "certifications";
 
-const NAV_ITEMS: { href: string; label: string; icon: typeof HomeIcon; section?: NavSection; badge?: string }[] = [
+const NAV_ITEMS: {
+  href: string;
+  label: string;
+  icon: typeof HomeIcon;
+  section?: NavSection;
+  badge?: string;
+  disabled?: boolean;
+}[] = [
   { href: "/dashboard", label: "Dashboard", icon: HomeIcon },
   { href: "/roles", label: "Explore Roles", icon: GridIcon },
   { href: "/roadmap", label: "Roadmap", icon: RouteIcon },
@@ -44,8 +54,11 @@ const NAV_ITEMS: { href: string; label: string; icon: typeof HomeIcon; section?:
   { href: "/freelancing", label: "Freelancing", icon: BriefcaseIcon, section: "freelancing" },
   { href: "/certifications", label: "Certifications", icon: AwardIcon, section: "certifications" },
   { href: "/resume-creation", label: "Resume Creation", icon: FileTextIcon, badge: "Helpful" },
+  { href: "/profiles", label: "Profiles", icon: BadgeIcon, badge: "Coming soon", disabled: true },
+  { href: "/portfolio", label: "Portfolio Website", icon: BrowserIcon, badge: "Coming soon", disabled: true },
   { href: "/blogs", label: "Blogs", icon: BookIcon, badge: "For You" },
   { href: "/mock-interview", label: "Mock Interview", icon: MessageIcon },
+  { href: "/job-applications", label: "Job Applications", icon: TargetIcon, badge: "Coming soon", disabled: true },
   { href: "/progress", label: "Progress", icon: CalendarIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/settings", label: "Settings", icon: SettingsIcon },
@@ -100,9 +113,45 @@ export default function Sidebar() {
       <ProfileSwitcher />
 
       <nav className="scrollbar-hide flex-1 overflow-y-auto px-3 py-4 space-y-1">
-        {NAV_ITEMS.map(({ href, label, icon: Icon, section, badge }) => {
+        {NAV_ITEMS.map(({ href, label, icon: Icon, section, badge, disabled }) => {
           const active = pathname.startsWith(href);
           const count = section ? newCounts[section] : 0;
+
+          const content = (
+            <>
+              <Icon className="h-[18px] w-[18px]" />
+              <span className="flex-1">{label}</span>
+              {count > 0 && (
+                <span className="flex h-4 min-w-4 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] px-1 text-[9px] font-bold text-white">
+                  {count}
+                </span>
+              )}
+              {badge && (
+                <span
+                  className={`shrink-0 rounded-full border px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide ${
+                    disabled
+                      ? "border-[var(--border)] bg-[var(--surface-2)] text-[var(--muted)]"
+                      : "border-[var(--good)] bg-[var(--good-soft)] text-[var(--good)]"
+                  }`}
+                >
+                  {badge}
+                </span>
+              )}
+            </>
+          );
+
+          if (disabled) {
+            return (
+              <div
+                key={href}
+                title="Coming soon"
+                className="flex cursor-not-allowed items-center gap-3 border-l-2 border-transparent px-3 py-2.5 text-sm font-medium text-[var(--muted)] opacity-60"
+              >
+                {content}
+              </div>
+            );
+          }
+
           return (
             <Link
               key={href}
@@ -113,18 +162,7 @@ export default function Sidebar() {
                   : "border-transparent text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)]"
               }`}
             >
-              <Icon className="h-[18px] w-[18px]" />
-              <span className="flex-1">{label}</span>
-              {count > 0 && (
-                <span className="flex h-4 min-w-4 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] px-1 text-[9px] font-bold text-white">
-                  {count}
-                </span>
-              )}
-              {badge && (
-                <span className="shrink-0 rounded-full border border-[var(--good)] bg-[var(--good-soft)] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[var(--good)]">
-                  {badge}
-                </span>
-              )}
+              {content}
             </Link>
           );
         })}
