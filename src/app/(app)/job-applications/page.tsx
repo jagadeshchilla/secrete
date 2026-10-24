@@ -43,8 +43,8 @@ export default function JobApplicationsPage() {
         Where to actually find roles, and how to apply in a way that gets read instead of auto-filtered out.
       </p>
 
-      <div className="animate-fade-in-up mt-8 space-y-10">
-        <section>
+      <div className="mt-8 space-y-10">
+        <section className="animate-fade-in-up" style={{ animationDelay: "40ms" }}>
           <SectionHeading n={1} title="Where to find jobs" />
           <p className={pCls}>Spread your search across a few different sources instead of relying on one:</p>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -62,7 +62,7 @@ export default function JobApplicationsPage() {
           </p>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "80ms" }}>
           <SectionHeading n={2} title="Before you apply" />
           <ul className={ulCls}>
             <li>Read the job description fully — tailor your resume&apos;s keywords and top bullet points to match it, since many companies filter resumes by keyword before a human sees them.</li>
@@ -71,7 +71,7 @@ export default function JobApplicationsPage() {
           </ul>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "120ms" }}>
           <SectionHeading n={3} title="How to apply well" />
           <ol className={olCls}>
             <li>Use a role-specific resume, not one generic version for every application.</li>
@@ -82,7 +82,7 @@ export default function JobApplicationsPage() {
           </ol>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "160ms" }}>
           <SectionHeading n={4} title="Track and follow up" />
           <ul className={ulCls}>
             <li>Keep a simple tracker: company, role, date applied, status, and any contact name — it&apos;s easy to lose track past 10-15 applications.</li>

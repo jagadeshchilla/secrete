@@ -86,7 +86,7 @@ function IdeaMetaField({
           <button
             type="button"
             onClick={() => setEditing(false)}
-            className="border border-[var(--border)] px-3 py-1 text-xs font-medium text-[var(--muted)] hover:text-[var(--text)]"
+            className="transition-colors border border-[var(--border)] px-3 py-1 text-xs font-medium text-[var(--muted)] hover:text-[var(--text)]"
           >
             Cancel
           </button>
@@ -99,7 +99,7 @@ function IdeaMetaField({
     <div className="min-w-0 flex-1">
       <div className="flex items-start gap-2">
         <h1 className="min-w-0 text-lg font-semibold">{title}</h1>
-        <button type="button" onClick={startEdit} className="shrink-0 text-[var(--muted)] hover:text-[var(--accent)]" title="Edit title & description">
+        <button type="button" onClick={startEdit} className="transition-colors shrink-0 text-[var(--muted)] hover:text-[var(--accent)]" title="Edit title & description">
           <PencilIcon className="h-3.5 w-3.5" />
         </button>
       </div>
@@ -198,11 +198,11 @@ function TagListField({
           {items.map((item, idx) => (
             <span
               key={idx}
-              className="flex items-center gap-1 border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[11px]"
+              className="flex items-center gap-1 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[11px] transition-colors hover:border-[var(--accent)]"
             >
               {item}
               {editing && (
-                <button type="button" onClick={() => onRemove(idx)} className="text-[var(--muted)] hover:text-[var(--bad)]">
+                <button type="button" onClick={() => onRemove(idx)} className="transition-colors text-[var(--muted)] hover:text-[var(--bad)]">
                   <CloseIcon className="h-3 w-3" />
                 </button>
               )}
@@ -230,7 +230,7 @@ function TagListField({
           <button
             type="button"
             onClick={submit}
-            className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
             <PlusIcon className="h-3.5 w-3.5" />
           </button>
@@ -320,7 +320,10 @@ function PromptItemField({
       {topics.length > 0 ? (
         <div className="mt-1.5 space-y-1.5">
           {topics.map((topic) => (
-            <div key={topic.id} className="border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5 text-[11px]">
+            <div
+              key={topic.id}
+              className="rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5 text-[11px] transition-colors hover:border-[var(--accent)]/40"
+            >
               <div className="flex items-center gap-1.5">
                 <span className="min-w-0 flex-1">{topic.text}</span>
                 <button
@@ -332,7 +335,7 @@ function PromptItemField({
                       () => setCopiedId((cur) => (cur === topic.id ? null : cur))
                     )
                   }
-                  className="shrink-0 text-[var(--muted)] hover:text-[var(--accent)]"
+                  className="transition-colors shrink-0 text-[var(--muted)] hover:text-[var(--accent)]"
                   title="Copy a ChatGPT prompt for this topic"
                 >
                   {copiedId === topic.id ? <CheckIcon className="h-3 w-3" /> : <CopyIcon className="h-3 w-3" />}
@@ -340,7 +343,7 @@ function PromptItemField({
                 <button
                   type="button"
                   onClick={() => (openId === topic.id ? setOpenId(null) : openEditor(topic))}
-                  className="shrink-0 text-[var(--muted)] hover:text-[var(--accent)]"
+                  className="transition-colors shrink-0 text-[var(--muted)] hover:text-[var(--accent)]"
                   title={topic.prompt ? "Edit saved prompt" : "Customize this prompt"}
                 >
                   <PencilIcon className="h-3 w-3" />
@@ -352,7 +355,7 @@ function PromptItemField({
                       if (openId === topic.id) setOpenId(null);
                       onRemove(topic.id);
                     }}
-                    className="shrink-0 text-[var(--muted)] hover:text-[var(--bad)]"
+                    className="transition-colors shrink-0 text-[var(--muted)] hover:text-[var(--bad)]"
                   >
                     <CloseIcon className="h-3 w-3" />
                   </button>
@@ -381,7 +384,7 @@ function PromptItemField({
                           onUpdatePrompt(topic.id, undefined);
                           setOpenId(null);
                         }}
-                        className="border border-[var(--border)] px-2.5 py-1 text-[11px] font-medium text-[var(--muted)] hover:text-[var(--text)]"
+                        className="transition-colors border border-[var(--border)] px-2.5 py-1 text-[11px] font-medium text-[var(--muted)] hover:text-[var(--text)]"
                       >
                         Reset to default
                       </button>
@@ -389,7 +392,7 @@ function PromptItemField({
                     <button
                       type="button"
                       onClick={() => setOpenId(null)}
-                      className="border border-[var(--border)] px-2.5 py-1 text-[11px] font-medium text-[var(--muted)] hover:text-[var(--text)]"
+                      className="transition-colors border border-[var(--border)] px-2.5 py-1 text-[11px] font-medium text-[var(--muted)] hover:text-[var(--text)]"
                     >
                       Cancel
                     </button>
@@ -420,7 +423,7 @@ function PromptItemField({
           <button
             type="button"
             onClick={submit}
-            className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
             <PlusIcon className="h-3.5 w-3.5" />
           </button>
@@ -486,7 +489,10 @@ function DataSourceField({
       {dataSources.length > 0 ? (
         <div className="mt-1.5 space-y-1">
           {dataSources.map((d) => (
-            <div key={d.id} className="flex items-start justify-between gap-2 border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5">
+            <div
+              key={d.id}
+              className="flex items-start justify-between gap-2 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5 transition-colors hover:border-[var(--accent)]/40"
+            >
               <div className="min-w-0 flex-1">
                 <div className="flex min-w-0 items-center gap-1.5">
                   <a
@@ -499,7 +505,7 @@ function DataSourceField({
                     <span className="truncate">{d.label}</span>
                   </a>
                   {d.category && (
-                    <span className="shrink-0 border border-[var(--border)] px-1.5 py-0.5 text-[10px] text-[var(--muted)]">
+                    <span className="shrink-0 rounded-[var(--radius-sm)] border border-[var(--border)] px-1.5 py-0.5 text-[10px] text-[var(--muted)]">
                       {d.category}
                     </span>
                   )}
@@ -508,10 +514,10 @@ function DataSourceField({
               </div>
               {editing && (
                 <div className="flex shrink-0 items-center gap-2">
-                  <button type="button" onClick={() => startEdit(d)} className="text-[var(--muted)] hover:text-[var(--accent)]">
+                  <button type="button" onClick={() => startEdit(d)} className="transition-colors text-[var(--muted)] hover:text-[var(--accent)]">
                     <PencilIcon className="h-3.5 w-3.5" />
                   </button>
-                  <button type="button" onClick={() => onRemove(d.id)} className="text-[var(--muted)] hover:text-[var(--bad)]">
+                  <button type="button" onClick={() => onRemove(d.id)} className="transition-colors text-[var(--muted)] hover:text-[var(--bad)]">
                     <CloseIcon className="h-3.5 w-3.5" />
                   </button>
                 </div>
@@ -527,7 +533,7 @@ function DataSourceField({
           {editingId && (
             <div className="flex items-center justify-between">
               <p className="text-[10px] font-medium text-[var(--accent)]">Editing entry</p>
-              <button type="button" onClick={resetForm} className="text-[10px] text-[var(--muted)] hover:text-[var(--text)]">
+              <button type="button" onClick={resetForm} className="transition-colors text-[10px] text-[var(--muted)] hover:text-[var(--text)]">
                 Cancel
               </button>
             </div>
@@ -542,7 +548,7 @@ function DataSourceField({
             <button
               type="button"
               onClick={submit}
-              className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
               {editingId ? <CheckIcon className="h-3.5 w-3.5" /> : <PlusIcon className="h-3.5 w-3.5" />}
             </button>
@@ -593,11 +599,14 @@ function TaskListField({
       {tasks.length > 0 ? (
         <div className="mt-1.5 space-y-1.5">
           {tasks.map((t) => (
-            <div key={t.id} className="flex items-center gap-2 border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5">
+            <div
+              key={t.id}
+              className="flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5 transition-colors hover:border-[var(--accent)]/40"
+            >
               <button
                 type="button"
                 onClick={() => onToggle(t.id)}
-                className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
+                className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
                   t.done ? "border-[var(--good)] bg-[var(--good)] text-white" : "border-[var(--border)]"
                 }`}
               >
@@ -606,16 +615,16 @@ function TaskListField({
               <span className={`min-w-0 flex-1 truncate text-xs ${t.done ? "text-[var(--muted)] line-through" : ""}`}>
                 {t.title}
               </span>
-              <span className="shrink-0 border border-[var(--border)] px-1.5 py-0.5 text-[10px] text-[var(--muted)]">
+              <span className="shrink-0 rounded-[var(--radius-sm)] border border-[var(--border)] px-1.5 py-0.5 text-[10px] text-[var(--muted)]">
                 {IDEA_TASK_TYPES.find((x) => x.value === t.type)?.label}
               </span>
               {t.assignedTo && (
-                <span className="shrink-0 border border-[var(--accent)] bg-[var(--accent-soft)] px-1.5 py-0.5 text-[10px] text-[var(--accent)]">
+                <span className="shrink-0 rounded-[var(--radius-sm)] border border-[var(--accent)] bg-[var(--accent-soft)] px-1.5 py-0.5 text-[10px] text-[var(--accent)]">
                   {PROFILE_LABELS[t.assignedTo]}
                 </span>
               )}
               {editing && (
-                <button type="button" onClick={() => onRemove(t.id)} className="shrink-0 text-[var(--muted)] hover:text-[var(--bad)]">
+                <button type="button" onClick={() => onRemove(t.id)} className="transition-colors shrink-0 text-[var(--muted)] hover:text-[var(--bad)]">
                   <CloseIcon className="h-3.5 w-3.5" />
                 </button>
               )}
@@ -653,7 +662,7 @@ function TaskListField({
           <button
             type="button"
             onClick={submit}
-            className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            className="shrink-0 border border-[var(--border)] px-2.5 text-[var(--muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
             <PlusIcon className="h-3.5 w-3.5" />
           </button>
@@ -669,13 +678,13 @@ function FeasibilityGate({ onDecide }: { onDecide: (feasible: boolean, reason?: 
   const [reason, setReason] = useState("");
 
   return (
-    <div className="mt-4 border-t border-[var(--border)] pt-4">
+    <div className="animate-fade-in-up mt-4 border-t border-[var(--border)] pt-4">
       <p className="mb-1.5 text-xs font-medium text-[var(--muted)]">Can we actually do this?</p>
       <div className="flex gap-2">
         <button
           type="button"
           onClick={() => setChoice(true)}
-          className={`flex-1 border px-3 py-2 text-xs font-medium ${
+          className={`flex-1 rounded-[var(--radius-sm)] border px-3 py-2 text-xs font-medium transition-colors ${
             choice === true
               ? "border-[var(--good)] bg-[var(--good-soft)] text-[var(--good)]"
               : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]"
@@ -686,9 +695,9 @@ function FeasibilityGate({ onDecide }: { onDecide: (feasible: boolean, reason?: 
         <button
           type="button"
           onClick={() => setChoice(false)}
-          className={`flex-1 border px-3 py-2 text-xs font-medium ${
+          className={`flex-1 rounded-[var(--radius-sm)] border px-3 py-2 text-xs font-medium transition-colors ${
             choice === false
-              ? "border-[var(--bad)] bg-[rgba(224,122,95,0.12)] text-[var(--bad)]"
+              ? "border-[var(--bad)] bg-[var(--bad-soft)] text-[var(--bad)]"
               : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]"
           }`}
         >
@@ -730,13 +739,13 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
   const [notPursuingReason, setNotPursuingReason] = useState("");
 
   return (
-    <div className="mt-4 space-y-4 border-t border-[var(--border)] pt-4">
+    <div className="animate-fade-in-up mt-4 space-y-4 border-t border-[var(--border)] pt-4">
       <div className="flex items-center justify-between">
         <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">Workflow</p>
         <button
           type="button"
           onClick={() => setEditing((v) => !v)}
-          className={`border px-2.5 py-1 text-[11px] font-medium ${
+          className={`rounded-[var(--radius-sm)] border px-2.5 py-1 text-[11px] font-medium transition-colors ${
             editing
               ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
               : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
@@ -911,7 +920,7 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
           <button
             type="button"
             onClick={() => updateIdea(idea.id, { done: !idea.done })}
-            className={`flex items-center gap-1.5 border px-3 py-1.5 text-xs font-medium ${
+            className={`flex items-center gap-1.5 rounded-[var(--radius-sm)] border px-3 py-1.5 text-xs font-medium transition-colors ${
               idea.done
                 ? "border-[var(--good)] bg-[var(--good-soft)] text-[var(--good)]"
                 : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
@@ -971,7 +980,7 @@ function IdeaWorkflow({ idea, onMarkInfeasible }: { idea: ProjectIdea; onMarkInf
               <button
                 type="button"
                 onClick={() => setShowNotPursuing(true)}
-                className="text-[11px] font-medium text-[var(--muted)] hover:text-[var(--bad)]"
+                className="transition-colors text-[11px] font-medium text-[var(--muted)] hover:text-[var(--bad)]"
               >
                 Not pursuing this after all?
               </button>
@@ -1007,7 +1016,7 @@ export default function IdeaDetailPage() {
     <div className="mx-auto max-w-4xl px-5 py-8 md:px-8">
       <Link
         href="/ideas"
-        className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--muted)] hover:text-[var(--accent)]"
+        className="transition-colors inline-flex items-center gap-1.5 text-xs font-medium text-[var(--muted)] hover:text-[var(--accent)]"
       >
         <ArrowLeftIcon className="h-3.5 w-3.5" />
         Back to Project Ideas
@@ -1015,7 +1024,7 @@ export default function IdeaDetailPage() {
 
       {!idea ? (
         hydrated ? (
-          <div className="mt-6 border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
+          <div className="animate-fade-in-up mt-6 rounded-xl border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
             Idea not found.
           </div>
         ) : null
@@ -1029,7 +1038,7 @@ export default function IdeaDetailPage() {
             />
             <button
               onClick={handleDelete}
-              className="shrink-0 p-1 text-[var(--muted)] hover:text-[var(--bad)]"
+              className="transition-colors shrink-0 p-1 text-[var(--muted)] hover:text-[var(--bad)]"
               title="Delete idea"
             >
               <TrashIcon className="h-4 w-4" />
@@ -1040,7 +1049,7 @@ export default function IdeaDetailPage() {
               {idea.domains.map((d) => (
                 <span
                   key={d}
-                  className="border border-[var(--accent)] bg-[var(--accent-soft)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
+                  className="rounded-[var(--radius-sm)] border border-[var(--accent)] bg-[var(--accent-soft)] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
                 >
                   {stripEmoji(d)}
                 </span>
@@ -1054,7 +1063,7 @@ export default function IdeaDetailPage() {
               return (
                 <span
                   key={key}
-                  className="border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[11px] text-[var(--muted)]"
+                  className="rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[11px] text-[var(--muted)]"
                 >
                   {r.role}
                 </span>
@@ -1080,7 +1089,7 @@ export default function IdeaDetailPage() {
                 <button
                   type="button"
                   onClick={() => updateIdea(idea.id, { feasible: true, infeasibleReason: undefined })}
-                  className="shrink-0 border border-[var(--border)] px-2.5 py-1 text-[11px] font-medium text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                  className="transition-colors shrink-0 border border-[var(--border)] px-2.5 py-1 text-[11px] font-medium text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
                 >
                   Reconsider
                 </button>

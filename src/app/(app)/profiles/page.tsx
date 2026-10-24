@@ -43,8 +43,8 @@ export default function ProfilesPage() {
         client checks. Here&apos;s how to make each one actually work for you.
       </p>
 
-      <div className="animate-fade-in-up mt-8 space-y-10">
-        <section>
+      <div className="mt-8 space-y-10">
+        <section className="animate-fade-in-up" style={{ animationDelay: "40ms" }}>
           <SectionHeading n={1} title="GitHub" />
           <p className={pCls}>
             Your GitHub is a portfolio, not a junk drawer. A recruiter who clicks through should immediately see
@@ -65,7 +65,7 @@ export default function ProfilesPage() {
           </div>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "80ms" }}>
           <SectionHeading n={2} title="LinkedIn" />
           <p className={pCls}>
             LinkedIn is where recruiters actually search. An optimized profile shows up more and converts
@@ -85,7 +85,7 @@ export default function ProfilesPage() {
           </div>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "120ms" }}>
           <SectionHeading n={3} title="Freelance platforms" />
           <p className={pCls}>
             On Upwork, Fiverr, or similar, your profile has to convert cold visitors into clients within a few
@@ -104,7 +104,7 @@ export default function ProfilesPage() {
           </div>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "160ms" }}>
           <SectionHeading n={4} title="Kaggle" />
           <p className={pCls}>
             For data/ML roles, Kaggle shows you can actually apply what you know — not just talk about it.
@@ -121,7 +121,7 @@ export default function ProfilesPage() {
           </div>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "200ms" }}>
           <SectionHeading n={5} title="Stack Overflow" />
           <p className={pCls}>
             Reputation here is hard to fake — it shows you can actually solve other people&apos;s real problems,
@@ -138,7 +138,7 @@ export default function ProfilesPage() {
           </div>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "240ms" }}>
           <SectionHeading n={6} title="LeetCode / HackerRank" />
           <p className={pCls}>
             Interviewers often check these before a call. A thin or inactive profile can quietly work against you

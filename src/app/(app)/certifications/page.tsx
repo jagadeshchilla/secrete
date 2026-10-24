@@ -294,7 +294,7 @@ export default function CertificationsPage() {
           </>
         )}
         {!selectedRole && roleFilterResults.length > 0 && (
-          <div className="absolute left-0 right-0 top-full z-10 mt-1 divide-y divide-[var(--border)] border border-[var(--border)] bg-[var(--surface)]">
+          <div className="animate-scale-in absolute left-0 right-0 top-full z-10 mt-1 divide-y divide-[var(--border)] rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-md)]">
             {roleFilterResults.map((r) => (
               <button
                 key={keyFor(r)}

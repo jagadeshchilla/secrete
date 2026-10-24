@@ -44,8 +44,8 @@ export default function PortfolioPage() {
         scattered across GitHub, LinkedIn, and a PDF resume.
       </p>
 
-      <div className="animate-fade-in-up mt-8 space-y-10">
-        <section>
+      <div className="mt-8 space-y-10">
+        <section className="animate-fade-in-up" style={{ animationDelay: "40ms" }}>
           <SectionHeading n={1} title="Why you need one" />
           <p className={pCls}>
             A resume lists what you did. A portfolio shows it — live demos, real screenshots, and the reasoning
@@ -54,7 +54,7 @@ export default function PortfolioPage() {
           </p>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "80ms" }}>
           <SectionHeading n={2} title="What to include" />
           <ul className={ulCls}>
             <li><strong className="text-[var(--text)]">Hero/intro</strong> — who you are and what you do, in one line.</li>
@@ -66,7 +66,7 @@ export default function PortfolioPage() {
           </ul>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "120ms" }}>
           <SectionHeading n={3} title="How to build it fast" />
           <p className={pCls}>Two realistic paths:</p>
           <ul className={ulCls}>
@@ -86,7 +86,7 @@ export default function PortfolioPage() {
           </ul>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "160ms" }}>
           <SectionHeading n={4} title="Make it feel premium" />
           <ul className={ulCls}>
             <li>Consistent spacing, type hierarchy, and one accent color — not five competing styles.</li>
@@ -97,7 +97,7 @@ export default function PortfolioPage() {
           </ul>
         </section>
 
-        <section>
+        <section className="animate-fade-in-up" style={{ animationDelay: "200ms" }}>
           <SectionHeading n={5} title="Where to host for free" />
           <div className="mt-3 flex flex-wrap gap-2">
             <ExtLink href="https://vercel.com/">Vercel</ExtLink>

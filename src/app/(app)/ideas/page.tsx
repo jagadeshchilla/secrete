@@ -134,7 +134,7 @@ export default function IdeasPage() {
         </div>
 
         {visibleIdeas.length === 0 ? (
-          <div className="mt-3 border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
+          <div className="mt-3 rounded-xl border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
             {view === "mine" ? "You haven't added any ideas yet." : "No ideas yet. Click “Add idea” to add the first one."}
           </div>
         ) : (
