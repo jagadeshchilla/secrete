@@ -318,7 +318,10 @@ export default function Dashboard() {
                   <Link href={step.href}>{content}</Link>
                 )}
                 {i < JOURNEY_STEPS.length - 1 && (
-                  <ChevronRightIcon className="mb-5 h-4 w-4 shrink-0 text-[var(--muted)]" />
+                  <div className="mb-5 flex shrink-0 items-center">
+                    <div className="h-px w-5 bg-[var(--border)] sm:w-8" />
+                    <ChevronRightIcon className="h-4 w-4 shrink-0 text-[var(--muted)]" />
+                  </div>
                 )}
               </div>
             );
