@@ -17,7 +17,6 @@ import HeatmapCalendar from "@/components/HeatmapCalendar";
 import {
   RouteIcon,
   GraduationCapIcon,
-  CalendarIcon,
   LightbulbIcon,
   FlaskIcon,
   BriefcaseIcon,
@@ -32,7 +31,6 @@ import {
   TargetIcon,
 } from "@/components/icons";
 
-const ROADMAP_ROLE_COUNT = Object.keys(ROADMAP_DATA).length;
 const TOOL_COUNT = new Set(
   Object.values(ROADMAP_DATA).flatMap((entry) => entry.skills.flatMap((s) => s.items))
 ).size;
@@ -56,6 +54,7 @@ const JOURNEY_STEPS: { href: string; label: string; icon: typeof RouteIcon; disa
 type View = "household" | Profile;
 
 function MiniStat({
+  href,
   icon: Icon,
   label,
   value,
@@ -63,6 +62,7 @@ function MiniStat({
   pct,
   delay,
 }: {
+  href: string;
   icon: typeof RouteIcon;
   label: string;
   value: string | number;
@@ -71,12 +71,13 @@ function MiniStat({
   delay?: number;
 }) {
   return (
-    <div
-      className="surface-card animate-fade-in-up p-4"
+    <Link
+      href={href}
+      className="card-hover surface-card group animate-fade-in-up block p-4"
       style={delay ? { animationDelay: `${delay}ms` } : undefined}
     >
       <div className="flex items-center gap-2">
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)] transition-transform group-hover:scale-105">
           <Icon className="h-4 w-4" />
         </div>
         <div className="min-w-0">
@@ -93,8 +94,15 @@ function MiniStat({
           />
         </div>
       )}
-    </div>
+    </Link>
   );
+}
+
+function greeting() {
+  const h = new Date().getHours();
+  if (h < 12) return "Good morning";
+  if (h < 17) return "Good afternoon";
+  return "Good evening";
 }
 
 function actionVerb(field: StatusField) {
@@ -236,7 +244,10 @@ export default function Dashboard() {
     <div className="mx-auto max-w-6xl px-5 py-8 md:px-8">
       <div className="animate-fade-in-up flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">
+            {greeting()}
+            {view !== "household" ? `, ${PROFILE_LABELS[view]}` : profile ? `, ${PROFILE_LABELS[profile]}` : ""}
+          </h1>
           <p className="mt-1 text-sm text-[var(--muted)]">
             Your career research at a glance. Pick up where you left off.
           </p>
@@ -265,8 +276,12 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="surface-card mt-6 animate-fade-in-up p-4" style={{ animationDelay: "20ms" }}>
+      <div className="surface-card relative mt-6 animate-fade-in-up p-4" style={{ animationDelay: "20ms" }}>
         <h2 className="text-sm font-semibold">Your journey</h2>
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 w-10 rounded-r-[var(--radius-lg)]"
+          style={{ background: "linear-gradient(to left, var(--surface), transparent)" }}
+        />
         <div className="scrollbar-hide mt-3 flex items-center overflow-x-auto pb-1">
           {JOURNEY_STEPS.map((step, i) => {
             const Icon = step.icon;
@@ -310,57 +325,18 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <Link
-          href="/roadmap"
-          className="card-hover group animate-fade-in-up flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4"
-        >
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)] transition-transform group-hover:scale-105">
-            <RouteIcon className="h-5 w-5" />
-          </div>
-          <div>
-            <div className="text-sm font-semibold">Roadmap</div>
-            <div className="text-xs text-[var(--muted)]">{ROADMAP_ROLE_COUNT} role paths mapped</div>
-          </div>
-        </Link>
-        <Link
-          href="/courses"
-          className="card-hover group animate-fade-in-up flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4"
-          style={{ animationDelay: "40ms" }}
-        >
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)] transition-transform group-hover:scale-105">
-            <GraduationCapIcon className="h-5 w-5" />
-          </div>
-          <div>
-            <div className="text-sm font-semibold">Courses</div>
-            <div className="text-xs text-[var(--muted)]">{TOOL_COUNT} tools to learn</div>
-          </div>
-        </Link>
-        <Link
-          href="/progress"
-          className="card-hover group animate-fade-in-up flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4"
-          style={{ animationDelay: "80ms" }}
-        >
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)] transition-transform group-hover:scale-105">
-            <CalendarIcon className="h-5 w-5" />
-          </div>
-          <div>
-            <div className="text-sm font-semibold">Progress</div>
-            <div className="text-xs text-[var(--muted)]">Roles, courses, ideas &amp; more</div>
-          </div>
-        </Link>
-      </div>
-
       <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-2 lg:items-stretch">
         <div className="grid grid-cols-1 gap-3">
           <MiniStat
+            href="/courses"
             icon={GraduationCapIcon}
             label="Courses"
             value={`${courseStats.started}/${courseStats.total}`}
-            sub={`${courseStats.pct}% complete`}
+            sub={`${courseStats.pct}% complete · ${TOOL_COUNT} tools to learn`}
             pct={courseStats.pct}
           />
           <MiniStat
+            href="/ideas"
             icon={LightbulbIcon}
             label="Ideas"
             value={ideaStats.total}
@@ -369,6 +345,7 @@ export default function Dashboard() {
             delay={40}
           />
           <MiniStat
+            href="/research"
             icon={FlaskIcon}
             label="Research"
             value={researchStats.total}
@@ -377,6 +354,7 @@ export default function Dashboard() {
             delay={80}
           />
           <MiniStat
+            href="/freelancing"
             icon={BriefcaseIcon}
             label="Freelancing"
             value={freelanceStats.total}
