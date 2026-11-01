@@ -6,6 +6,7 @@ import type { CareerRole } from "@/types/career";
 import RoleCard from "@/components/RoleCard";
 import RoleDrawer from "@/components/RoleDrawer";
 import { BookmarkIcon } from "@/components/icons";
+import EmptyState from "@/components/EmptyState";
 
 export default function SavedPage() {
   const { data, getRecord, setStatus, setNote } = useAppState();
@@ -23,12 +24,11 @@ export default function SavedPage() {
       </div>
 
       {saved.length === 0 ? (
-        <div className="mt-8 flex flex-col items-center gap-3 border border-dashed border-[var(--border)] p-12 text-center">
-          <BookmarkIcon className="h-8 w-8 text-[var(--muted)]" />
-          <p className="text-sm text-[var(--muted)]">
-            Nothing saved yet. Click the bookmark icon on a role card to save it here.
-          </p>
-        </div>
+        <EmptyState
+          icon={BookmarkIcon}
+          className="mt-8"
+          message="Nothing saved yet. Click the bookmark icon on a role card to save it here."
+        />
       ) : (
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {saved.map((role, i) => (

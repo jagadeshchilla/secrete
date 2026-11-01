@@ -6,6 +6,7 @@ import type { CareerRole } from "@/types/career";
 import RoleCard from "@/components/RoleCard";
 import RoleDrawer from "@/components/RoleDrawer";
 import { SearchIcon } from "@/components/icons";
+import EmptyState from "@/components/EmptyState";
 
 const CODING_LEVELS = ["Low", "Low-Medium", "Medium", "Medium-High", "High", "Very High"];
 
@@ -162,9 +163,7 @@ export default function RolesPage() {
         </div>
 
         {filtered.length === 0 ? (
-          <div className="mt-10 border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
-            No roles match your filters.
-          </div>
+          <EmptyState icon={SearchIcon} className="mt-10" message="No roles match your filters." />
         ) : (
           <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
             {filtered.map((role, i) => (

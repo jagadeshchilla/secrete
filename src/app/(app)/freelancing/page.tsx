@@ -17,10 +17,11 @@ import {
   ChevronDownIcon,
   ExternalLinkIcon,
 } from "@/components/icons";
+import EmptyState from "@/components/EmptyState";
 
 const STATUS_STYLES: Record<FreelanceStatus, string> = {
   open: "border-[var(--good)] bg-[var(--good-soft)] text-[var(--good)]",
-  applied: "border-[#f2c368] bg-[rgba(242,195,104,0.12)] text-[#c9972e]",
+  applied: "border-[var(--warn)] bg-[var(--warn-soft)] text-[var(--warn)]",
   "in-progress": "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]",
   completed: "border-[var(--border)] text-[var(--muted)]",
 };
@@ -140,9 +141,11 @@ export default function FreelancingPage() {
         </h2>
 
         {gigs.length === 0 ? (
-          <div className="mt-3 rounded-xl border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
-            No gigs yet. Click &ldquo;Add gig&rdquo; to add the first one.
-          </div>
+          <EmptyState
+            icon={BriefcaseIcon}
+            className="mt-3"
+            message={<>No gigs yet. Click &ldquo;Add gig&rdquo; to add the first one.</>}
+          />
         ) : (
           <div className="mt-3 space-y-2">
             {gigs.map((gig, i) => {

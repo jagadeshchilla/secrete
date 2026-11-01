@@ -23,6 +23,7 @@ import {
   CopyIcon,
   CheckIcon,
 } from "@/components/icons";
+import EmptyState from "@/components/EmptyState";
 
 const RESOURCE_ICONS: Record<ResourceLink["type"], typeof PlayIcon> = {
   youtube: PlayIcon,
@@ -344,9 +345,7 @@ function CoursesPageInner() {
         <div className="animate-fade-in-up mt-4">
 
           {filtered.length === 0 ? (
-            <div className="mt-3 border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
-              No tools match this search/filter.
-            </div>
+            <EmptyState icon={SearchIcon} className="mt-3" message="No tools match this search/filter." />
           ) : (
             <div className="mt-3 divide-y divide-[var(--border)] border border-[var(--border)]">
               {filtered.map((t) => {
@@ -391,20 +390,20 @@ function CoursesPageInner() {
 
           <Link
             href="/courses/special"
-            className="card-hover animate-fade-in-up mt-3 flex items-center justify-between gap-3 rounded-xl border border-[#f2c368]/40 bg-[#f2c368]/10 p-4 hover:border-[#f2c368]"
+            className="card-hover animate-fade-in-up mt-3 flex items-center justify-between gap-3 rounded-xl border border-[var(--warn)]/40 bg-[var(--warn-soft)] p-4 hover:border-[var(--warn)]"
           >
             <div className="flex min-w-0 items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#f2c368]/20 text-lg">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--warn)]/20 text-lg">
                 😊
               </div>
               <div className="min-w-0">
-                <h2 className="text-sm font-semibold text-[#c9972e]">Special courses</h2>
+                <h2 className="text-sm font-semibold text-[var(--warn)]">Special courses</h2>
                 <p className="mt-0.5 truncate text-xs text-[var(--muted)]">
                   Paid courses I already have — sharing them with you, happy if they&apos;re useful!
                 </p>
               </div>
             </div>
-            <ChevronRightIcon className="h-4 w-4 shrink-0 text-[#c9972e]" />
+            <ChevronRightIcon className="h-4 w-4 shrink-0 text-[var(--warn)]" />
           </Link>
 
           {startedCourses.length > 0 && (

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeftIcon, AwardIcon } from "@/components/icons";
 import SpecialCourseCard, { type SpecialCourse } from "@/components/SpecialCourseCard";
 import SPECIAL_COURSES from "@/data/specialCourses.json";
+import EmptyState from "@/components/EmptyState";
 
 export default function SpecialCoursesPage() {
   const courses = SPECIAL_COURSES as SpecialCourse[];
@@ -28,9 +29,7 @@ export default function SpecialCoursesPage() {
       </p>
 
       {courses.length === 0 ? (
-        <div className="mt-6 border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
-          No special courses added yet.
-        </div>
+        <EmptyState icon={AwardIcon} className="mt-6" message="No special courses added yet." />
       ) : (
         <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {courses.map((c) => (

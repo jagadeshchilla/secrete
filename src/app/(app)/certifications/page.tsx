@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useAppState, stripEmoji, keyFor } from "@/context/AppStateContext";
 import { AwardIcon, SearchIcon, CloseIcon, ExternalLinkIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
+import EmptyState from "@/components/EmptyState";
 import Favicon from "@/components/Favicon";
 import { CERTIFICATIONS, CERTIFICATION_DOMAINS, LEVEL_TIER_LABELS, type Certification, type LevelTier } from "@/lib/certifications";
 import { useNewBadge } from "@/hooks/useNewBadge";
@@ -15,7 +16,7 @@ const PER_PAGE = 18;
 const LEVEL_TIER_COLORS: Record<LevelTier, string> = {
   beginner: "var(--good)",
   associate: "var(--accent)",
-  professional: "#a78bfa",
+  professional: "var(--warn)",
   expert: "var(--bad)",
   other: "var(--muted)",
 };
@@ -322,9 +323,7 @@ export default function CertificationsPage() {
       )}
 
       {filtered.length === 0 ? (
-        <div className="mt-6 border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
-          No certifications match this filter yet.
-        </div>
+        <EmptyState icon={AwardIcon} className="mt-6" message="No certifications match this filter yet." />
       ) : (
         <>
           <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">

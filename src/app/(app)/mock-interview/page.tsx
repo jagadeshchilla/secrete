@@ -5,6 +5,7 @@ import { MessageIcon, ExternalLinkIcon, CopyIcon, CheckIcon } from "@/components
 import Favicon from "@/components/Favicon";
 import MockInterviewSiteCard, { type MockInterviewSite } from "@/components/MockInterviewSiteCard";
 import SITES from "@/data/mockInterviewSites.json";
+import EmptyState from "@/components/EmptyState";
 
 const MOCK_INTERVIEW_PROMPT = `# Role: Senior AI Engineer Interviewer and Career Coach
 
@@ -214,9 +215,7 @@ export default function MockInterviewPage() {
           </p>
 
           {sites.length === 0 ? (
-            <div className="mt-4 border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
-              No sites added yet.
-            </div>
+            <EmptyState icon={MessageIcon} className="mt-4" message="No sites added yet." />
           ) : (
             <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {sites.map((s) => (

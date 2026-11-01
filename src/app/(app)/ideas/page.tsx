@@ -9,6 +9,7 @@ import { useNewBadge } from "@/hooks/useNewBadge";
 import NewBadge from "@/components/NewBadge";
 import { PROFILE_LABELS } from "@/config/access";
 import { LightbulbIcon, SearchIcon, CloseIcon, PlusIcon, ChevronRightIcon } from "@/components/icons";
+import EmptyState from "@/components/EmptyState";
 
 export default function IdeasPage() {
   const { data, domains } = useAppState();
@@ -134,9 +135,15 @@ export default function IdeasPage() {
         </div>
 
         {visibleIdeas.length === 0 ? (
-          <div className="mt-3 rounded-xl border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
-            {view === "mine" ? "You haven't added any ideas yet." : "No ideas yet. Click “Add idea” to add the first one."}
-          </div>
+          <EmptyState
+            icon={LightbulbIcon}
+            className="mt-3"
+            message={
+              view === "mine"
+                ? "You haven't added any ideas yet."
+                : <>No ideas yet. Click &ldquo;Add idea&rdquo; to add the first one.</>
+            }
+          />
         ) : (
           <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {visibleIdeas.map((idea, i) => {

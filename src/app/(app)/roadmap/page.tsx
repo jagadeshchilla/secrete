@@ -6,6 +6,7 @@ import { useAppState, stripEmoji, keyFor } from "@/context/AppStateContext";
 import { ROADMAP_DATA } from "@/data/roadmapData";
 import RoadmapChart from "@/components/RoadmapChart";
 import { RouteIcon, ExternalLinkIcon, ArrowLeftIcon } from "@/components/icons";
+import EmptyState from "@/components/EmptyState";
 
 function RoadmapPageInner() {
   const { data } = useAppState();
@@ -97,9 +98,7 @@ function RoadmapPageInner() {
       </p>
 
       {rolesWithData.length === 0 ? (
-        <div className="mt-8 border border-dashed border-[var(--border)] p-10 text-center text-sm text-[var(--muted)]">
-          No roadmap data yet.
-        </div>
+        <EmptyState icon={RouteIcon} className="mt-8" message="No roadmap data yet." />
       ) : (
         <>
           {history.length > 0 && (
