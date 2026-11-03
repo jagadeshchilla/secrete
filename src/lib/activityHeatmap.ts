@@ -3,7 +3,7 @@ import type { ProjectIdea } from "@/types/ideas";
 import type { ResearchPaper } from "@/types/research";
 import type { FreelanceGig } from "@/types/freelance";
 import type { Course } from "@/types/course";
-import { todayKey } from "@/context/AppStateContext";
+import { todayKey } from "@/lib/dateKey";
 
 // Combined activity-by-date map across Courses, Ideas, Research, and
 // Freelancing — replaces the old roles-only heatmap now that progress

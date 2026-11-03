@@ -20,6 +20,7 @@ import {
   BadgeIcon,
   BrowserIcon,
   TargetIcon,
+  FlameIcon,
 } from "@/components/icons";
 
 const NAV_ITEMS = [
@@ -37,6 +38,7 @@ const NAV_ITEMS = [
   { href: "/blogs", label: "Blogs", icon: BookIcon },
   { href: "/mock-interview", label: "Mock", icon: MessageIcon },
   { href: "/job-applications", label: "Jobs", icon: TargetIcon, disabled: true },
+  { href: "/habits", label: "Habits", icon: FlameIcon },
   { href: "/progress", label: "Progress", icon: CalendarIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/settings", label: "Settings", icon: SettingsIcon },

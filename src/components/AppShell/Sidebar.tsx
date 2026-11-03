@@ -33,6 +33,7 @@ import {
   BadgeIcon,
   BrowserIcon,
   TargetIcon,
+  FlameIcon,
 } from "@/components/icons";
 
 type NavSection = "courses" | "ideas" | "research" | "freelancing" | "certifications";
@@ -59,6 +60,7 @@ const NAV_ITEMS: {
   { href: "/blogs", label: "Blogs", icon: BookIcon, badge: "For You" },
   { href: "/mock-interview", label: "Mock Interview", icon: MessageIcon },
   { href: "/job-applications", label: "Job Applications", icon: TargetIcon, badge: "Coming soon", disabled: true },
+  { href: "/habits", label: "Habits", icon: FlameIcon },
   { href: "/progress", label: "Progress", icon: CalendarIcon },
   { href: "/saved", label: "Saved", icon: BookmarkIcon },
   { href: "/settings", label: "Settings", icon: SettingsIcon },

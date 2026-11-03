@@ -13,6 +13,7 @@ import careerDataRaw from "@/data/careerData.json";
 import type { CareerRole, ProgressRecord, ProgressState, StatusField } from "@/types/career";
 import { useAccess } from "@/context/AccessContext";
 import { PROFILES, type Profile } from "@/config/access";
+import { todayKey } from "@/lib/dateKey";
 
 const DATA = careerDataRaw as CareerRole[];
 const PROGRESS_KEY = "careerResearchProgress";
@@ -29,15 +30,11 @@ export function stripEmoji(domain: string) {
   return domain.replace(/^[^\p{L}\p{N}]+/u, "").trim();
 }
 
-// Local calendar-day key (not toISOString/UTC) — using UTC here would shift
-// the date backward for positive UTC offsets (e.g. IST) near local midnight,
-// making "today" mismatch the heatmap grid and activity timestamps.
-export function todayKey(d: Date = new Date()) {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
-}
+// Re-exported for backward compatibility — existing code imports todayKey
+// from here. The implementation now lives in src/lib/dateKey.ts (a plain,
+// "use client"-free module) because importing it directly from this file
+// crashes at runtime when pulled into a server Route Handler's bundle.
+export { todayKey };
 
 // Generic current/longest streak from any date-keyed activity map — used for
 // roles as well as the combined Courses/Ideas/Research/Freelancing activity

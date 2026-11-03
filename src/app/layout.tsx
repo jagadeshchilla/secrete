@@ -7,6 +7,7 @@ import { ResourcesProvider } from "@/context/ResourcesContext";
 import { IdeasProvider } from "@/context/IdeasContext";
 import { ResearchProvider } from "@/context/ResearchContext";
 import { FreelanceProvider } from "@/context/FreelanceContext";
+import { HabitsProvider } from "@/context/HabitsContext";
 import { ToastProvider } from "@/context/ToastContext";
 import Gate from "@/components/Gate/Gate";
 import StreakToastWatcher from "@/components/StreakToastWatcher";
@@ -49,12 +50,14 @@ export default function RootLayout({
               <IdeasProvider>
                 <ResearchProvider>
                   <FreelanceProvider>
-                    <ToastProvider>
-                      <Gate>
-                        <StreakToastWatcher />
-                        {children}
-                      </Gate>
-                    </ToastProvider>
+                    <HabitsProvider>
+                      <ToastProvider>
+                        <Gate>
+                          <StreakToastWatcher />
+                          {children}
+                        </Gate>
+                      </ToastProvider>
+                    </HabitsProvider>
                   </FreelanceProvider>
                 </ResearchProvider>
               </IdeasProvider>

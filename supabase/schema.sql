@@ -87,6 +87,22 @@ alter table project_ideas add column if not exists outcome_notes text;
 alter table project_ideas add column if not exists research_paper_link text;
 alter table project_ideas add column if not exists done boolean not null default false;
 
+-- Daily habit/commitment tracker — separate from the Courses/Ideas/Research/
+-- Freelancing activity streak. A habit runs for a fixed duration starting
+-- start_date (a local calendar-day key, not a timestamp, so "today" lines up
+-- with the app's todayKey()/activity-heatmap keying instead of drifting a
+-- day under positive UTC offsets like IST).
+create table if not exists habits (
+  id text primary key,
+  title text not null,
+  description text,
+  duration_days int not null,
+  start_date text not null, -- YYYY-MM-DD local calendar key
+  created_by text not null check (created_by in ('jagadesh', 'harshita')),
+  created_at timestamptz not null default now(),
+  check_ins jsonb not null default '{}' -- {"YYYY-MM-DD": true/false}
+);
+
 create table if not exists research_papers (
   id text primary key,
   title text not null,
@@ -248,6 +264,7 @@ alter table admin_course_items enable row level security;
 alter table admin_course_substeps enable row level security;
 alter table course_progress enable row level security;
 alter table app_settings enable row level security;
+alter table habits enable row level security;
 
 -- No policies are defined, so the public Data API (anon/authenticated keys)
 -- is denied by default. Only the server, using the service role key (which

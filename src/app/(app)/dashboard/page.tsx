@@ -7,12 +7,14 @@ import { useAccess } from "@/context/AccessContext";
 import { useIdeas } from "@/context/IdeasContext";
 import { useResearch } from "@/context/ResearchContext";
 import { useFreelance } from "@/context/FreelanceContext";
+import { useHabits } from "@/context/HabitsContext";
 import { PROFILES, PROFILE_LABELS, type Profile } from "@/config/access";
 import type { StatusField } from "@/types/career";
 import type { Course } from "@/types/course";
 import { ROADMAP_DATA } from "@/data/roadmapData";
 import { courseTotals, loadCourseProgress, fetchCourseProgress } from "@/lib/courseProgress";
 import { buildActivityMap } from "@/lib/activityHeatmap";
+import { habitStats } from "@/lib/habits";
 import HeatmapCalendar from "@/components/HeatmapCalendar";
 import {
   RouteIcon,
@@ -130,6 +132,7 @@ export default function Dashboard() {
   const { ideas } = useIdeas();
   const { papers } = useResearch();
   const { gigs } = useFreelance();
+  const { habits, updateHabit } = useHabits();
   const [view, setView] = useState<View>(profile || "household");
   const [courses, setCourses] = useState<Course[]>([]);
   const [courseProgressByProfile, setCourseProgressByProfile] = useState<
@@ -211,6 +214,11 @@ export default function Dashboard() {
     [ideas, papers, gigs, courses, view]
   );
   const activityStreak = useMemo(() => computeStreak(activityMap), [activityMap]);
+
+  const activeHabits = useMemo(() => {
+    const mine = view === "household" ? habits : habits.filter((h) => h.createdBy === view);
+    return mine.filter((h) => !habitStats(h).completed).slice(0, 4);
+  }, [habits, view]);
 
   const courseEvents = useMemo<HouseholdEvent[]>(
     () =>
@@ -387,6 +395,70 @@ export default function Dashboard() {
             <HeatmapCalendar activityByDate={activityMap} mode="rolling" weeks={12} cellSize={26} />
           </div>
         </div>
+      </div>
+
+      <div className="surface-card mt-4 animate-fade-in-up p-5" style={{ animationDelay: "180ms" }}>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <FlameIcon className="h-4 w-4 text-[var(--accent)]" />
+            <h2 className="text-sm font-semibold">Daily habits</h2>
+          </div>
+          <Link href="/habits" className="text-xs font-medium text-[var(--accent)] hover:underline">
+            View all →
+          </Link>
+        </div>
+        {activeHabits.length === 0 ? (
+          <p className="mt-3 text-sm text-[var(--muted)]">
+            No active habits —{" "}
+            <Link href="/habits" className="font-medium text-[var(--accent)] hover:underline">
+              start one
+            </Link>{" "}
+            to track a daily commitment.
+          </p>
+        ) : (
+          <div className="mt-3 space-y-3">
+            {activeHabits.map((h) => {
+              const stats = habitStats(h);
+              const doneToday = !!h.checkIns[stats.today];
+              return (
+                <div key={h.id} className="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--border)] pt-3 first:border-t-0 first:pt-0">
+                  <div className="min-w-0">
+                    <div className="truncate text-sm font-medium">{h.title}</div>
+                    <div className="mt-0.5 flex flex-wrap gap-0.5">
+                      {stats.days.slice(0, 20).map((day) => {
+                        const done = !!h.checkIns[day];
+                        const isFuture = day > stats.today;
+                        return (
+                          <div
+                            key={day}
+                            className="h-2 w-2 shrink-0 rounded-[2px]"
+                            style={{
+                              background: done ? "var(--good)" : isFuture ? "var(--border)" : "var(--bad-soft)",
+                            }}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="flex shrink-0 items-center gap-2">
+                    <span className="text-xs text-[var(--muted)]">{stats.daysRemaining}d left</span>
+                    <button
+                      type="button"
+                      onClick={() => updateHabit(h.id, { checkIns: { ...h.checkIns, [stats.today]: !doneToday } })}
+                      className={`rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors ${
+                        doneToday
+                          ? "border-[var(--good)] bg-[var(--good-soft)] text-[var(--good)]"
+                          : "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
+                      }`}
+                    >
+                      {doneToday ? "Done" : "Mark today"}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       <div className="surface-card mt-4 animate-fade-in-up p-5" style={{ animationDelay: "200ms" }}>
