@@ -42,7 +42,17 @@ function DayGrid({ habit, cellSize = 10 }: { habit: Habit; cellSize?: number }) 
   );
 }
 
-function HabitCard({ habit, onToggleToday, onRemove }: { habit: Habit; onToggleToday: () => void; onRemove: () => void }) {
+function HabitCard({
+  habit,
+  showCreator,
+  onToggleToday,
+  onRemove,
+}: {
+  habit: Habit;
+  showCreator: boolean;
+  onToggleToday: () => void;
+  onRemove: () => void;
+}) {
   const stats = habitStats(habit);
   const doneToday = !!habit.checkIns[stats.today];
 
@@ -52,6 +62,11 @@ function HabitCard({ habit, onToggleToday, onRemove }: { habit: Habit; onToggleT
         <div className="min-w-0">
           <div className="flex items-center gap-2">
             <h3 className="truncate text-sm font-semibold">{habit.title}</h3>
+            {showCreator && (
+              <span className="shrink-0 rounded-full border border-[var(--border)] bg-[var(--surface-2)] px-1.5 py-0.5 text-[9px] font-medium text-[var(--muted)]">
+                {PROFILE_LABELS[habit.createdBy]}
+              </span>
+            )}
             {stats.completed && (
               <span className="shrink-0 rounded-full border border-[var(--good)] bg-[var(--good-soft)] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[var(--good)]">
                 Completed
@@ -339,6 +354,7 @@ export default function HabitsPage() {
             <HabitCard
               key={h.id}
               habit={h}
+              showCreator={view === "household"}
               onToggleToday={() => {
                 const { today } = habitStats(h);
                 updateHabit(h.id, { checkIns: { ...h.checkIns, [today]: !h.checkIns[today] } });
@@ -357,6 +373,7 @@ export default function HabitsPage() {
               <HabitCard
                 key={h.id}
                 habit={h}
+                showCreator={view === "household"}
                 onToggleToday={() => {
                   const { today } = habitStats(h);
                   updateHabit(h.id, { checkIns: { ...h.checkIns, [today]: !h.checkIns[today] } });

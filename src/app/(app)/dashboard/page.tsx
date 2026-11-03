@@ -264,10 +264,6 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="flex flex-col items-end gap-2">
-          <div className="surface-card flex items-center gap-3 px-4 py-2.5">
-            <AnalogClock3D size={64} />
-            <LiveClock compact />
-          </div>
           <div className="flex overflow-hidden rounded-lg border border-[var(--border)]">
             <button
               onClick={() => setView("household")}
@@ -346,35 +342,48 @@ export default function Dashboard() {
       </div>
 
       <div
-        className="surface-card mt-4 animate-fade-in-up border-[var(--accent)]/40 bg-[var(--accent-soft)]/40 p-5"
-        style={{ animationDelay: "40ms" }}
+        className="surface-card mt-4 grid animate-fade-in-up grid-cols-1 gap-5 border-2 border-[var(--accent)] bg-[var(--accent-soft)] p-5 sm:grid-cols-[auto_1fr]"
+        style={{ animationDelay: "40ms", boxShadow: "0 0 0 4px var(--accent-soft), var(--shadow-md)" }}
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <FlameIcon className="h-4 w-4 text-[var(--accent)]" />
-            <h2 className="text-sm font-semibold">Daily habits</h2>
-          </div>
-          <Link href="/habits" className="text-xs font-medium text-[var(--accent)] hover:underline">
-            View all →
-          </Link>
+        <div className="flex flex-col items-center justify-center gap-2 sm:border-r sm:border-[var(--accent)]/30 sm:pr-5">
+          <AnalogClock3D size={112} />
+          <LiveClock compact />
         </div>
-        {activeHabits.length === 0 ? (
-          <p className="mt-3 text-sm text-[var(--muted)]">
-            No active habits —{" "}
-            <Link href="/habits" className="font-medium text-[var(--accent)] hover:underline">
-              start one
-            </Link>{" "}
-            to track a daily commitment.
-          </p>
-        ) : (
-          <div className="mt-3 space-y-3">
-            {activeHabits.map((h) => {
+
+        <div>
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <FlameIcon className="h-4 w-4 text-[var(--accent)]" />
+              <h2 className="text-sm font-semibold">Daily habits</h2>
+            </div>
+            <Link href="/habits" className="text-xs font-medium text-[var(--accent)] hover:underline">
+              View all →
+            </Link>
+          </div>
+          {activeHabits.length === 0 ? (
+            <p className="mt-3 text-sm text-[var(--muted)]">
+              No active habits —{" "}
+              <Link href="/habits" className="font-medium text-[var(--accent)] hover:underline">
+                start one
+              </Link>{" "}
+              to track a daily commitment.
+            </p>
+          ) : (
+            <div className="mt-3 space-y-3">
+              {activeHabits.map((h) => {
               const stats = habitStats(h);
               const doneToday = !!h.checkIns[stats.today];
               return (
                 <div key={h.id} className="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--border)] pt-3 first:border-t-0 first:pt-0">
                   <div className="min-w-0">
-                    <div className="truncate text-sm font-medium">{h.title}</div>
+                    <div className="flex items-center gap-1.5">
+                      <div className="truncate text-sm font-medium">{h.title}</div>
+                      {view === "household" && (
+                        <span className="shrink-0 rounded-full border border-[var(--border)] bg-[var(--surface)] px-1.5 py-0.5 text-[9px] font-medium text-[var(--muted)]">
+                          {PROFILE_LABELS[h.createdBy]}
+                        </span>
+                      )}
+                    </div>
                     <div className="mt-0.5 flex flex-wrap gap-0.5">
                       {stats.days.slice(0, 20).map((day) => {
                         const done = !!h.checkIns[day];
@@ -419,7 +428,8 @@ export default function Dashboard() {
               );
             })}
           </div>
-        )}
+          )}
+        </div>
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-2 lg:items-stretch">
