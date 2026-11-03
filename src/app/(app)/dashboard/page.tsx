@@ -16,6 +16,7 @@ import { courseTotals, loadCourseProgress, fetchCourseProgress } from "@/lib/cou
 import { buildActivityMap } from "@/lib/activityHeatmap";
 import { habitStats } from "@/lib/habits";
 import HeatmapCalendar from "@/components/HeatmapCalendar";
+import LiveClock from "@/components/LiveClock";
 import {
   RouteIcon,
   GraduationCapIcon,
@@ -261,27 +262,30 @@ export default function Dashboard() {
             Your career research at a glance. Pick up where you left off.
           </p>
         </div>
-        <div className="flex overflow-hidden rounded-lg border border-[var(--border)]">
-          <button
-            onClick={() => setView("household")}
-            className={`px-3 py-1.5 text-xs font-medium transition-colors ${
-              view === "household" ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            Household
-          </button>
-          {PROFILES.map((p) => (
+        <div className="flex flex-col items-end gap-2">
+          <LiveClock compact />
+          <div className="flex overflow-hidden rounded-lg border border-[var(--border)]">
             <button
-              key={p}
-              onClick={() => setView(p)}
-              className={`border-l border-[var(--border)] px-3 py-1.5 text-xs font-medium transition-colors ${
-                view === p ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
+              onClick={() => setView("household")}
+              className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+                view === "household" ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
               }`}
             >
-              {PROFILE_LABELS[p]}
-              {p === profile ? " (me)" : ""}
+              Household
             </button>
-          ))}
+            {PROFILES.map((p) => (
+              <button
+                key={p}
+                onClick={() => setView(p)}
+                className={`border-l border-[var(--border)] px-3 py-1.5 text-xs font-medium transition-colors ${
+                  view === p ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
+                }`}
+              >
+                {PROFILE_LABELS[p]}
+                {p === profile ? " (me)" : ""}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

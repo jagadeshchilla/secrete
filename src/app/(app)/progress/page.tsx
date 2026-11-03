@@ -14,6 +14,7 @@ import { computeStreak } from "@/context/AppStateContext";
 import type { Course } from "@/types/course";
 import StatCard from "@/components/StatCard";
 import HeatmapCalendar from "@/components/HeatmapCalendar";
+import LiveClock from "@/components/LiveClock";
 import { GraduationCapIcon, LightbulbIcon, FlaskIcon, BriefcaseIcon, FlameIcon } from "@/components/icons";
 
 type View = "household" | Profile;
@@ -138,27 +139,30 @@ export default function ProgressPage() {
             Your activity across courses, ideas, research, and freelancing.
           </p>
         </div>
-        <div className="flex overflow-hidden rounded-lg border border-[var(--border)]">
-          <button
-            onClick={() => setView("household")}
-            className={`px-3 py-1.5 text-xs font-medium transition-colors ${
-              view === "household" ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            Household
-          </button>
-          {PROFILES.map((p) => (
+        <div className="flex flex-col items-end gap-2">
+          <LiveClock compact />
+          <div className="flex overflow-hidden rounded-lg border border-[var(--border)]">
             <button
-              key={p}
-              onClick={() => setView(p)}
-              className={`border-l border-[var(--border)] px-3 py-1.5 text-xs font-medium transition-colors ${
-                view === p ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
+              onClick={() => setView("household")}
+              className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+                view === "household" ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
               }`}
             >
-              {PROFILE_LABELS[p]}
-              {p === profile ? " (me)" : ""}
+              Household
             </button>
-          ))}
+            {PROFILES.map((p) => (
+              <button
+                key={p}
+                onClick={() => setView(p)}
+                className={`border-l border-[var(--border)] px-3 py-1.5 text-xs font-medium transition-colors ${
+                  view === p ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--muted)] hover:text-[var(--text)]"
+                }`}
+              >
+                {PROFILE_LABELS[p]}
+                {p === profile ? " (me)" : ""}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

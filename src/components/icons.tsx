@@ -453,3 +453,12 @@ export function BrowserIcon({ className }: IconProps) {
     </Base>
   );
 }
+
+export function ClockIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3.5 2" />
+    </Base>
+  );
+}
