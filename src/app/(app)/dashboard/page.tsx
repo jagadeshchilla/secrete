@@ -17,6 +17,7 @@ import { buildActivityMap } from "@/lib/activityHeatmap";
 import { habitStats } from "@/lib/habits";
 import HeatmapCalendar from "@/components/HeatmapCalendar";
 import LiveClock from "@/components/LiveClock";
+import AnalogClock3D from "@/components/AnalogClock3D";
 import {
   RouteIcon,
   GraduationCapIcon,
@@ -263,7 +264,10 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="flex flex-col items-end gap-2">
-          <LiveClock compact />
+          <div className="surface-card flex items-center gap-3 px-4 py-2.5">
+            <AnalogClock3D size={64} />
+            <LiveClock compact />
+          </div>
           <div className="flex overflow-hidden rounded-lg border border-[var(--border)]">
             <button
               onClick={() => setView("household")}

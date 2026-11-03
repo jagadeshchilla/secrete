@@ -46,7 +46,6 @@ export default function LiveClock({ compact = false }: { compact?: boolean }) {
   if (compact) {
     return (
       <div className="flex items-center gap-2">
-        <ClockIcon className="h-4 w-4 shrink-0 text-[var(--accent)]" />
         <span className="font-semibold tabular-nums tracking-tight">
           {pad(hours)}:{pad(minutes)}:{pad(seconds)}
         </span>
