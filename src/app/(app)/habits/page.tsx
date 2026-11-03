@@ -20,7 +20,10 @@ function DayGrid({ habit, cellSize = 10 }: { habit: Habit; cellSize?: number }) 
       {days.map((day) => {
         const done = !!habit.checkIns[day];
         const isFuture = day > today;
-        const isPastMissed = !isFuture && !done;
+        const isToday = day === today;
+        // Only days strictly BEFORE today, left unchecked, count as missed —
+        // today isn't over yet, so it stays "pending" until marked either way.
+        const isPastMissed = !isFuture && !isToday && !done;
         return (
           <div
             key={day}
@@ -29,8 +32,8 @@ function DayGrid({ habit, cellSize = 10 }: { habit: Habit; cellSize?: number }) 
             style={{
               height: cellSize,
               width: cellSize,
-              background: done ? "var(--good)" : isPastMissed ? "var(--bad-soft)" : "transparent",
-              borderColor: isFuture ? "var(--border)" : done ? "var(--good)" : "var(--bad-soft)",
+              background: done ? "var(--good)" : isToday ? "var(--accent-soft)" : isPastMissed ? "var(--bad-soft)" : "transparent",
+              borderColor: isFuture ? "var(--border)" : done ? "var(--good)" : isToday ? "var(--accent)" : "var(--bad-soft)",
             }}
           />
         );
@@ -105,22 +108,45 @@ function HabitCard({ habit, onToggleToday, onRemove }: { habit: Habit; onToggleT
   );
 }
 
-function NewHabitForm({ onCreate, onClose }: { onCreate: (input: { title: string; description?: string; durationDays: number }) => void; onClose: () => void }) {
+function toDateKey(d: Date) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function NewHabitForm({
+  onCreate,
+  onClose,
+}: {
+  onCreate: (input: { title: string; description?: string; durationDays: number; startDate: string }) => void;
+  onClose: () => void;
+}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [duration, setDuration] = useState<number>(30);
   const [customDuration, setCustomDuration] = useState("");
   const [useCustom, setUseCustom] = useState(false);
+  const [startChoice, setStartChoice] = useState<"today" | "tomorrow" | "custom">("today");
+  const [customStart, setCustomStart] = useState("");
+
+  const today = useMemo(() => new Date(), []);
+  const todayKey = toDateKey(today);
+  const tomorrowKey = useMemo(() => {
+    const d = new Date(today);
+    d.setDate(d.getDate() + 1);
+    return toDateKey(d);
+  }, [today]);
 
   function submit() {
     const days = useCustom ? parseInt(customDuration, 10) : duration;
-    if (!title.trim() || !Number.isInteger(days) || days <= 0) return;
-    onCreate({ title: title.trim(), description: description.trim() || undefined, durationDays: days });
+    const startDate = startChoice === "today" ? todayKey : startChoice === "tomorrow" ? tomorrowKey : customStart;
+    if (!title.trim() || !Number.isInteger(days) || days <= 0 || !startDate) return;
+    onCreate({ title: title.trim(), description: description.trim() || undefined, durationDays: days, startDate });
     setTitle("");
     setDescription("");
     setDuration(30);
     setCustomDuration("");
     setUseCustom(false);
+    setStartChoice("today");
+    setCustomStart("");
     onClose();
   }
 
@@ -150,6 +176,34 @@ function NewHabitForm({ onCreate, onClose }: { onCreate: (input: { title: string
           rows={2}
           className={inputCls}
         />
+        <div>
+          <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">Start</p>
+          <div className="flex flex-wrap gap-1.5">
+            {(["today", "tomorrow", "custom"] as const).map((choice) => (
+              <button
+                key={choice}
+                type="button"
+                onClick={() => setStartChoice(choice)}
+                className={`rounded-full border px-3 py-1 text-xs font-medium capitalize transition-colors ${
+                  startChoice === choice
+                    ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]"
+                    : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)]"
+                }`}
+              >
+                {choice === "custom" ? "Pick a date" : choice}
+              </button>
+            ))}
+            {startChoice === "custom" && (
+              <input
+                type="date"
+                value={customStart}
+                min={todayKey}
+                onChange={(e) => setCustomStart(e.target.value)}
+                className="border border-[var(--border)] bg-[var(--surface-2)] px-2.5 py-1 text-xs outline-none focus:border-[var(--accent)]"
+              />
+            )}
+          </div>
+        </div>
         <div>
           <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">Duration</p>
           <div className="flex flex-wrap gap-1.5">
@@ -196,7 +250,7 @@ function NewHabitForm({ onCreate, onClose }: { onCreate: (input: { title: string
         <button
           type="button"
           onClick={submit}
-          disabled={!title.trim() || (useCustom && !customDuration)}
+          disabled={!title.trim() || (useCustom && !customDuration) || (startChoice === "custom" && !customStart)}
           className="btn-shimmer w-full border border-[var(--accent)] bg-[var(--accent)] px-3 py-2 text-xs font-medium text-white disabled:opacity-50"
         >
           Start habit
