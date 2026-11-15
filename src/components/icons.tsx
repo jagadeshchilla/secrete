@@ -462,3 +462,32 @@ export function ClockIcon({ className }: IconProps) {
     </Base>
   );
 }
+
+export function CakeIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <path d="M12 3v3M9 2.5c0 1 .7 1.5.7 2.5S9 7 9 7M15 2.5c0 1-.7 1.5-.7 2.5S15 7 15 7" />
+      <rect x="4" y="11" width="16" height="9" rx="2" />
+      <path d="M4 15.5c1.5 1 2.5-1 4 0s2.5 1 4 0 2.5-1 4 0" />
+      <path d="M12 11V8" />
+    </Base>
+  );
+}
+
+export function GiftIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <rect x="3" y="9" width="18" height="4" rx="1" />
+      <rect x="5" y="13" width="14" height="8" rx="1" />
+      <path d="M12 9v12M12 9c-1.6 0-3-1.1-3-2.5S9.7 4 11 4c1.5 0 1 2.5 1 5zm0 0c1.6 0 3-1.1 3-2.5S13.3 4 12 4c-1.5 0-1 2.5-1 5z" />
+    </Base>
+  );
+}
+
+export function HeartIcon({ className }: IconProps) {
+  return (
+    <Base className={className}>
+      <path d="M12 20s-7-4.4-9.3-8.6C1.3 8.6 2.5 5.5 5.3 4.7 7.3 4.1 9.5 4.9 12 7.5c2.5-2.6 4.7-3.4 6.7-2.8 2.8.8 4 3.9 2.6 6.7C19 15.6 12 20 12 20z" />
+    </Base>
+  );
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { LockIcon, CakeIcon, GiftIcon, HeartIcon } from "@/components/icons";
 
 const VIDEO_EMBED_URL = "https://drive.google.com/file/d/1JOA_6Wq0unLCbYgrC7bHN50-UOn1Fhmi/preview";
 
@@ -36,8 +37,8 @@ function CountdownScreen({ msLeft }: { msLeft: number }) {
       style={{ background: "radial-gradient(circle at 50% 0%, #1a1f2e 0%, #0b0e16 55%, #060709 100%)" }}
     >
       <div className="animate-fade-in-up flex flex-col items-center text-center">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-xl">
-          🔒
+        <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70">
+          <LockIcon className="h-5 w-5" />
         </span>
         <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-white/40">Unlocks soon</p>
         <p className="mt-2 max-w-xs text-sm text-white/60">Something has been made for you. Check back when it&apos;s ready.</p>
@@ -87,14 +88,15 @@ export default function BirthdayWishPage() {
       }}
     >
       <div className="animate-fade-in-up w-full max-w-xl text-center">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white text-3xl shadow-lg">
-          🎂
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white text-[#e7897a] shadow-lg">
+          <CakeIcon className="h-7 w-7" />
         </div>
         <h1 className="mt-5 text-3xl font-bold tracking-tight text-[#3a2e2a] sm:text-4xl">
           Happy Birthday, Harshita!
         </h1>
-        <p className="mt-3 text-base leading-relaxed text-[#6b5c56]">
-          A little something made just for you. Hope it brings a smile. 💛
+        <p className="mt-3 flex items-center justify-center gap-1.5 text-base leading-relaxed text-[#6b5c56]">
+          A little something made just for you. Hope it brings a smile.
+          <HeartIcon className="h-4 w-4 shrink-0 text-[#e7897a]" />
         </p>
       </div>
 
@@ -105,8 +107,8 @@ export default function BirthdayWishPage() {
             onClick={() => setRevealed(true)}
             className="group mx-auto flex w-full flex-col items-center gap-4 rounded-3xl border border-[#f0d9d4] bg-white/80 px-8 py-16 shadow-xl backdrop-blur transition-transform hover:scale-[1.01]"
           >
-            <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#f6a6b2] to-[#f3c98a] text-4xl shadow-md transition-transform group-hover:scale-110">
-              🎁
+            <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#f6a6b2] to-[#f3c98a] text-white shadow-md transition-transform group-hover:scale-110">
+              <GiftIcon className="h-9 w-9" />
             </span>
             <span className="text-lg font-semibold text-[#3a2e2a]">Tap to open your surprise</span>
             <span className="text-sm text-[#9a8b85]">A short video, made with love</span>
@@ -128,10 +130,11 @@ export default function BirthdayWishPage() {
 
       {revealed && (
         <div
-          className="animate-fade-in-up mt-6 w-full max-w-4xl rounded-2xl border border-[#f0d9d4] bg-white/70 px-5 py-4 text-center text-sm leading-relaxed text-[#6b5c56] backdrop-blur"
+          className="animate-fade-in-up mt-6 flex w-full max-w-4xl items-center justify-center gap-2 rounded-2xl border border-[#f0d9d4] bg-white/70 px-5 py-4 text-center text-sm leading-relaxed text-[#6b5c56] backdrop-blur"
           style={{ animationDelay: "80ms" }}
         >
-          💛 If anything isn&apos;t perfect, sorry for that — it&apos;s just a cartoon video made with love, so please don&apos;t mind the little imperfections!
+          <HeartIcon className="h-4 w-4 shrink-0 text-[#e7897a]" />
+          If anything isn&apos;t perfect, sorry for that — it&apos;s just a cartoon video made with love, so please don&apos;t mind the little imperfections!
         </div>
       )}
     </div>
