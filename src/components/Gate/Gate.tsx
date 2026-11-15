@@ -6,6 +6,7 @@ import { useAccess } from "@/context/AccessContext";
 import HeroGate from "./HeroGate";
 import RevealTransition from "./RevealTransition";
 import ProfilePicker from "./ProfilePicker";
+import StreakToastWatcher from "@/components/StreakToastWatcher";
 
 // Routes that are public and should never be stopped by the password/profile
 // gate — e.g. a one-off page meant to be opened by a link, not logged into.
@@ -37,5 +38,10 @@ export default function Gate({ children }: { children: React.ReactNode }) {
     return <ProfilePicker />;
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <StreakToastWatcher />
+      {children}
+    </>
+  );
 }

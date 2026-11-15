@@ -10,7 +10,6 @@ import { FreelanceProvider } from "@/context/FreelanceContext";
 import { HabitsProvider } from "@/context/HabitsContext";
 import { ToastProvider } from "@/context/ToastContext";
 import Gate from "@/components/Gate/Gate";
-import StreakToastWatcher from "@/components/StreakToastWatcher";
 
 export const metadata: Metadata = {
   title: "Career Hub",
@@ -52,10 +51,7 @@ export default function RootLayout({
                   <FreelanceProvider>
                     <HabitsProvider>
                       <ToastProvider>
-                        <Gate>
-                          <StreakToastWatcher />
-                          {children}
-                        </Gate>
+                        <Gate>{children}</Gate>
                       </ToastProvider>
                     </HabitsProvider>
                   </FreelanceProvider>
