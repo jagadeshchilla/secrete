@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 import { LockIcon, CakeIcon, GiftIcon, HeartIcon } from "@/components/icons";
 
-// Self-hosted instead of embedding Google Drive's preview iframe — that iframe
-// renders Drive's own unstylable player chrome (progress bar, settings gear,
-// volume) which is cross-origin and can't be restyled or removed. A native
-// <video> gives clean browser controls and lets the file display at its real
-// aspect ratio with no forced box that could crop it.
-const VIDEO_URL = "/birthday/wish.mp4";
+// Served via Google Drive's preview iframe — the only reliable way to stream
+// a file this large (331MB) from anywhere, including once this is deployed.
+// A direct <video src> pointed at a Drive download link doesn't support
+// proper range-request streaming/seeking at this size and often serves
+// Drive's virus-scan warning page instead of the raw file. The one tradeoff:
+// Drive's own player controls are cross-origin content and can't be
+// restyled — unavoidable with this hosting choice.
+const VIDEO_EMBED_URL = "https://drive.google.com/file/d/1JOA_6Wq0unLCbYgrC7bHN50-UOn1Fhmi/preview";
 
 // Fixed instant in time (explicit +05:30 offset) — unlocks tomorrow 7:00 AM
 // IST regardless of the viewer's own device timezone/clock settings.
@@ -120,12 +122,14 @@ export default function BirthdayWishPage() {
           </button>
         ) : (
           <div className="animate-fade-in-up overflow-hidden rounded-3xl bg-black shadow-2xl">
-            <video
-              src={VIDEO_URL}
-              controls
-              playsInline
-              preload="metadata"
-              className="block w-full"
+            {/* A fixed 16:9 box would crop the video if its real aspect ratio
+                differs — a flexible height lets Drive's player letterbox
+                internally instead of anything getting clipped. */}
+            <iframe
+              src={VIDEO_EMBED_URL}
+              className="h-[50vh] min-h-[260px] max-h-[640px] w-full border-0 sm:h-[65vh]"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
               title="A birthday surprise for Harshu"
             />
           </div>
