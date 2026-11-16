@@ -16,10 +16,10 @@ function pad(n: number) {
 function CountdownUnit({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center gap-1">
-      <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-2xl font-bold tabular-nums text-white shadow-lg backdrop-blur sm:h-20 sm:w-20 sm:text-3xl">
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-lg font-bold tabular-nums text-white shadow-lg backdrop-blur sm:h-20 sm:w-20 sm:text-3xl">
         {pad(value)}
       </div>
-      <span className="text-[10px] font-medium uppercase tracking-wider text-white/50 sm:text-xs">{label}</span>
+      <span className="text-[9px] font-medium uppercase tracking-wider text-white/50 sm:text-xs">{label}</span>
     </div>
   );
 }
@@ -43,13 +43,13 @@ function CountdownScreen({ msLeft }: { msLeft: number }) {
         <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-white/40">Unlocks soon</p>
         <p className="mt-2 max-w-xs text-sm text-white/60">Something has been made for you. Check back when it&apos;s ready.</p>
 
-        <div className="mt-8 flex items-start gap-3 sm:gap-4">
+        <div className="mt-8 flex flex-wrap items-start justify-center gap-1.5 sm:gap-4">
           <CountdownUnit value={days} label="Days" />
-          <span className="pt-4 text-xl font-bold text-white/20 sm:pt-5 sm:text-2xl">:</span>
+          <span className="pt-3 text-base font-bold text-white/20 sm:pt-5 sm:text-2xl">:</span>
           <CountdownUnit value={hours} label="Hours" />
-          <span className="pt-4 text-xl font-bold text-white/20 sm:pt-5 sm:text-2xl">:</span>
+          <span className="pt-3 text-base font-bold text-white/20 sm:pt-5 sm:text-2xl">:</span>
           <CountdownUnit value={minutes} label="Minutes" />
-          <span className="pt-4 text-xl font-bold text-white/20 sm:pt-5 sm:text-2xl">:</span>
+          <span className="pt-3 text-base font-bold text-white/20 sm:pt-5 sm:text-2xl">:</span>
           <CountdownUnit value={seconds} label="Seconds" />
         </div>
       </div>
@@ -94,8 +94,8 @@ export default function BirthdayWishPage() {
         <h1 className="mt-5 text-3xl font-bold tracking-tight text-[#3a2e2a] sm:text-4xl">
           Happy Birthday, Harshita!
         </h1>
-        <p className="mt-3 flex items-center justify-center gap-1.5 text-base leading-relaxed text-[#6b5c56]">
-          A little something made just for you. Hope it brings a smile.
+        <p className="mt-3 flex flex-wrap items-center justify-center gap-1.5 text-base leading-relaxed text-[#6b5c56]">
+          <span>A little something made just for you. Hope it brings a smile.</span>
           <HeartIcon className="h-4 w-4 shrink-0 text-[#e7897a]" />
         </p>
       </div>
@@ -105,36 +105,40 @@ export default function BirthdayWishPage() {
           <button
             type="button"
             onClick={() => setRevealed(true)}
-            className="group mx-auto flex w-full flex-col items-center gap-4 rounded-3xl border border-[#f0d9d4] bg-white/80 px-8 py-16 shadow-xl backdrop-blur transition-transform hover:scale-[1.01]"
+            className="group mx-auto flex w-full flex-col items-center gap-3 rounded-3xl border border-[#f0d9d4] bg-white/80 px-5 py-10 shadow-xl backdrop-blur transition-transform hover:scale-[1.01] sm:gap-4 sm:px-8 sm:py-16"
           >
-            <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#f6a6b2] to-[#f3c98a] text-white shadow-md transition-transform group-hover:scale-110">
-              <GiftIcon className="h-9 w-9" />
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#f6a6b2] to-[#f3c98a] text-white shadow-md transition-transform group-hover:scale-110 sm:h-20 sm:w-20">
+              <GiftIcon className="h-7 w-7 sm:h-9 sm:w-9" />
             </span>
-            <span className="text-lg font-semibold text-[#3a2e2a]">Tap to open your surprise</span>
-            <span className="text-sm text-[#9a8b85]">A short video, made with love</span>
+            <span className="text-base font-semibold text-[#3a2e2a] sm:text-lg">Tap to open your surprise</span>
+            <span className="text-xs text-[#9a8b85] sm:text-sm">A short video, made with love</span>
           </button>
         ) : (
-          <div className="animate-fade-in-up overflow-hidden rounded-3xl border border-[#f0d9d4] bg-white shadow-2xl">
-            <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
-              <iframe
-                src={VIDEO_EMBED_URL}
-                className="absolute inset-0 h-full w-full"
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-                title="A birthday surprise for Harshita"
-              />
-            </div>
+          <div className="animate-fade-in-up rounded-3xl bg-black shadow-2xl">
+            {/* A fixed 16:9 box would crop the video if its real aspect ratio
+                differs — a generous, flexible height lets Drive's player
+                letterbox internally instead of anything getting clipped. */}
+            <iframe
+              src={VIDEO_EMBED_URL}
+              className="h-[50vh] min-h-[260px] max-h-[640px] w-full rounded-3xl border-0 sm:h-[65vh]"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              title="A birthday surprise for Harshita"
+            />
           </div>
         )}
       </div>
 
       {revealed && (
         <div
-          className="animate-fade-in-up mt-6 flex w-full max-w-4xl items-center justify-center gap-2 rounded-2xl border border-[#f0d9d4] bg-white/70 px-5 py-4 text-center text-sm leading-relaxed text-[#6b5c56] backdrop-blur"
+          className="animate-fade-in-up mt-6 flex w-full max-w-4xl items-start justify-center gap-2 rounded-2xl border border-[#f0d9d4] bg-white/70 px-5 py-4 text-center text-sm leading-relaxed text-[#6b5c56] backdrop-blur"
           style={{ animationDelay: "80ms" }}
         >
-          <HeartIcon className="h-4 w-4 shrink-0 text-[#e7897a]" />
-          If anything isn&apos;t perfect, sorry for that — it&apos;s just a cartoon video made with love, so please don&apos;t mind the little imperfections!
+          <HeartIcon className="mt-0.5 h-4 w-4 shrink-0 text-[#e7897a]" />
+          <span>
+            If anything isn&apos;t perfect, sorry for that — it&apos;s just a cartoon video made with love, so please
+            don&apos;t mind the little imperfections!
+          </span>
         </div>
       )}
     </div>
