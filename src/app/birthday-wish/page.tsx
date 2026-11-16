@@ -3,7 +3,12 @@
 import { useEffect, useState } from "react";
 import { LockIcon, CakeIcon, GiftIcon, HeartIcon } from "@/components/icons";
 
-const VIDEO_EMBED_URL = "https://drive.google.com/file/d/1JOA_6Wq0unLCbYgrC7bHN50-UOn1Fhmi/preview";
+// Self-hosted instead of embedding Google Drive's preview iframe — that iframe
+// renders Drive's own unstylable player chrome (progress bar, settings gear,
+// volume) which is cross-origin and can't be restyled or removed. A native
+// <video> gives clean browser controls and lets the file display at its real
+// aspect ratio with no forced box that could crop it.
+const VIDEO_URL = "/birthday/wish.mp4";
 
 // Fixed instant in time (explicit +05:30 offset) — unlocks tomorrow 7:00 AM
 // IST regardless of the viewer's own device timezone/clock settings.
@@ -92,7 +97,7 @@ export default function BirthdayWishPage() {
           <CakeIcon className="h-7 w-7" />
         </div>
         <h1 className="mt-5 text-3xl font-bold tracking-tight text-[#3a2e2a] sm:text-4xl">
-          Happy Birthday, Harshita!
+          Happy Birthday, Harshu!
         </h1>
         <p className="mt-3 flex flex-wrap items-center justify-center gap-1.5 text-base leading-relaxed text-[#6b5c56]">
           <span>A little something made just for you. Hope it brings a smile.</span>
@@ -114,16 +119,14 @@ export default function BirthdayWishPage() {
             <span className="text-xs text-[#9a8b85] sm:text-sm">A short video, made with love</span>
           </button>
         ) : (
-          <div className="animate-fade-in-up rounded-3xl bg-black shadow-2xl">
-            {/* A fixed 16:9 box would crop the video if its real aspect ratio
-                differs — a generous, flexible height lets Drive's player
-                letterbox internally instead of anything getting clipped. */}
-            <iframe
-              src={VIDEO_EMBED_URL}
-              className="h-[50vh] min-h-[260px] max-h-[640px] w-full rounded-3xl border-0 sm:h-[65vh]"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              title="A birthday surprise for Harshita"
+          <div className="animate-fade-in-up overflow-hidden rounded-3xl bg-black shadow-2xl">
+            <video
+              src={VIDEO_URL}
+              controls
+              playsInline
+              preload="metadata"
+              className="block w-full"
+              title="A birthday surprise for Harshu"
             />
           </div>
         )}

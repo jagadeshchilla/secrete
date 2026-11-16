@@ -24,6 +24,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# large local-only media (over GitHub's 100MB limit) — self-hosted
+# locally so the birthday-wish page gets a clean native video player
+# instead of an unstylable third-party embed.
+/public/birthday/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
